@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register: Happy Birthday, Shirley</title>
+<meta name="description" content="Register for the Pay Our Providers campaign launch and Shirley Chisholm's 102nd birthday party, Wednesday, December 2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  /* ---- Settings you may want to change ------------------------------------
+     SUBMIT_URL is set in the <script> at the bottom of this file.          */
+  :root {
+    --paper: #FDF8F7;
+    --ink: #1F1A1A;
+    --ink-soft: #4A4040;
+    --line: #D9CCC8;
+    --coral: #D9472B;
+    --coral-deep: #B8361C;
+    --teal: #1F7A74;
+    --rose: #9E2F4E;
+    --field: #FFFFFF;
+    --chip: #F6ECE9;
+    --focus: #1F7A74;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B1616; --ink: #F6EEEC; --ink-soft: #CDBFBB; --line: #4A3F3D;
+      --coral: #F0694D; --coral-deep: #C9452A; --teal: #5FC2BA; --rose: #E07A98;
+      --field: #251F1F; --chip: #2E2625; --focus: #5FC2BA;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1B1616; --ink: #F6EEEC; --ink-soft: #CDBFBB; --line: #4A3F3D;
+    --coral: #F0694D; --coral-deep: #C9452A; --teal: #5FC2BA; --rose: #E07A98;
+    --field: #251F1F; --chip: #2E2625; --focus: #5FC2BA;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: 'Libre Franklin', system-ui, sans-serif; font-size: 17px; line-height: 1.5;
+  }
+  .display { font-family: 'Unbounded', system-ui, sans-serif; }
+
+  /* Header */
+  .hero { position: relative; }
+  .hero img.rally { display: block; width: 100%; height: clamp(140px, 26vw, 220px); object-fit: cover; }
+  .tags { position: absolute; right: 16px; bottom: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .tag-main { background: var(--coral-deep); color: #fff; padding: 8px 14px; font-weight: 800; font-size: clamp(14px, 2.4vw, 20px); letter-spacing: .02em; }
+  .tag-sub { background: #1F1A1A; color: #fff; padding: 5px 12px; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+
+  .intro { display: grid; grid-template-columns: 112px 1fr; gap: 20px; align-items: start; margin-top: 18px; position: relative; }
+  .intro img.portrait { width: 112px; height: 142px; object-fit: cover; border: 5px solid var(--paper); display: block; margin-top: -60px; }
+  h1 { margin: 0; color: var(--coral); font-weight: 800; font-size: clamp(28px, 6vw, 44px); line-height: 1.02; letter-spacing: -.02em; }
+  .tagline { margin: 10px 0 0; font-weight: 600; font-size: clamp(16px, 3vw, 20px); line-height: 1.25; }
+
+  .when { margin: 22px 0 0; background: var(--coral-deep); color: #fff; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding: 14px 18px; font-weight: 800; font-size: clamp(16px, 3.4vw, 22px); }
+  .loc-note { margin: 0; padding: 8px 18px; background: #1F1A1A; color: #FFFFFF; font-weight: 800; font-size: 15px; letter-spacing: .02em; }
+  .party { margin: 12px 0 0; color: var(--ink-soft); font-size: 16px; }
+  .party b { color: var(--ink); }
+
+  /* Progress */
+  .steps { list-style: none; margin: 30px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .steps li { border-top: 4px solid var(--line); padding-top: 8px; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .steps li.is-done { border-color: var(--teal); color: var(--teal); }
+  .steps li.current { border-color: var(--coral); color: var(--ink); }
+  .steps button { all: unset; cursor: pointer; display: block; min-height: 32px; }
+  .steps button:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+  /* Form */
+  form { margin: 18px 0 0; }
+  fieldset.step { border: 0; margin: 0; padding: 0; }
+  fieldset.step[hidden] { display: none; }
+  legend.step-title { padding: 0; margin: 0 0 4px; font-weight: 800; font-size: clamp(22px, 4.6vw, 28px); line-height: 1.15; }
+  .step-note { margin: 0 0 18px; color: var(--ink-soft); }
+
+  .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
+  .field { margin: 0 0 18px; }
+  label.lbl, .lbl { display: block; font-weight: 800; font-size: 15px; margin: 0 0 6px; }
+  .opt { font-weight: 400; color: var(--ink-soft); }
+  .hint { font-size: 14px; color: var(--ink-soft); margin: -2px 0 8px; }
+  input[type=text], input[type=email], input[type=tel], select, textarea {
+    width: 100%; font: inherit; color: var(--ink); background: var(--field);
+    border: 2px solid var(--line); border-radius: 0; padding: 12px 14px; min-height: 50px;
+    appearance: none; -webkit-appearance: none;
+  }
+  select { background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 20px) 50%, calc(100% - 14px) 50%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 40px; }
+  textarea { min-height: 96px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 25%, transparent); }
+  .invalid input, .invalid select { border-color: var(--rose); }
+  .err { display: none; color: var(--rose); font-size: 14px; font-weight: 600; margin-top: 6px; }
+  .invalid .err { display: block; }
+
+  h2.sec { margin: 30px 0 4px; padding-top: 22px; border-top: 2px solid var(--ink); font-weight: 800; font-size: clamp(22px, 4.6vw, 28px); line-height: 1.15; }
+  .row.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .contact-err { margin-top: -10px; }
+  .invalid select, .invalid textarea { border-color: var(--rose); }
+  /* Choice cards */
+  .choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .choice { position: relative; }
+  .choice input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .choice span { display: flex; align-items: center; gap: 10px; min-height: 54px; padding: 12px 14px; background: var(--field); border: 2px solid var(--line); font-weight: 600; font-size: 16px; line-height: 1.25; }
+  .choice span::before { content: ""; flex: 0 0 18px; height: 18px; border: 2px solid var(--ink-soft); background: var(--field); }
+  .choice input[type=radio] + span::before { border-radius: 50%; }
+  .choice input:checked + span { border-color: var(--coral); background: var(--chip); }
+  .choice input:checked + span::before { border-color: var(--coral); background: var(--coral); box-shadow: inset 0 0 0 3px var(--field); }
+  .choice input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .choices.three-up { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .choices.one { grid-template-columns: minmax(0, 1fr); }
+
+  /* Counters */
+  .counter { display: flex; align-items: center; gap: 0; border: 2px solid var(--line); background: var(--field); width: max-content; }
+  .counter button { width: 50px; height: 50px; border: 0; background: transparent; color: var(--ink); font: 800 22px/1 'Libre Franklin', sans-serif; cursor: pointer; }
+  .counter button:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
+  .counter output { min-width: 44px; text-align: center; font-weight: 800; font-size: 20px; }
+
+  /* Nav */
+  .nav { display: flex; justify-content: space-between; gap: 12px; margin: 26px 0 0; padding: 18px 0 0; border-top: 2px solid var(--ink); }
+  .btn { font: 800 16px/1 'Libre Franklin', sans-serif; letter-spacing: .04em; min-height: 52px; padding: 0 22px; border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+  .btn.primary { background: var(--coral-deep); border-color: var(--coral-deep); color: #fff; margin-left: auto; }
+  .btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  .btn[disabled] { opacity: .6; cursor: progress; }
+  .form-error { display: none; margin: 14px 0 0; padding: 12px 14px; border: 2px solid var(--rose); color: var(--rose); font-weight: 600; }
+  .form-error.show { display: block; }
+
+  /* Done */
+  .done { display: none; margin: 30px 0 0; }
+  .done.show { display: block; }
+  .done h2 { margin: 0; color: var(--coral); font-weight: 800; font-size: clamp(26px, 5vw, 36px); line-height: 1.1; }
+  .done p { margin: 12px 0 0; }
+  .done .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .done a.btn { display: inline-flex; align-items: center; text-decoration: none; }
+  .done .btn.primary { margin-left: 0; }
+  .cal { position: relative; }
+  .cal-menu { position: absolute; left: 0; top: calc(100% + 6px); z-index: 5; min-width: 240px; background: var(--field); border: 2px solid var(--ink); display: flex; flex-direction: column; }
+  .cal-menu[hidden] { display: none; }
+  .cal-menu a { display: flex; align-items: center; min-height: 48px; padding: 0 16px; color: var(--ink); font-weight: 600; text-decoration: none; border-top: 1px solid var(--line); }
+  .cal-menu a:first-child { border-top: 0; }
+  .cal-menu a:hover, .cal-menu a:focus-visible { background: var(--chip); outline: none; }
+
+  footer { margin: 44px 0 0; padding: 18px 0 36px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 14px; }
+  main.wrap { padding-bottom: 48px; }
+  .lang { position: absolute; top: 12px; right: 12px; display: flex; gap: 4px; }
+  .lang button { font: 800 13px/1 'Libre Franklin', sans-serif; letter-spacing: .08em; min-height: 36px; padding: 0 12px; border: 0; background: rgba(253,248,247,.85); color: #4A4040; cursor: pointer; }
+  .lang button[aria-pressed=true] { background: #1F1A1A; color: #FFFFFF; }
+  .lang button:focus-visible { outline: 3px solid #FFFFFF; outline-offset: 2px; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  @media (max-width: 560px) {
+    .row, .row.three { grid-template-columns: minmax(0, 1fr); }
+    .row.three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .row.three .field:first-child { grid-column: 1 / -1; }
+    .intro { grid-template-columns: 88px 1fr; gap: 14px; }
+    .intro img.portrait { width: 88px; height: 112px; margin-top: -48px; }
+    .steps li { font-size: 11px; letter-spacing: .04em; }
+    .when { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img class="rally" src="assets/rally.jpg" alt="POP providers cheering at a rally under Child Care for All signs">
+  <div class="lang" role="group" aria-label="Language / Idioma">
+    <button type="button" data-lang="en" aria-pressed="true">English</button>
+    <button type="button" data-lang="es" aria-pressed="false">Español</button>
+  </div>
+  <div class="tags">
+    <div class="tag-main display">PAY OUR PROVIDERS</div>
+    <div class="tag-sub" data-i18n="launch">Campaign Launch</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <img class="portrait" src="assets/shirley.jpg" alt="Portrait of Shirley Chisholm, 1972">
+    <div>
+      <h1 class="display" data-i18n="h1">Happy Birthday, Shirley Chisholm!</h1>
+      <p class="tagline display" data-i18n="tagline">We're finishing what Shirley started.</p>
+    </div>
+  </div>
+
+  <div class="when display">
+    <span data-i18n="date">Wed, Dec 2</span>
+    <span>10 AM</span>
+    <span>Albany · Buffalo · NYC</span>
+  </div>
+  <p class="loc-note" data-i18n="locNote">Register to receive location details.</p>
+  <p class="party" data-i18n-html="party"><b>Cake, games &amp; music.</b> Bring the kids. It's a birthday party, and the launch of our campaign to Pay Our Providers.</p>
+
+  <form id="reg" novalidate>
+    <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+    <h2 class="sec display" data-i18n="title">Register</h2>
+    <p class="step-note" data-i18n="note">Celebrate in Albany, Buffalo or New York City. We'll send you the exact address as soon as it's set.</p>
+
+    <div class="field" data-req-site>
+      <span class="lbl" id="siteLbl" data-i18n="site">Where will you be celebrating?</span>
+      <div class="choices three-up" role="radiogroup" aria-labelledby="siteLbl">
+        <label class="choice"><input type="radio" name="site" value="Albany"><span>Albany</span></label>
+        <label class="choice"><input type="radio" name="site" value="Buffalo"><span>Buffalo</span></label>
+        <label class="choice"><input type="radio" name="site" value="New York City"><span>NYC</span></label>
+      </div>
+      <div class="err" data-i18n="errSite">Please choose a city.</div>
+    </div>
+
+    <div class="row">
+      <div class="field" data-req>
+        <label class="lbl" for="first" data-i18n="first">First name</label>
+        <input id="first" name="first_name" type="text" autocomplete="given-name" required>
+        <div class="err" data-i18n="errName">Please add your first name.</div>
+      </div>
+      <div class="field">
+        <label class="lbl" for="last" data-i18n="last">Last name</label>
+        <input id="last" name="last_name" type="text" autocomplete="family-name" required>
+        <div class="err" data-i18n="errLast">Please add your last name.</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field" data-contact>
+        <label class="lbl" for="phone" data-i18n="phone">Mobile phone</label>
+        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 555-5555">
+      </div>
+      <div class="field" data-contact>
+        <label class="lbl" for="email" data-i18n="email">Email</label>
+        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.org">
+      </div>
+    </div>
+    <div class="field contact-err" id="contactErr"><div class="err" data-i18n="errContact">Please add a phone number or an email so we can reach you.</div></div>
+
+    <div class="row">
+      <div class="field" data-req-select>
+        <label class="lbl" for="role" data-i18n="role">I am a…</label>
+        <select id="role" name="role" required>
+          <option value="" data-i18n="choose">Choose one</option>
+          <option value="Home-based child care provider" data-i18n="r1">Home-based child care provider</option>
+          <option value="Center-based educator or staff" data-i18n="r2">Center-based educator or staff</option>
+          <option value="Program director or owner" data-i18n="r3">Program director or owner</option>
+          <option value="Parent or caregiver" data-i18n="r4">Parent or caregiver</option>
+          <option value="Supporter or ally" data-i18n="r5">Supporter or ally</option>
+          <option value="Elected official or staff" data-i18n="r6">Elected official or staff</option>
+          <option value="Press" data-i18n="r7">Press</option>
+          <option value="Other" data-i18n="other">Other</option>
+        </select>
+        <div class="err" data-i18n="errRole">Please choose one.</div>
+      </div>
+      <div class="field">
+        <label class="lbl" for="org"><span data-i18n="org">Organization or program</span> <span class="opt" data-i18n="optional">(optional)</span></label>
+        <input id="org" name="organization" type="text" autocomplete="organization">
+      </div>
+    </div>
+
+    <div class="row three">
+      <div class="field" data-zip>
+        <label class="lbl" for="zip" data-i18n="zip">Your zip code</label>
+        <input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}">
+        <div class="err" data-i18n="errZip">Please enter a 5-digit zip code.</div>
+      </div>
+      <div class="field">
+        <span class="lbl" id="adultsLbl" data-i18n="adults">Adults (including you)</span>
+        <div class="counter" data-counter="adults" data-min="1" data-max="20">
+          <button type="button" data-dec aria-label="Fewer adults">−</button>
+          <output aria-live="polite" aria-labelledby="adultsLbl">1</output>
+          <button type="button" data-inc aria-label="More adults">+</button>
+        </div>
+        <input type="hidden" name="adults" value="1">
+      </div>
+      <div class="field">
+        <span class="lbl" id="kidsLbl" data-i18n="kids">Kids</span>
+        <div class="counter" data-counter="kids" data-min="0" data-max="20">
+          <button type="button" data-dec aria-label="Fewer kids">−</button>
+          <output aria-live="polite" aria-labelledby="kidsLbl">0</output>
+          <button type="button" data-inc aria-label="More kids">+</button>
+        </div>
+        <input type="hidden" name="kids" value="0">
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="lbl" id="needLbl"><span data-i18n="needs">I'll need…</span> <span class="opt" data-i18n="optional">(optional)</span></span>
+      <div class="choices" role="group" aria-labelledby="needLbl">
+        <label class="choice"><input type="checkbox" name="needs" value="Wheelchair access"><span data-i18n="i3">Wheelchair access</span></label>
+        <label class="choice"><input type="checkbox" name="needs" value="Spanish interpretation"><span data-i18n="i1">Spanish interpretation</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl" for="notes"><span data-i18n="notes">Anything else we should know?</span> <span class="opt" data-i18n="optional">(optional)</span></label>
+      <textarea id="notes" name="notes" data-i18n-ph="notesPh" placeholder="Allergies, other languages, access needs…"></textarea>
+    </div>
+
+    <div class="form-error" id="formError" role="alert" data-i18n="errSubmit">Something went wrong sending your registration. Please try again.</div>
+
+    <div class="nav">
+      <button type="submit" class="btn primary" id="submit" data-i18n="submit">Register</button>
+    </div>
+  </form>
+
+  <section class="done" id="done" aria-live="polite" tabindex="-1">
+    <h2 class="display" data-i18n="doneH">You're in. See you December 2!</h2>
+    <p data-i18n="doneP">Look out in your email for the location and other details. Bring the kids, and bring a friend.</p>
+    <div class="actions">
+      <div class="cal">
+        <button type="button" class="btn primary" id="calBtn" aria-expanded="false" aria-controls="calMenu"><span data-i18n="cal">Add to my calendar</span> <span aria-hidden="true">▾</span></button>
+        <div class="cal-menu" id="calMenu" hidden>
+          <a id="calGoogle" href="#" target="_blank" rel="noopener">Google</a>
+          <a id="calApple" href="#" download="happy-birthday-shirley.ics">Apple (iPhone, Mac)</a>
+          <a id="calOutlook" href="#" target="_blank" rel="noopener">Outlook.com</a>
+          <a id="calO365" href="#" target="_blank" rel="noopener">Outlook (work or school)</a>
+          <a id="calYahoo" href="#" target="_blank" rel="noopener">Yahoo</a>
+          <a id="calIcs" href="#" download="happy-birthday-shirley.ics" data-i18n="calOther">Other calendar (.ics file)</a>
+        </div>
+      </div>
+      <button type="button" class="btn" id="share" data-i18n="share">Share this page</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  // Where registrations are sent: paste your Google Apps Script web app URL here
+  // (it ends in /exec; see README.md). Leave empty ('') to preview without sending.
+  var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwmRCE6ZZ8YbofybIzp96qPEI_AJoCiXFlE5lxWwD5zN-S7LR2Ut9-WFf_JhK4mXqlQ/exec';
+
+  var EVENT = { title: 'Happy Birthday, Shirley! Pay Our Providers campaign launch', start: '20261202T100000', end: '20261202T120000', tz: 'America/New_York' };
+
+  var ES = {
+    launch: 'Lanzamiento de campaña', h1: '¡Feliz cumpleaños, Shirley Chisholm!', tagline: 'Terminamos lo que Shirley empezó.',
+    date: 'Miér., 2 de dic.', locNote: 'Regístrate para recibir los detalles del lugar.',
+    party: '<b>Pastel, juegos y música.</b> Traigan a los niños. Es una fiesta de cumpleaños y el lanzamiento de nuestra campaña Pay Our Providers.',
+    title: 'Regístrate', note: 'Celebra en Albany, Buffalo o la Ciudad de Nueva York. Te enviaremos la dirección exacta en cuanto esté lista.',
+    site: '¿Dónde vas a celebrar?', errSite: 'Por favor elige una ciudad.',
+    first: 'Nombre', last: 'Apellido', optional: '(opcional)', phone: 'Teléfono celular', email: 'Correo electrónico',
+    errName: 'Por favor escribe tu nombre.', errLast: 'Por favor escribe tu apellido.', errContact: 'Por favor agrega un teléfono o un correo para comunicarnos contigo.',
+    role: 'Soy…', choose: 'Elige una opción', r1: 'Proveedora de cuidado infantil en casa', r2: 'Educadora o personal de un centro', r3: 'Directora o dueña de programa',
+    r4: 'Madre, padre o cuidador', r5: 'Simpatizante o aliado', r6: 'Funcionario electo o personal', r7: 'Prensa', other: 'Otro',
+    errRole: 'Por favor elige una opción.', org: 'Organización o programa',
+    zip: 'Tu código postal', errZip: 'Por favor escribe un código postal de 5 dígitos.',
+    adults: 'Adultos (incluyéndote)', kids: 'Niños',
+    needs: 'Necesitaré…', i1: 'Interpretación al español', i3: 'Acceso para silla de ruedas',
+    notes: '¿Algo más que debamos saber?', notesPh: 'Alergias, otros idiomas, necesidades de acceso…',
+    errSubmit: 'Hubo un problema al enviar tu registro. Por favor intenta de nuevo.',
+    submit: 'Registrarme', sending: 'Enviando…',
+    doneH: '¡Listo! Nos vemos el 2 de diciembre.', doneP: 'Revisa tu correo electrónico para el lugar y otros detalles. Trae a los niños y trae a un amigo.', locNoteDone: 'Revisa tu correo electrónico para el lugar y otros detalles.', calOther: 'Otro calendario (archivo .ics)',
+    cal: 'Agregar a mi calendario', share: 'Compartir esta página', copied: 'Enlace copiado',
+    footer: 'Providers Organized for Power (POP) y la Mesa de Alineación de Cuidado Infantil del Estado de Nueva York.'
+  };
+  var EN = {};
+  var lang = 'en';
+
+  var form = document.getElementById('reg');
+  var submitBtn = document.getElementById('submit');
+  var errBox = document.getElementById('formError');
+
+  // Remember English strings so the toggle can switch back.
+  document.querySelectorAll('[data-i18n]').forEach(function (el) { EN[el.getAttribute('data-i18n')] = el.textContent; });
+  document.querySelectorAll('[data-i18n-html]').forEach(function (el) { EN[el.getAttribute('data-i18n-html')] = el.innerHTML; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function (el) { EN[el.getAttribute('data-i18n-ph')] = el.getAttribute('placeholder'); });
+  EN.copied = 'Link copied'; EN.locNoteDone = 'Look out in your email for the location and other details.'; EN.sending = 'Sending…';
+  function t(k) { return (lang === 'es' ? ES[k] : EN[k]) || EN[k] || k; }
+
+  function setLang(l) {
+    lang = l;
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function (el) { el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph'))); });
+    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === l)); });
+    try { localStorage.setItem('popreg-lang', l); } catch (e) {}
+  }
+  document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
+
+  function validate() {
+    var bad = [];
+    form.querySelectorAll('.field').forEach(function (f) { f.classList.remove('invalid'); });
+    if (!form.first_name.value.trim()) { form.first_name.closest('.field').classList.add('invalid'); bad.push(form.first_name); }
+    if (!form.last_name.value.trim()) { form.last_name.closest('.field').classList.add('invalid'); bad.push(form.last_name); }
+    var phone = form.phone.value.replace(/\D/g, ''), email = form.email.value.trim();
+    var emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    var phoneOk = !phone || phone.length >= 10;
+    if ((!phone && !email) || !emailOk || !phoneOk) {
+      document.getElementById('contactErr').classList.add('invalid');
+      form.querySelectorAll('[data-contact]').forEach(function (f) { f.classList.add('invalid'); });
+      bad.push(!phoneOk || !phone ? form.phone : form.email);
+    }
+    if (!form.querySelector('input[name="site"]:checked')) { var sf = form.querySelector('[data-req-site]'); sf.classList.add('invalid'); bad.push(sf.querySelector('input')); }
+    if (!form.role.value) { form.role.closest('.field').classList.add('invalid'); bad.push(form.role); }
+    if (!/^\d{5}$/.test(form.zip.value.trim())) { form.zip.closest('.field').classList.add('invalid'); bad.push(form.zip); }
+    if (bad.length) bad[0].focus();
+    return !bad.length;
+  }
+
+  // Counters
+  document.querySelectorAll('[data-counter]').forEach(function (c) {
+    var name = c.dataset.counter, min = +c.dataset.min, max = +c.dataset.max;
+    var out = c.querySelector('output'), hidden = form.querySelector('input[name="' + name + '"]');
+    function set(v) { v = Math.max(min, Math.min(max, v)); out.textContent = v; hidden.value = v; save(); }
+    c.querySelector('[data-dec]').addEventListener('click', function () { set(+hidden.value - 1); });
+    c.querySelector('[data-inc]').addEventListener('click', function () { set(+hidden.value + 1); });
+    c._set = set;
+  });
+
+  function data() {
+    var fd = new FormData(form), o = {};
+    fd.forEach(function (v, k) { if (k in o) { o[k] = [].concat(o[k], v); } else { o[k] = v; } });
+    o.needs = o.needs ? [].concat(o.needs) : [];
+    // One sheet column per need.
+    o.wheelchair_access = o.needs.indexOf('Wheelchair access') > -1;
+    o.spanish_interpretation = o.needs.indexOf('Spanish interpretation') > -1;
+    o.form_language = lang;
+    return o;
+  }
+
+  // Draft saving, so a phone that reloads doesn't lose answers.
+  function save() { try { localStorage.setItem('popreg-draft', JSON.stringify(data())); } catch (e) {} }
+  function restore() {
+    var d; try { d = JSON.parse(localStorage.getItem('popreg-draft') || 'null'); } catch (e) {}
+    if (!d) return;
+    Object.keys(d).forEach(function (k) {
+      form.querySelectorAll('[name="' + k + '"]').forEach(function (el) {
+        if (el.type === 'checkbox') el.checked = [].concat(d[k]).indexOf(el.value) > -1;
+        else if (el.type === 'radio') el.checked = el.value === d[k];
+        else if (el.type !== 'hidden' && k !== 'website') el.value = d[k];
+      });
+    });
+    document.querySelectorAll('[data-counter]').forEach(function (c) { if (d[c.dataset.counter] != null) c._set(+d[c.dataset.counter]); });
+  }
+  form.addEventListener('input', save);
+  form.addEventListener('change', save);
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validate()) return;
+    var payload = data();
+    if (payload.website) { finish(); return; } // bot trap
+    delete payload.website;
+    payload.submitted_at = new Date().toISOString();
+    submitBtn.disabled = true; submitBtn.textContent = t('sending');
+    errBox.classList.remove('show');
+    var send = SUBMIT_URL
+      // Sent as plain text so Google accepts it without a CORS preflight.
+      ? fetch(SUBMIT_URL, { method: 'POST', body: JSON.stringify(payload) })
+          .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+          .then(function (j) { if (!j || j.ok !== true) throw new Error('Not saved'); })
+      : new Promise(function (res) { setTimeout(res, 400); });
+    send.then(finish).catch(function () {
+      errBox.classList.add('show');
+      submitBtn.disabled = false; submitBtn.textContent = t('submit');
+    });
+  });
+
+  function finish() {
+    var ln = document.querySelector('.loc-note');
+    if (ln) { ln.setAttribute('data-i18n', 'locNoteDone'); ln.textContent = t('locNoteDone'); }
+    try { localStorage.removeItem('popreg-draft'); } catch (e) {}
+    form.hidden = true;
+    var done = document.getElementById('done');
+    done.classList.add('show');
+    done.focus();
+    done.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Calendar file
+  var ics = [
+    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//POP//Dec 2 Launch//EN', 'BEGIN:VEVENT',
+    'UID:pop-dec2-2026@popchildcare.org', 'DTSTAMP:20261017T000000Z',
+    'DTSTART;TZID=' + EVENT.tz + ':' + EVENT.start, 'DTEND;TZID=' + EVENT.tz + ':' + EVENT.end,
+    'SUMMARY:' + EVENT.title, 'LOCATION:Albany\\, Buffalo or New York City (address to come)',
+    'DESCRIPTION:Shirley Chisholm\'s 102nd birthday party and the launch of the Pay Our Providers campaign. Cake\\, games & music. Address to come. Questions? Contact Luis at luis@actionlabny.org.',
+    'CONTACT:Luis\\, luis@actionlabny.org',
+    'END:VEVENT', 'END:VCALENDAR'
+  ].join('\r\n');
+  var icsHref = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+  document.getElementById('calIcs').href = icsHref;
+  document.getElementById('calApple').href = icsHref;
+  var details = "Shirley Chisholm's 102nd birthday party and the launch of the Pay Our Providers campaign. Cake, games & music. Celebrations in Albany, Buffalo and New York City; watch your email for the location. Questions? Contact Luis at luis@actionlabny.org.";
+  var where = 'Albany, Buffalo or New York City (address to come)';
+  document.getElementById('calGoogle').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+    + '&text=' + encodeURIComponent(EVENT.title)
+    + '&dates=' + EVENT.start + '/' + EVENT.end + '&ctz=' + encodeURIComponent(EVENT.tz)
+    + '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
+  document.getElementById('calOutlook').href = 'https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent'
+    + '&subject=' + encodeURIComponent(EVENT.title)
+    + '&startdt=' + encodeURIComponent('2026-12-02T10:00:00-05:00') + '&enddt=' + encodeURIComponent('2026-12-02T12:00:00-05:00')
+    + '&body=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
+  var olQuery = '&subject=' + encodeURIComponent(EVENT.title)
+    + '&startdt=' + encodeURIComponent('2026-12-02T10:00:00-05:00') + '&enddt=' + encodeURIComponent('2026-12-02T12:00:00-05:00')
+    + '&body=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
+  document.getElementById('calO365').href = 'https://outlook.office.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent' + olQuery;
+  document.getElementById('calYahoo').href = 'https://calendar.yahoo.com/?v=60'
+    + '&title=' + encodeURIComponent(EVENT.title) + '&st=20261202T150000Z&et=20261202T170000Z'
+    + '&desc=' + encodeURIComponent(details) + '&in_loc=' + encodeURIComponent(where);
+  var calBtn = document.getElementById('calBtn'), calMenu = document.getElementById('calMenu');
+  function closeCal() { calMenu.hidden = true; calBtn.setAttribute('aria-expanded', 'false'); }
+  calBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var open = calMenu.hidden; calMenu.hidden = !open; calBtn.setAttribute('aria-expanded', String(open));
+    if (open) calMenu.querySelector('a').focus();
+  });
+  calMenu.addEventListener('click', function () { setTimeout(closeCal, 0); });
+  document.addEventListener('click', function (e) { if (!calMenu.hidden && !calMenu.contains(e.target)) closeCal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !calMenu.hidden) { closeCal(); calBtn.focus(); } });
+
+  document.getElementById('share').addEventListener('click', function () {
+    var url = location.href.split('#')[0], btn = this;
+    if (navigator.share) { navigator.share({ title: document.title, url: url }).catch(function () {}); return; }
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { btn.textContent = t('copied'); }).catch(function () {});
+  });
+
+  restore();
+  var saved; try { saved = localStorage.getItem('popreg-lang'); } catch (e) {}
+  if (!saved && /^es\b/i.test(navigator.language || '')) saved = 'es';
+  if (/[?&]lang=es\b/.test(location.search)) saved = 'es';
+  setLang(saved === 'es' ? 'es' : 'en');
+})();
+</script>
+</body>
+</html>
