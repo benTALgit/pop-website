@@ -63,6 +63,12 @@
   .loc-note { margin: 0; padding: 8px 18px; background: #1F1A1A; color: #FFFFFF; font-weight: 800; font-size: 15px; letter-spacing: .02em; }
   .party { margin: 12px 0 0; color: var(--ink-soft); font-size: 16px; }
   .party b { color: var(--ink); }
+  .logos { margin: 18px 0 0; padding: 14px 0 0; border-top: 1px solid var(--line); }
+  .logos h2 { margin: 0 0 10px; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+  .logos ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; }
+  .logos img { display: block; height: 28px; width: auto; max-width: 120px; object-fit: contain; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logos img { filter: invert(1); } }
+  :root[data-theme="dark"] .logos img { filter: invert(1); }
 
   /* Progress */
   .steps { list-style: none; margin: 30px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
@@ -196,6 +202,20 @@
   </div>
   <p class="loc-note" data-i18n="locNote">Register to receive location details.</p>
   <p class="party" data-i18n-html="party"><b>Cake, games &amp; music.</b> Bring the kids. It's a birthday party, and the launch of our campaign to Pay Our Providers.</p>
+  <section class="logos" aria-labelledby="logosH">
+    <h2 id="logosH" data-i18n="hosted">Hosted by</h2>
+    <ul>
+      <li><img src="assets/logos/pop.png" alt="Providers Organized for Power" loading="lazy"></li>
+      <li><img src="assets/logos/tal.png" alt="The Action Lab" loading="lazy"></li>
+      <li><img src="assets/logos/uft.png" alt="UFT" loading="lazy"></li>
+      <li><img src="assets/logos/citizen-action.png" alt="Citizen Action of New York" loading="lazy"></li>
+      <li><img src="assets/logos/nycc.png" alt="New York Communities for Change" loading="lazy"></li>
+      <li><img src="assets/logos/aqe.png" alt="Alliance for Quality Education" loading="lazy"></li>
+      <li><img src="assets/logos/ece-otm.png" alt="ECE On The Move" loading="lazy"></li>
+      <li><img src="assets/logos/las-donas.png" alt="Las Doñas" loading="lazy"></li>
+      <li><img src="assets/logos/ilr.png" alt="ILR Worker Institute" loading="lazy"></li>
+    </ul>
+  </section>
 
   <form id="reg" novalidate>
     <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -336,6 +356,7 @@
   var ES = {
     launch: 'Lanzamiento de campaña', h1: '¡Feliz cumpleaños, Shirley Chisholm!', tagline: 'Terminamos lo que Shirley empezó.',
     date: 'Miér., 2 de dic.', locNote: 'Regístrate para recibir los detalles del lugar.',
+    hosted: 'Organizan',
     party: '<b>Pastel, juegos y música.</b> Traigan a los niños. Es una fiesta de cumpleaños y el lanzamiento de nuestra campaña Pay Our Providers.',
     title: 'Regístrate', note: 'Celebra en Albany, Buffalo o la Ciudad de Nueva York. Te enviaremos la dirección exacta en cuanto esté lista.',
     site: '¿Dónde vas a celebrar?', errSite: 'Por favor elige una ciudad.',
