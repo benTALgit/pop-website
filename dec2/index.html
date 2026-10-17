@@ -146,6 +146,9 @@
   footer { margin: 44px 0 0; padding: 18px 0 36px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 14px; }
   main.wrap { padding-bottom: 48px; }
   .lang { position: absolute; top: 12px; right: 12px; display: flex; gap: 4px; }
+  .home { position: absolute; top: 12px; left: 12px; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(253,248,247,.85); color: #1F1A1A; }
+  .home:hover { background: #1F1A1A; color: #FFFFFF; }
+  .home:focus-visible { outline: 3px solid #FFFFFF; outline-offset: 2px; }
   .lang button { font: 800 13px/1 'Libre Franklin', sans-serif; letter-spacing: .08em; min-height: 36px; padding: 0 12px; border: 0; background: rgba(253,248,247,.85); color: #4A4040; cursor: pointer; }
   .lang button[aria-pressed=true] { background: #1F1A1A; color: #FFFFFF; }
   .lang button:focus-visible { outline: 3px solid #FFFFFF; outline-offset: 2px; }
@@ -166,6 +169,7 @@
 
 <header class="hero">
   <img class="rally" src="assets/rally.jpg" alt="POP providers cheering at a rally under Child Care for All signs">
+  <a class="home" href="https://popchildcare.org/" aria-label="POP home" title="POP home"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7M5.5 9.5V20h5v-6h3v6h5V9.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   <div class="lang" role="group" aria-label="Language / Idioma">
     <button type="button" data-lang="en" aria-pressed="true">English</button>
     <button type="button" data-lang="es" aria-pressed="false">Español</button>
