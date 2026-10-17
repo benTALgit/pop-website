@@ -123,6 +123,8 @@ ul.facts { list-style: none; margin: 0; padding: 0; }
 ul.facts li { padding: 10px 0 10px 16px; border-left: 4px solid var(--coral); margin: 0 0 10px; background: linear-gradient(90deg, var(--chip), transparent 70%); padding-right: 8px; }
 ul.facts b { color: var(--coral-deep); }
 cite { display: block; margin-top: 4px; font-style: normal; font-size: 13px; color: var(--ink-soft); }
+cite a { color: inherit; font-weight: 600; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+cite a:hover { color: var(--coral-deep); }
 .note { font-size: 14px; color: var(--ink-soft); }
 
 .scen { margin: 14px 0 0; border-top: 2px solid var(--ink); }
