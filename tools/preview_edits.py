@@ -17,7 +17,7 @@ from html.parser import HTMLParser
 VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'}
 BLOCKS = {'h1', 'h2', 'h3', 'h4', 'p', 'li', 'figcaption'}
 CLASSES = {'t', 'sub', 'tag-main', 'tag-sub', 'btn'}
-SPLIT_LISTS = {'people', 'stats', 'pstats', 'regions', 'nyc'}  # tag each line of these list items, not the whole item
+SPLIT_LISTS = {'people', 'stats', 'ladder', 'hubs'}  # tag each line of these list items, not the whole item
 SKIP = {'logos', 'topnav', 'num'}
 
 
