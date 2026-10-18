@@ -18,7 +18,7 @@ VOID = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'met
 BLOCKS = {'h1', 'h2', 'h3', 'h4', 'p', 'li', 'figcaption'}
 CLASSES = {'t', 'sub', 'tag-main', 'tag-sub', 'btn'}
 SPLIT_LISTS = {'people', 'stats', 'fstages', 'hubs'}  # tag each line of these list items, not the whole item
-SKIP = {'logos', 'topnav', 'num'}
+SKIP = {'logos', 'topnav', 'num', 'join'}  # the join dialog is bilingual; its text lives in the markup
 
 
 class Scan(HTMLParser):

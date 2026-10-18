@@ -52,10 +52,10 @@
   <section id="power" class="power" aria-labelledby="powerH">
     <p class="eyebrow" data-e="126">The power we're building</p>
     <h2 id="powerH" class="display" data-e="127">Policy follows power. We're building it district by district.</h2>
-    <p class="power-lede" data-e="128">Pay Our Providers is an organizing campaign first. Providers and parents are building committees in the districts where our votes are won, so every legislator hears from the people who care for their constituents' children.</p>
+    <p class="power-lede" data-e="128">Pay Our Providers is an organizing campaign built and led by providers, parents, and organizations committed to pay justice. There is no more pressing need in child care than for providers to be compensated justly, and we are pushing for the policies that will solve this crisis. Ultimately, it is only our power as an organized group that can win and sustain these policies. <a href="#join" class="join-link" data-join><b>Join us.</b></a></p>
 
     <h3 class="power-h" data-e="158">How people move into the campaign</h3>
-    <p class="power-sub" data-e="159">POP's labor unions, community organizations and provider associations bring people in as members, and the campaign moves them up: to showing up, to joining a committee, to leading. The filled part of each box is how far we've come toward the goal; the outline is the room still to grow.</p>
+    <p class="power-sub" data-e="159">POP's labor unions, community organizations and provider associations bring people in as members, and the campaign moves them up: to showing up, to joining a committee, to leading.</p>
     <div class="flow">
       <ol class="fstages"><li><b data-e="182">Members</b><span data-e="183">25,000+ union members and tens of thousands of member families</span><span class="sgoal" data-e="184">Our base, and growing</span></li><li><b data-e="185">Engaged</b><span data-e="186">600+ who have turned out, testified or met legislators</span><span class="sgoal" data-e="187"><span class="sbar"><i style="width:6%"></i></span>Goal: 10,000</span></li><li><b data-e="188">In committees</b><span data-e="189">39+ providers, with parents joining</span><span class="sgoal" data-e="190"><span class="sbar"><i style="width:10%"></i></span>Goal: 400</span></li><li><b data-e="191">Leaders</b><span data-e="192">20 committee leaders and 25+ spokespeople</span><span class="sgoal" data-e="193"><span class="sbar"><i style="width:13%"></i></span>Goal: 150</span></li></ol>
       <div class="frow fone">
@@ -393,110 +393,119 @@
 </main>
 
 
-<dialog id="join" class="join" aria-labelledby="joinH">
+<dialog id="join" class="join" aria-labelledby="joinH" lang="en">
   <div class="join-head">
-    <h2 id="joinH" data-e="209">Join the campaign</h2>
+    <h2 id="joinH" data-es="Únete a la campaña">Join the campaign</h2>
+    <div class="join-lang" role="group" aria-label="Language / Idioma">
+      <button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" aria-pressed="false">Español</button>
+    </div>
     <button type="button" class="join-x" aria-label="Close">&times;</button>
   </div>
-  <form class="join-zip" novalidate>
-    <p data-e="210">Start with your zip code so we can put you on the map.</p>
-    <label for="joinZip">Zip code</label>
-    <div class="join-zip-row">
-      <input id="joinZip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="11201" required>
-      <button type="submit" class="btn primary" data-e="211">Continue</button>
-    </div>
-    <p class="join-err" role="alert" hidden data-e="212">Enter a 5-digit zip code.</p>
-  </form>
-  <form class="join-native" hidden novalidate>
-    <p class="join-pledge" data-e="214">I pledge to stand with Providers Organized for Power in the fight for universal child care, living wages for providers in every setting, and a state budget that supports children, families and the people who care for them.</p>
+  <form class="join-native" novalidate>
+    <p class="join-pledge" data-es="Me comprometo a unirme a la campaña Pay Our Providers.">I commit to join the campaign to Pay Our Providers.</p>
     <div class="jf-grid">
-      <label>First name<input name="first_name" autocomplete="given-name" required></label>
-      <label>Last name<input name="last_name" autocomplete="family-name" required></label>
-      <label>Email<input name="email" type="email" autocomplete="email" required></label>
-      <label>Cell phone<input name="phone" type="tel" autocomplete="tel"></label>
-      <label>Zip code<input name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" required></label>
-      <label>City or borough<input name="city" autocomplete="address-level2"></label>
+      <label><span data-es="Nombre">First name</span><input name="first_name" autocomplete="given-name" required></label>
+      <label><span data-es="Apellido">Last name</span><input name="last_name" autocomplete="family-name" required></label>
+      <label><span data-es="Correo electrónico">Email</span><input name="email" type="email" autocomplete="email" required></label>
+      <label><span data-es="Teléfono celular">Cell phone</span><input name="phone" type="tel" autocomplete="tel"></label>
+      <label><span data-es="¿Quién eres?">Who are you?</span>
+        <select name="supporter" required>
+          <option value="" data-es="Elige uno">Choose one</option>
+          <option value="Provider" data-es="Proveedora de cuidado infantil">Child care provider</option>
+          <option value="Parent" data-es="Madre, padre o familia">Parent or family member</option>
+          <option value="Union Member " data-es="Miembro de un sindicato">Union member</option>
+          <option value="Advocate" data-es="Defensora o aliada">Advocate or ally</option>
+          <option value="Other" data-es="Otro">Other</option>
+        </select>
+      </label>
+      <label><span data-es="Código postal (para ponerte en el mapa)">Zip code (puts you on the map)</span><input name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" required></label>
     </div>
-    <fieldset><legend>I am a</legend>
-      <label><input type="checkbox" name="supporter" value="Provider">Child care provider</label>
-      <label><input type="checkbox" name="supporter" value="Parent">Parent</label>
-      <label><input type="checkbox" name="supporter" value="Union Member ">Union member</label>
-      <label><input type="checkbox" name="supporter" value="Advocate">Advocate or ally</label>
-    </fieldset>
-    <label class="jf-wide">Are you a member of one of these groups?
-      <select name="organization">
-        <option value="">Not yet, or not sure</option>
-        <option>UFT</option><option>CSEA Voice</option><option>DC37</option>
-        <option value="NYCC ">NYCC</option><option>Citizen Action of NY</option><option>Las Doñas</option>
-        <option>ECE on The Move</option><option>AQE</option><option>Day Care Council of New York</option>
-        <option>New York Union Child Care Coalition</option><option>United Neighborhood Houses</option>
-        <option>ESCCC</option><option>Other</option>
-      </select>
-    </label>
-    <fieldset><legend>Language</legend>
-      <label><input type="checkbox" name="language" value="English">English</label>
-      <label><input type="checkbox" name="language" value="Spanish">Español</label>
-      <label><input type="checkbox" name="language" value="French">Français</label>
-      <label><input type="checkbox" name="language" value="Creole">Kreyòl</label>
-    </fieldset>
     <input name="website" tabindex="-1" autocomplete="off" class="jf-trap" aria-hidden="true">
-    <p class="join-err" role="alert" hidden data-e="215"></p>
-    <button type="submit" class="btn primary" data-e="216">Sign the pledge</button>
+    <p class="join-err" role="alert" hidden></p>
+    <button type="submit" class="btn primary" data-es="Me uno">Sign on</button>
   </form>
   <div class="join-form" hidden>
     <iframe title="POP pledge form" src="about:blank"></iframe>
     <div class="join-foot">
-      <span>Once you've hit submit, light up your spot.</span>
-      <button type="button" class="btn primary join-done" data-e="213">See me on the map</button>
+      <span data-es="Revisa tus datos y presiona Submit para terminar.">Check your details and press Submit to finish.</span>
+      <button type="button" class="btn primary join-done" data-es="Verme en el mapa">See me on the map</button>
     </div>
   </div>
 </dialog>
 
 <script>
-  // Join: zip first (the Airtable form can't tell this page what was entered), then the
-  // POP pledge form prefilled with it, then a dot on the map for that zip.
+  // Join: a short bilingual sign-on form. With JOIN_URL set it posts straight to Airtable through the
+  // site's pledge API; without it, it opens the POP pledge Airtable form prefilled with the answers.
+  // Either way the person then lights up their zip on the map.
   (function () {
-    // JOIN_URL: the pledge API on popchildcare.org (Replit, /api/pop-pledge; GET /zips gives counts). Empty = embedded Airtable form.
+    // JOIN_URL: the pledge API on popchildcare.org (Replit, /api/pop-pledge; GET /zips gives counts).
     // LIVE_MAP: add dots for sign-ups from Airtable zip counts on top of the built-in base layer.
     var JOIN_URL = '', LIVE_MAP = false;
     var FORM = 'https://airtable.com/embed/appZZI67MRBI5Lgpg/pag4XKeT6FLNJwFXw/form';
     var dlg = document.getElementById('join');
     if (!dlg || !dlg.showModal) return;
-    var zipForm = dlg.querySelector('.join-zip'), input = dlg.querySelector('#joinZip');
-    var err = dlg.querySelector('.join-err'), step2 = dlg.querySelector('.join-form');
-    var frame = dlg.querySelector('iframe'), zip = '', zips = null;
+    var native = dlg.querySelector('.join-native'), nerr = native.querySelector('.join-err');
+    var step2 = dlg.querySelector('.join-form'), frame = dlg.querySelector('iframe');
+    var zip = '', zips = null, lang = 'en';
+    var MSG = {
+      en: { name: 'Add your first and last name.', email: 'Check your email address.', who: 'Choose who you are.', zip: 'Enter a 5-digit zip code.', fail: 'That didn’t go through. Please try again in a moment.', sending: 'Sending…' },
+      es: { name: 'Escribe tu nombre y apellido.', email: 'Revisa tu correo electrónico.', who: 'Elige quién eres.', zip: 'Escribe un código postal de 5 dígitos.', fail: 'No se pudo enviar. Inténtalo de nuevo en un momento.', sending: 'Enviando…' }
+    };
     function loadZips() {
       if (!zips) zips = fetch('zips.json').then(function (r) { return r.json(); }).catch(function () { return {}; });
       return zips;
     }
-    var native = dlg.querySelector('.join-native'), nerr = native.querySelector('.join-err');
-    function open() {
+    function setLang(l) {
+      lang = l; dlg.lang = l;
+      Array.prototype.forEach.call(dlg.querySelectorAll('[data-es]'), function (el) {
+        if (!el.hasAttribute('data-en')) el.setAttribute('data-en', el.textContent);
+        el.textContent = el.getAttribute('data-' + l);
+      });
+      Array.prototype.forEach.call(dlg.querySelectorAll('[data-lang]'), function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+      nerr.hidden = true;
+    }
+    Array.prototype.forEach.call(dlg.querySelectorAll('[data-lang]'), function (b) {
+      b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); });
+    });
+    function open(e) {
+      if (e) e.preventDefault();
       loadZips();
-      err.hidden = true; nerr.hidden = true; step2.hidden = true;
-      zipForm.hidden = !!JOIN_URL; native.hidden = !JOIN_URL;
-      dlg.showModal();
-      (JOIN_URL ? native.elements.first_name : input).focus();
+      nerr.hidden = true; step2.hidden = true; native.hidden = false;
+      if (!dlg.open) dlg.showModal();
+      native.elements.first_name.focus();
+    }
+    function done() {
+      dlg.close(); native.reset();
+      try { localStorage.setItem('pop-join-zip', zip); } catch (e) {}
+      light(zip, true);
     }
     native.addEventListener('submit', function (e) {
       e.preventDefault();
-      var el = native.elements, d = { website: el.website.value };
-      ['first_name', 'last_name', 'email', 'phone', 'zip', 'city'].forEach(function (k) { d[k] = el[k].value.trim(); });
-      d.organization = el.organization.value; // untrimmed: some Airtable choices end in a space
-      ['supporter', 'language'].forEach(function (k) {
-        d[k] = Array.prototype.filter.call(native.querySelectorAll('[name=' + k + ']'), function (c) { return c.checked; }).map(function (c) { return c.value; });
-      });
+      var el = native.elements, d = { website: el.website.value }, m = MSG[lang];
+      ['first_name', 'last_name', 'email', 'phone', 'zip'].forEach(function (k) { d[k] = el[k].value.trim(); });
       d.zip = d.zip.replace(/\D/g, '');
-      var bad = !d.first_name || !d.last_name ? 'Add your first and last name.' : !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email) ? 'Check your email address.' : d.zip.length !== 5 ? 'Enter a 5-digit zip code.' : '';
+      d.supporter = el.supporter.value ? [el.supporter.value] : []; // untrimmed: some Airtable choices end in a space
+      d.language = [lang === 'es' ? 'Spanish' : 'English']; // the language they signed on in
+      var bad = !d.first_name || !d.last_name ? m.name : !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email) ? m.email : !d.supporter.length ? m.who : d.zip.length !== 5 ? m.zip : '';
       if (bad) { nerr.textContent = bad; nerr.hidden = false; return; }
-      var btn = native.querySelector('[type=submit]'); btn.disabled = true; btn.textContent = 'Sending…'; nerr.hidden = true;
+      zip = d.zip;
+      if (!JOIN_URL) {
+        var q = { 'Name': d.first_name, 'Last Name': d.last_name, 'Email': d.email, 'Phone': d.phone, 'Zip Code': d.zip,
+          'Type of Supporter - Select all that apply': d.supporter[0], 'Language / Idioma': d.language[0] };
+        frame.src = FORM + '?' + Object.keys(q).filter(function (k) { return q[k]; }).map(function (k) {
+          return 'prefill_' + encodeURIComponent(k) + '=' + encodeURIComponent(q[k]);
+        }).join('&');
+        native.hidden = true; step2.hidden = false;
+        return;
+      }
+      var btn = native.querySelector('[type=submit]'), label = btn.textContent;
+      btn.disabled = true; btn.textContent = m.sending; nerr.hidden = true;
       fetch(JOIN_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) }).then(function (r) { return r.json(); }).then(function (r) {
         if (!r.ok) throw new Error(r.error);
-        dlg.close(); native.reset(); zip = d.zip;
-        try { localStorage.setItem('pop-join-zip', zip); } catch (e) {}
-        light(zip, true);
+        done();
       }).catch(function () {
-        nerr.textContent = 'That didn\u2019t go through. Please try again in a moment.'; nerr.hidden = false;
-      }).then(function () { btn.disabled = false; btn.textContent = 'Sign the pledge'; });
+        nerr.textContent = m.fail; nerr.hidden = false;
+      }).then(function () { btn.disabled = false; btn.textContent = label; });
     });
     if (JOIN_URL && LIVE_MAP) {
       Promise.all([loadZips(), fetch(JOIN_URL + '/zips').then(function (r) { return r.json(); })]).then(function (res) {
@@ -515,19 +524,7 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-join]'), function (b) { b.addEventListener('click', open); });
     dlg.querySelector('.join-x').addEventListener('click', function () { dlg.close(); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
-    zipForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var v = input.value.replace(/\D/g, '');
-      if (v.length !== 5) { err.hidden = false; input.focus(); return; }
-      zip = v;
-      frame.src = FORM + '?prefill_Zip+Code=' + zip;
-      zipForm.hidden = true; step2.hidden = false;
-    });
-    dlg.querySelector('.join-done').addEventListener('click', function () {
-      dlg.close();
-      try { localStorage.setItem('pop-join-zip', zip); } catch (e) {}
-      light(zip, true);
-    });
+    dlg.querySelector('.join-done').addEventListener('click', done);
     function light(z, animate) {
       loadZips().then(function (all) {
         var pt = all[z], svg = document.querySelector('figure.map svg');

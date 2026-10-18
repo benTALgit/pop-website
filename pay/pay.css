@@ -299,13 +299,12 @@ dialog.join { width: min(720px, calc(100vw - 32px)); max-height: calc(100vh - 32
 dialog.join[open] { display: flex; flex-direction: column; }
 dialog.join::backdrop { background: rgba(31,26,26,.5); }
 .join-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--coral-deep); color: #fff; }
-.join-head h2 { margin: 0; font-size: 20px; font-weight: 800; }
+.join-head h2 { margin: 0; font-size: 20px; font-weight: 800; flex: 1; }
+.join-lang { display: inline-flex; margin-right: 10px; border: 1.5px solid #fff; }
+.join-lang button { border: 0; padding: 6px 10px; background: none; color: #fff; font: 700 13px 'Libre Franklin', sans-serif; cursor: pointer; }
+.join-lang button[aria-pressed=true] { background: #fff; color: var(--coral-deep); }
+.join-link { color: inherit; }
 .join-x { border: 0; background: none; color: #fff; font-size: 30px; line-height: 1; cursor: pointer; padding: 0 4px; }
-.join-zip { padding: 22px 18px 26px; }
-.join-zip p { margin: 0 0 14px; }
-.join-zip label { display: block; font-weight: 800; margin-bottom: 6px; }
-.join-zip-row { display: flex; gap: 10px; }
-.join-zip input { width: 9em; min-height: 50px; padding: 0 12px; font: 700 20px/1 'Libre Franklin', sans-serif; letter-spacing: .08em; border: 2px solid var(--ink); background: var(--card); color: var(--ink); }
 .join-err { color: var(--coral); font-weight: 700; margin: 10px 0 0 !important; }
 .join-form { display: flex; flex-direction: column; min-height: 0; flex: 1; }
 .join-form[hidden] { display: none; }
@@ -324,7 +323,7 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 @media (prefers-reduced-motion: reduce) { .nymap .me.go * { animation: none !important; } }
 .join-native { padding: 18px 18px 22px; overflow-y: auto; }
 .join-native[hidden] { display: none; }
-.join-pledge { margin: 0 0 16px; padding-left: 12px; border-left: 4px solid var(--coral); font-weight: 600; }
+.join-pledge { margin: 0 0 16px; padding-left: 12px; border-left: 4px solid var(--coral); font-size: 19px; font-weight: 800; line-height: 1.3; }
 .jf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 14px; margin-bottom: 14px; }
 .join-native label { font-weight: 700; font-size: 14px; }
 .jf-grid label, .jf-wide { display: flex; flex-direction: column; gap: 5px; }
