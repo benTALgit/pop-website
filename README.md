@@ -26,3 +26,12 @@ node tools/pay-toolkit/render.js   # needs Playwright (set PLAYWRIGHT=/path/to/p
 To turn it on, paste `pay/endorse/google-sheet-script.gs` into a Google Sheet's Apps Script, deploy it as a web app
 (Execute as: Me, Who has access: Anyone), and put the `/exec` URL into `SUBMIT_URL` in `pay/endorse/index.html`.
 Until then the form shows its thank-you screen without sending anything.
+
+## Editing text in the preview
+
+The claude.ai preview of the campaign page has an "Edit text" button. Saved edits land in the preview's
+`edits.json` as `{"edits": {"<data-e id>": "<new inner HTML>"}}`. To bring them into the site, save that
+`edits` object to a file and run `python3 tools/preview_edits.py apply pay/index.html that-file.json`.
+The `data-e` attributes on `pay/index.html` mark the editable blocks; after adding new text, run
+`python3 tools/preview_edits.py tag pay/index.html` to number the new blocks. `tools/pay-preview/build.sh`
+builds the preview folder.
