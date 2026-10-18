@@ -209,6 +209,13 @@ details.sec[open] > .body { border-left: 2px solid var(--ink); margin-left: 7px;
 .band.s3 i:nth-child(1) { height: 46px; } .band.s3 i:nth-child(2) { height: 36px; } .band.s3 i:nth-child(3) { height: 26px; } .band.s3 i:nth-child(4) { height: 18px; }
 .band.s2 i:nth-child(1) { height: 38px; } .band.s2 i:nth-child(2) { height: 30px; } .band.s2 i:nth-child(3) { height: 22px; } .band.s2 i:nth-child(4) { height: 15px; }
 .band.s1 i:nth-child(1) { height: 20px; } .band.s1 i:nth-child(2) { height: 17px; } .band.s1 i:nth-child(3) { height: 14px; } .band.s1 i:nth-child(4) { height: 11px; }
+.fone { grid-column: 1 / -1; grid-template-columns: 140px 44px 1fr; column-gap: 0; align-items: center; margin-top: 8px; padding: 10px 0; }
+.fins { list-style: none; margin: 0; padding: 0; display: grid; grid-auto-rows: 1fr; gap: 6px; }
+.fins li { display: flex; align-items: center; padding: 5px 9px; border: 1.5px solid var(--teal); background: var(--card); font-size: 13px; font-weight: 700; line-height: 1.2; }
+.fjoin { display: block; fill: none; stroke: var(--teal); stroke-width: 2; }
+.fjoin path { vector-effect: non-scaling-stroke; }
+.fjoin.wide { width: 30px; height: 100%; align-self: stretch; }
+.fjoin.tall { display: none; }
 .sgoal { display: block; margin-top: 8px; font-size: 12.5px; font-weight: 800; opacity: 1 !important; }
 .sbar { display: block; height: 6px; margin-bottom: 4px; background: rgba(255,255,255,.25); }
 .sbar i { display: block; height: 100%; background: var(--coral); }
@@ -246,6 +253,11 @@ details.sec[open] > .body { border-left: 2px solid var(--ink); margin-left: 7px;
   .frow { grid-template-columns: 1fr; row-gap: 6px; }
   .fsrc b, .fsrc span { display: inline; }
   .fsrc span::before { content: ' · '; }
+  .fone { grid-template-columns: 1fr; row-gap: 0; }
+  .fins { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: auto; }
+  .fins li { justify-content: center; text-align: center; font-size: 12px; padding: 5px 4px; }
+  .fjoin.wide { display: none; }
+  .fjoin.tall { display: block; width: 100%; height: 22px; }
   .hubs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 520px) {
