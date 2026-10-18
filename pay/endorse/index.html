@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Endorse Pay Our Providers</title>
+<meta name="description" content="Add your organization to the coalition fighting for the dignity and just compensation of New York's child care professionals.">
+<meta property="og:title" content="Endorse Pay Our Providers">
+<meta property="og:image" content="https://popny.org/pay/toolkit/social/pop-share.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pay.css">
+<style>
+  .form { margin: 26px 0 0; max-width: 640px; }
+  fieldset { border: 0; margin: 0 0 22px; padding: 0; }
+  legend { padding: 0; margin: 0 0 10px; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--coral-deep); }
+  .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .field { margin: 0 0 14px; }
+  .field label, .field .lbl { display: block; font-weight: 800; font-size: 15px; margin-bottom: 6px; }
+  .opt { font-weight: 400; color: var(--ink-soft); }
+  .hint { display: block; font-size: 13.5px; color: var(--ink-soft); margin: -2px 0 6px; }
+  input[type=text], input[type=email], input[type=tel], input[type=url], textarea {
+    width: 100%; font: inherit; font-size: 16px; padding: 11px 12px; color: var(--ink);
+    background: var(--card); border: 2px solid var(--line); border-radius: 0;
+  }
+  textarea { min-height: 120px; resize: vertical; }
+  input:focus, textarea:focus { outline: none; border-color: var(--focus); }
+  .err { display: none; color: var(--coral-deep); font-size: 14px; font-weight: 600; margin-top: 6px; }
+  .field.invalid input, .field.invalid textarea, .field.invalid .drop { border-color: var(--coral-deep); }
+  .field.invalid .err { display: block; }
+  .count { display: block; text-align: right; font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; }
+
+  .drop { display: flex; align-items: center; gap: 14px; padding: 14px; background: var(--card); border: 2px dashed var(--line); cursor: pointer; }
+  .drop:hover, .drop.over { border-color: var(--teal); }
+  .drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .drop:focus-within { border-color: var(--focus); border-style: solid; }
+  .drop .thumb { width: 84px; height: 56px; flex: none; display: flex; align-items: center; justify-content: center; background: var(--chip); }
+  .drop .thumb img { max-width: 100%; max-height: 100%; display: block; }
+  .drop .thumb svg { color: var(--ink-soft); }
+  .drop b { display: block; }
+  .drop span { font-size: 13.5px; color: var(--ink-soft); }
+
+  .check { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: start; padding: 14px; background: var(--chip); }
+  .check input { width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--teal); }
+  .check label { font-weight: 600; font-size: 15.5px; margin: 0; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .submit-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 8px; }
+  .submit-row .btn { min-width: 220px; }
+  .btn[disabled] { opacity: .6; cursor: progress; }
+  .formerr { display: none; margin: 14px 0 0; padding: 12px 14px; background: var(--chip); border-left: 4px solid var(--coral-deep); font-weight: 600; }
+  .formerr.show { display: block; }
+  .done { display: none; margin: 26px 0 0; padding: 24px 22px; background: var(--card); border-top: 6px solid var(--teal); max-width: 640px; }
+  .done.show { display: block; }
+  .done h2 { margin: 0 0 8px; color: var(--teal); font-size: clamp(22px, 4vw, 28px); line-height: 1.15; }
+  .done p { margin: 0 0 14px; }
+  @media (max-width: 600px) { .row { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+</style>
+</head>
+<body>
+
+<header class="hero short">
+  <img class="rally" src="/dec2/assets/rally.jpg" alt="POP providers cheering at a rally under Child Care for All signs">
+  <a class="home" href="../#endorsers" aria-label="Back to Pay Our Providers" title="Pay Our Providers"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <div class="tags">
+    <div class="tag-main display">PAY OUR PROVIDERS</div>
+    <div class="tag-sub">Endorse the campaign</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <h1 class="display">Add your organization.</h1>
+    <p class="lede">Pay Our Providers is a campaign led by a powerful and diverse group of organizations, coalitions, and unions committed to fighting for the dignity and just compensation of New York State's early childhood education and child care professionals. Join us in calling for <b>$1.8 billion for a child care wage scale</b> and <b>$1.04 billion for CCAP</b> in the 2027 state budget.</p>
+  </section>
+
+  <form class="form" id="endorse" novalidate>
+    <fieldset>
+      <legend>About you</legend>
+      <div class="row">
+        <div class="field"><label for="first_name">First name</label><input type="text" id="first_name" name="first_name" autocomplete="given-name" required><span class="err">Please enter your first name.</span></div>
+        <div class="field"><label for="last_name">Last name</label><input type="text" id="last_name" name="last_name" autocomplete="family-name" required><span class="err">Please enter your last name.</span></div>
+      </div>
+      <div class="field"><label for="role">Your role at the organization</label><input type="text" id="role" name="role" autocomplete="organization-title" placeholder="Executive Director, President, Lead Organizer…" required><span class="err">Please enter your role.</span></div>
+      <div class="row">
+        <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required><span class="err">Please enter a valid email.</span></div>
+        <div class="field"><label for="phone">Phone <span class="opt">(optional)</span></label><input type="tel" id="phone" name="phone" autocomplete="tel"><span class="err">Please enter a 10-digit phone number.</span></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Your organization</legend>
+      <div class="field"><label for="organization">Organization name</label><input type="text" id="organization" name="organization" autocomplete="organization" required><span class="err">Please enter your organization's name.</span></div>
+      <div class="field"><label for="org_website">Website or social media link</label><input type="url" id="org_website" name="org_website" placeholder="https://" inputmode="url" required><span class="err">Please enter a link, like https://example.org.</span></div>
+      <div class="field">
+        <label for="mission">Mission</label>
+        <span class="hint" id="missionHint">A sentence or two on who you are and who you serve.</span>
+        <textarea id="mission" name="mission" maxlength="600" aria-describedby="missionHint" required></textarea>
+        <span class="count" id="missionCount">0 / 600</span>
+        <span class="err">Please tell us a little about your organization.</span>
+      </div>
+      <div class="field" id="logoField">
+        <span class="lbl" id="logoLbl">Logo</span>
+        <span class="hint">PNG, SVG or JPG, up to 5 MB. A transparent background works best.</span>
+        <label class="drop" id="drop">
+          <input type="file" id="logo" accept="image/png,image/jpeg,image/svg+xml,image/webp" aria-labelledby="logoLbl">
+          <span class="thumb" id="thumb"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0l-5 5m5-5l5 5M4 20h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span><b id="logoName">Choose a file</b><span id="logoMeta">or drag it here</span></span>
+        </label>
+        <span class="err" id="logoErr">Please add your logo.</span>
+      </div>
+    </fieldset>
+
+    <div class="field" id="authField">
+      <div class="check">
+        <input type="checkbox" id="authorized" name="authorized" value="yes" required>
+        <label for="authorized">I am authorized to endorse Pay Our Providers on behalf of this organization, and I agree that its name and logo may be listed publicly as an endorser.</label>
+      </div>
+      <span class="err">Please confirm you're authorized to endorse for your organization.</span>
+    </div>
+
+    <div class="hp" aria-hidden="true"><label for="website">Leave this empty</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
+
+    <div class="submit-row">
+      <button type="submit" class="btn primary" id="submit">Endorse the campaign</button>
+    </div>
+    <p class="formerr" id="formError" role="alert">Something went wrong sending your endorsement. Please try again, or email <a href="mailto:ben@actionlabny.org">ben@actionlabny.org</a>.</p>
+  </form>
+
+  <section class="done" id="done" tabindex="-1" aria-live="polite">
+    <h2 class="display">Thank you for standing with providers.</h2>
+    <p>We've received your endorsement. Someone from the campaign will follow up to confirm before your organization is listed on the page.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="../toolkit/">Get the toolkit</a>
+      <a class="btn" href="../">Back to Pay Our Providers</a>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  // Where endorsements are sent: paste the Google Apps Script web app URL here
+  // (it ends in /exec; see README.md). Leave empty ('') to preview without sending.
+  var SUBMIT_URL = '';
+  var MAX_BYTES = 5 * 1024 * 1024;
+
+  var form = document.getElementById('endorse');
+  var btn = document.getElementById('submit');
+  var errBox = document.getElementById('formError');
+  var logoInput = document.getElementById('logo');
+  var drop = document.getElementById('drop');
+  var logo = null; // { name, type, data (base64) }
+
+  var mission = form.mission, count = document.getElementById('missionCount');
+  mission.addEventListener('input', function () { count.textContent = mission.value.length + ' / 600'; });
+
+  function setLogo(file) {
+    var field = document.getElementById('logoField'), err = document.getElementById('logoErr');
+    logo = null;
+    if (!file) return;
+    if (!/^image\/(png|jpeg|svg\+xml|webp)$/.test(file.type)) { err.textContent = 'Please choose a PNG, SVG, JPG or WebP image.'; field.classList.add('invalid'); return; }
+    if (file.size > MAX_BYTES) { err.textContent = 'That file is over 5 MB. Please choose a smaller one.'; field.classList.add('invalid'); return; }
+    field.classList.remove('invalid'); err.textContent = 'Please add your logo.';
+    var r = new FileReader();
+    r.onload = function () {
+      var url = r.result;
+      logo = { name: file.name, type: file.type, data: url.slice(url.indexOf(',') + 1) };
+      document.getElementById('thumb').innerHTML = '<img alt="" src="' + url + '">';
+      document.getElementById('logoName').textContent = file.name;
+      document.getElementById('logoMeta').textContent = Math.max(1, Math.round(file.size / 1024)) + ' KB · choose another';
+    };
+    r.readAsDataURL(file);
+  }
+  logoInput.addEventListener('change', function () { setLogo(logoInput.files[0]); });
+  ['dragenter', 'dragover'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+  ['dragleave', 'drop'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
+  drop.addEventListener('drop', function (e) { if (e.dataTransfer.files[0]) setLogo(e.dataTransfer.files[0]); });
+
+  function normUrl(v) {
+    v = v.trim();
+    if (v && !/^https?:\/\//i.test(v)) v = 'https://' + v;
+    return v;
+  }
+
+  function validate() {
+    var bad = [];
+    function mark(el, ok) { var f = el.closest('.field'); f.classList.toggle('invalid', !ok); if (!ok) bad.push(el); }
+    ['first_name', 'last_name', 'role', 'organization', 'mission'].forEach(function (n) { mark(form[n], !!form[n].value.trim()); });
+    mark(form.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim()));
+    var ph = form.phone.value.replace(/\D/g, '');
+    mark(form.phone, !ph || ph.length >= 10);
+    form.org_website.value = normUrl(form.org_website.value);
+    mark(form.org_website, /^https?:\/\/[^\s.]+\.[^\s]+$/i.test(form.org_website.value));
+    var lf = document.getElementById('logoField');
+    if (!logo) { lf.classList.add('invalid'); bad.push(logoInput); } else lf.classList.remove('invalid');
+    mark(form.authorized, form.authorized.checked);
+    // Keep the order of the page when moving focus to the first problem.
+    bad.sort(function (a, b) { return a.compareDocumentPosition(b) & 4 ? -1 : 1; });
+    if (bad.length) bad[0].focus();
+    return !bad.length;
+  }
+
+  form.addEventListener('input', function (e) {
+    var f = e.target.closest('.field');
+    if (f && f.classList.contains('invalid') && e.target.value) f.classList.remove('invalid');
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (form.website.value) { finish(); return; } // bot trap
+    if (!validate()) return;
+    var payload = {
+      submitted_at: new Date().toISOString(),
+      first_name: form.first_name.value.trim(),
+      last_name: form.last_name.value.trim(),
+      role: form.role.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      organization: form.organization.value.trim(),
+      org_website: form.org_website.value.trim(),
+      mission: form.mission.value.trim(),
+      authorized: true,
+      logo: logo
+    };
+    btn.disabled = true; btn.textContent = 'Sending…';
+    errBox.classList.remove('show');
+    var send = SUBMIT_URL
+      // Sent as plain text so Google accepts it without a CORS preflight.
+      ? fetch(SUBMIT_URL, { method: 'POST', body: JSON.stringify(payload) })
+          .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+          .then(function (j) { if (!j || j.ok !== true) throw new Error('Not saved'); })
+      : new Promise(function (res) { setTimeout(res, 500); });
+    send.then(finish).catch(function () {
+      errBox.classList.add('show');
+      btn.disabled = false; btn.textContent = 'Endorse the campaign';
+    });
+  });
+
+  function finish() {
+    form.hidden = true;
+    var done = document.getElementById('done');
+    done.classList.add('show');
+    done.focus();
+    done.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+})();
+</script>
+</body>
+</html>

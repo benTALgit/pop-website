@@ -176,3 +176,7 @@ footer p { margin: 0 0 6px; }
 .photo figcaption { margin-top: 6px; font-size: 13px; color: var(--ink-soft); }
 .principles .photo { margin: 0 0 16px; }
 main.wrap { padding-bottom: 56px; }
+.people img.badge { object-fit: cover; background: var(--line); }
+.logos a { display: block; border-radius: 6px; transition: opacity .15s; }
+.logos a:hover { opacity: .75; }
+.logos a:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
