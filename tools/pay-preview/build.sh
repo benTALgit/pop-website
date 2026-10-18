@@ -15,8 +15,8 @@ cp pay/pay.css "$OUT/"
 cp -R pay/toolkit/. "$OUT/toolkit/"
 cp tools/pay-preview/editor.js "$OUT/editor.js"
 fix() {
-  sed -e "s#/dec2/assets/#$2dec2assets/#g" \
-      -e 's#href="/dec2/"#href="https://popny.org/dec2/"#g' \
+  sed -e "s#\(\.\./\)*dec2/assets/#$2dec2assets/#g" \
+      -e 's#href="\(\.\./\)*dec2/"#href="https://popny.org/dec2/"#g' \
       -e 's#href="toolkit/"#href="toolkit/index.html"#g' \
       -e 's#href="endorse/"#href="endorse/index.html"#g' \
       -e 's#href="\.\./toolkit/"#href="../toolkit/index.html"#g' \
@@ -27,6 +27,7 @@ fix() {
 fix pay/index.html "" | sed 's#</body>#<script src="editor.js"></script>\n</body>#' > "$OUT/index.html"
 fix pay/toolkit/index.html "../" > "$OUT/toolkit/index.html"
 fix pay/endorse/index.html "../" > "$OUT/endorse/index.html"
+fix pay/toolkit/onepagers/onepager.css "../../" > "$OUT/toolkit/onepagers/onepager.css"
 for f in legislators providers parents; do fix "pay/toolkit/onepagers/$f.html" "../../" > "$OUT/toolkit/onepagers/$f.html"; done
 printf '{"savedAt": null, "edits": {}}\n' > "$OUT/edits.json"
 echo "built $OUT"

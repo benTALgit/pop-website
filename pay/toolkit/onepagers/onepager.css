@@ -8,7 +8,7 @@ body { margin: 0; background: #E9E1DE; font-family: 'Libre Franklin', system-ui,
 @media print { body { background: none; } .sheet { margin: 0; } .screen-only { display: none !important; } }
 @media screen and (max-width: 860px) { .sheet { width: 100%; height: auto; margin: 0; } }
 
-.top { position: relative; height: 1.05in; background: url(/dec2/assets/rally.jpg) center 38%/cover; flex: none; }
+.top { position: relative; height: 1.05in; background: url(../../../dec2/assets/rally.jpg) center 38%/cover; flex: none; }
 .top .tag { position: absolute; right: .45in; bottom: .34in; background: #B8361C; color: #fff; font-size: 17pt; padding: 5pt 10pt; }
 .top .aud { position: absolute; right: .45in; bottom: .14in; background: #1F1A1A; color: #fff; font-size: 7.5pt; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; padding: 3pt 8pt; }
 .main { padding: .2in .5in 0; flex: 1; min-height: 0; }
