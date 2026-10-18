@@ -139,6 +139,11 @@
       <figcaption class="map-key" data-e="181"><span><i class="k1"></i><i class="k2"></i><i class="k3"></i><i class="k4"></i>Fewer to more members by county</span><span><i class="kdot"></i>A cluster of members</span></figcaption>
     </figure>
 
+    <div class="join-row">
+      <p data-e="205">Every dot is someone who signed on. Add yours.</p>
+      <button type="button" class="btn primary" data-join data-e="206">Join the campaign</button>
+    </div>
+
     <p class="note" data-e="157">Sources: POP and The Action Lab organizing records, 2026; union figures from UFT, CSEA/VOICE and DC37.</p>
 
     <a class="power-to" href="#demands"><span>Committees in every region</span><span>Legislators who stand with providers</span><span><b>$1.8B</b> wage scale and <b>$1.04B</b> CCAP</span></a>
@@ -282,6 +287,10 @@
           <li data-e="203"><b>In committees:</b> 39+ providers, with parents joining. Our goal is 400.</li>
           <li data-e="204"><b>Leaders:</b> 20 committee leaders and 25+ spokespeople. Our goal is 150.</li>
         </ul>
+        <div class="join-row">
+          <p data-e="207">The fastest way to grow these numbers is you. Sign the POP pledge and we'll connect you with a committee near you.</p>
+          <button type="button" class="btn primary" data-join data-e="208">Join the campaign</button>
+        </div>
         <h3 data-e="143">Six regional hubs</h3>
         <p class="hubs-sub" data-e="144">Each hub is a home for provider and parent committees, built around the legislators we need to move.</p>
         <ul class="hubs">
@@ -382,6 +391,88 @@
   </section>
 </main>
 
+
+<dialog id="join" class="join" aria-labelledby="joinH">
+  <div class="join-head">
+    <h2 id="joinH" data-e="209">Join the campaign</h2>
+    <button type="button" class="join-x" aria-label="Close">&times;</button>
+  </div>
+  <form class="join-zip" novalidate>
+    <p data-e="210">Start with your zip code so we can put you on the map.</p>
+    <label for="joinZip">Zip code</label>
+    <div class="join-zip-row">
+      <input id="joinZip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="11201" required>
+      <button type="submit" class="btn primary" data-e="211">Continue</button>
+    </div>
+    <p class="join-err" role="alert" hidden data-e="212">Enter a 5-digit zip code.</p>
+  </form>
+  <div class="join-form" hidden>
+    <iframe title="POP pledge form" src="about:blank"></iframe>
+    <div class="join-foot">
+      <span>Once you've hit submit, light up your spot.</span>
+      <button type="button" class="btn primary join-done" data-e="213">See me on the map</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  // Join: zip first (the Airtable form can't tell this page what was entered), then the
+  // POP pledge form prefilled with it, then a dot on the map for that zip.
+  (function () {
+    var FORM = 'https://airtable.com/embed/appZZI67MRBI5Lgpg/pag4XKeT6FLNJwFXw/form';
+    var dlg = document.getElementById('join');
+    if (!dlg || !dlg.showModal) return;
+    var zipForm = dlg.querySelector('.join-zip'), input = dlg.querySelector('#joinZip');
+    var err = dlg.querySelector('.join-err'), step2 = dlg.querySelector('.join-form');
+    var frame = dlg.querySelector('iframe'), zip = '', zips = null;
+    function loadZips() {
+      if (!zips) zips = fetch('zips.json').then(function (r) { return r.json(); }).catch(function () { return {}; });
+      return zips;
+    }
+    function open() {
+      loadZips();
+      zipForm.hidden = false; step2.hidden = true; err.hidden = true;
+      dlg.showModal(); input.focus();
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-join]'), function (b) { b.addEventListener('click', open); });
+    dlg.querySelector('.join-x').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    zipForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = input.value.replace(/\D/g, '');
+      if (v.length !== 5) { err.hidden = false; input.focus(); return; }
+      zip = v;
+      frame.src = FORM + '?prefill_Zip+Code=' + zip;
+      zipForm.hidden = true; step2.hidden = false;
+    });
+    dlg.querySelector('.join-done').addEventListener('click', function () {
+      dlg.close();
+      try { localStorage.setItem('pop-join-zip', zip); } catch (e) {}
+      light(zip, true);
+    });
+    function light(z, animate) {
+      loadZips().then(function (all) {
+        var pt = all[z], svg = document.querySelector('figure.map svg');
+        if (!pt || !svg) return;
+        var ns = 'http://www.w3.org/2000/svg';
+        var host = pt[2] ? svg.querySelector('g[clip-path]') : svg;
+        var old = svg.querySelector('.me'); if (old) old.parentNode.removeChild(old);
+        var g = document.createElementNS(ns, 'g'); g.setAttribute('class', 'me' + (animate ? ' go' : ''));
+        [['ripple', 22], ['ripple r2', 22], ['core', pt[2] ? 6 : 8]].forEach(function (c) {
+          var el = document.createElementNS(ns, 'circle');
+          el.setAttribute('class', c[0]); el.setAttribute('cx', pt[0]); el.setAttribute('cy', pt[1]); el.setAttribute('r', c[1]);
+          g.appendChild(el);
+        });
+        var t = document.createElementNS(ns, 'text');
+        t.setAttribute('class', 'me-lbl'); t.setAttribute('x', pt[0] + 9); t.setAttribute('y', pt[1] - 9); t.textContent = 'You';
+        g.appendChild(t);
+        host.appendChild(g);
+        if (animate) svg.closest('figure').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+    try { var saved = localStorage.getItem('pop-join-zip'); if (saved) light(saved, false); } catch (e) {}
+  })();
+</script>
 
 <script>
   (function () {

@@ -11,7 +11,7 @@ mkdir -p "$OUT/dec2assets/logos" "$OUT/assets" "$OUT/toolkit" "$OUT/endorse"
 cp dec2/assets/rally.jpg dec2/assets/shirley.jpg "$OUT/dec2assets/"
 cp dec2/assets/logos/*.png "$OUT/dec2assets/logos/"
 cp -R pay/assets/. "$OUT/assets/"
-cp pay/pay.css "$OUT/"
+cp pay/pay.css pay/zips.json "$OUT/"
 cp -R pay/toolkit/. "$OUT/toolkit/"
 cp tools/pay-preview/editor.js "$OUT/editor.js"
 fix() {
