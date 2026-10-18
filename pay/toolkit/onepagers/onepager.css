@@ -1,0 +1,53 @@
+/* Letter-size one-pagers for the Pay Our Providers toolkit. Print or save as PDF. */
+@page { size: Letter; margin: 0; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: #E9E1DE; font-family: 'Libre Franklin', system-ui, sans-serif; color: #1F1A1A; font-size: 10pt; line-height: 1.34; }
+.d { font-family: 'Unbounded', system-ui, sans-serif; font-weight: 800; letter-spacing: -.01em; }
+.sheet { width: 8.5in; height: 11in; margin: 24px auto; background: #FDF8F7; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+@media print { body { background: none; } .sheet { margin: 0; } .screen-only { display: none !important; } }
+@media screen and (max-width: 860px) { .sheet { width: 100%; height: auto; margin: 0; } }
+
+.top { position: relative; height: 1.05in; background: url(../../../dec2/assets/rally.jpg) center 38%/cover; flex: none; }
+.top .tag { position: absolute; right: .45in; bottom: .34in; background: #B8361C; color: #fff; font-size: 17pt; padding: 5pt 10pt; }
+.top .aud { position: absolute; right: .45in; bottom: .14in; background: #1F1A1A; color: #fff; font-size: 7.5pt; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; padding: 3pt 8pt; }
+.main { padding: .2in .5in 0; flex: 1; min-height: 0; }
+h1 { margin: 0; color: #D9472B; font-size: 19pt; line-height: 1.07; }
+.lede { margin: 6pt 0 0; font-size: 10.8pt; line-height: 1.38; }
+.eyebrow { margin: 0 0 4pt; font-size: 8pt; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #1F7A74; }
+h2 { margin: 10pt 0 4pt; font-size: 12pt; line-height: 1.2; }
+.asks { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; margin: 9pt 0 0; }
+.ask { background: #fff; border-top: 4pt solid #B8361C; padding: 8pt 10pt 9pt; }
+.ask .amt { color: #D9472B; font-size: 24pt; line-height: 1; }
+.ask b.h { display: block; font-size: 11pt; margin: 4pt 0 2pt; }
+.ask p { margin: 0; font-size: 9.2pt; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16pt; }
+ul.tight { margin: 0; padding-left: 13pt; }
+ul.tight li { margin: 0 0 3.5pt; }
+ul.tight b { color: #B8361C; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8pt; margin: 4pt 0 0; }
+.stats div { border-left: 3pt solid #D9472B; padding: 1pt 0 1pt 7pt; font-size: 9pt; line-height: 1.3; }
+.stats b { display: block; font-family: 'Unbounded', sans-serif; color: #D9472B; font-size: 15pt; line-height: 1.05; margin-bottom: 2pt; }
+table.scen { width: 100%; border-collapse: collapse; font-size: 9pt; margin: 2pt 0 0; }
+table.scen th { text-align: left; font-size: 7pt; letter-spacing: .1em; text-transform: uppercase; color: #4A4040; border-bottom: 1.5pt solid #1F1A1A; padding: 2pt 0; }
+table.scen td { border-bottom: .6pt solid #D9CCC8; padding: 3.5pt 4pt 3.5pt 0; vertical-align: top; }
+table.scen td.n, table.scen th.n { text-align: right; white-space: nowrap; padding-right: 0; padding-left: 6pt; }
+table.scen td.new { color: #1F7A74; font-weight: 800; }
+ol.pr { margin: 0; padding-left: 15pt; font-size: 9.6pt; }
+ol.pr li { margin: 0 0 3pt; }
+.callout { background: #F6ECE9; padding: 8pt 10pt; margin: 10pt 0 0; font-size: 9.6pt; }
+.src { font-size: 7pt; color: #4A4040; line-height: 1.3; margin: 8pt 0 0; }
+.foot { flex: none; display: flex; align-items: center; gap: 12pt; background: #1F1A1A; color: #fff; padding: 8pt .5in; font-size: 9pt; }
+.foot .qr { width: .7in; height: .7in; background: #fff; padding: 4pt; flex: none; }
+.foot .qr img { width: 100%; height: 100%; display: block; }
+.foot .url { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 13pt; }
+.foot .who { margin-left: auto; text-align: right; font-size: 8pt; color: #E6DCD9; max-width: 2.9in; }
+.foot b { color: #fff; }
+.logos { display: flex; align-items: center; justify-content: space-between; gap: 10pt; padding: 8pt .5in; flex: none; border-top: .6pt solid #D9CCC8; }
+.logos img { height: 19pt; width: auto; max-width: 62pt; object-fit: contain; }
+
+.bar { position: sticky; top: 0; z-index: 2; display: flex; gap: 8px; justify-content: center; padding: 10px; background: #1F1A1A; font-family: 'Libre Franklin', sans-serif; }
+.bar a, .bar button { font: 800 13px/1 'Libre Franklin', sans-serif; letter-spacing: .06em; text-transform: uppercase; padding: 10px 14px; border: 0; background: #FDF8F7; color: #1F1A1A; text-decoration: none; cursor: pointer; }
+.bar .on { background: #B8361C; color: #fff; }
+.sheet[lang-block] { display: none; }
+html[lang="en"] .sheet[lang-block="en"], html[lang="es"] .sheet[lang-block="es"] { display: flex; }
