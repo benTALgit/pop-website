@@ -455,7 +455,7 @@
   // Join: zip first (the Airtable form can't tell this page what was entered), then the
   // POP pledge form prefilled with it, then a dot on the map for that zip.
   (function () {
-    // JOIN_URL: the Apps Script web app in pay/join/airtable-script.gs. Empty = use the embedded Airtable form.
+    // JOIN_URL: the pledge API on popchildcare.org (Replit, /api/pop-pledge; GET /zips gives counts). Empty = embedded Airtable form.
     // LIVE_MAP: draw the map's dots from Airtable zip counts instead of the built-in clusters.
     var JOIN_URL = '', LIVE_MAP = false;
     var FORM = 'https://airtable.com/embed/appZZI67MRBI5Lgpg/pag4XKeT6FLNJwFXw/form';
@@ -488,7 +488,7 @@
       var bad = !d.first_name || !d.last_name ? 'Add your first and last name.' : !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email) ? 'Check your email address.' : d.zip.length !== 5 ? 'Enter a 5-digit zip code.' : '';
       if (bad) { nerr.textContent = bad; nerr.hidden = false; return; }
       var btn = native.querySelector('[type=submit]'); btn.disabled = true; btn.textContent = 'Sending…'; nerr.hidden = true;
-      fetch(JOIN_URL, { method: 'POST', body: JSON.stringify(d) }).then(function (r) { return r.json(); }).then(function (r) {
+      fetch(JOIN_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) }).then(function (r) { return r.json(); }).then(function (r) {
         if (!r.ok) throw new Error(r.error);
         dlg.close(); native.reset(); zip = d.zip;
         try { localStorage.setItem('pop-join-zip', zip); } catch (e) {}
@@ -498,7 +498,7 @@
       }).then(function () { btn.disabled = false; btn.textContent = 'Sign the pledge'; });
     });
     if (JOIN_URL && LIVE_MAP) {
-      Promise.all([loadZips(), fetch(JOIN_URL).then(function (r) { return r.json(); })]).then(function (res) {
+      Promise.all([loadZips(), fetch(JOIN_URL + '/zips').then(function (r) { return r.json(); })]).then(function (res) {
         var pos = res[0], counts = res[1].zips || {}, svg = document.querySelector('figure.map svg');
         if (!svg || !Object.keys(counts).length) return;
         var ns = 'http://www.w3.org/2000/svg', inset = svg.querySelector('g[clip-path]'), first = svg.querySelector('.dot');
