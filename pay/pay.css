@@ -183,3 +183,34 @@ main.wrap { padding-bottom: 56px; }
 /* An open section keeps a rule down its left side so it reads as one block while scrolling. */
 details.sec[open] > .body { border-left: 2px solid var(--ink); margin-left: 7px; padding-left: 22px; }
 @media (max-width: 600px) { details.sec[open] > .body { margin-left: 3px; padding-left: 14px; } }
+
+/* Power: the organizing behind the demands */
+.power { margin: 46px 0 0; }
+.power-lede { margin: 12px 0 0; max-width: 44em; }
+.pstats { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.pstats li { background: var(--ink); color: var(--paper); padding: 16px 14px; }
+.pstats b { display: block; font-size: clamp(24px, 3.6vw, 32px); line-height: 1.05; font-weight: 800; }
+.pstats span { display: block; margin-top: 8px; font-size: 14px; line-height: 1.35; opacity: .85; }
+.power-h { margin: 28px 0 0; font-size: 20px; line-height: 1.2; font-weight: 800; }
+.power-sub { margin: 6px 0 0; font-size: 15.5px; color: var(--ink-soft); max-width: 46em; }
+.regions { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 28px; }
+.reg-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.reg-top b { font-size: 16px; }
+.reg-top span { font-size: 14px; font-weight: 600; color: var(--ink-soft); white-space: nowrap; }
+.bar { height: 12px; margin: 6px 0 4px; background: var(--chip); border: 1px solid var(--line); }
+.bar i { display: block; height: 100%; background: var(--teal); }
+.regions .why { display: block; font-size: 13.5px; line-height: 1.35; color: var(--ink-soft); }
+.power .note { margin: 14px 0 0; }
+.power-to { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 22px 0 0; text-decoration: none; color: var(--ink); font-weight: 600; font-size: 15px; line-height: 1.3; }
+.power-to span { position: relative; padding: 14px 26px 14px 16px; background: var(--chip); border-top: 4px solid var(--teal); }
+.power-to span + span { margin-left: 4px; }
+.power-to span:last-child { background: var(--coral-deep); color: #fff; border-top-color: var(--coral-deep); }
+.power-to span:not(:last-child)::after { content: '→'; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); color: var(--teal); font-weight: 800; }
+.power-to:hover span:last-child { background: var(--coral); }
+@media (max-width: 700px) {
+  .pstats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .regions { grid-template-columns: 1fr; }
+  .power-to { grid-template-columns: 1fr; }
+  .power-to span + span { margin: 4px 0 0; }
+  .power-to span:not(:last-child)::after { content: '↓'; }
+}
