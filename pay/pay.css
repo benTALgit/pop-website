@@ -247,3 +247,24 @@ details.sec[open] > .body { border-left: 2px solid var(--ink); margin-left: 7px;
   .power-to span + span { margin: 4px 0 0; }
   .power-to span:not(:last-child)::after { content: '↓'; }
 }
+
+/* Power: map of where members are */
+.map { margin: 14px 0 0; }
+.nymap { display: block; width: 100%; height: auto; }
+.nymap .st { fill: var(--card); stroke: var(--ink-soft); stroke-width: 1.2; }
+.nymap .co { stroke: var(--line); stroke-width: .6; fill: transparent; }
+.nymap .co.l1 { fill: var(--teal); fill-opacity: .18; }
+.nymap .co.l2 { fill: var(--teal); fill-opacity: .35; }
+.nymap .co.l3 { fill: var(--teal); fill-opacity: .6; }
+.nymap .co.l4 { fill: var(--teal); fill-opacity: .85; }
+.nymap .dot { fill: var(--coral); fill-opacity: .8; stroke: var(--paper); stroke-width: .8; }
+.nymap .inset rect { fill: var(--paper); stroke: var(--ink-soft); stroke-width: 1; }
+.nymap .lead { stroke: var(--ink-soft); stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+.nymap text { font-family: 'Libre Franklin', sans-serif; fill: var(--ink-soft); }
+.nymap .lbl { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.nymap .rl { font-size: 11px; font-weight: 600; }
+.map-key { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 8px 0 0; font-size: 13px; color: var(--ink-soft); }
+.map-key span { display: inline-flex; align-items: center; gap: 3px; }
+.map-key i { display: inline-block; width: 14px; height: 10px; background: var(--teal); }
+.map-key .k1 { opacity: .18; } .map-key .k2 { opacity: .35; } .map-key .k3 { opacity: .6; } .map-key .k4 { opacity: .85; margin-right: 5px; }
+.map-key .kdot { width: 10px; height: 10px; border-radius: 50%; background: var(--coral); margin-right: 5px; }
