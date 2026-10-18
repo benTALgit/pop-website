@@ -406,6 +406,42 @@
     </div>
     <p class="join-err" role="alert" hidden data-e="212">Enter a 5-digit zip code.</p>
   </form>
+  <form class="join-native" hidden novalidate>
+    <p class="join-pledge" data-e="214">I pledge to stand with Providers Organized for Power in the fight for universal child care, living wages for providers in every setting, and a state budget that supports children, families and the people who care for them.</p>
+    <div class="jf-grid">
+      <label>First name<input name="first_name" autocomplete="given-name" required></label>
+      <label>Last name<input name="last_name" autocomplete="family-name" required></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required></label>
+      <label>Cell phone<input name="phone" type="tel" autocomplete="tel"></label>
+      <label>Zip code<input name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" required></label>
+      <label>City or borough<input name="city" autocomplete="address-level2"></label>
+    </div>
+    <fieldset><legend>I am a</legend>
+      <label><input type="checkbox" name="supporter" value="Provider">Child care provider</label>
+      <label><input type="checkbox" name="supporter" value="Parent">Parent</label>
+      <label><input type="checkbox" name="supporter" value="Union Member ">Union member</label>
+      <label><input type="checkbox" name="supporter" value="Advocate">Advocate or ally</label>
+    </fieldset>
+    <label class="jf-wide">Are you a member of one of these groups?
+      <select name="organization">
+        <option value="">Not yet, or not sure</option>
+        <option>UFT</option><option>CSEA Voice</option><option>DC37</option>
+        <option value="NYCC ">NYCC</option><option>Citizen Action of NY</option><option>Las Doñas</option>
+        <option>ECE on The Move</option><option>AQE</option><option>Day Care Council of New York</option>
+        <option>New York Union Child Care Coalition</option><option>United Neighborhood Houses</option>
+        <option>ESCCC</option><option>Other</option>
+      </select>
+    </label>
+    <fieldset><legend>Language</legend>
+      <label><input type="checkbox" name="language" value="English">English</label>
+      <label><input type="checkbox" name="language" value="Spanish">Español</label>
+      <label><input type="checkbox" name="language" value="French">Français</label>
+      <label><input type="checkbox" name="language" value="Creole">Kreyòl</label>
+    </fieldset>
+    <input name="website" tabindex="-1" autocomplete="off" class="jf-trap" aria-hidden="true">
+    <p class="join-err" role="alert" hidden data-e="215"></p>
+    <button type="submit" class="btn primary" data-e="216">Sign the pledge</button>
+  </form>
   <div class="join-form" hidden>
     <iframe title="POP pledge form" src="about:blank"></iframe>
     <div class="join-foot">
@@ -419,6 +455,9 @@
   // Join: zip first (the Airtable form can't tell this page what was entered), then the
   // POP pledge form prefilled with it, then a dot on the map for that zip.
   (function () {
+    // JOIN_URL: the Apps Script web app in pay/join/airtable-script.gs. Empty = use the embedded Airtable form.
+    // LIVE_MAP: draw the map's dots from Airtable zip counts instead of the built-in clusters.
+    var JOIN_URL = '', LIVE_MAP = false;
     var FORM = 'https://airtable.com/embed/appZZI67MRBI5Lgpg/pag4XKeT6FLNJwFXw/form';
     var dlg = document.getElementById('join');
     if (!dlg || !dlg.showModal) return;
@@ -429,10 +468,49 @@
       if (!zips) zips = fetch('zips.json').then(function (r) { return r.json(); }).catch(function () { return {}; });
       return zips;
     }
+    var native = dlg.querySelector('.join-native'), nerr = native.querySelector('.join-err');
     function open() {
       loadZips();
-      zipForm.hidden = false; step2.hidden = true; err.hidden = true;
-      dlg.showModal(); input.focus();
+      err.hidden = true; nerr.hidden = true; step2.hidden = true;
+      zipForm.hidden = !!JOIN_URL; native.hidden = !JOIN_URL;
+      dlg.showModal();
+      (JOIN_URL ? native.elements.first_name : input).focus();
+    }
+    native.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var el = native.elements, d = { website: el.website.value };
+      ['first_name', 'last_name', 'email', 'phone', 'zip', 'city'].forEach(function (k) { d[k] = el[k].value.trim(); });
+      d.organization = el.organization.value; // untrimmed: some Airtable choices end in a space
+      ['supporter', 'language'].forEach(function (k) {
+        d[k] = Array.prototype.filter.call(native.querySelectorAll('[name=' + k + ']'), function (c) { return c.checked; }).map(function (c) { return c.value; });
+      });
+      d.zip = d.zip.replace(/\D/g, '');
+      var bad = !d.first_name || !d.last_name ? 'Add your first and last name.' : !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email) ? 'Check your email address.' : d.zip.length !== 5 ? 'Enter a 5-digit zip code.' : '';
+      if (bad) { nerr.textContent = bad; nerr.hidden = false; return; }
+      var btn = native.querySelector('[type=submit]'); btn.disabled = true; btn.textContent = 'Sending…'; nerr.hidden = true;
+      fetch(JOIN_URL, { method: 'POST', body: JSON.stringify(d) }).then(function (r) { return r.json(); }).then(function (r) {
+        if (!r.ok) throw new Error(r.error);
+        dlg.close(); native.reset(); zip = d.zip;
+        try { localStorage.setItem('pop-join-zip', zip); } catch (e) {}
+        light(zip, true);
+      }).catch(function () {
+        nerr.textContent = 'That didn\u2019t go through. Please try again in a moment.'; nerr.hidden = false;
+      }).then(function () { btn.disabled = false; btn.textContent = 'Sign the pledge'; });
+    });
+    if (JOIN_URL && LIVE_MAP) {
+      Promise.all([loadZips(), fetch(JOIN_URL).then(function (r) { return r.json(); })]).then(function (res) {
+        var pos = res[0], counts = res[1].zips || {}, svg = document.querySelector('figure.map svg');
+        if (!svg || !Object.keys(counts).length) return;
+        var ns = 'http://www.w3.org/2000/svg', inset = svg.querySelector('g[clip-path]'), first = svg.querySelector('.dot');
+        Array.prototype.forEach.call(svg.querySelectorAll('.dot'), function (c) { c.parentNode.removeChild(c); });
+        Object.keys(counts).forEach(function (z) {
+          var pt = pos[z], n = counts[z]; if (!pt) return;
+          var c = document.createElementNS(ns, 'circle');
+          c.setAttribute('class', 'dot'); c.setAttribute('cx', pt[0]); c.setAttribute('cy', pt[1]);
+          c.setAttribute('r', (pt[2] ? 2.6 + 1.5 * Math.sqrt(n) : 4.5 + 2.6 * Math.sqrt(n)).toFixed(1));
+          (pt[2] ? inset : svg).insertBefore(c, pt[2] ? null : svg.querySelector('defs'));
+        });
+      }).catch(function () {});
     }
     Array.prototype.forEach.call(document.querySelectorAll('[data-join]'), function (b) { b.addEventListener('click', open); });
     dlg.querySelector('.join-x').addEventListener('click', function () { dlg.close(); });

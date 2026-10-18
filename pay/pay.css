@@ -309,3 +309,17 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 @keyframes me-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes me-ripple { from { transform: scale(.2); opacity: .9; } to { transform: scale(1.6); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .nymap .me.go * { animation: none !important; } }
+.join-native { padding: 18px 18px 22px; overflow-y: auto; }
+.join-native[hidden] { display: none; }
+.join-pledge { margin: 0 0 16px; padding-left: 12px; border-left: 4px solid var(--coral); font-weight: 600; }
+.jf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 14px; margin-bottom: 14px; }
+.join-native label { font-weight: 700; font-size: 14px; }
+.jf-grid label, .jf-wide { display: flex; flex-direction: column; gap: 5px; }
+.jf-wide { margin: 0 0 14px; }
+.join-native input:not([type=checkbox]), .join-native select { min-height: 44px; padding: 0 10px; font: 500 16px 'Libre Franklin', sans-serif; border: 2px solid var(--ink); background: var(--card); color: var(--ink); }
+.join-native fieldset { border: 0; padding: 0; margin: 0 0 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.join-native legend { font-weight: 800; font-size: 14px; margin-bottom: 6px; padding: 0; }
+.join-native fieldset label { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; font-size: 15px; }
+.join-native input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--coral-deep); }
+.jf-trap { position: absolute; left: -9999px; }
+.join-native .join-err { margin: 0 0 12px !important; }
