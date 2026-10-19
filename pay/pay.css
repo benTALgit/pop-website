@@ -204,8 +204,6 @@ details.sec[open] > .body { border-left: 2px solid var(--ink); margin-left: 7px;
 .band { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; align-items: center; padding: 7px 0; }
 .band i { display: block; position: relative; border: 2px dashed var(--teal); }
 .band i span { position: absolute; left: -2px; top: -2px; bottom: -2px; background: var(--teal); }
-.band i:first-child { border: 0; background: var(--teal); outline: 2px dashed var(--teal); outline-offset: 5px; margin: 0 6px 0 2px; }
-.band i:first-child span { display: none; }
 .band.s3 i:nth-child(1) { height: 46px; } .band.s3 i:nth-child(2) { height: 36px; } .band.s3 i:nth-child(3) { height: 26px; } .band.s3 i:nth-child(4) { height: 18px; }
 .band.s2 i:nth-child(1) { height: 38px; } .band.s2 i:nth-child(2) { height: 30px; } .band.s2 i:nth-child(3) { height: 22px; } .band.s2 i:nth-child(4) { height: 15px; }
 .band.s1 i:nth-child(1) { height: 20px; } .band.s1 i:nth-child(2) { height: 17px; } .band.s1 i:nth-child(3) { height: 14px; } .band.s1 i:nth-child(4) { height: 11px; }
