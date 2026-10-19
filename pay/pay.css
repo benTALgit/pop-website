@@ -88,8 +88,6 @@ details.more li + li { margin-top: 6px; }
 .plist li { counter-increment: p; position: relative; padding: 14px 14px 14px 52px; background: var(--chip); font-size: 15.5px; line-height: 1.45; }
 .plist li::before { content: counter(p); position: absolute; left: 14px; top: 12px; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; background: var(--ink); color: var(--paper); font: 800 14px/1 'Unbounded', sans-serif; }
 .plist b { display: block; margin-bottom: 2px; }
-.tie { display: block; margin-top: 8px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); }
-.tie::before { content: "→ "; }
 
 .partner { display: grid; grid-template-columns: 170px 1fr; gap: 20px; align-items: start; margin: 28px 0 0; padding: 20px; border: 2px solid var(--ink); }
 .partner-logo { width: 100%; height: auto; display: block; margin-top: 4px; }
