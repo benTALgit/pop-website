@@ -310,10 +310,6 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 .join-link { color: inherit; }
 .join-x { border: 0; background: none; color: #fff; font-size: 30px; line-height: 1; cursor: pointer; padding: 0 4px; }
 .join-err { color: var(--coral); font-weight: 700; margin: 10px 0 0 !important; }
-.join-form { display: flex; flex-direction: column; min-height: 0; flex: 1; }
-.join-form[hidden] { display: none; }
-.join-form iframe { width: 100%; height: min(70vh, 900px); border: 0; background: #fff; }
-.join-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 18px; border-top: 1px solid var(--line); font-weight: 700; }
 .nymap .me .core { fill: var(--ink); stroke: var(--paper); stroke-width: 2.5; }
 .nymap .me .ripple { fill: none; stroke: var(--ink); stroke-width: 3; opacity: 0; transform-box: fill-box; transform-origin: center; }
 .nymap .me .me-lbl { font: 800 14px 'Libre Franklin', sans-serif; fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; }

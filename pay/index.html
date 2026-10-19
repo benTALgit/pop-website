@@ -369,18 +369,11 @@
     <p class="join-err" role="alert" hidden></p>
     <button type="submit" class="btn primary" data-es="Me uno">Sign on</button>
   </form>
-  <div class="join-form" hidden>
-    <iframe title="POP pledge form" src="about:blank"></iframe>
-    <div class="join-foot">
-      <span data-es="Revisa tus datos y presiona Submit para terminar.">Check your details and press Submit to finish.</span>
-      <button type="button" class="btn primary join-done" data-es="Verme en el mapa">See me on the map</button>
-    </div>
-  </div>
 </dialog>
 
 <script>
   // Join: a short bilingual sign-on form. With JOIN_URL set it posts straight to Airtable through the
-  // site's pledge API; without it, it opens the POP pledge Airtable form prefilled with the answers.
+  // site's pledge API; until then it posts to the POP forms Google Sheet (tab "Pledges").
   // Either way the person then lights up their zip on the map.
   (function () {
     // JOIN_URL: the pledge API on popchildcare.org (Replit, /api/pop-pledge; GET /zips gives counts). Only on our own
@@ -389,11 +382,11 @@
     // API_READY: turn on once the site's Airtable key is in place (until then the API can't save).
     var API_READY = false;
     var JOIN_URL = API_READY && /(^|\.)(popny|popchildcare)\.org$/.test(location.hostname) ? 'https://popchildcare.org/api/pop-pledge' : '', LIVE_MAP = false;
-    var FORM = 'https://airtable.com/embed/appZZI67MRBI5Lgpg/pag4XKeT6FLNJwFXw/form';
+    // SHEET_URL: the Apps Script web app on the Dec 2 registration sheet (tools/sheets/pop-forms-script.gs).
+    var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwmRCE6ZZ8YbofybIzp96qPEI_AJoCiXFlE5lxWwD5zN-S7LR2Ut9-WFf_JhK4mXqlQ/exec';
     var dlg = document.getElementById('join');
     if (!dlg || !dlg.showModal) return;
     var native = dlg.querySelector('.join-native'), nerr = native.querySelector('.join-err');
-    var step2 = dlg.querySelector('.join-form'), frame = dlg.querySelector('iframe');
     var zip = '', zips = null, lang = 'en';
     var MSG = {
       en: { name: 'Add your first and last name.', email: 'Check your email address.', who: 'Choose who you are.', zip: 'Enter a 5-digit zip code.', fail: 'That didn’t go through. Please try again in a moment.', sending: 'Sending…' },
@@ -418,7 +411,7 @@
     function open(e) {
       if (e) e.preventDefault();
       loadZips();
-      nerr.hidden = true; step2.hidden = true; native.hidden = false;
+      nerr.hidden = true;
       if (!dlg.open) dlg.showModal();
       native.elements.first_name.focus();
     }
@@ -437,18 +430,13 @@
       var bad = !d.first_name || !d.last_name ? m.name : !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email) ? m.email : !d.supporter.length ? m.who : d.zip.length !== 5 ? m.zip : '';
       if (bad) { nerr.textContent = bad; nerr.hidden = false; return; }
       zip = d.zip;
-      if (!JOIN_URL) {
-        var q = { 'Name': d.first_name, 'Last Name': d.last_name, 'Email': d.email, 'Phone': d.phone, 'Zip Code': d.zip,
-          'Type of Supporter - Select all that apply': d.supporter[0], 'Language / Idioma': d.language[0] };
-        frame.src = FORM + '?' + Object.keys(q).filter(function (k) { return q[k]; }).map(function (k) {
-          return 'prefill_' + encodeURIComponent(k) + '=' + encodeURIComponent(q[k]);
-        }).join('&');
-        native.hidden = true; step2.hidden = false;
-        return;
-      }
       var btn = native.querySelector('[type=submit]'), label = btn.textContent;
       btn.disabled = true; btn.textContent = m.sending; nerr.hidden = true;
-      fetch(JOIN_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) }).then(function (r) { return r.json(); }).then(function (r) {
+      var req = JOIN_URL
+        ? fetch(JOIN_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) })
+        // Sent as plain text so Google accepts it without a CORS preflight.
+        : fetch(SHEET_URL, { method: 'POST', body: JSON.stringify(Object.assign({ form: 'pledge', page: location.href }, d)) });
+      req.then(function (r) { return r.json(); }).then(function (r) {
         if (!r.ok) throw new Error(r.error);
         done();
       }).catch(function () {
@@ -472,7 +460,6 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-join]'), function (b) { b.addEventListener('click', open); });
     dlg.querySelector('.join-x').addEventListener('click', function () { dlg.close(); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
-    dlg.querySelector('.join-done').addEventListener('click', done);
     function light(z, animate) {
       loadZips().then(function (all) {
         var pt = all[z], svg = document.querySelector('figure.map svg');

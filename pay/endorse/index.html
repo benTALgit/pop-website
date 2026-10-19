@@ -142,7 +142,8 @@
 (function () {
   // Where endorsements are sent: paste the Google Apps Script web app URL here
   // (it ends in /exec; see README.md). Leave empty ('') to preview without sending.
-  var SUBMIT_URL = '';
+  // The POP forms Apps Script on the Dec 2 registration sheet (tools/sheets/pop-forms-script.gs), tab "Endorsements".
+  var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwmRCE6ZZ8YbofybIzp96qPEI_AJoCiXFlE5lxWwD5zN-S7LR2Ut9-WFf_JhK4mXqlQ/exec';
   var MAX_BYTES = 5 * 1024 * 1024;
 
   var form = document.getElementById('endorse');
@@ -211,6 +212,7 @@
     if (form.website.value) { finish(); return; } // bot trap
     if (!validate()) return;
     var payload = {
+      form: 'endorse',
       submitted_at: new Date().toISOString(),
       first_name: form.first_name.value.trim(),
       last_name: form.last_name.value.trim(),
