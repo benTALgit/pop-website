@@ -441,7 +441,9 @@
     // JOIN_URL: the pledge API on popchildcare.org (Replit, /api/pop-pledge; GET /zips gives counts). Only on our own
     // domains (the API allows those); elsewhere, like the preview, the form falls back to the prefilled Airtable form.
     // LIVE_MAP: add dots for sign-ups from Airtable zip counts on top of the built-in base layer.
-    var JOIN_URL = /(^|\.)(popny|popchildcare)\.org$/.test(location.hostname) ? 'https://popchildcare.org/api/pop-pledge' : '', LIVE_MAP = false;
+    // API_READY: turn on once the site's Airtable key is in place (until then the API can't save).
+    var API_READY = false;
+    var JOIN_URL = API_READY && /(^|\.)(popny|popchildcare)\.org$/.test(location.hostname) ? 'https://popchildcare.org/api/pop-pledge' : '', LIVE_MAP = false;
     var FORM = 'https://airtable.com/embed/appZZI67MRBI5Lgpg/pag4XKeT6FLNJwFXw/form';
     var dlg = document.getElementById('join');
     if (!dlg || !dlg.showModal) return;
