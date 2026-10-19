@@ -45,12 +45,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .tags { position: absolute; right: 16px; bottom: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 .tag-main { background: var(--coral-deep); color: #fff; padding: 8px 14px; font-weight: 800; font-size: clamp(16px, 3vw, 26px); letter-spacing: .02em; }
 .tag-sub { background: #1F1A1A; color: #fff; padding: 5px 12px; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
-.home { position: absolute; top: 12px; left: 12px; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(253,248,247,.88); color: #1F1A1A; }
-.home:hover { background: #1F1A1A; color: #fff; }
-.topnav { position: absolute; top: 12px; right: 12px; display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
-.topnav a { font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; padding: 9px 12px; background: rgba(253,248,247,.88); color: #1F1A1A; }
-.topnav a:hover { background: #1F1A1A; color: #fff; }
-.topnav a.go { background: var(--coral-deep); color: #fff; }
 
 /* Intro */
 .intro { padding: 30px 0 6px; }
@@ -166,7 +160,6 @@ footer p { margin: 0 0 6px; }
   .partner-logo { max-width: 200px; }
   .scen-row { grid-template-columns: 1fr 76px 84px; font-size: 14.5px; gap: 8px; }
   .scen-row b { font-size: 16px; }
-  .topnav a:first-child { display: none; }
   details.sec > summary { grid-template-columns: 40px 1fr 28px; }
 }
 
