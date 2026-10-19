@@ -8,7 +8,8 @@
  *
  * Update (once): in the sheet, Extensions > Apps Script, replace all the code with this file and save.
  * Then Deploy > Manage deployments > pencil icon > Version: New version > Deploy, and approve the
- * new Drive permission (for endorser logos). Editing the existing deployment keeps the same /exec URL.
+ * new Drive permission (for endorser logos): run authorizeDrive once from the editor if Deploy does not
+ * ask for it. Editing the existing deployment keeps the same /exec URL.
  */
 var FORMS = {
   registration: {
@@ -80,4 +81,10 @@ function saveLogo_(d) {
 
 function reply_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+
+// Run once from the Apps Script editor (choose it in the function menu, then Run) to approve
+// the Drive permission that endorser logo uploads need. Then deploy a new version.
+function authorizeDrive() {
+  DriveApp.getFoldersByName(LOGO_FOLDER);
 }
