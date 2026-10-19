@@ -7,9 +7,13 @@
  *   Endorsement (/pay/endorse), logo saved to Drive  -> tab "Endorsements"
  *
  * Update (once): in the sheet, Extensions > Apps Script, replace all the code with this file and save.
- * Then Deploy > Manage deployments > pencil icon > Version: New version > Deploy, and approve the
- * new Drive permission (for endorser logos): run authorizeDrive once from the editor if Deploy does not
- * ask for it. Editing the existing deployment keeps the same /exec URL.
+ * Permissions are kept narrow in appsscript.json (Project Settings > "Show appsscript.json"):
+ *   "oauthScopes": ["https://www.googleapis.com/auth/spreadsheets.currentonly",
+ *                   "https://www.googleapis.com/auth/drive.file",
+ *                   "https://www.googleapis.com/auth/script.external_request"]
+ * i.e. only this spreadsheet, and only Drive files this script creates (the endorser logo folder).
+ * Run authorizeDrive once, then Deploy > Manage deployments > pencil icon > Version: New version > Deploy.
+ * Editing the existing deployment keeps the same /exec URL.
  */
 var FORMS = {
   registration: {
@@ -68,23 +72,47 @@ function cell_(v) {
   return /^[=+\-@]/.test(v) ? "'" + v : v;
 }
 
+// Logos go through the Drive API with the narrow drive.file scope (set in appsscript.json), so the
+// script can only see the folder and files it creates itself, not the rest of your Drive.
 function saveLogo_(d) {
   var logo = d.logo;
   if (!logo || !logo.data || !LOGO_TYPES[logo.type]) return;
   var bytes = Utilities.base64Decode(logo.data);
   if (bytes.length > 5 * 1024 * 1024) return;
   var name = String(d.organization || 'logo').replace(/[^\w\- ]+/g, '').trim().slice(0, 80) || 'logo';
-  var it = DriveApp.getFoldersByName(LOGO_FOLDER);
-  var folder = it.hasNext() ? it.next() : DriveApp.createFolder(LOGO_FOLDER);
-  d.logo_file = folder.createFile(Utilities.newBlob(bytes, logo.type, name + '.' + LOGO_TYPES[logo.type])).getUrl();
+  // One multipart upload: the file's name and folder, then its bytes.
+  var b = 'pop' + Date.now();
+  var meta = JSON.stringify({ name: name + '.' + LOGO_TYPES[logo.type], parents: [logoFolderId_()] });
+  var body = Utilities.newBlob('--' + b + '\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n' + meta
+    + '\r\n--' + b + '\r\nContent-Type: ' + logo.type + '\r\n\r\n').getBytes()
+    .concat(bytes, Utilities.newBlob('\r\n--' + b + '--').getBytes());
+  d.logo_file = drive_('post', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=webViewLink',
+    'multipart/related; boundary=' + b, body).webViewLink;
+}
+
+function logoFolderId_() {
+  var props = PropertiesService.getScriptProperties();
+  var id = props.getProperty('LOGO_FOLDER_ID');
+  if (id) return id;
+  id = drive_('post', 'https://www.googleapis.com/drive/v3/files?fields=id', 'application/json',
+    JSON.stringify({ name: LOGO_FOLDER, mimeType: 'application/vnd.google-apps.folder' })).id;
+  props.setProperty('LOGO_FOLDER_ID', id);
+  return id;
+}
+
+function drive_(method, url, contentType, payload) {
+  var r = UrlFetchApp.fetch(url, { method: method, contentType: contentType, payload: payload, muteHttpExceptions: true,
+    headers: { Authorization: 'Bearer ' + ScriptApp.getOAuthToken() } });
+  if (r.getResponseCode() >= 300) throw new Error('Drive ' + r.getResponseCode() + ': ' + r.getContentText().slice(0, 300));
+  return JSON.parse(r.getContentText());
 }
 
 function reply_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
 
-// Run once from the Apps Script editor (choose it in the function menu, then Run) to approve
-// the Drive permission that endorser logo uploads need. Then deploy a new version.
+// Run once from the Apps Script editor (choose it in the function menu, then Run) to approve the
+// permissions. Then deploy a new version.
 function authorizeDrive() {
-  DriveApp.getFoldersByName(LOGO_FOLDER);
+  logoFolderId_();
 }
