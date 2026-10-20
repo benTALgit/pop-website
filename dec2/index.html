@@ -163,9 +163,22 @@
     .row.three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .row.three .field:first-child { grid-column: 1 / -1; }
     .intro { grid-template-columns: 88px 1fr; gap: 14px; }
-    .intro img.portrait { width: 88px; height: 112px; margin-top: -48px; }
+    .intro img.portrait { width: 88px; height: 112px; margin-top: 0; border: 0; }
     .steps li { font-size: 11px; letter-spacing: .04em; }
-    .when { flex-direction: column; }
+    /* Phones: drop the banner photo and tighten the date bar so the form starts on the first screen. */
+    .hero { display: none; }
+    .intro { margin-top: 16px; align-items: center; }
+    .when { margin-top: 16px; padding: 10px 14px; gap: 2px 12px; justify-content: flex-start; font-size: 17px; }
+    .loc-note { padding: 6px 14px; font-size: 14px; }
+    .party { font-size: 15px; line-height: 1.45; }
+    form { margin-top: 6px; }
+    h2.sec { margin-top: 18px; padding-top: 14px; }
+  }
+  @media (min-width: 561px) {
+    .hero img.rally { height: clamp(110px, 11vw, 140px); }
+    .when { margin-top: 16px; }
+    .loc-note { padding: 6px 18px; }
+    .intro img.portrait { margin-top: -48px; }
   }
 </style>
 </head>
@@ -215,22 +228,7 @@
     <span>Albany · Buffalo · NYC</span>
   </div>
   <p class="loc-note" data-i18n="locNote">Register to receive location details.</p>
-  <p class="party" data-i18n-html="party"><b>Cake, games &amp; music.</b> Bring the kids. It's a birthday party, and the launch of our campaign to Pay Our Providers.</p>
-  <section class="logos" aria-labelledby="logosH">
-    <h2 id="logosH" data-i18n="hosted">Hosted by</h2>
-    <ul>
-      <li><img src="assets/logos/empire.png" alt="Empire State Campaign for Child Care" loading="lazy"></li>
-      <li><img src="assets/logos/pop.png" alt="Providers Organized for Power" loading="lazy"></li>
-      <li><img src="assets/logos/tal.png" alt="The Action Lab" loading="lazy"></li>
-      <li><img src="assets/logos/uft.png" alt="UFT" loading="lazy"></li>
-      <li><img src="assets/logos/citizen-action.png" alt="Citizen Action of New York" loading="lazy"></li>
-      <li><img src="assets/logos/nycc.png" alt="New York Communities for Change" loading="lazy"></li>
-      <li><img src="assets/logos/aqe.png" alt="Alliance for Quality Education" loading="lazy"></li>
-      <li><img src="assets/logos/ece-otm.png" alt="ECE On The Move" loading="lazy"></li>
-      <li><img src="assets/logos/las-donas.png" alt="Las Doñas" loading="lazy"></li>
-      <li><img src="assets/logos/ilr.png" alt="ILR Worker Institute" loading="lazy"></li>
-    </ul>
-  </section>
+  <p class="party" data-i18n-html="party"><b>Before Congress, Shirley Chisholm was a child care teacher and director.</b> She later championed a universal child care bill through Congress, only to have it vetoed by Nixon. For her 102nd birthday we're throwing her a party, with cake, games and music for the kids, and launching our campaign to Pay Our Providers.</p>
 
   <form id="reg" novalidate>
     <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -358,6 +356,22 @@
     </div>
   </section>
 
+  <section class="logos" aria-labelledby="logosH">
+    <h2 id="logosH" data-i18n="hosted">Hosted by</h2>
+    <ul>
+      <li><img src="assets/logos/empire.png" alt="Empire State Campaign for Child Care" loading="lazy"></li>
+      <li><img src="assets/logos/pop.png" alt="Providers Organized for Power" loading="lazy"></li>
+      <li><img src="assets/logos/tal.png" alt="The Action Lab" loading="lazy"></li>
+      <li><img src="assets/logos/uft.png" alt="UFT" loading="lazy"></li>
+      <li><img src="assets/logos/citizen-action.png" alt="Citizen Action of New York" loading="lazy"></li>
+      <li><img src="assets/logos/nycc.png" alt="New York Communities for Change" loading="lazy"></li>
+      <li><img src="assets/logos/aqe.png" alt="Alliance for Quality Education" loading="lazy"></li>
+      <li><img src="assets/logos/ece-otm.png" alt="ECE On The Move" loading="lazy"></li>
+      <li><img src="assets/logos/las-donas.png" alt="Las Doñas" loading="lazy"></li>
+      <li><img src="assets/logos/ilr.png" alt="ILR Worker Institute" loading="lazy"></li>
+      <li><img src="assets/logos/momsrising.png" alt="MomsRising" loading="lazy"></li>
+    </ul>
+  </section>
 </main>
 
 <script>
@@ -373,7 +387,7 @@
     launch: 'Lanzamiento de campaña', h1: '¡Feliz cumpleaños, Shirley Chisholm!', tagline: 'Terminamos lo que Shirley empezó.',
     date: 'Miér., 2 de dic.', locNote: 'Regístrate para recibir los detalles del lugar.',
     hosted: 'Organizan',
-    party: '<b>Pastel, juegos y música.</b> Traigan a los niños. Es una fiesta de cumpleaños y el lanzamiento de nuestra campaña Pay Our Providers.',
+    party: '<b>Antes de llegar al Congreso, Shirley Chisholm fue maestra y directora de cuidado infantil.</b> Luego impulsó en el Congreso un proyecto de ley de cuidado infantil universal, pero Nixon lo vetó. Para su cumpleaños 102 le hacemos una fiesta, con pastel, juegos y música para los niños, y lanzamos nuestra campaña Pay Our Providers.',
     title: 'Regístrate', note: 'Celebra en Albany, Buffalo o la Ciudad de Nueva York. Te enviaremos la dirección exacta en cuanto esté lista.',
     site: '¿Dónde vas a celebrar?', errSite: 'Por favor elige una ciudad.',
     first: 'Nombre', last: 'Apellido', optional: '(opcional)', phone: 'Teléfono celular', email: 'Correo electrónico',
