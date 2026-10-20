@@ -6,7 +6,9 @@ Pages for Providers Organized for Power (POP), served by GitHub Pages at popny.o
 - `pay/`: Pay Our Providers campaign page (popny.org/pay)
 - `pay/toolkit/`: social media kit, one-pagers and launch flyer (popny.org/pay/toolkit)
 - `pay/endorse/`: endorsement form (popny.org/pay/endorse)
-- `index.html`: sends visitors to popchildcare.org for now
+- `index.html`: sends visitors to popchildcare.org
+
+popchildcare.org is the main site and serves these same pages. On popny.org, each page forwards to the same path on popchildcare.org, so the short links never show an old copy.
 
 Each folder is one page: add `name/index.html` and it's live at popny.org/name.
 

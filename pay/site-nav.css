@@ -1,0 +1,68 @@
+/* Shared POP site header, matched to the popchildcare.org homepage nav.
+   Used by /campaign/ (pay), its toolkit and endorse pages, and /dec2/. */
+@font-face { font-family: 'Pimento'; src: url('/fonts/Pimento.otf') format('opentype'); font-display: swap; }
+
+.site-nav {
+  position: sticky; top: 0; z-index: 50;
+  background: #FDF8F7; /* hsl(8 60% 98%) */
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  border-bottom: 1px solid #F1DEDA; /* hsl(8 35% 89%) */
+  color: #2B1C1F; /* hsl(350 22% 14%) */
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+.site-nav .sn-in { display: flex; align-items: center; justify-content: space-between; padding: 20px 80px; }
+.site-nav .sn-logo { display: block; line-height: 0; }
+.site-nav .sn-logo img { display: block; height: 76px; width: auto; }
+.site-nav .sn-links { display: flex; align-items: center; gap: 12px; }
+.site-nav .sn-links a:not(.sn-join) {
+  font-family: 'Pimento', Georgia, serif; font-size: 14px; line-height: 20px; letter-spacing: .02em;
+  color: rgba(43, 28, 31, .7); text-decoration: none; padding: 8px 4px;
+}
+.site-nav .sn-links a:not(.sn-join):hover, .site-nav .sn-links a[aria-current] { color: #2B1C1F; }
+.site-nav .sn-join {
+  display: inline-flex; align-items: center; height: 36px; padding: 0 20px; border-radius: 8px;
+  background: #FF5757; color: #fff; font: 500 14px/1 'DM Sans', system-ui, sans-serif; text-decoration: none;
+}
+.site-nav .sn-join:hover { background: #F04848; }
+.site-nav a:focus-visible, .site-nav summary:focus-visible { outline: 2px solid #FF5757; outline-offset: 2px; }
+
+/* Mobile menu */
+.site-nav .sn-menu { display: none; position: relative; }
+.site-nav .sn-menu summary { list-style: none; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; cursor: pointer; color: #2B1C1F; }
+.site-nav .sn-menu summary::-webkit-details-marker { display: none; }
+.site-nav .sn-menu .x { display: none; }
+.site-nav .sn-menu[open] .x { display: block; }
+.site-nav .sn-menu[open] .bars { display: none; }
+.site-nav .sn-drop { position: absolute; right: 0; top: 100%; min-width: 220px; padding: 8px; background: #FDF8F7; border: 1px solid #F1DEDA; border-radius: 8px; box-shadow: 0 10px 30px rgba(43, 28, 31, .12); }
+.site-nav .sn-drop a { display: block; padding: 12px 14px; font-family: 'Pimento', Georgia, serif; font-size: 15px; color: #2B1C1F; text-decoration: none; border-radius: 6px; }
+.site-nav .sn-drop a:hover { background: #F7EAE7; }
+.site-nav .sn-drop a.sn-join { display: flex; justify-content: center; height: 44px; margin-top: 6px; color: #fff; font-family: 'DM Sans', system-ui, sans-serif; }
+
+@media (max-width: 1023px) { .site-nav .sn-in { padding: 20px 48px; } }
+@media (max-width: 639px) {
+  .site-nav .sn-in { padding: 14px 16px 14px 24px; }
+  .site-nav .sn-logo img { height: 60px; }
+  .site-nav .sn-links { display: none; }
+  .site-nav .sn-menu { display: block; }
+}
+
+/* Campaign sub-nav: the Pay Our Providers pages, under the site header */
+.camp-nav { border-bottom: 1px solid var(--line, #E6D8D4); background: var(--paper, #FDF8F7); }
+.camp-nav .cn-in { display: flex; align-items: center; gap: 6px 18px; flex-wrap: wrap; padding: 10px 80px; }
+@media (max-width: 1023px) { .camp-nav .cn-in { padding: 10px 48px; } }
+.camp-nav .cn-name { font: 800 13px/1.2 'Libre Franklin', sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--coral, #D9472B); text-decoration: none; margin-right: auto; }
+.camp-nav .cn-links { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.camp-nav .cn-links a { font: 800 12px/1 'Libre Franklin', sans-serif; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; color: var(--ink, #1F1A1A); padding: 9px 11px; border: 1px solid transparent; }
+.camp-nav .cn-links a:hover { border-color: var(--ink, #1F1A1A); }
+.camp-nav .cn-links a[aria-current] { background: var(--ink, #1F1A1A); color: var(--paper, #FDF8F7); }
+.camp-nav .cn-links a.go { background: var(--coral-deep, #B8361C); color: #fff; }
+.camp-nav .cn-links a.go[aria-current] { box-shadow: inset 0 0 0 2px var(--ink, #1F1A1A); }
+@media (max-width: 639px) {
+  .camp-nav .cn-in { padding: 8px 16px 6px 24px; }
+  .camp-nav .lang { order: 1; }
+  .camp-nav .lang button { min-height: 30px; padding: 0 9px; font-size: 11px; }
+  .camp-nav .cn-links { order: 2; width: calc(100% + 40px); margin: 0 -16px 0 -24px; padding: 0 16px 2px 24px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .camp-nav .cn-links::-webkit-scrollbar { display: none; }
+  .camp-nav .cn-links a { flex: none; padding: 8px 9px; font-size: 11px; }
+  .camp-nav .cn-links a:first-child { margin-left: -9px; }
+}

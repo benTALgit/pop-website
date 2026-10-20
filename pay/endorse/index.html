@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- popny.org is the short address: send visitors to the same page on popchildcare.org, the main site. -->
+<script>if (/(^|\.)popny\.org$/.test(location.hostname)) location.replace('https://popchildcare.org' + location.pathname + location.search + location.hash);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Endorse Pay Our Providers</title>
 <meta name="description" content="Add your organization to the coalition fighting for the dignity and just compensation of New York's child care professionals.">
@@ -9,7 +11,8 @@
 <meta property="og:image" content="https://popny.org/pay/toolkit/social/pop-share.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site-nav.css">
 <link rel="stylesheet" href="../pay.css">
 <style>
   .form { margin: 26px 0 0; max-width: 640px; }
@@ -60,9 +63,25 @@
 </head>
 <body>
 
+<header class="site-nav">
+  <nav class="sn-in" aria-label="POP">
+    <a class="sn-logo" href="https://popchildcare.org/"><img src="../assets/pop-logo.svg" alt="Providers Organized for Power home" width="164" height="76"></a>
+    <div class="sn-links"><a href="https://popchildcare.org/campaign/" aria-current="page">Campaign</a><a href="https://popchildcare.org/events">Events</a><a href="https://popchildcare.org/press">Press</a><a class="sn-join" href="../#join">Join</a></div>
+    <details class="sn-menu">
+      <summary aria-label="Menu"><svg class="bars" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="x" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+      <div class="sn-drop"><a href="https://popchildcare.org/campaign/" aria-current="page">Campaign</a><a href="https://popchildcare.org/events">Events</a><a href="https://popchildcare.org/press">Press</a><a class="sn-join" href="../#join">Join the Movement</a></div>
+    </details>
+  </nav>
+</header>
+<nav class="camp-nav" aria-label="Pay Our Providers">
+  <div class="cn-in">
+    <a class="cn-name" href="../">Pay Our Providers</a>
+    <div class="cn-links"><a href="../#demands">Demands</a><a href="../toolkit/">Toolkit</a><a href="../endorse/" aria-current="page">Endorse</a><a href="../../dec2/" class="go">Dec 2 launch</a></div>
+  </div>
+</nav>
+
 <header class="hero short">
   <img class="rally" src="../../dec2/assets/rally.jpg" alt="POP providers cheering at a rally under Child Care for All signs">
-  <a class="home" href="../#endorsers" aria-label="Back to Pay Our Providers" title="Pay Our Providers"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   <div class="tags">
     <div class="tag-main display">PAY OUR PROVIDERS</div>
     <div class="tag-sub">Endorse the campaign</div>
@@ -142,7 +161,8 @@
 (function () {
   // Where endorsements are sent: paste the Google Apps Script web app URL here
   // (it ends in /exec; see README.md). Leave empty ('') to preview without sending.
-  var SUBMIT_URL = '';
+  // The POP forms Apps Script on the Dec 2 registration sheet (tools/sheets/pop-forms-script.gs), tab "Endorsements".
+  var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwmRCE6ZZ8YbofybIzp96qPEI_AJoCiXFlE5lxWwD5zN-S7LR2Ut9-WFf_JhK4mXqlQ/exec';
   var MAX_BYTES = 5 * 1024 * 1024;
 
   var form = document.getElementById('endorse');
@@ -211,6 +231,7 @@
     if (form.website.value) { finish(); return; } // bot trap
     if (!validate()) return;
     var payload = {
+      form: 'endorse',
       submitted_at: new Date().toISOString(),
       first_name: form.first_name.value.trim(),
       last_name: form.last_name.value.trim(),

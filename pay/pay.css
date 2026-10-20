@@ -45,12 +45,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .tags { position: absolute; right: 16px; bottom: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 .tag-main { background: var(--coral-deep); color: #fff; padding: 8px 14px; font-weight: 800; font-size: clamp(16px, 3vw, 26px); letter-spacing: .02em; }
 .tag-sub { background: #1F1A1A; color: #fff; padding: 5px 12px; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
-.home { position: absolute; top: 12px; left: 12px; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(253,248,247,.88); color: #1F1A1A; }
-.home:hover { background: #1F1A1A; color: #fff; }
-.topnav { position: absolute; top: 12px; right: 12px; display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
-.topnav a { font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; padding: 9px 12px; background: rgba(253,248,247,.88); color: #1F1A1A; }
-.topnav a:hover { background: #1F1A1A; color: #fff; }
-.topnav a.go { background: var(--coral-deep); color: #fff; }
 
 /* Intro */
 .intro { padding: 30px 0 6px; }
@@ -94,8 +88,6 @@ details.more li + li { margin-top: 6px; }
 .plist li { counter-increment: p; position: relative; padding: 14px 14px 14px 52px; background: var(--chip); font-size: 15.5px; line-height: 1.45; }
 .plist li::before { content: counter(p); position: absolute; left: 14px; top: 12px; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; background: var(--ink); color: var(--paper); font: 800 14px/1 'Unbounded', sans-serif; }
 .plist b { display: block; margin-bottom: 2px; }
-.tie { display: block; margin-top: 8px; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); }
-.tie::before { content: "→ "; }
 
 .partner { display: grid; grid-template-columns: 170px 1fr; gap: 20px; align-items: start; margin: 28px 0 0; padding: 20px; border: 2px solid var(--ink); }
 .partner-logo { width: 100%; height: auto; display: block; margin-top: 4px; }
@@ -166,7 +158,6 @@ footer p { margin: 0 0 6px; }
   .partner-logo { max-width: 200px; }
   .scen-row { grid-template-columns: 1fr 76px 84px; font-size: 14.5px; gap: 8px; }
   .scen-row b { font-size: 16px; }
-  .topnav a:first-child { display: none; }
   details.sec > summary { grid-template-columns: 40px 1fr 28px; }
 }
 
@@ -310,10 +301,6 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 .join-link { color: inherit; }
 .join-x { border: 0; background: none; color: #fff; font-size: 30px; line-height: 1; cursor: pointer; padding: 0 4px; }
 .join-err { color: var(--coral); font-weight: 700; margin: 10px 0 0 !important; }
-.join-form { display: flex; flex-direction: column; min-height: 0; flex: 1; }
-.join-form[hidden] { display: none; }
-.join-form iframe { width: 100%; height: min(70vh, 900px); border: 0; background: #fff; }
-.join-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 18px; border-top: 1px solid var(--line); font-weight: 700; }
 .nymap .me .core { fill: var(--ink); stroke: var(--paper); stroke-width: 2.5; }
 .nymap .me .ripple { fill: none; stroke: var(--ink); stroke-width: 3; opacity: 0; transform-box: fill-box; transform-origin: center; }
 .nymap .me .me-lbl { font: 800 14px 'Libre Franklin', sans-serif; fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; }

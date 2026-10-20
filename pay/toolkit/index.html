@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- popny.org is the short address: send visitors to the same page on popchildcare.org, the main site. -->
+<script>if (/(^|\.)popny\.org$/.test(location.hostname)) location.replace('https://popchildcare.org' + location.pathname + location.search + location.hash);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pay Our Providers Toolkit</title>
-<meta name="description" content="Social media graphics, one-pagers for legislative visits, providers and parents, and the Dec 2 launch flyer for the Pay Our Providers campaign.">
+<meta name="description" content="Social media graphics and the Dec 2 launch flyer for the Pay Our Providers campaign.">
 <meta property="og:title" content="Pay Our Providers Toolkit">
 <meta property="og:image" content="https://popny.org/pay/toolkit/social/pop-share.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site-nav.css">
 <link rel="stylesheet" href="../pay.css">
 <style>
   .kit-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
@@ -49,9 +52,25 @@
 </head>
 <body>
 
+<header class="site-nav">
+  <nav class="sn-in" aria-label="POP">
+    <a class="sn-logo" href="https://popchildcare.org/"><img src="../assets/pop-logo.svg" alt="Providers Organized for Power home" width="164" height="76"></a>
+    <div class="sn-links"><a href="https://popchildcare.org/campaign/" aria-current="page">Campaign</a><a href="https://popchildcare.org/events">Events</a><a href="https://popchildcare.org/press">Press</a><a class="sn-join" href="../#join">Join</a></div>
+    <details class="sn-menu">
+      <summary aria-label="Menu"><svg class="bars" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="x" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+      <div class="sn-drop"><a href="https://popchildcare.org/campaign/" aria-current="page">Campaign</a><a href="https://popchildcare.org/events">Events</a><a href="https://popchildcare.org/press">Press</a><a class="sn-join" href="../#join">Join the Movement</a></div>
+    </details>
+  </nav>
+</header>
+<nav class="camp-nav" aria-label="Pay Our Providers">
+  <div class="cn-in">
+    <a class="cn-name" href="../">Pay Our Providers</a>
+    <div class="cn-links"><a href="../#demands">Demands</a><a href="../toolkit/" aria-current="page">Toolkit</a><a href="../endorse/">Endorse</a><a href="../../dec2/" class="go">Dec 2 launch</a></div>
+  </div>
+</nav>
+
 <header class="hero short">
   <img class="rally" src="../../dec2/assets/rally.jpg" alt="POP providers cheering at a rally under Child Care for All signs">
-  <a class="home" href="../" aria-label="Back to Pay Our Providers" title="Pay Our Providers"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   <div class="tags">
     <div class="tag-main display">PAY OUR PROVIDERS</div>
     <div class="tag-sub">Campaign toolkit</div>
@@ -65,7 +84,6 @@
     <nav class="kit-nav" aria-label="Toolkit sections">
       <a href="#flyer">Launch flyer</a>
       <a href="#social">Social media kit</a>
-      <a href="#onepagers">One-pagers</a>
     </nav>
   </section>
 
@@ -138,39 +156,6 @@
         <div class="cap"><span class="lang">English</span><p>Child care is the work that makes all other work possible. It's time New York paid providers like it. Two demands for the 2027 budget: a $1.8B wage scale and $1.2B for child care assistance. #PayOurProviders popny.org/pay</p><button type="button" class="copy">Copy caption</button></div>
         <div class="cap"><span class="lang">Español</span><p>El cuidado infantil es el trabajo que hace posible todos los demás. Es hora de que Nueva York les pague a las proveedoras como se merecen. Dos demandas para el presupuesto 2027: una escala salarial de $1.8B y $1.2B para la asistencia de cuidado infantil. #PayOurProviders popny.org/pay</p><button type="button" class="copy">Copiar texto</button></div>
         <a class="btn" href="social/pop-share.png" download>Download graphic</a>
-      </article>
-    </div>
-  </section>
-
-  <section class="kit" id="onepagers" aria-labelledby="opH">
-    <p class="eyebrow">Letter size · print or share as PDF</p>
-    <h2 id="opH" class="display">One-pagers</h2>
-    <div class="ops">
-      <article class="op">
-        <h3>For legislative visits</h3>
-        <p>A leave-behind with both demands, the need, wage scale examples, how to pay for it, the NYCAT principles and a clear ask.</p>
-        <div class="links">
-          <a class="pdf" href="onepagers/pay-our-providers-legislators.pdf" download>PDF</a>
-          <a href="onepagers/legislators.html">View</a>
-        </div>
-      </article>
-      <article class="op">
-        <h3>For providers</h3>
-        <p>What the wage scale means for providers, real raises, and how to get involved. In English and Spanish.</p>
-        <div class="links">
-          <a class="pdf" href="onepagers/pay-our-providers-providers.pdf" download>PDF English</a>
-          <a class="pdf" href="onepagers/pay-our-providers-providers-es.pdf" download>PDF Español</a>
-          <a href="onepagers/providers.html">View</a>
-        </div>
-      </article>
-      <article class="op">
-        <h3>For parents and families</h3>
-        <p>Why fair pay and a funded CCAP matter to families, with no new costs for parents, and how to stand with your provider. In English and Spanish.</p>
-        <div class="links">
-          <a class="pdf" href="onepagers/pay-our-providers-parents.pdf" download>PDF English</a>
-          <a class="pdf" href="onepagers/pay-our-providers-parents-es.pdf" download>PDF Español</a>
-          <a href="onepagers/parents.html">View</a>
-        </div>
       </article>
     </div>
   </section>
