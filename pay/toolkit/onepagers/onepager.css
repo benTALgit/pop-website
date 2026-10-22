@@ -43,8 +43,8 @@ ol.pr li { margin: 0 0 3pt; }
 .foot .url { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 13pt; }
 .foot .who { margin-left: auto; text-align: right; font-size: 8pt; color: #E6DCD9; max-width: 2.9in; }
 .foot b { color: #fff; }
-.logos { display: flex; align-items: center; justify-content: space-between; gap: 10pt; padding: 8pt .5in; flex: none; border-top: .6pt solid #D9CCC8; }
-.logos img { height: 19pt; width: auto; max-width: 62pt; object-fit: contain; }
+.logos { display: flex; align-items: center; justify-content: space-between; gap: 7pt; padding: 8pt .5in; flex: none; border-top: .6pt solid #D9CCC8; }
+.logos img { height: 18pt; width: auto; max-width: 54pt; min-width: 0; flex: 0 1 auto; object-fit: contain; }
 
 .bar { position: sticky; top: 0; z-index: 2; display: flex; gap: 8px; justify-content: center; padding: 10px; background: #1F1A1A; font-family: 'Libre Franklin', sans-serif; }
 .bar a, .bar button { font: 800 13px/1 'Libre Franklin', sans-serif; letter-spacing: .06em; text-transform: uppercase; padding: 10px 14px; border: 0; background: #FDF8F7; color: #1F1A1A; text-decoration: none; cursor: pointer; }
