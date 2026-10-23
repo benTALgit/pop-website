@@ -33,7 +33,7 @@
 <nav class="camp-nav" aria-label="Pay Our Providers">
   <div class="cn-in">
     <a class="cn-name" href="./">Pay Our Providers</a>
-    <div class="cn-links"><a href="#demands">Demands</a><a href="toolkit/">Toolkit</a><a href="endorse/">Endorse</a><a href="testify/">Testify Oct 29</a><a href="../dec2/" class="go">Dec 2 launch</a></div>
+    <div class="cn-links"><a href="#demands">Demands</a><a href="toolkit/">Toolkit</a><a href="endorse/">Endorse</a><a href="../dec2/" class="go">Dec 2 launch</a></div>
   </div>
 </nav>
 
@@ -396,7 +396,7 @@
     // domains (the API allows those); elsewhere, like the preview, the form falls back to the prefilled Airtable form.
     // LIVE_MAP: add dots for sign-ups from Airtable zip counts on top of the built-in base layer.
     // API_READY: turn on once the site's Airtable key is in place (until then the API can't save).
-    var API_READY = false;
+    var API_READY = true;
     var JOIN_URL = API_READY && /(^|\.)(popny|popchildcare)\.org$/.test(location.hostname) ? 'https://popchildcare.org/api/pop-pledge' : '', LIVE_MAP = false;
     // SHEET_URL: the Apps Script web app on the Dec 2 registration sheet (tools/sheets/pop-forms-script.gs).
     var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwmRCE6ZZ8YbofybIzp96qPEI_AJoCiXFlE5lxWwD5zN-S7LR2Ut9-WFf_JhK4mXqlQ/exec';
