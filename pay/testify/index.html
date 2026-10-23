@@ -16,9 +16,11 @@
 <link rel="stylesheet" href="../site-nav.css">
 <link rel="stylesheet" href="../pay.css">
 <style>
-  :root { --rose: #9E2F4E; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --rose: #E07A98; } }
-  :root[data-theme="dark"] { --rose: #E07A98; }
+  /* Lighter page than the rest of the campaign, so the hearing sign-up doesn't read as the Dec 2 form. */
+  :root { --rose: #9E2F4E; --paper: #FFFFFF; --card: #F8F5F4; --chip: #F3EDEC; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --rose: #E07A98; --paper: #1B1616; --card: #251F1F; --chip: #2E2625; } }
+  :root[data-theme="dark"] { --rose: #E07A98; --paper: #1B1616; --card: #251F1F; --chip: #2E2625; }
+  .hero.short img.rally { height: clamp(150px, 19vw, 250px); object-position: center 30%; }
 
   .lang { display: flex; gap: 4px; }
   .lang button { font: 800 13px/1 'Libre Franklin', sans-serif; letter-spacing: .08em; min-height: 36px; padding: 0 12px; border: 0; background: transparent; box-shadow: inset 0 0 0 1px #D8C9C5; color: var(--ink-soft); cursor: pointer; }
@@ -139,7 +141,7 @@
 </nav>
 
 <header class="hero short">
-  <img class="rally" src="../../dec2/assets/rally.jpg" alt="POP providers cheering at a rally under Child Care for All signs">
+  <img class="rally" src="../assets/testify-hero.jpg" alt="A speaker at the microphone during the NYCAT convening with elected officials, September 28">
   <div class="tags">
     <div class="tag-main display">PAY OUR PROVIDERS</div>
     <div class="tag-sub" data-i18n="tagSub">Testify at City Council</div>
