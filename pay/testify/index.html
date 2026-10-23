@@ -322,9 +322,9 @@
 
 <script>
 (function () {
-  // Sign-ups go to the POP forms Apps Script on the Dec 2 registration sheet, tab "Testimony"
-  // (tools/sheets/pop-forms-script.gs). Leave empty ('') to preview without sending.
-  var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwmRCE6ZZ8YbofybIzp96qPEI_AJoCiXFlE5lxWwD5zN-S7LR2Ut9-WFf_JhK4mXqlQ/exec';
+  // Sign-ups go to Airtable (Registrations, linked to the Oct 29 hearing Event) through the
+  // popchildcare.org server. Leave empty ('') to preview without sending.
+  var SUBMIT_URL = '/api/testify';
   var COUNCIL_FORM = 'https://council.nyc.gov/testify/';
   // What to pick in the Council's form. Its options are in English, so these stay in English.
   var COUNCIL_HOW = {
@@ -447,12 +447,11 @@
     if (f && f.classList.contains('invalid')) f.classList.remove('invalid');
   });
 
-  function send(payload) {
-    if (!SUBMIT_URL) return new Promise(function (res) { setTimeout(res, 400); });
-    // Sent as plain text so Google accepts it without a CORS preflight.
-    return fetch(SUBMIT_URL, { method: 'POST', body: JSON.stringify(payload) })
+  function send(url, payload) {
+    if (!SUBMIT_URL) return new Promise(function (res) { setTimeout(function () { res({ ok: true }); }, 400); });
+    return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-      .then(function (j) { if (!j || j.ok !== true) throw new Error('Not saved'); });
+      .then(function (j) { if (!j || j.ok !== true) throw new Error('Not saved'); return j; });
   }
 
   form.addEventListener('submit', function (e) {
@@ -460,9 +459,6 @@
     if (form.website.value) { showHandoff(); return; } // bot trap
     if (!validate()) return;
     entry = {
-      form: 'testify',
-      status: 'signed_up',
-      submitted_at: new Date().toISOString(),
       how: checked('how')[0],
       first_name: form.first_name.value.trim(),
       last_name: form.last_name.value.trim(),
@@ -480,7 +476,7 @@
     };
     btn.disabled = true; btn.textContent = t('sending');
     errBox.classList.remove('show');
-    send(entry).then(showHandoff).catch(function () {
+    send(SUBMIT_URL, entry).then(function (j) { entry.id = j.id; showHandoff(); }).catch(function () {
       errBox.classList.add('show');
       btn.disabled = false; btn.textContent = t('submit');
     });
@@ -543,8 +539,8 @@
   document.getElementById('registered').addEventListener('click', function () {
     var b = this;
     b.disabled = true;
-    // A second row marks that they finished the Council's form; failures here shouldn't block them.
-    var done = entry ? send(Object.assign({}, entry, { status: 'registered_with_council', submitted_at: new Date().toISOString() })) : Promise.resolve();
+    // Marks their sign-up as registered with the Council; failures here shouldn't block them.
+    var done = entry && entry.id ? send(SUBMIT_URL + '/registered', { id: entry.id, email: entry.email }) : Promise.resolve();
     done.catch(function () {}).then(function () {
       document.getElementById('handoff').classList.remove('show');
       var f = document.getElementById('finish');
