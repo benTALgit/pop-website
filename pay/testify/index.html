@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- popny.org is the short address: send visitors to the same page on popchildcare.org, the main site. -->
+<script>if (/(^|\.)popny\.org$/.test(location.hostname)) location.replace('https://popchildcare.org' + location.pathname + location.search + location.hash);</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Testify Oct 29: Pay Us On Time</title>
+<meta name="description" content="Child care providers are getting paid late, and paid too little. Sign up to testify at the City Council hearing on the business of child care, Thursday, October 29.">
+<meta property="og:title" content="Testify Oct 29: Pay Us On Time">
+<meta property="og:description" content="Sign up to tell the City Council what late payments are doing to child care providers.">
+<meta property="og:image" content="https://popny.org/pay/toolkit/social/pop-share.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../site-nav.css">
+<link rel="stylesheet" href="../pay.css">
+<style>
+  /* Lighter page than the rest of the campaign, so the hearing sign-up doesn't read as the Dec 2 form. */
+  :root { --rose: #9E2F4E; --paper: #FFFFFF; --card: #F3F5F6; --chip: #EDF1F2; --line: #D5DBDE; }
+  .site-nav, .site-nav .sn-drop { background: #FFFFFF; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --rose: #E07A98; --paper: #1B1616; --card: #251F1F; --chip: #2E2625; } }
+  :root[data-theme="dark"] { --rose: #E07A98; --paper: #1B1616; --card: #251F1F; --chip: #2E2625; }
+  .hero.short img.rally { height: clamp(200px, 32vw, 420px); object-position: center 20%; }
+
+  .lang { display: flex; gap: 4px; }
+  .lang button { font: 800 13px/1 'Libre Franklin', sans-serif; letter-spacing: .08em; min-height: 36px; padding: 0 12px; border: 0; background: transparent; box-shadow: inset 0 0 0 1px #D8C9C5; color: var(--ink-soft); cursor: pointer; }
+  .lang button[aria-pressed=true] { background: #1F1A1A; color: #FFFFFF; }
+
+  .when { margin: 22px 0 0; background: var(--coral-deep); color: #fff; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding: 14px 18px; font-weight: 800; font-size: clamp(16px, 3.2vw, 21px); }
+  .where { margin: 0; padding: 8px 18px; background: #1F1A1A; color: #fff; font-weight: 800; font-size: 15px; }
+  .where a { color: #fff; }
+
+  .why { margin: 26px 0 0; }
+  .why p { margin: 0 0 14px; max-width: 44em; }
+  .why .big { font-size: clamp(18px, 2.6vw, 21px); font-weight: 600; }
+
+  h2.sec { margin: 34px 0 6px; padding-top: 22px; border-top: 2px solid var(--ink); font-weight: 800; font-size: clamp(22px, 4.4vw, 28px); line-height: 1.15; }
+  .sec-note { margin: 0 0 18px; color: var(--ink-soft); }
+
+  .how { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; counter-reset: s; }
+  .how li { background: var(--card); border-top: 5px solid var(--coral); padding: 14px 14px 16px; counter-increment: s; font-size: 15.5px; }
+  .how li::before { content: counter(s); display: block; font: 800 26px/1 'Unbounded', sans-serif; color: var(--coral); margin-bottom: 8px; }
+  .how b { display: block; margin-bottom: 4px; }
+
+  .tips { margin: 0; padding: 0 0 0 20px; }
+  .tips li { margin: 0 0 8px; }
+
+  /* Form */
+  .form { margin: 18px 0 0; max-width: 680px; }
+  fieldset { border: 0; margin: 0 0 22px; padding: 0; }
+  legend { padding: 0; margin: 0 0 10px; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--coral-deep); }
+  .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 14px; }
+  .field { margin: 0 0 16px; }
+  .field > label, .lbl { display: block; font-weight: 800; font-size: 15px; margin-bottom: 6px; }
+  .opt { font-weight: 400; color: var(--ink-soft); }
+  .hint { display: block; font-size: 14px; color: var(--ink-soft); margin: -2px 0 8px; }
+  input[type=text], input[type=email], input[type=tel], select, textarea {
+    width: 100%; font: inherit; font-size: 16px; padding: 11px 12px; min-height: 48px; color: var(--ink);
+    background: var(--card); border: 2px solid var(--line); border-radius: 0; appearance: none; -webkit-appearance: none;
+  }
+  select { background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 20px) 50%, calc(100% - 14px) 50%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 40px; }
+  textarea { min-height: 120px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--focus); }
+  .err { display: none; color: var(--rose); font-size: 14px; font-weight: 600; margin-top: 6px; }
+  .field.invalid input, .field.invalid select, .field.invalid textarea, .field.invalid .choice span { border-color: var(--rose); }
+  .field.invalid .err { display: block; }
+
+  .choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .choices.one { grid-template-columns: minmax(0, 1fr); }
+  .choice { position: relative; }
+  .choice input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .choice span { display: flex; align-items: center; gap: 10px; min-height: 52px; height: 100%; padding: 12px 14px; background: var(--card); border: 2px solid var(--line); font-weight: 600; font-size: 16px; line-height: 1.25; }
+  .choice span::before { content: ""; flex: 0 0 18px; height: 18px; border: 2px solid var(--ink-soft); background: var(--card); }
+  .choice input[type=radio] + span::before { border-radius: 50%; }
+  .choice input:checked + span { border-color: var(--coral); background: var(--chip); }
+  .choice input:checked + span::before { border-color: var(--coral); background: var(--coral); box-shadow: inset 0 0 0 3px var(--card); }
+  .choice input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .choice span:has(small) { flex-wrap: wrap; column-gap: 10px; row-gap: 2px; }
+  .choice small { flex: 1 0 100%; padding-left: 28px; font-weight: 400; color: var(--ink-soft); font-size: 13.5px; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .submit-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 8px; }
+  .submit-row .btn { min-width: 240px; }
+  .btn[disabled] { opacity: .6; cursor: progress; }
+  .formerr { display: none; margin: 14px 0 0; padding: 12px 14px; background: var(--chip); border-left: 4px solid var(--rose); font-weight: 600; }
+  .formerr.show { display: block; }
+  .privacy { font-size: 13.5px; color: var(--ink-soft); margin: 12px 0 0; }
+
+  /* Step 2: hand off to the Council form */
+  .handoff { display: none; margin: 26px 0 0; max-width: 680px; }
+  .handoff.show { display: block; }
+  .handoff h2 { margin: 0 0 8px; color: var(--coral); font-size: clamp(24px, 4.6vw, 32px); line-height: 1.12; }
+  .handoff > p { margin: 0 0 14px; }
+  .copylist { list-style: none; margin: 16px 0 0; padding: 0; border-top: 2px solid var(--ink); }
+  .copylist li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .copylist .k { grid-column: 1 / -1; font-size: 12.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+  .copylist .v { font-weight: 600; overflow-wrap: anywhere; }
+  .copybtn { font: 800 13px/1 'Libre Franklin', sans-serif; letter-spacing: .06em; min-height: 40px; padding: 0 14px; border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+  .copybtn.ok { border-color: var(--teal); color: var(--teal); }
+  .bigsteps { margin: 20px 0 0; padding: 0; list-style: none; }
+  .bigsteps li { margin: 0 0 12px; padding: 14px 16px; background: var(--card); border-left: 5px solid var(--coral); }
+  .bigsteps li.done-step { border-left-color: var(--teal); }
+  .bigsteps b { display: block; margin-bottom: 4px; }
+  .bigsteps .cta-row { margin-top: 12px; }
+  .note { margin: 14px 0 0; padding: 12px 14px; background: var(--chip); font-size: 15.5px; }
+
+  .finish { display: none; margin: 26px 0 0; padding: 22px; background: var(--card); border-top: 6px solid var(--teal); max-width: 680px; }
+  .finish.show { display: block; }
+  .finish h2 { margin: 0 0 8px; color: var(--teal); font-size: clamp(22px, 4vw, 28px); line-height: 1.15; }
+  .finish p { margin: 0 0 12px; }
+
+  @media (max-width: 640px) {
+    .how { grid-template-columns: minmax(0, 1fr); }
+    .row, .choices { grid-template-columns: minmax(0, 1fr); }
+    .hero { display: none; }
+    .when { margin-top: 16px; padding: 10px 14px; font-size: 17px; justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <nav class="sn-in" aria-label="POP">
+    <a class="sn-logo" href="https://popchildcare.org/"><img src="../assets/pop-logo.svg" alt="Providers Organized for Power home" width="164" height="76"></a>
+    <div class="sn-links"><a href="https://popchildcare.org/campaign/" aria-current="page">Campaign</a><a href="https://popchildcare.org/events">Events</a><a href="https://popchildcare.org/press">Press</a><a class="sn-join" href="../#join">Join</a></div>
+    <details class="sn-menu">
+      <summary aria-label="Menu"><svg class="bars" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="x" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+      <div class="sn-drop"><a href="https://popchildcare.org/campaign/" aria-current="page">Campaign</a><a href="https://popchildcare.org/events">Events</a><a href="https://popchildcare.org/press">Press</a><a class="sn-join" href="../#join">Join the Movement</a></div>
+    </details>
+  </nav>
+</header>
+<nav class="camp-nav" aria-label="Pay Our Providers">
+  <div class="cn-in">
+    <a class="cn-name" href="../">Pay Our Providers</a>
+    <div class="cn-links"><a href="../#demands" data-i18n="navDemands">Demands</a><a href="../toolkit/" data-i18n="navToolkit">Toolkit</a><a href="../endorse/" data-i18n="navEndorse">Endorse</a><a href="./" aria-current="page" data-i18n="navTestify">Testify Oct 29</a><a href="../../dec2/" class="go" data-i18n="navDec2">Dec 2 launch</a></div>
+    <div class="lang" role="group" aria-label="Language / Idioma">
+      <button type="button" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" data-lang="es" aria-pressed="false">Español</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero short">
+  <img class="rally" src="../assets/testify-hero.jpg" alt="POP and Las Doñas members holding their banners together">
+  <div class="tags">
+    <div class="tag-main display">PAY OUR PROVIDERS</div>
+    <div class="tag-sub" data-i18n="tagSub">Testify at City Council</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <h1 class="display" data-i18n-html="h1">Paid late. Paid too little. <span class="hl">Tell the City Council.</span></h1>
+    <p class="lede" data-i18n-html="lede">The City Council is holding a hearing on <b>the business of child care</b>, and we need providers, parents and allies there, in person or on Zoom, to tell them what is really going on with late payments.</p>
+  </section>
+
+  <div class="when display">
+    <span data-i18n="date">Thu, Oct 29</span>
+    <span>1 PM</span>
+    <span data-i18n="mode">In person or Zoom</span>
+  </div>
+  <p class="where"><span data-i18n="place">250 Broadway, 8th Floor, Hearing Room 1, Manhattan.</span> <a href="https://legistar.council.nyc.gov/MeetingDetail.aspx?LEGID=22740&amp;GID=61&amp;G=2FD004F1-D85B-4588-A648-0A736C77D6E3" data-i18n="agenda">Hearing details</a></p>
+
+  <section class="why">
+    <p class="big" data-i18n-html="why1">Child care providers across New York are getting paid late, month after month, and some are seeing their payments reversed with no explanation at all.</p>
+    <p data-i18n-html="why2">Meanwhile, the state committed to paying providers in advance and based on enrollment, not attendance. Not only are providers not getting those things, they are getting paid late, and they are getting paid too little. The whole system isn't even built to pay people regularly, let alone on time.</p>
+    <p data-i18n-html="why3">That's why this is part of our fight to Pay Our Providers. Pay justice is a lot of things. Provider pay is abysmally low and out of sync with what we pay other educators, which is why we're fighting for <b>$1.8 billion for a child care wage scale</b> and <b>$1.2 billion for CCAP</b>. But we can't have pay justice if people aren't even paid on time. We need wage justice, and people need to at least get paid on time.</p>
+    <p data-i18n-html="why4">The people in charge need to hear from folks who are outraged about this, including providers, parents and families who might not know all the technicalities but know exactly what it means when a check doesn't come. Sign up to testify, and join us.</p>
+  </section>
+
+  <h2 class="sec display" data-i18n="howH">How it works</h2>
+  <ol class="how">
+    <li data-i18n-html="how1"><b>Sign up with us.</b> Tell us how you'd like to testify, so we can get you ready and make sure POP shows up together.</li>
+    <li data-i18n-html="how2"><b>Register with the Council.</b> We'll give you your answers to copy into the Council's official sign-up form. It takes about two minutes.</li>
+    <li data-i18n-html="how3"><b>Speak up on Oct 29.</b> You get two minutes, in person or on Zoom. Or send written testimony, which the Council takes up to 72 hours after the hearing.</li>
+  </ol>
+
+  <h2 class="sec display" id="signup" data-i18n="formH">Sign up to testify</h2>
+  <p class="sec-note" data-i18n="formNote">This goes to POP. On the next screen we'll send you to the Council's form to finish registering.</p>
+
+  <form class="form" id="testify" novalidate>
+    <fieldset>
+      <legend data-i18n="lgHow">How will you testify?</legend>
+      <div class="field" id="howField">
+        <div class="choices">
+          <label class="choice"><input type="radio" name="how" value="in_person"><span data-i18n-html="howPerson">In person<small>250 Broadway, Manhattan</small></span></label>
+          <label class="choice"><input type="radio" name="how" value="zoom_web"><span data-i18n-html="howZoom">On Zoom<small>From a computer or phone app</small></span></label>
+          <label class="choice"><input type="radio" name="how" value="zoom_phone"><span data-i18n-html="howPhone">By phone call<small>Dial in to the Zoom</small></span></label>
+          <label class="choice"><input type="radio" name="how" value="written"><span data-i18n-html="howWritten">Written testimony only<small>Send it in, no speaking</small></span></label>
+        </div>
+        <span class="err" data-i18n="errHow">Please choose how you'll testify.</span>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="lgYou">About you</legend>
+      <div class="row">
+        <div class="field"><label for="first_name" data-i18n="first">First name</label><input type="text" id="first_name" name="first_name" autocomplete="given-name" required><span class="err" data-i18n="errFirst">Please enter your first name.</span></div>
+        <div class="field"><label for="last_name" data-i18n="last">Last name</label><input type="text" id="last_name" name="last_name" autocomplete="family-name" required><span class="err" data-i18n="errLast">Please enter your last name.</span></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="email" data-i18n="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required><span class="err" data-i18n="errEmail">Please enter a valid email.</span></div>
+        <div class="field"><label for="phone" data-i18n="phone">Mobile phone</label><input type="tel" id="phone" name="phone" autocomplete="tel" required><span class="err" data-i18n="errPhone">Please enter a 10-digit phone number.</span></div>
+      </div>
+      <span class="hint" data-i18n="phoneHint" style="margin-top:-8px">The Council asks for a phone number too. If you're calling in, use the number you'll call from.</span>
+      <div class="row" style="margin-top:14px">
+        <div class="field">
+          <label for="role" data-i18n="role">I am a…</label>
+          <select id="role" name="role" required>
+            <option value="" data-i18n="choose">Choose one</option>
+            <option value="FCC provider" data-i18n="roleFcc">Family child care (FCC) provider</option>
+            <option value="Center provider or staff" data-i18n="roleCenter">Child care center owner or staff</option>
+            <option value="Parent" data-i18n="roleParent">Parent or family member</option>
+            <option value="Union member" data-i18n="roleUnion">Union member</option>
+            <option value="Advocate" data-i18n="roleAdvocate">Advocate or ally</option>
+            <option value="Other" data-i18n="roleOther">Other</option>
+          </select>
+          <span class="err" data-i18n="errRole">Please choose one.</span>
+        </div>
+        <div class="field"><label for="zip" data-i18n="zip">Zip code</label><input type="text" id="zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" required><span class="err" data-i18n="errZip">Please enter a 5-digit zip code.</span></div>
+      </div>
+      <div class="field"><label for="organization"><span data-i18n="org">Program or organization</span> <span class="opt" data-i18n="optional">(optional)</span></label><span class="hint" data-i18n="orgHint">Leave blank if you're testifying for yourself.</span><input type="text" id="organization" name="organization" autocomplete="organization"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="lgStory">What's happening to you?</legend>
+      <div class="field">
+        <span class="lbl" data-i18n-html="issues">Check all that apply <span class="opt">(optional)</span></span>
+        <div class="choices one">
+          <label class="choice"><input type="checkbox" name="issues" value="Paid late"><span data-i18n="isLate">I've been paid late</span></label>
+          <label class="choice"><input type="checkbox" name="issues" value="Payment reversed"><span data-i18n="isReversed">I've had payments reversed or taken back with no explanation</span></label>
+          <label class="choice"><input type="checkbox" name="issues" value="Paid too little"><span data-i18n="isLow">My pay doesn't cover the real cost of care</span></label>
+          <label class="choice"><input type="checkbox" name="issues" value="Attendance not enrollment"><span data-i18n="isAttendance">I lose pay when kids are absent</span></label>
+          <label class="choice"><input type="checkbox" name="issues" value="Borrowed or went without"><span data-i18n="isBorrow">I've had to borrow, skip my own pay, or go without to keep my program open</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="story"><span data-i18n="story">Tell us a little about it</span> <span class="opt" data-i18n="optional">(optional)</span></label>
+        <span class="hint" data-i18n="storyHint">How late, how often, and what it did to you, your family or your program. We'll use this to help you get your two minutes ready.</span>
+        <textarea id="story" name="story" maxlength="2000"></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="lgHelp">Support</legend>
+      <div class="field">
+        <label for="interpretation" data-i18n="interp">Do you need interpretation at the hearing?</label>
+        <select id="interpretation" name="interpretation">
+          <option value="" data-i18n="interpNo">No, I'll testify in English</option>
+          <option value="Spanish" data-i18n="interpEs">Yes, Spanish</option>
+          <option value="Other language" data-i18n="interpOther">Yes, another language</option>
+        </select>
+        <span class="hint" data-i18n="interpHint" style="margin-top:6px">The Council needs interpretation requests by Monday, Oct 26. We'll help you send it.</span>
+      </div>
+      <div class="field">
+        <div class="choices one">
+          <label class="choice"><input type="checkbox" name="help" value="Help writing testimony"><span data-i18n="helpWrite">I'd like help writing my testimony</span></label>
+          <label class="choice"><input type="checkbox" name="help" value="Help registering"><span data-i18n="helpReg">Call me if I get stuck registering with the Council</span></label>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="hp" aria-hidden="true"><label for="website">Leave this empty</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
+
+    <div class="submit-row">
+      <button type="submit" class="btn primary" id="submit" data-i18n="submit">Next: register with the Council</button>
+    </div>
+    <p class="formerr" id="formError" role="alert" data-i18n-html="errSubmit">Something went wrong sending your sign-up. Please try again, or email <a href="mailto:ben@actionlabny.org">ben@actionlabny.org</a>.</p>
+    <p class="privacy" data-i18n="privacy">POP will only use your information to help you testify and keep you posted on the campaign.</p>
+  </form>
+
+  <section class="handoff" id="handoff" tabindex="-1" aria-live="polite">
+    <h2 class="display" data-i18n="hoH">Thank you! One more step.</h2>
+    <p data-i18n-html="hoP">To speak at the hearing, you also need to register on the <b>City Council's official form</b>. Here are your answers, ready to copy and paste into it.</p>
+
+    <ul class="copylist" id="copylist"></ul>
+    <div class="cta-row">
+      <button type="button" class="copybtn" id="copyAll" data-i18n="copyAll">Copy all my answers</button>
+    </div>
+
+    <ol class="bigsteps">
+      <li>
+        <b data-i18n="ho1">Open the Council's form and fill it in</b>
+        <span data-i18n="ho1p">It opens in a new tab, so you can come back here to copy each answer.</span>
+        <div class="cta-row"><a class="btn primary" id="councilLink" href="https://council.nyc.gov/testify/" target="_blank" rel="noopener" data-i18n="ho1btn">Open the Council sign-up form</a></div>
+      </li>
+      <li id="interpStep" hidden>
+        <b data-i18n="hoInterp">Ask the Council for interpretation by Monday, Oct 26</b>
+        <span data-i18n="hoInterpP">This opens an email to the Council's translation team with your details filled in. Just press send.</span>
+        <div class="cta-row"><a class="btn" id="interpLink" href="mailto:translationservice@council.nyc.gov" data-i18n="hoInterpBtn">Email the request</a></div>
+      </li>
+      <li>
+        <b data-i18n="ho2">Done? Let us know</b>
+        <span data-i18n="ho2p">So we know who's on the list and can save you a seat with POP.</span>
+        <div class="cta-row"><button type="button" class="btn primary" id="registered" data-i18n="ho2btn">I registered with the Council</button></div>
+      </li>
+    </ol>
+    <p class="note" data-i18n-html="hoNote">In person, you can also sign up with the Sergeant-at-Arms at the back of the hearing room on the day. On Zoom, you have to register ahead of time, and the Council sends you the link before the hearing. Stuck? Email <a href="mailto:ben@actionlabny.org">ben@actionlabny.org</a>.</p>
+  </section>
+
+  <section class="finish" id="finish" tabindex="-1" aria-live="polite">
+    <h2 class="display" data-i18n="fiH">You're on the list. See you Oct 29!</h2>
+    <p data-i18n="fiP">We'll be in touch before the hearing to help you get ready. Bring your receipts: payment dates, letters, anything that shows what's happening. And bring a friend.</p>
+    <p data-i18n-html="fiDec2">This is just the start. On <b>December 2</b> we launch the Pay Our Providers campaign across the state, in Albany, Buffalo and New York City. Register now so we can count you in.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="../../dec2/" data-i18n="fiBtn">Register for Dec 2</a>
+      <button type="button" class="btn" id="share" data-i18n="share">Share this page</button>
+    </div>
+  </section>
+
+  <h2 class="sec display" data-i18n="tipsH">What to say in two minutes</h2>
+  <ul class="tips">
+    <li data-i18n-html="tip1"><b>Who you are.</b> Your name, your program or your kids' program, and your neighborhood or Council district.</li>
+    <li data-i18n-html="tip2"><b>What happened.</b> How late, how many times, how much. Payments that were reversed. Bring your receipts.</li>
+    <li data-i18n-html="tip3"><b>What it did to you.</b> Covering payroll or rent out of pocket, borrowing, going without your own pay, families and children who were affected.</li>
+    <li data-i18n-html="tip4"><b>What you want.</b> Pay providers on time, every time. Pay in advance and based on enrollment, like the state committed to. And Pay Our Providers: a real wage scale for everyone who does this work.</li>
+  </ul>
+  <p class="sec-note" style="margin-top:14px" data-i18n="tipsNote">Everything you say or send becomes part of the public record.</p>
+
+  <footer>
+    <p data-i18n="footer">Providers Organized for Power (POP) is a coalition of child care providers, parents, unions and community organizations across New York State.</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  // Sign-ups go to Airtable (Registrations, linked to the Oct 29 hearing Event) through the
+  // popchildcare.org server. Leave empty ('') to preview without sending.
+  var SUBMIT_URL = '/api/testify';
+  var COUNCIL_FORM = 'https://council.nyc.gov/testify/';
+  // What to pick in the Council's form. Its options are in English, so these stay in English.
+  var COUNCIL_HOW = {
+    in_person: 'Testifying in-person',
+    zoom_web: 'Testifying via Zoom (web)',
+    zoom_phone: 'Testifying via Zoom (phone)',
+    written: 'Submitting written testimony'
+  };
+  var HEARING = 'Oct 29, 2026, 1:00 PM: Subcommittee on Early Childhood Education, jointly with the Committee on Small Business';
+  var SUBJECT = 'Oversight - The Business of Child Care';
+
+  var ES = {
+    navDemands: 'Demandas', navToolkit: 'Materiales', navEndorse: 'Respaldar', navTestify: 'Testificar 29 oct', navDec2: 'Lanzamiento 2 dic',
+    tagSub: 'Testifica en el Concejo',
+    h1: 'Pago tarde. Pago muy bajo. <span class="hl">Díselo al Concejo Municipal.</span>',
+    lede: 'El Concejo Municipal tendrá una audiencia sobre <b>el negocio del cuidado infantil</b>, y necesitamos que proveedoras, padres y aliados estén ahí, en persona o por Zoom, para decirles lo que de verdad está pasando con los pagos atrasados.',
+    date: 'Jue, 29 oct', mode: 'En persona o por Zoom',
+    place: '250 Broadway, piso 8, Sala de Audiencias 1, Manhattan.', agenda: 'Detalles de la audiencia',
+    why1: 'Las proveedoras de cuidado infantil en todo Nueva York están recibiendo sus pagos tarde, mes tras mes, y a algunas les están revirtiendo pagos sin ninguna explicación.',
+    why2: 'Mientras tanto, el estado se comprometió a pagarles a las proveedoras por adelantado y según la inscripción, no la asistencia. No solo no están recibiendo eso, sino que les pagan tarde y les pagan muy poco. Todo el sistema ni siquiera está hecho para pagarle a la gente con regularidad, mucho menos a tiempo.',
+    why3: 'Por eso esto es parte de nuestra lucha para Pay Our Providers. La justicia salarial es muchas cosas. El pago de las proveedoras es terriblemente bajo y no está a la par de lo que les pagamos a otros educadores, y por eso luchamos por <b>$1.8 mil millones para una escala salarial de cuidado infantil</b> y <b>$1.2 mil millones para CCAP</b>. Pero no puede haber justicia salarial si a la gente ni siquiera le pagan a tiempo. Necesitamos justicia salarial, y como mínimo, que a la gente le paguen a tiempo.',
+    why4: 'Los que están a cargo tienen que escuchar a la gente indignada por esto, incluyendo proveedoras, padres y familias que tal vez no conocen todos los detalles técnicos pero saben exactamente lo que significa cuando un pago no llega. Inscríbete para testificar, y únete a nosotros.',
+    howH: 'Cómo funciona',
+    how1: '<b>Inscríbete con nosotros.</b> Dinos cómo quieres testificar, para ayudarte a prepararte y asegurarnos de que POP llegue unido.',
+    how2: '<b>Regístrate con el Concejo.</b> Te daremos tus respuestas para copiar en el formulario oficial del Concejo. Toma como dos minutos.',
+    how3: '<b>Habla el 29 de octubre.</b> Tienes dos minutos, en persona o por Zoom. O manda tu testimonio por escrito, que el Concejo acepta hasta 72 horas después de la audiencia.',
+    formH: 'Inscríbete para testificar',
+    formNote: 'Esto le llega a POP. En la siguiente pantalla te llevamos al formulario del Concejo para terminar tu registro.',
+    lgHow: '¿Cómo vas a testificar?',
+    howPerson: 'En persona<small>250 Broadway, Manhattan</small>',
+    howZoom: 'Por Zoom<small>Desde una computadora o la app del teléfono</small>',
+    howPhone: 'Por llamada telefónica<small>Marcando al Zoom</small>',
+    howWritten: 'Solo testimonio escrito<small>Lo mandas, sin hablar</small>',
+    errHow: 'Por favor elige cómo vas a testificar.',
+    lgYou: 'Sobre ti', first: 'Nombre', last: 'Apellido', email: 'Correo electrónico', phone: 'Teléfono celular',
+    errFirst: 'Por favor escribe tu nombre.', errLast: 'Por favor escribe tu apellido.', errEmail: 'Por favor escribe un correo válido.', errPhone: 'Por favor escribe un número de 10 dígitos.',
+    phoneHint: 'El Concejo también pide un número de teléfono. Si vas a llamar, usa el número desde el que vas a llamar.',
+    role: 'Soy…', choose: 'Elige uno', roleFcc: 'Proveedora de cuidado infantil familiar (FCC)', roleCenter: 'Dueña o personal de un centro de cuidado infantil', roleParent: 'Madre, padre o familiar', roleUnion: 'Miembro de un sindicato', roleAdvocate: 'Defensora o aliada', roleOther: 'Otro',
+    errRole: 'Por favor elige uno.', zip: 'Código postal', errZip: 'Por favor escribe un código postal de 5 dígitos.',
+    org: 'Programa u organización', optional: '(opcional)', orgHint: 'Déjalo en blanco si vas a testificar por tu cuenta.',
+    lgStory: '¿Qué te está pasando?', issues: 'Marca todo lo que aplique <span class="opt">(opcional)</span>',
+    isLate: 'Me han pagado tarde', isReversed: 'Me han revertido o quitado pagos sin explicación', isLow: 'Mi pago no cubre el costo real del cuidado', isAttendance: 'Pierdo pago cuando los niños faltan', isBorrow: 'He tenido que pedir prestado, dejar de pagarme o pasar sin cosas para mantener mi programa abierto',
+    story: 'Cuéntanos un poco', storyHint: 'Qué tan tarde, qué tan seguido, y lo que te causó a ti, a tu familia o a tu programa. Lo usaremos para ayudarte a preparar tus dos minutos.',
+    lgHelp: 'Apoyo', interp: '¿Necesitas interpretación en la audiencia?', interpNo: 'No, voy a testificar en inglés', interpEs: 'Sí, español', interpOther: 'Sí, otro idioma',
+    interpHint: 'El Concejo necesita las solicitudes de interpretación para el lunes 26 de octubre. Te ayudamos a mandarla.',
+    helpWrite: 'Quiero ayuda para escribir mi testimonio', helpReg: 'Llámenme si me atoro al registrarme con el Concejo',
+    submit: 'Siguiente: regístrate con el Concejo', sending: 'Enviando…',
+    errSubmit: 'Hubo un problema al enviar tu inscripción. Por favor intenta de nuevo, o escribe a <a href="mailto:ben@actionlabny.org">ben@actionlabny.org</a>.',
+    privacy: 'POP solo usará tu información para ayudarte a testificar y mantenerte al tanto de la campaña.',
+    hoH: '¡Gracias! Un paso más.',
+    hoP: 'Para hablar en la audiencia, también tienes que registrarte en el <b>formulario oficial del Concejo Municipal</b>. Aquí están tus respuestas, listas para copiar y pegar. El formulario está en inglés, así que tus respuestas también.',
+    copyAll: 'Copiar todas mis respuestas', copy: 'Copiar', copied: 'Copiado',
+    ho1: 'Abre el formulario del Concejo y llénalo', ho1p: 'Se abre en otra pestaña, así puedes regresar aquí a copiar cada respuesta.', ho1btn: 'Abrir el formulario del Concejo',
+    hoInterp: 'Pídele interpretación al Concejo para el lunes 26 de octubre', hoInterpP: 'Esto abre un correo al equipo de traducción del Concejo con tus datos ya escritos. Solo dale enviar.', hoInterpBtn: 'Mandar la solicitud',
+    ho2: '¿Listo? Avísanos', ho2p: 'Así sabemos quién está en la lista y te guardamos un lugar con POP.', ho2btn: 'Ya me registré con el Concejo',
+    hoNote: 'En persona, también te puedes inscribir el mismo día con el Sargento de Armas al fondo de la sala. Por Zoom, tienes que registrarte antes, y el Concejo te manda el enlace antes de la audiencia. ¿Te atoraste? Escribe a <a href="mailto:ben@actionlabny.org">ben@actionlabny.org</a>.',
+    fiH: 'Estás en la lista. ¡Nos vemos el 29 de octubre!',
+    fiP: 'Nos comunicaremos antes de la audiencia para ayudarte a prepararte. Trae tus comprobantes: fechas de pago, cartas, cualquier cosa que muestre lo que está pasando. Y trae a una amiga.',
+    fiDec2: 'Esto es solo el comienzo. El <b>2 de diciembre</b> lanzamos la campaña Pay Our Providers en todo el estado, en Albany, Buffalo y la Ciudad de Nueva York. Regístrate ahora para contar contigo.',
+    fiBtn: 'Regístrate para el 2 de diciembre', share: 'Compartir esta página', linkCopied: 'Enlace copiado',
+    tipsH: 'Qué decir en dos minutos',
+    tip1: '<b>Quién eres.</b> Tu nombre, tu programa o el programa de tus hijos, y tu vecindario o distrito del Concejo.',
+    tip2: '<b>Qué pasó.</b> Qué tan tarde, cuántas veces, cuánto. Pagos que te revirtieron. Trae tus comprobantes.',
+    tip3: '<b>Lo que te causó.</b> Cubrir la nómina o la renta de tu bolsillo, pedir prestado, dejar de pagarte, las familias y los niños afectados.',
+    tip4: '<b>Lo que quieres.</b> Que les paguen a las proveedoras a tiempo, siempre. Que paguen por adelantado y según la inscripción, como el estado se comprometió. Y Pay Our Providers: una escala salarial de verdad para todas las personas que hacen este trabajo.',
+    tipsNote: 'Todo lo que digas o mandes se vuelve parte del registro público.',
+    footer: 'Providers Organized for Power (POP) es una coalición de proveedoras de cuidado infantil, padres, sindicatos y organizaciones comunitarias en todo el estado de Nueva York.',
+    kHow: '¿Cómo vas a testificar? (How will you be testifying?)', kName: 'Nombre completo (Full Name)', kEmail: 'Correo (Your Email)', kPhone: 'Teléfono (Phone Number)', kHearing: 'Audiencia (Select a hearing)', kSubject: 'Tema (Subject of testimony)', kOrg: 'Organización (Organization)',
+    self: 'Self', otherOrg: 'Other: '
+  };
+  var EN = {
+    copy: 'Copy', copied: 'Copied', sending: 'Sending…', linkCopied: 'Link copied',
+    kHow: 'How will you be testifying?', kName: 'Full Name', kEmail: 'Your Email', kPhone: 'Phone Number', kHearing: 'Select a hearing', kSubject: 'Subject of testimony', kOrg: 'Organization',
+    self: 'Self', otherOrg: 'Other: '
+  };
+  var lang = 'en';
+
+  // Remember English strings so the toggle can switch back.
+  document.querySelectorAll('[data-i18n]').forEach(function (el) { EN[el.getAttribute('data-i18n')] = el.textContent; });
+  document.querySelectorAll('[data-i18n-html]').forEach(function (el) { EN[el.getAttribute('data-i18n-html')] = el.innerHTML; });
+  function t(k) { return (lang === 'es' ? ES[k] : EN[k]) || EN[k] || k; }
+
+  function setLang(l) {
+    lang = l;
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
+    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === l)); });
+    if (entry) renderCopyList();
+    try { localStorage.setItem('popreg-lang', l); } catch (e) {}
+  }
+  document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
+
+  var form = document.getElementById('testify');
+  var btn = document.getElementById('submit');
+  var errBox = document.getElementById('formError');
+  var entry = null; // what the person sent us, used for the Council hand-off
+
+  function checked(name) {
+    return Array.prototype.filter.call(form.querySelectorAll('input[name="' + name + '"]'), function (i) { return i.checked; }).map(function (i) { return i.value; });
+  }
+
+  function validate() {
+    var bad = [];
+    function mark(el, ok, field) { var f = field || el.closest('.field'); f.classList.toggle('invalid', !ok); if (!ok) bad.push(el); }
+    mark(form.querySelector('input[name="how"]'), checked('how').length === 1, document.getElementById('howField'));
+    mark(form.first_name, !!form.first_name.value.trim());
+    mark(form.last_name, !!form.last_name.value.trim());
+    mark(form.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim()));
+    mark(form.phone, form.phone.value.replace(/\D/g, '').length >= 10);
+    mark(form.role, !!form.role.value);
+    mark(form.zip, /^\d{5}$/.test(form.zip.value.trim()));
+    bad.sort(function (a, b) { return a.compareDocumentPosition(b) & 4 ? -1 : 1; });
+    if (bad.length) bad[0].focus();
+    return !bad.length;
+  }
+
+  form.addEventListener('input', function (e) {
+    var f = e.target.closest('.field');
+    if (f && f.classList.contains('invalid')) f.classList.remove('invalid');
+  });
+
+  function send(url, payload) {
+    if (!SUBMIT_URL) return new Promise(function (res) { setTimeout(function () { res({ ok: true }); }, 400); });
+    return fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (j) { if (!j || j.ok !== true) throw new Error('Not saved'); return j; });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (form.website.value) { showHandoff(); return; } // bot trap
+    if (!validate()) return;
+    entry = {
+      how: checked('how')[0],
+      first_name: form.first_name.value.trim(),
+      last_name: form.last_name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      role: form.role.value,
+      zip: form.zip.value.trim(),
+      organization: form.organization.value.trim(),
+      issues: checked('issues'),
+      story: form.story.value.trim(),
+      interpretation: form.interpretation.value,
+      help: checked('help'),
+      language: lang === 'es' ? 'Spanish' : 'English',
+      page: location.href.split('#')[0]
+    };
+    btn.disabled = true; btn.textContent = t('sending');
+    errBox.classList.remove('show');
+    send(SUBMIT_URL, entry).then(function (j) { entry.id = j.id; showHandoff(); }).catch(function () {
+      errBox.classList.add('show');
+      btn.disabled = false; btn.textContent = t('submit');
+    });
+  });
+
+  function councilAnswers() {
+    return [
+      ['kHow', COUNCIL_HOW[entry.how]],
+      ['kName', entry.first_name + ' ' + entry.last_name],
+      ['kEmail', entry.email],
+      ['kPhone', entry.phone],
+      ['kHearing', HEARING],
+      ['kSubject', SUBJECT],
+      ['kOrg', entry.organization ? t('otherOrg') + entry.organization : t('self')]
+    ];
+  }
+
+  function copyText(text, button) {
+    function ok() { button.textContent = t('copied'); button.classList.add('ok'); setTimeout(function () { button.textContent = button.dataset.label; button.classList.remove('ok'); }, 1600); }
+    if (navigator.clipboard) { navigator.clipboard.writeText(text).then(ok).catch(function () {}); return; }
+    var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); ok(); } catch (e) {}
+    ta.remove();
+  }
+
+  function renderCopyList() {
+    var ul = document.getElementById('copylist');
+    ul.innerHTML = '';
+    councilAnswers().forEach(function (a) {
+      var li = document.createElement('li');
+      var k = document.createElement('span'); k.className = 'k'; k.textContent = t(a[0]);
+      var v = document.createElement('span'); v.className = 'v'; v.textContent = a[1];
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'copybtn'; b.textContent = b.dataset.label = t('copy');
+      b.addEventListener('click', function () { copyText(a[1], b); });
+      li.appendChild(k); li.appendChild(v); li.appendChild(b); ul.appendChild(li);
+    });
+    var all = document.getElementById('copyAll'); all.dataset.label = t('copyAll');
+  }
+  document.getElementById('copyAll').addEventListener('click', function () {
+    copyText(councilAnswers().map(function (a) { return EN[a[0]] + ': ' + a[1]; }).join('\n'), this);
+  });
+
+  function showHandoff() {
+    if (!entry) return;
+    renderCopyList();
+    if (entry.interpretation && entry.how !== 'written') {
+      var body = 'Hello,\n\nI would like to request ' + (entry.interpretation === 'Spanish' ? 'Spanish' : '[language]') +
+        ' interpretation to testify at the October 29, 2026, 1:00 PM hearing of the Subcommittee on Early Childhood Education, jointly with the Committee on Small Business (Oversight - The Business of Child Care).\n\n' +
+        'Full name: ' + entry.first_name + ' ' + entry.last_name + '\nPhone: ' + entry.phone + '\nEmail: ' + entry.email + '\n\nThank you.';
+      document.getElementById('interpLink').href = 'mailto:translationservice@council.nyc.gov?subject=' +
+        encodeURIComponent('Interpretation request: Oct 29 hearing, Subcommittee on Early Childhood Education') + '&body=' + encodeURIComponent(body);
+      document.getElementById('interpStep').hidden = false;
+    }
+    form.hidden = true;
+    var h = document.getElementById('handoff');
+    h.classList.add('show'); h.focus();
+    h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('registered').addEventListener('click', function () {
+    var b = this;
+    b.disabled = true;
+    // Marks their sign-up as registered with the Council; failures here shouldn't block them.
+    var done = entry && entry.id ? send(SUBMIT_URL + '/registered', { id: entry.id, email: entry.email }) : Promise.resolve();
+    done.catch(function () {}).then(function () {
+      document.getElementById('handoff').classList.remove('show');
+      var f = document.getElementById('finish');
+      f.classList.add('show'); f.focus();
+      f.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  document.getElementById('share').addEventListener('click', function () {
+    var url = location.href.split('#')[0].split('?')[0], b = this;
+    if (navigator.share) { navigator.share({ title: document.title, url: url }).catch(function () {}); return; }
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { b.textContent = t('linkCopied'); }).catch(function () {});
+  });
+
+  var saved; try { saved = localStorage.getItem('popreg-lang'); } catch (e) {}
+  if (!saved && /^es\b/i.test(navigator.language || '')) saved = 'es';
+  if (/[?&]lang=es\b/.test(location.search)) saved = 'es';
+  if (/[?&]lang=en\b/.test(location.search)) saved = 'en';
+  setLang(saved === 'es' ? 'es' : 'en');
+})();
+</script>
+</body>
+</html>

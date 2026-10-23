@@ -159,10 +159,9 @@
 
 <script>
 (function () {
-  // Where endorsements are sent: paste the Google Apps Script web app URL here
-  // (it ends in /exec; see README.md). Leave empty ('') to preview without sending.
-  // The POP forms Apps Script on the Dec 2 registration sheet (tools/sheets/pop-forms-script.gs), tab "Endorsements".
-  var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwmRCE6ZZ8YbofybIzp96qPEI_AJoCiXFlE5lxWwD5zN-S7LR2Ut9-WFf_JhK4mXqlQ/exec';
+  // Where endorsements are sent: Airtable (Organizations, with the logo attached and the signer linked in
+  // Members) through the popchildcare.org server. Leave empty ('') to preview without sending.
+  var SUBMIT_URL = '/api/endorse';
   var MAX_BYTES = 5 * 1024 * 1024;
 
   var form = document.getElementById('endorse');
@@ -247,8 +246,7 @@
     btn.disabled = true; btn.textContent = 'Sending…';
     errBox.classList.remove('show');
     var send = SUBMIT_URL
-      // Sent as plain text so Google accepts it without a CORS preflight.
-      ? fetch(SUBMIT_URL, { method: 'POST', body: JSON.stringify(payload) })
+      ? fetch(SUBMIT_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
           .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
           .then(function (j) { if (!j || j.ok !== true) throw new Error('Not saved'); })
       : new Promise(function (res) { setTimeout(res, 500); });

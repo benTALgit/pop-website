@@ -5,6 +5,9 @@
  *   Dec 2 registration (popchildcare.org/dec2)       -> tab "Registrations" (unchanged)
  *   Campaign pledge ("Join us" on /campaign)         -> tab "Pledges"
  *   Endorsement (/pay/endorse), logo saved to Drive  -> tab "Endorsements"
+ *   Testify sign-up (/campaign/testify)              -> tab "Testimony" (one row at sign-up, a second
+ *                                                       row with status registered_with_council when
+ *                                                       they say they finished the Council's form)
  *
  * Update (once): in the sheet, Extensions > Apps Script, replace all the code with this file and save.
  * Permissions are kept narrow in appsscript.json (Project Settings > "Show appsscript.json"):
@@ -31,6 +34,11 @@ var FORMS = {
     sheet: 'Endorsements',
     columns: ['submitted_at', 'organization', 'org_website', 'mission', 'first_name', 'last_name',
       'role', 'email', 'phone', 'authorized', 'logo_file', 'status']
+  },
+  testify: {
+    sheet: 'Testimony',
+    columns: ['submitted_at', 'status', 'how', 'first_name', 'last_name', 'email', 'phone', 'role',
+      'zip', 'organization', 'issues', 'story', 'interpretation', 'help', 'language', 'page']
   }
 };
 var LOGO_FOLDER = 'Pay Our Providers endorser logos';
@@ -42,7 +50,8 @@ function doPost(e) {
   try {
     var d = JSON.parse(e.postData.contents);
     if (d.website) return reply_({ ok: true }); // bot trap
-    var form = FORMS[d.form] || FORMS.registration; // the Dec 2 form sends no "form" field
+    var form = d.form ? FORMS[d.form] : FORMS.registration; // the Dec 2 form sends no "form" field
+    if (!form) return reply_({ ok: false, error: 'unknown form' });
     if (!d.submitted_at) d.submitted_at = new Date().toISOString();
     if (d.form === 'endorse') {
       if (!d.authorized) return reply_({ ok: false, error: 'not authorized' });
