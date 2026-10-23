@@ -16,12 +16,21 @@
 <link rel="stylesheet" href="../site-nav.css">
 <link rel="stylesheet" href="../pay.css">
 <style>
-  /* Lighter page than the rest of the campaign, so the hearing sign-up doesn't read as the Dec 2 form. */
-  :root { --rose: #9E2F4E; --paper: #FFFFFF; --card: #F3F5F6; --chip: #EDF1F2; --line: #D5DBDE; }
+  /* White page, light even in dark mode, so the hearing sign-up doesn't read as the Dec 2 form. */
+  :root, :root[data-theme="dark"] {
+    color-scheme: light;
+    --paper: #FFFFFF; --ink: #1F1A1A; --ink-soft: #4A4040; --line: #D5DBDE;
+    --coral: #D9472B; --coral-deep: #B8361C; --teal: #1F7A74;
+    --card: #F3F5F6; --chip: #EDF1F2; --focus: #1F7A74; --rose: #9E2F4E;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    color-scheme: light;
+    --paper: #FFFFFF; --ink: #1F1A1A; --ink-soft: #4A4040; --line: #D5DBDE;
+    --coral: #D9472B; --coral-deep: #B8361C; --teal: #1F7A74;
+    --card: #F3F5F6; --chip: #EDF1F2; --focus: #1F7A74; --rose: #9E2F4E;
+  } }
   .site-nav, .site-nav .sn-drop { background: #FFFFFF; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --rose: #E07A98; --paper: #1B1616; --card: #251F1F; --chip: #2E2625; } }
-  :root[data-theme="dark"] { --rose: #E07A98; --paper: #1B1616; --card: #251F1F; --chip: #2E2625; }
-  .hero.short img.rally { height: clamp(200px, 32vw, 420px); object-position: center 20%; }
+  .hero.short img.rally { object-position: center 40%; }
 
   .lang { display: flex; gap: 4px; }
   .lang button { font: 800 13px/1 'Libre Franklin', sans-serif; letter-spacing: .08em; min-height: 36px; padding: 0 12px; border: 0; background: transparent; box-shadow: inset 0 0 0 1px #D8C9C5; color: var(--ink-soft); cursor: pointer; }
@@ -142,7 +151,7 @@
 </nav>
 
 <header class="hero short">
-  <img class="rally" src="../assets/testify-hero.jpg" alt="POP and Las Doñas members holding their banners together">
+  <img class="rally" src="../assets/testify-hero.jpg" alt="POP and Las Doñas members cheering behind their banners">
   <div class="tags">
     <div class="tag-main display">PAY OUR PROVIDERS</div>
     <div class="tag-sub" data-i18n="tagSub">Testify at City Council</div>
