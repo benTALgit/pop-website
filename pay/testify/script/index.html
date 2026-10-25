@@ -112,9 +112,40 @@
     .part p, .part ol { font-size: 17px; }
     .switch button { font-size: 15px; }
   }
+  /* Text-it-to-me: ask for their number so the To line fills in. */
+  dialog.sms { border: 0; padding: 0; width: min(420px, calc(100vw - 32px)); background: #FFFFFF; color: var(--ink); box-shadow: 0 14px 40px rgba(0,0,0,.28); border-top: 6px solid var(--teal); }
+  dialog.sms::backdrop { background: rgba(31,26,26,.55); }
+  dialog.sms form { padding: 18px 18px 16px; }
+  dialog.sms h3 { margin: 0 0 6px; font-size: 20px; font-weight: 800; }
+  dialog.sms p { margin: 0 0 12px; font-size: 15px; color: var(--ink-soft); }
+  dialog.sms input { width: 100%; font: inherit; font-size: 18px; padding: 10px 12px; min-height: 50px; border: 2px solid var(--line); border-radius: 0; color: var(--ink); background: var(--card); }
+  dialog.sms input:focus { outline: none; border-color: var(--focus); }
+  dialog.sms .err { display: none; margin: 6px 0 0; color: var(--rose); font-weight: 600; font-size: 14px; }
+  dialog.sms.bad .err { display: block; }
+  dialog.sms .copy-row { margin-top: 14px; }
+
+  /* Print: only the person's own testimony, then a page of talking points and the when and where. */
+  #printout { display: none; }
   @media print {
-    .site-nav, .camp-nav, .hero, .jump, .switch, .copy-row, .back, footer { display: none !important; }
-    .blank { background: none; border-bottom: 1px solid #000; }
+    @page { margin: 0.7in; }
+    body > *:not(#printout) { display: none !important; }
+    #printout { display: block; color: #000; font: 12pt/1.5 'Libre Franklin', Arial, sans-serif; }
+    #printout .pr-top { margin: 0 0 14pt; padding-bottom: 8pt; border-bottom: 2pt solid #000; }
+    #printout .pr-top b { display: block; font-size: 16pt; }
+    #printout .pr-top span { font-size: 10.5pt; }
+    #printout .pr-script p { margin: 0 0 10pt; font-size: 13pt; line-height: 1.55; }
+    #printout .pr-script ol { margin: 0 0 10pt; padding-left: 22pt; font-size: 13pt; font-weight: 600; }
+    #printout .pr-page2 { break-before: page; page-break-before: always; }
+    #printout h2 { margin: 0 0 6pt; font-size: 14pt; }
+    #printout h3 { margin: 7pt 0 2pt; font-size: 11.5pt; }
+    #printout ul { margin: 0 0 6pt; padding-left: 16pt; }
+    #printout li { margin: 0 0 2pt; font-size: 10.5pt; line-height: 1.35; }
+    #printout a { color: #000; text-decoration: none; }
+    #printout .pr-facts { margin-bottom: 10pt; }
+    #printout .pr-pts { columns: 2; column-gap: 20pt; }
+    #printout .pr-pts .pt { break-inside: avoid; page-break-inside: avoid; }
+    #printout .pr-pts h3:first-child { margin-top: 0; }
+    #printout .pr-foot { margin-top: 14pt; font-size: 9.5pt; }
   }
 </style>
 </head>
@@ -297,6 +328,21 @@
   </footer>
 </main>
 
+<dialog class="sms" id="smsDlg" aria-labelledby="smsH">
+  <form method="dialog" id="smsForm" novalidate>
+    <h3 id="smsH" data-i18n="smsH">Text it to yourself</h3>
+    <p data-i18n="smsP">Type your cell number and we'll open your messages with your testimony ready to send to you. Your number stays on your phone.</p>
+    <input type="tel" id="smsNum" aria-label="Mobile number" inputmode="tel" autocomplete="tel" placeholder="(718) 555-0123">
+    <span class="err" data-i18n="smsErr">Please enter a 10-digit phone number.</span>
+    <div class="copy-row">
+      <button type="submit" class="btn primary" value="send" data-i18n="smsSend">Open my messages</button>
+      <button type="button" class="btn" id="smsCancel" data-i18n="smsCancel">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="printout" aria-hidden="true"></div>
+
 <script>
 (function () {
   var ES = {
@@ -361,6 +407,8 @@
     pa6: 'La justicia salarial significa salarios dignos, pero empieza con que les paguen a tiempo. Gracias.',
     locH: 'Encuentra tu distrito del Concejo', locHint: 'Escribe tu dirección (de tu casa o de tu programa) y llenamos tu distrito y tu vecindario. Un código postal solo puede cubrir más de un distrito.', locBtn: 'Buscar',
     locWait: 'Buscando…', locNone: 'No encontramos esa dirección. Intenta agregar el condado (borough) o el código postal.', locErr: 'La búsqueda no está funcionando ahora. Puedes encontrar tu distrito en council.nyc.gov/districts.', locFound: 'Distrito del Concejo {d}{h}. Tu concejal es {m}.', locZip: 'Parece que pusiste solo el código postal, así que esto es un cálculo aproximado. Agrega tu dirección para estar seguro.',
+    smsH: 'Mándatelo por texto', smsP: 'Escribe tu número de celular y abrimos tus mensajes con tu testimonio listo para mandártelo. Tu número se queda en tu teléfono.', smsErr: 'Por favor escribe un número de 10 dígitos.', smsSend: 'Abrir mis mensajes', smsCancel: 'Cancelar',
+    prTitle: 'Mi testimonio', prSub: 'Audiencia del Concejo Municipal, "Oversight - The Business of Child Care" · jueves 29 de octubre, 1 PM', prWhen: 'Cuándo y dónde', prFoot: 'Providers Organized for Power (POP) · popchildcare.org/campaign/testify',
     copyScript: 'Copiar', copied: 'Copiado', print: 'Imprimir',
     lgBlank: '<span class="blank">RESALTADO</span> tócalo y escribe lo tuyo',
     sendH: 'Mándatelo', sendP: 'Llena tus espacios arriba y luego mándate tu testimonio por correo o por mensaje de texto, para tenerlo el 29 de octubre. Lo que escribes se queda en tu teléfono o computadora. No se le manda nada a POP.',
@@ -375,7 +423,7 @@
     backSign: 'Inscríbete para testificar',
     footer: 'Providers Organized for Power (POP) es una coalición de proveedoras de cuidado infantil, padres, sindicatos y organizaciones comunitarias en todo el estado de Nueva York.'
   };
-  var EN = { locWait: 'Looking up…', locNone: "We couldn't find that address. Try adding the borough or zip code.", locErr: "The lookup isn't working right now. You can find your district at council.nyc.gov/districts.", locFound: 'Council District {d}{h}. Your Council Member is {m}.', locZip: 'That looks like a zip code only, so this is a best guess. Add your street address to be sure.', copied: 'Copied', mailSubj: 'My testimony for Oct 29', clearAsk: 'Clear everything you typed?' };
+  var EN = { prTitle: 'My testimony', prSub: 'NYC Council hearing, "Oversight - The Business of Child Care" · Thursday, October 29, 1 PM', prWhen: 'When and where', prFoot: 'Providers Organized for Power (POP) · popchildcare.org/campaign/testify', locWait: 'Looking up…', locNone: "We couldn't find that address. Try adding the borough or zip code.", locErr: "The lookup isn't working right now. You can find your district at council.nyc.gov/districts.", locFound: 'Council District {d}{h}. Your Council Member is {m}.', locZip: 'That looks like a zip code only, so this is a best guess. Add your street address to be sure.', copied: 'Copied', mailSubj: 'My testimony for Oct 29', clearAsk: 'Clear everything you typed?' };
   var EDIT = false; // the editor copy turns this on and leaves the blanks as plain text
   var lang = 'en';
 
@@ -511,10 +559,28 @@
   document.getElementById('emailScript').addEventListener('click', function () {
     location.href = 'mailto:?subject=' + encodeURIComponent(t('mailSubj')) + '&body=' + encodeURIComponent(withLink());
   });
+  var PHONE = 'pop-testimony-phone', dlg = document.getElementById('smsDlg'), num = document.getElementById('smsNum');
+  function openSms(n) {
+    // iPhones and Macs read "&body=", Android reads "?body=".
+    var apple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
+    location.href = 'sms:' + n + (apple ? '&' : '?') + 'body=' + encodeURIComponent(scriptText());
+  }
   document.getElementById('textScript').addEventListener('click', function () {
-    // iPhones read "&body=", Android reads "?body="; "?&body=" works on both.
-    location.href = 'sms:?&body=' + encodeURIComponent(scriptText());
+    if (EDIT) return;
+    try { num.value = localStorage.getItem(PHONE) || ''; } catch (e) {}
+    dlg.classList.remove('bad');
+    if (dlg.showModal) { dlg.showModal(); num.focus(); } else openSms('');
   });
+  document.getElementById('smsForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = num.value.replace(/\D/g, '');
+    if (d.length === 11 && d[0] === '1') d = d.slice(1);
+    if (d.length !== 10) { dlg.classList.add('bad'); num.focus(); return; }
+    try { localStorage.setItem(PHONE, num.value); } catch (e2) {}
+    dlg.close();
+    openSms('+1' + d);
+  });
+  document.getElementById('smsCancel').addEventListener('click', function () { dlg.close(); });
   var copyBtn = document.getElementById('copyScript');
   copyBtn.addEventListener('click', function () {
     var b = this;
@@ -526,7 +592,27 @@
     Object.keys(vals).forEach(function (k) { if (k.indexOf(lang + ':sc-' + who + ':') === 0) delete vals[k]; });
     keep(); makeFields();
   });
-  document.getElementById('printScript').addEventListener('click', function () { window.print(); });
+  // Print sheet: page 1 is their filled-in script, page 2 the when and where plus the talking points.
+  function esc(x) { var d = document.createElement('div'); d.textContent = x; return d.innerHTML; }
+  function buildPrint() {
+    var parts = scriptText().split('\n\n').map(function (b) {
+      if (/^1\. /.test(b)) return '<ol>' + b.split('\n').map(function (l) { return '<li>' + esc(l.replace(/^\d+\. /, '')) + '</li>'; }).join('') + '</ol>';
+      return '<p>' + esc(b) + '</p>';
+    }).join('');
+    var facts = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6'].map(function (k) { var el = document.querySelector('[data-i18n-html="' + k + '"]'); return el ? '<li>' + el.innerHTML + '</li>' : ''; }).join('');
+    var pts = Array.prototype.map.call(document.querySelectorAll('.points .point'), function (pt) {
+      var h = pt.querySelector('h3'), ul = pt.querySelector('ul');
+      return '<div class="pt"><h3>' + (h ? h.innerHTML : '') + '</h3><ul>' + (ul ? ul.innerHTML : '') + '</ul></div>';
+    }).join('');
+    document.getElementById('printout').innerHTML =
+      '<div class="pr-top"><b>' + esc(t('prTitle')) + '</b><span>' + esc(t('prSub')) + '</span></div>' +
+      '<div class="pr-script">' + parts + '</div>' +
+      '<div class="pr-page2"><h2>' + esc(t('prWhen')) + '</h2><ul class="pr-facts">' + facts + '</ul>' +
+      '<h2>' + document.querySelector('[data-i18n="tpH"]').textContent + '</h2><div class="pr-pts">' + pts + '</div>' +
+      '<p class="pr-foot">' + esc(t('prFoot')) + '</p></div>';
+  }
+  window.addEventListener('beforeprint', buildPrint);
+  document.getElementById('printScript').addEventListener('click', function () { buildPrint(); window.print(); });
 
   var saved; try { saved = localStorage.getItem('popreg-lang'); } catch (e) {}
   if (!saved && /^es\b/i.test(navigator.language || '')) saved = 'es';
