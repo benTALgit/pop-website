@@ -199,7 +199,7 @@
 <nav class="camp-nav" aria-label="Pay Our Providers">
   <div class="cn-in">
     <a class="cn-name" href="../pay/">Pay Our Providers</a>
-    <div class="cn-links"><a href="../pay/#demands" data-i18n="navDemands">Demands</a><a href="../pay/toolkit/" data-i18n="navToolkit">Toolkit</a><a href="../pay/endorse/" data-i18n="navEndorse">Endorse</a><a href="../pay/../dec2/" class="go" aria-current="page" data-i18n="navDec2">Dec 2 launch</a></div>
+    <div class="cn-links"><a href="../pay/#demands" data-i18n="navDemands">Demands</a><a href="../pay/toolkit/" data-i18n="navToolkit">Toolkit</a><a href="../pay/endorse/" data-i18n="navEndorse">Endorse</a><a href="../pay/testify/" data-i18n="navTestify">Testify</a><a href="../pay/../dec2/" class="go" aria-current="page" data-i18n="navDec2">Dec 2 launch</a></div>
     <div class="lang" role="group" aria-label="Language / Idioma">
       <button type="button" data-lang="en" aria-pressed="true">English</button>
       <button type="button" data-lang="es" aria-pressed="false">Español</button>
@@ -277,7 +277,7 @@
         <label class="lbl" for="role" data-i18n="role">I am a…</label>
         <select id="role" name="role" required>
           <option value="" data-i18n="choose">Choose one</option>
-          <option value="Home-based child care provider" data-i18n="r1">Home-based child care provider</option>
+          <option value="Family child care (FCC) provider" data-i18n="r1">Family child care (FCC) provider</option>
           <option value="Center-based educator or staff" data-i18n="r2">Center-based educator or staff</option>
           <option value="Program director or owner" data-i18n="r3">Program director or owner</option>
           <option value="Parent or caregiver" data-i18n="r4">Parent or caregiver</option>
@@ -379,14 +379,14 @@
 
 <script>
 (function () {
-  // Where registrations are sent: paste your Google Apps Script web app URL here
-  // (it ends in /exec; see README.md). Leave empty ('') to preview without sending.
-  var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwmRCE6ZZ8YbofybIzp96qPEI_AJoCiXFlE5lxWwD5zN-S7LR2Ut9-WFf_JhK4mXqlQ/exec';
+  // Where registrations are sent: Airtable (Registrations, linked to the city's Dec 2 Event) through the
+  // popchildcare.org server. Leave empty ('') to preview without sending.
+  var SUBMIT_URL = '/api/dec2-register';
 
   var EVENT = { title: 'Happy Birthday, Shirley! Pay Our Providers campaign launch', start: '20261202T100000', end: '20261202T120000', tz: 'America/New_York' };
 
   var ES = {
-    navDemands: 'Demandas', navToolkit: 'Materiales', navEndorse: 'Respaldar', navDec2: 'Lanzamiento 2 dic',
+    navDemands: 'Demandas', navToolkit: 'Materiales', navEndorse: 'Respaldar', navTestify: 'Testificar', navDec2: 'Lanzamiento 2 dic',
     launch: 'Lanzamiento de campaña', h1: '¡Feliz cumpleaños, Shirley Chisholm!', tagline: 'Terminamos lo que Shirley empezó.',
     date: 'Miér., 2 de dic.', locNote: 'Regístrate para recibir los detalles del lugar.',
     hosted: 'Organizan',
@@ -395,7 +395,7 @@
     site: '¿Dónde vas a celebrar?', errSite: 'Por favor elige una ciudad.',
     first: 'Nombre', last: 'Apellido', optional: '(opcional)', phone: 'Teléfono celular', email: 'Correo electrónico',
     errName: 'Por favor escribe tu nombre.', errLast: 'Por favor escribe tu apellido.', errContact: 'Por favor agrega un teléfono o un correo para comunicarnos contigo.',
-    role: 'Soy…', choose: 'Elige una opción', r1: 'Proveedora de cuidado infantil en casa', r2: 'Educadora o personal de un centro', r3: 'Directora o dueña de programa',
+    role: 'Soy…', choose: 'Elige una opción', r1: 'Proveedora de cuidado infantil familiar (FCC)', r2: 'Educadora o personal de un centro', r3: 'Directora o dueña de programa',
     r4: 'Madre, padre o cuidador', r5: 'Simpatizante o aliado', r6: 'Funcionario electo o personal', r7: 'Prensa', other: 'Otro',
     errRole: 'Por favor elige una opción.', org: 'Organización o programa',
     zip: 'Tu código postal', errZip: 'Por favor escribe un código postal de 5 dígitos.',
@@ -501,8 +501,7 @@
     submitBtn.disabled = true; submitBtn.textContent = t('sending');
     errBox.classList.remove('show');
     var send = SUBMIT_URL
-      // Sent as plain text so Google accepts it without a CORS preflight.
-      ? fetch(SUBMIT_URL, { method: 'POST', body: JSON.stringify(payload) })
+      ? fetch(SUBMIT_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
           .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
           .then(function (j) { if (!j || j.ok !== true) throw new Error('Not saved'); })
       : new Promise(function (res) { setTimeout(res, 400); });
