@@ -41,7 +41,10 @@
   .where a { color: #fff; }
 
   .why { margin: 26px 0 0; }
-  .why p { margin: 0 0 14px; max-width: 44em; }
+  .why p { margin: 0 0 18px; max-width: 44em; line-height: 1.6; }
+  .demands { margin: 4px 0 22px; padding: 0 0 0 22px; max-width: 44em; font-size: clamp(17px, 2.4vw, 19px); }
+  .demands li { margin: 0 0 8px; padding-left: 4px; }
+  .demands li::marker { color: var(--coral); }
   .why .big { font-size: clamp(18px, 2.6vw, 21px); font-weight: 600; }
 
   h2.sec { margin: 34px 0 6px; padding-top: 22px; border-top: 2px solid var(--ink); font-weight: 800; font-size: clamp(22px, 4.4vw, 28px); line-height: 1.15; }
@@ -175,6 +178,11 @@
     <p class="big" data-i18n-html="why1">For child care providers every month is a crisis. Month after month, they are paid late and some are seeing their payments reversed with no explanation at all.</p>
     <p data-i18n-html="why2">Already child care providers are <b>paid only after they submit attendance</b> for the month. <b>Imagine an 8th grade teacher getting docked pay because students were out with the flu!</b> Years ago, child care providers were promised that the State would begin <b>paying in advance</b> and finally <b>based on enrollment, rather than attendance</b>. <u><i>None of this has happened.</i></u></p>
     <p data-i18n-html="why3">Now, the <b><u>city needs more child care providers</u> to meet demand for universal child care. Will they fix these problems first? Join us to testify -- demand that they do! </b>That's why this is part of our fight to Pay Our Providers. Pay justice is a lot of things. Provider pay is abysmally low and out of sync with what we pay other educators, which is why we're fighting for <b>$1.8 billion for a child care wage scale</b> and <b>$1.2 billion for CCAP</b>. But we can't have pay justice if people aren't even paid on time. We need wage justice, and people need to at least get paid on time.</p>
+    <ul class="demands">
+      <li data-i18n-html="dem1"><b>Pay providers</b></li>
+      <li data-i18n-html="dem2"><b>Pay based on enrollment</b></li>
+      <li data-i18n-html="dem3"><b>Hold agencies accountable</b></li>
+    </ul>
     <p data-i18n-html="why4">The people in charge need to hear from folks who are outraged about this, including providers, parents and families who might not know all the technicalities but know exactly what it means when a check doesn't come. Sign up to testify, and join us.</p>
   </section>
 
@@ -357,6 +365,7 @@
     why1: 'Las proveedoras de cuidado infantil en todo Nueva York están recibiendo sus pagos tarde, mes tras mes, y a algunas les están revirtiendo pagos sin ninguna explicación.',
     why2: 'Mientras tanto, el estado se comprometió a pagarles a las proveedoras por adelantado y según la inscripción, no la asistencia. No solo no están recibiendo eso, sino que les pagan tarde y les pagan muy poco. Todo el sistema ni siquiera está hecho para pagarle a la gente con regularidad, mucho menos a tiempo.',
     why3: 'Por eso esto es parte de nuestra lucha para Pay Our Providers. La justicia salarial es muchas cosas. El pago de las proveedoras es terriblemente bajo y no está a la par de lo que les pagamos a otros educadores, y por eso luchamos por <b>$1.8 mil millones para una escala salarial de cuidado infantil</b> y <b>$1.2 mil millones para CCAP</b>. Pero no puede haber justicia salarial si a la gente ni siquiera le pagan a tiempo. Necesitamos justicia salarial, y como mínimo, que a la gente le paguen a tiempo.',
+    dem1: '<b>Que les paguen a las proveedoras</b>', dem2: '<b>Que paguen según la inscripción</b>', dem3: '<b>Que las agencias rindan cuentas</b>',
     why4: 'Los que están a cargo tienen que escuchar a la gente indignada por esto, incluyendo proveedoras, padres y familias que tal vez no conocen todos los detalles técnicos pero saben exactamente lo que significa cuando un pago no llega. Inscríbete para testificar, y únete a nosotros.',
     howH: 'Cómo funciona',
     how1: '<b>Inscríbete con nosotros.</b> Dinos cómo quieres testificar, para ayudarte a prepararte y asegurarnos de que POP llegue unido.',
