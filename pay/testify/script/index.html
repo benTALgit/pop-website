@@ -81,6 +81,17 @@
   .fill:empty::before { content: attr(data-ph); color: #7A5A00; font-weight: 600; }
   .fill:focus { box-shadow: 0 0 0 3px var(--focus); }
   .fill.done { background: #DFF1EE; border-bottom: 2px solid var(--teal); }
+  .locate { margin: 16px 0 0; padding: 14px 16px 16px; background: var(--card); border-left: 5px solid var(--coral); max-width: 720px; }
+  .locate label { display: block; font-weight: 800; font-size: 16px; margin: 0 0 4px; }
+  .locate .hint { display: block; font-size: 14px; color: var(--ink-soft); margin: 0 0 10px; }
+  .locate .row { display: flex; gap: 8px; }
+  .locate input { flex: 1 1 auto; min-width: 0; font: inherit; font-size: 16px; padding: 10px 12px; min-height: 48px; color: var(--ink); background: #FFFFFF; border: 2px solid var(--line); border-radius: 0; }
+  .locate input:focus { outline: none; border-color: var(--focus); }
+  .locate .btn { flex: 0 0 auto; }
+  .locate .out { margin: 10px 0 0; font-size: 15.5px; }
+  .locate .out:empty { display: none; }
+  .locate .out.bad { color: var(--rose); font-weight: 600; }
+  .locate .out b { color: var(--ink); }
   .send { margin: 22px 0 0; padding: 16px 18px 18px; background: var(--card); border-top: 5px solid var(--teal); max-width: 720px; }
   .send h3 { margin: 0 0 4px; font-size: 18px; font-weight: 800; }
   .send p { margin: 0; color: var(--ink-soft); font-size: 15px; }
@@ -222,9 +233,16 @@
   </div>
   <p class="legend"><span data-i18n-html="lgBlank"><span class="blank">HIGHLIGHTED</span> tap and type your own</span><span data-i18n-html="lgOpt"><span class="optl">[In brackets]</span> use it if it fits you</span></p>
 
+  <form class="locate" id="locate" novalidate>
+    <label for="addr" data-i18n="locH">Find your Council district</label>
+    <span class="hint" data-i18n="locHint">Type your street address (home or program) and we'll fill in your district and neighborhood. A zip code alone can cover more than one district.</span>
+    <div class="row"><input type="text" id="addr" name="addr" autocomplete="street-address" placeholder="123 Main St, Brooklyn"><button type="submit" class="btn primary" id="locBtn" data-i18n="locBtn">Find</button></div>
+    <p class="out" id="locOut" aria-live="polite"></p>
+  </form>
+
   <section class="script-panel on" id="sc-provider" aria-label="Provider script">
     <div class="part"><h3 data-i18n="pv1h">Who you are</h3>
-      <p data-i18n-html="pv1">Good afternoon, Chair Thomas-Henry, Chair Gutiérrez and members of the Council. My name is <span class="blank">YOUR NAME</span>, and I'm a <span class="blank">family child care provider / child care center owner / teacher</span> in <span class="blank">NEIGHBORHOOD</span>, Council District <span class="blank">NUMBER</span>. I've been caring for children for <span class="blank">NUMBER</span> years, and right now I care for <span class="blank">NUMBER</span> children. I'm here with Providers Organized for Power, POP.</p></div>
+      <p data-i18n-html="pv1">Good afternoon, Chair Thomas-Henry, Chair Gutiérrez and members of the Council. My name is <span class="blank">YOUR NAME</span>, and I'm a <span class="blank">family child care provider / child care center owner / teacher</span> in <span class="blank" data-auto="hood">NEIGHBORHOOD</span>, Council District <span class="blank" data-auto="district">NUMBER</span>. I've been caring for children for <span class="blank">NUMBER</span> years, and right now I care for <span class="blank">NUMBER</span> children. I'm here with Providers Organized for Power, POP.</p></div>
     <div class="part"><h3 data-i18n="pv2h">What happened</h3>
       <p data-i18n-html="pv2">For providers like me, every month is a crisis. In <span class="blank">MONTH</span>, my payment came <span class="blank">NUMBER</span> weeks late. <span class="optl">[Since <span class="blank">DATE</span>, I've been paid late <span class="blank">NUMBER</span> times.]</span> <span class="optl">[In <span class="blank">MONTH</span>, $<span class="blank">AMOUNT</span> was taken back from my payment with no explanation.]</span></p></div>
     <div class="part"><h3 data-i18n="pv3h">What it did to you</h3>
@@ -239,7 +257,7 @@
 
   <section class="script-panel" id="sc-parent" aria-label="Parent script">
     <div class="part"><h3 data-i18n="pa1h">Who you are</h3>
-      <p data-i18n-html="pa1">Good afternoon, Chair Thomas-Henry, Chair Gutiérrez and members of the Council. My name is <span class="blank">YOUR NAME</span>, and I'm a parent in <span class="blank">NEIGHBORHOOD</span>, Council District <span class="blank">NUMBER</span>. My child goes to <span class="blank">PROGRAM OR PROVIDER'S NAME</span>. I'm here with Providers Organized for Power, POP.</p></div>
+      <p data-i18n-html="pa1">Good afternoon, Chair Thomas-Henry, Chair Gutiérrez and members of the Council. My name is <span class="blank">YOUR NAME</span>, and I'm a parent in <span class="blank" data-auto="hood">NEIGHBORHOOD</span>, Council District <span class="blank" data-auto="district">NUMBER</span>. My child goes to <span class="blank">PROGRAM OR PROVIDER'S NAME</span>. I'm here with Providers Organized for Power, POP.</p></div>
     <div class="part"><h3 data-i18n="pa2h">What happened</h3>
       <p data-i18n-html="pa2">The people who care for my child are paid late, month after month. <span class="optl">[In <span class="blank">MONTH</span>, our provider went <span class="blank">NUMBER</span> weeks without being paid.]</span> <span class="optl">[Payments to our provider have been taken back with no explanation.]</span></p></div>
     <div class="part"><h3 data-i18n="pa3h">What it did to you</h3>
@@ -321,7 +339,7 @@
     tgProv: 'Soy proveedora', tgPar: 'Soy madre, padre o familiar',
  lgOpt: '<span class="optl">[Entre corchetes]</span> úsalo si va contigo',
     pv1h: 'Quién eres',
-    pv1: 'Buenas tardes, presidenta Thomas-Henry, presidenta Gutiérrez y miembros del Concejo. Me llamo <span class="blank">TU NOMBRE</span>, y soy <span class="blank">proveedora de cuidado infantil familiar / dueña de un centro de cuidado infantil / maestra</span> en <span class="blank">VECINDARIO</span>, Distrito del Concejo <span class="blank">NÚMERO</span>. Llevo <span class="blank">NÚMERO</span> años cuidando niños, y ahora cuido a <span class="blank">NÚMERO</span> niños. Estoy aquí con Providers Organized for Power, POP.',
+    pv1: 'Buenas tardes, presidenta Thomas-Henry, presidenta Gutiérrez y miembros del Concejo. Me llamo <span class="blank">TU NOMBRE</span>, y soy <span class="blank">proveedora de cuidado infantil familiar / dueña de un centro de cuidado infantil / maestra</span> en <span class="blank" data-auto="hood">VECINDARIO</span>, Distrito del Concejo <span class="blank" data-auto="district">NÚMERO</span>. Llevo <span class="blank">NÚMERO</span> años cuidando niños, y ahora cuido a <span class="blank">NÚMERO</span> niños. Estoy aquí con Providers Organized for Power, POP.',
     pv2h: 'Qué pasó',
     pv2: 'Para proveedoras como yo, cada mes es una crisis. En <span class="blank">MES</span>, mi pago llegó <span class="blank">NÚMERO</span> semanas tarde. <span class="optl">[Desde <span class="blank">FECHA</span>, me han pagado tarde <span class="blank">NÚMERO</span> veces.]</span> <span class="optl">[En <span class="blank">MES</span>, me quitaron $<span class="blank">CANTIDAD</span> de mi pago sin ninguna explicación.]</span>',
     pv3h: 'Lo que te causó',
@@ -333,7 +351,7 @@
     ask1: 'Les paguen a las proveedoras por adelantado', ask2: 'Paguen según la inscripción', ask3: 'Hagan que las agencias y las empresas contratistas rindan cuentas',
     pv6: 'La justicia salarial significa salarios dignos, pero empieza con que nos paguen a tiempo. Gracias.',
     pa1h: 'Quién eres',
-    pa1: 'Buenas tardes, presidenta Thomas-Henry, presidenta Gutiérrez y miembros del Concejo. Me llamo <span class="blank">TU NOMBRE</span>, y soy madre o padre en <span class="blank">VECINDARIO</span>, Distrito del Concejo <span class="blank">NÚMERO</span>. Mi hijo o hija va a <span class="blank">PROGRAMA O NOMBRE DE LA PROVEEDORA</span>. Estoy aquí con Providers Organized for Power, POP.',
+    pa1: 'Buenas tardes, presidenta Thomas-Henry, presidenta Gutiérrez y miembros del Concejo. Me llamo <span class="blank">TU NOMBRE</span>, y soy madre o padre en <span class="blank" data-auto="hood">VECINDARIO</span>, Distrito del Concejo <span class="blank" data-auto="district">NÚMERO</span>. Mi hijo o hija va a <span class="blank">PROGRAMA O NOMBRE DE LA PROVEEDORA</span>. Estoy aquí con Providers Organized for Power, POP.',
     pa2h: 'Qué pasó',
     pa2: 'A las personas que cuidan a mi hijo les pagan tarde, mes tras mes. <span class="optl">[En <span class="blank">MES</span>, nuestra proveedora pasó <span class="blank">NÚMERO</span> semanas sin que le pagaran.]</span> <span class="optl">[A nuestra proveedora le han quitado pagos sin ninguna explicación.]</span>',
     pa3h: 'Lo que te causó',
@@ -343,6 +361,8 @@
     pa5h: 'Lo que quieres',
     pa5: 'Necesito que mi proveedora esté ahí, y no puede estar ahí si no le pagan. La Ciudad necesita más proveedoras de cuidado infantil para cubrir la demanda del cuidado infantil universal. Primero arreglen estos problemas. Le pido al Concejo que:',
     pa6: 'La justicia salarial significa salarios dignos, pero empieza con que les paguen a tiempo. Gracias.',
+    locH: 'Encuentra tu distrito del Concejo', locHint: 'Escribe tu dirección (de tu casa o de tu programa) y llenamos tu distrito y tu vecindario. Un código postal solo puede cubrir más de un distrito.', locBtn: 'Buscar',
+    locWait: 'Buscando…', locNone: 'No encontramos esa dirección. Intenta agregar el condado (borough) o el código postal.', locErr: 'La búsqueda no está funcionando ahora. Puedes encontrar tu distrito en council.nyc.gov/districts.', locFound: 'Distrito del Concejo {d}{h}. Tu concejal es {m}.', locZip: 'Parece que pusiste solo el código postal, así que esto es un cálculo aproximado. Agrega tu dirección para estar seguro.',
     copyScript: 'Copiar', copied: 'Copiado', print: 'Imprimir',
     lgBlank: '<span class="blank">RESALTADO</span> tócalo y escribe lo tuyo',
     sendH: 'Mándatelo', sendP: 'Llena tus espacios arriba y luego mándate tu testimonio por correo o por mensaje de texto, para tenerlo el 29 de octubre. Lo que escribes se queda en tu teléfono o computadora. No se le manda nada a POP.',
@@ -357,7 +377,7 @@
     backSign: 'Inscríbete para testificar',
     footer: 'Providers Organized for Power (POP) es una coalición de proveedoras de cuidado infantil, padres, sindicatos y organizaciones comunitarias en todo el estado de Nueva York.'
   };
-  var EN = { copied: 'Copied', mailSubj: 'My testimony for Oct 29', clearAsk: 'Clear everything you typed?' };
+  var EN = { locWait: 'Looking up…', locNone: "We couldn't find that address. Try adding the borough or zip code.", locErr: "The lookup isn't working right now. You can find your district at council.nyc.gov/districts.", locFound: 'Council District {d}{h}. Your Council Member is {m}.', locZip: 'That looks like a zip code only, so this is a best guess. Add your street address to be sure.', copied: 'Copied', mailSubj: 'My testimony for Oct 29', clearAsk: 'Clear everything you typed?' };
   var EDIT = false; // the editor copy turns this on and leaves the blanks as plain text
   var lang = 'en';
 
@@ -405,6 +425,8 @@
         b.setAttribute('aria-label', b.textContent);
         b.setAttribute('spellcheck', 'true');
         b.dataset.id = id;
+        var auto = b.getAttribute('data-auto');
+        if (!vals[id] && auto && vals['auto:' + auto]) vals[id] = vals['auto:' + auto];
         b.textContent = vals[id] || '';
         b.classList.toggle('done', !!vals[id]);
       });
@@ -425,6 +447,45 @@
     e.preventDefault();
     var txt = (e.clipboardData || window.clipboardData).getData('text').replace(/\s+/g, ' ');
     document.execCommand('insertText', false, txt);
+  });
+
+  // Council district lookup: the City's address search (NYC Planning GeoSearch) for the point and
+  // neighborhood, then NYC Open Data's Council district map for the district. Nothing goes to POP.
+  var MEMBERS = ['', 'Christopher Marte', 'Harvey Epstein', 'Carl Wilson', 'Virginia Maloney', 'Julie Menin', 'Gale A. Brewer', 'Shaun Abreu', 'Elsie Encarnacion', 'Yusef Salaam', 'Carmen De La Rosa',
+    'Eric Dinowitz', 'Kevin C. Riley', 'Shirley Aldebol', 'Pierina Ana Sanchez', 'Oswald Feliz', 'Althea Stevens', 'Justin Sanchez', 'Amanda Farías', 'Vickie Paladino', 'Sandra Ung',
+    'Shanel Thomas-Henry', 'Tiffany Cabán', 'Linda Lee', 'James F. Gennaro', 'Shekar Krishnan', 'Julie Won', 'Nantasha Williams', 'Ty Hankerson', 'Lynn Schulman', 'Phil Wong',
+    'Selvena N. Brooks-Powers', 'Joann Ariola', 'Lincoln Restler', 'Jennifer Gutiérrez', 'Crystal Hudson', 'Chi Ossé', 'Sandy Nurse', 'Alexa Avilés', 'Shahana Hanif', 'Rita C. Joseph',
+    'Darlene Mealy', 'Chris Banks', 'Susan Zhuang', 'Simcha Felder', 'Farah N. Louis', 'Mercedes Narcisse', 'Kayla Santosuosso', 'Inna Vernikov', 'Kamillah M. Hanks', 'David Carr', 'Frank Morano'];
+  var locForm = document.getElementById('locate'), locOut = document.getElementById('locOut');
+  function locSay(msg, bad) { locOut.textContent = msg; locOut.classList.toggle('bad', !!bad); }
+  function getJSON(url) { return fetch(url).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }); }
+  function fillAuto(name, v) {
+    vals['auto:' + name] = v;
+    document.querySelectorAll('.fill[data-auto="' + name + '"]').forEach(function (f) {
+      f.textContent = v; f.classList.add('done'); vals[f.dataset.id] = v;
+    });
+  }
+  locForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (EDIT) return;
+    var q = document.getElementById('addr').value.trim(); if (!q) return;
+    var zipOnly = /^\d{5}$/.test(q);
+    locSay(t('locWait'));
+    getJSON('https://geosearch.planninglabs.nyc/v2/search?size=1&text=' + encodeURIComponent(q)).then(function (g) {
+      var f = g && g.features && g.features[0];
+      if (!f) { locSay(t('locNone'), true); return; }
+      var c = f.geometry.coordinates, pr = f.properties || {};
+      var where = "intersects(the_geom,'POINT (" + c[0] + ' ' + c[1] + ")')";
+      return getJSON('https://data.cityofnewyork.us/resource/872g-cjhh.json?$select=coundist&$where=' + encodeURIComponent(where)).then(function (rows) {
+        var d = rows && rows[0] && parseInt(rows[0].coundist, 10);
+        if (!d) { locSay(t('locNone'), true); return; }
+        fillAuto('district', String(d));
+        if (pr.neighbourhood) fillAuto('hood', pr.neighbourhood);
+        keep();
+        var msg = t('locFound').replace('{d}', d).replace('{h}', pr.neighbourhood ? ', ' + pr.neighbourhood : '').replace('{m}', MEMBERS[d] || '');
+        locSay(zipOnly || !pr.housenumber ? msg + ' ' + t('locZip') : msg);
+      });
+    }).catch(function () { locSay(t('locErr'), true); });
   });
 
   // The script as plain text. Unfilled blanks stay in [BRACKETS]; optional sentences
