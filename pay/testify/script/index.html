@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- popny.org is the short address: send visitors to the same page on popchildcare.org, the main site. -->
+<script>if (/(^|\.)popny\.org$/.test(location.hostname)) location.replace('https://popchildcare.org' + location.pathname + location.search + location.hash);</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What to Say Oct 29: Testimony Guide</title>
+<meta name="description" content="Talking points and a two-minute script for the October 29 City Council hearing on the business of child care, for providers and for parents.">
+<meta property="og:title" content="What to Say Oct 29: Testimony Guide">
+<meta property="og:description" content="Talking points and a fill-in-the-blank script for providers and parents testifying on October 29.">
+<meta property="og:image" content="https://popny.org/pay/toolkit/social/pop-share.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../site-nav.css">
+<link rel="stylesheet" href="../../pay.css">
+<style>
+  /* Same white page as the sign-up, light even in dark mode. */
+  :root, :root[data-theme="dark"] {
+    color-scheme: light;
+    --paper: #FFFFFF; --ink: #1F1A1A; --ink-soft: #4A4040; --line: #D5DBDE;
+    --coral: #D9472B; --coral-deep: #B8361C; --teal: #1F7A74;
+    --card: #F3F5F6; --chip: #EDF1F2; --focus: #1F7A74; --rose: #9E2F4E; --blank: #FFE9A8;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    color-scheme: light;
+    --paper: #FFFFFF; --ink: #1F1A1A; --ink-soft: #4A4040; --line: #D5DBDE;
+    --coral: #D9472B; --coral-deep: #B8361C; --teal: #1F7A74;
+    --card: #F3F5F6; --chip: #EDF1F2; --focus: #1F7A74; --rose: #9E2F4E; --blank: #FFE9A8;
+  } }
+  .site-nav, .site-nav .sn-drop { background: #FFFFFF; }
+  .hero.short img.rally { object-position: center 40%; }
+
+  .lang { display: flex; gap: 4px; }
+  .lang button { font: 800 13px/1 'Libre Franklin', sans-serif; letter-spacing: .08em; min-height: 36px; padding: 0 12px; border: 0; background: transparent; box-shadow: inset 0 0 0 1px #D8C9C5; color: var(--ink-soft); cursor: pointer; }
+  .lang button[aria-pressed=true] { background: #1F1A1A; color: #FFFFFF; }
+
+  .when { margin: 22px 0 0; background: var(--coral-deep); color: #fff; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding: 14px 18px; font-weight: 800; font-size: clamp(16px, 3.2vw, 21px); }
+  .jump { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 0; }
+
+  h2.sec { margin: 38px 0 6px; padding-top: 22px; border-top: 2px solid var(--ink); font-weight: 800; font-size: clamp(22px, 4.4vw, 28px); line-height: 1.15; scroll-margin-top: 16px; }
+  .sec-note { margin: 0 0 16px; color: var(--ink-soft); max-width: 44em; }
+  .body p { max-width: 44em; line-height: 1.6; }
+
+  .facts { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .facts li { background: var(--card); padding: 12px 14px; border-left: 5px solid var(--coral); font-size: 15.5px; line-height: 1.45; }
+  .facts li.wide { grid-column: 1 / -1; border-left-color: var(--ink); background: var(--chip); }
+  .facts a { color: var(--ink); font-weight: 600; }
+
+  .points { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 6px 0 0; }
+  .point { background: var(--card); border-top: 5px solid var(--coral); padding: 14px 16px 16px; }
+  .point h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.25; font-weight: 800; }
+  .point ul { margin: 0; padding: 0 0 0 18px; }
+  .point li { margin: 0 0 6px; line-height: 1.45; }
+  .point.wide { grid-column: 1 / -1; }
+  .point.ask { grid-column: 1 / -1; background: #1F1A1A; color: #FFFFFF; border-top-color: var(--coral); }
+  .point.ask li::marker { color: var(--coral); }
+  .point.ask .dem { font-size: clamp(17px, 2.4vw, 19px); }
+
+  /* Provider / parent switch */
+  .switch { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 14px 0 0; max-width: 620px; border: 2px solid var(--ink); }
+  .switch button { font: 800 16px/1.2 'Libre Franklin', sans-serif; min-height: 56px; padding: 10px 14px; border: 0; background: #FFFFFF; color: var(--ink); cursor: pointer; }
+  .switch button + button { border-left: 2px solid var(--ink); }
+  .switch button[aria-pressed=true] { background: var(--coral-deep); color: #FFFFFF; }
+  .switch button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  .script-panel { display: none; margin: 18px 0 0; max-width: 720px; }
+  .script-panel.on { display: block; }
+  .part { margin: 0; padding: 14px 0 16px; border-bottom: 1px solid var(--line); }
+  .part:first-of-type { border-top: 2px solid var(--ink); }
+  .part h3 { margin: 0 0 6px; font-size: 12.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--coral-deep); }
+  .part p { margin: 0 0 8px; font-size: 18px; line-height: 1.65; }
+  .part ol { margin: 4px 0 8px; padding-left: 26px; font-size: 18px; line-height: 1.55; font-weight: 600; }
+  .blank { background: var(--blank); padding: 1px 5px; border-bottom: 2px dashed #B98A00; font-weight: 600; white-space: normal; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .optl { color: var(--ink-soft); }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 12px 0 0; font-size: 14px; color: var(--ink-soft); }
+  .copy-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 16px 0 0; }
+  /* Fill-in blanks: tap a highlighted blank and type. */
+  .fill { display: inline-block; min-width: 4.5em; max-width: 100%; vertical-align: baseline; background: var(--blank); padding: 0 6px; border-bottom: 2px dashed #B98A00; font-weight: 600; color: var(--ink); outline: none; cursor: text; }
+  .fill:empty::before { content: attr(data-ph); color: #7A5A00; font-weight: 600; }
+  .fill:focus { box-shadow: 0 0 0 3px var(--focus); }
+  .fill.done { background: #DFF1EE; border-bottom: 2px solid var(--teal); }
+  .send { margin: 22px 0 0; padding: 16px 18px 18px; background: var(--card); border-top: 5px solid var(--teal); max-width: 720px; }
+  .send h3 { margin: 0 0 4px; font-size: 18px; font-weight: 800; }
+  .send p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+  .send .copy-row { margin-top: 12px; }
+  .linkish { font: 600 14px/1 'Libre Franklin', sans-serif; background: none; border: 0; padding: 8px 0; color: var(--ink-soft); text-decoration: underline; cursor: pointer; }
+  .copybtn.ok { border-color: var(--teal); color: var(--teal); }
+
+  .tips { margin: 14px 0 0; padding: 0 0 0 20px; max-width: 44em; }
+  .tips li { margin: 0 0 10px; line-height: 1.5; }
+  .callout { margin: 0 0 14px; padding: 14px 16px; background: var(--card); border-left: 5px solid var(--teal); max-width: 44em; line-height: 1.6; }
+  .callout a { color: var(--ink); font-weight: 600; }
+  .back { margin: 30px 0 0; }
+
+  @media (max-width: 640px) {
+    .facts, .points { grid-template-columns: minmax(0, 1fr); }
+    .hero { display: none; }
+    .when { margin-top: 16px; padding: 10px 14px; font-size: 17px; justify-content: flex-start; }
+    .part p, .part ol { font-size: 17px; }
+    .switch button { font-size: 15px; }
+  }
+  @media print {
+    .site-nav, .camp-nav, .hero, .jump, .switch, .copy-row, .back, footer { display: none !important; }
+    .blank { background: none; border-bottom: 1px solid #000; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <nav class="sn-in" aria-label="POP">
+    <a class="sn-logo" href="https://popchildcare.org/"><img src="../../assets/pop-logo.svg" alt="Providers Organized for Power home" width="164" height="76"></a>
+    <div class="sn-links"><a href="https://popchildcare.org/campaign/" aria-current="page">Campaign</a><a href="https://popchildcare.org/events">Events</a><a href="https://popchildcare.org/press">Press</a><a class="sn-join" href="../../#join">Join</a></div>
+    <details class="sn-menu">
+      <summary aria-label="Menu"><svg class="bars" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="x" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+      <div class="sn-drop"><a href="https://popchildcare.org/campaign/" aria-current="page">Campaign</a><a href="https://popchildcare.org/events">Events</a><a href="https://popchildcare.org/press">Press</a><a class="sn-join" href="../../#join">Join the Movement</a></div>
+    </details>
+  </nav>
+</header>
+<nav class="camp-nav" aria-label="Pay Our Providers">
+  <div class="cn-in">
+    <a class="cn-name" href="../../">Pay Our Providers</a>
+    <div class="cn-links"><a href="../../#demands" data-i18n="navDemands">Demands</a><a href="../../toolkit/" data-i18n="navToolkit">Toolkit</a><a href="../../endorse/" data-i18n="navEndorse">Endorse</a><a href="../" aria-current="page" data-i18n="navTestify">Testify</a><a href="../../../dec2/" class="go" data-i18n="navDec2">Dec 2 launch</a></div>
+    <div class="lang" role="group" aria-label="Language / Idioma">
+      <button type="button" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" data-lang="es" aria-pressed="false">Español</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero short">
+  <img class="rally" src="../../assets/testify-hero.jpg" alt="POP and Las Doñas members cheering behind their banners">
+  <div class="tags">
+    <div class="tag-main display">PAY OUR PROVIDERS</div>
+    <div class="tag-sub" data-i18n="tagSub">Testimony guide</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <h1 class="display" data-i18n-html="h1">What to say on Oct 29. <span class="hl">Two minutes, your story.</span></h1>
+    <p class="lede" data-i18n-html="lede">Talking points and a fill-in-the-blank script for the City Council hearing on <b>the business of child care</b>. Pick the script for providers or for parents, fill in your blanks and practice it once out loud.</p>
+  </section>
+
+  <div class="when display">
+    <span data-i18n="date">Thu, Oct 29</span>
+    <span>1 PM</span>
+    <span data-i18n="mode">In person or Zoom</span>
+  </div>
+  <div class="jump">
+    <a class="btn primary" href="#script" data-i18n="jumpScript">Go to the script</a>
+    <a class="btn" href="../#signup" data-i18n="jumpSign">Sign up to testify</a>
+  </div>
+
+  <h2 class="sec display" id="before" data-i18n="prepH">Before you testify</h2>
+  <div class="body"><p data-i18n-html="prepP">You get <b>two minutes</b>, so pick one or two stories and tell them well. You don't need to know the policy details -- you know what it means when a payment doesn't come.</p></div>
+  <ul class="facts">
+    <li data-i18n-html="p1"><b>When:</b> Thursday, October 29, 1 PM, City Council Subcommittee on Early Childhood Education with the Committee on Small Business, "Oversight - The Business of Child Care"</li>
+    <li data-i18n-html="p2"><b>Where:</b> 250 Broadway, 8th Floor, Hearing Room 1, Manhattan, or on Zoom</li>
+    <li data-i18n-html="p3"><b>Register first:</b> <a href="https://council.nyc.gov/testify/">council.nyc.gov/testify</a>. On Zoom you have to register ahead. In person you can also sign up with the Sergeant-at-Arms on the day.</li>
+    <li data-i18n-html="p4"><b>Need interpretation?</b> Email <a href="mailto:translationservice@council.nyc.gov">translationservice@council.nyc.gov</a> by Monday, October 26.</li>
+    <li data-i18n-html="p5"><b>Can't speak?</b> Send <a href="#written">written testimony</a> up to 72 hours after the hearing.</li>
+    <li data-i18n-html="p6"><b>Bring your receipts:</b> payment dates, letters, screenshots, anything that shows how late, how often and how much.</li>
+    <li class="wide" data-i18n-html="p7">Everything you say or send becomes part of the public record.</li>
+  </ul>
+
+  <h2 class="sec display" id="points" data-i18n="tpH">Talking points</h2>
+  <p class="sec-note" data-i18n="tpNote">Use the ones that match your story. You don't need all of them.</p>
+  <div class="points">
+    <div class="point">
+      <h3 data-i18n="tp1h">For many providers, every month is a crisis.</h3>
+      <ul>
+        <li data-i18n-html="tp1a">Month after month, providers are paid late, and some see payments reversed with no explanation at all.</li>
+        <li data-i18n-html="tp1b">Late payments, unexplained reversals and system failures mean providers cover payroll, rent and food out of their own pockets, borrow, or go without their own pay to keep their doors open.</li>
+      </ul>
+    </div>
+    <div class="point">
+      <h3 data-i18n="tp2h">We're paid only after we submit attendance.</h3>
+      <ul>
+        <li data-i18n-html="tp2a">Providers are paid only after they submit attendance for the month.</li>
+        <li data-i18n-html="tp2b">Imagine an 8th grade teacher getting docked pay because students were out with the flu. That's what attendance-based pay does to us.</li>
+      </ul>
+    </div>
+    <div class="point">
+      <h3 data-i18n="tp3h">The State made us a promise. None of it has happened.</h3>
+      <ul>
+        <li data-i18n-html="tp3a">Years ago, providers were promised the State would begin paying in advance, and finally based on enrollment, rather than attendance.</li>
+        <li data-i18n-html="tp3b">None of this has happened.</li>
+      </ul>
+    </div>
+    <div class="point">
+      <h3 data-i18n="tp4h">The City needs more of us -- fix this first.</h3>
+      <ul>
+        <li data-i18n-html="tp4a">The City needs more child care providers to meet demand for universal child care.</li>
+        <li data-i18n-html="tp4b">It won't get them if the providers we have now can't count on getting paid. Fix these problems before more providers are affected.</li>
+      </ul>
+    </div>
+    <div class="point ask">
+      <h3 data-i18n="tp5h">What we're demanding:</h3>
+      <ul>
+        <li class="dem" data-i18n-html="dem1"><b>Pay providers in advance</b></li>
+        <li class="dem" data-i18n-html="dem2"><b>Pay based on enrollment</b></li>
+        <li class="dem" data-i18n-html="dem3"><b>Hold agencies and third-party vendors accountable</b> -- ACS is the City agency that runs the payments and the companies it contracts to process them</li>
+      </ul>
+    </div>
+    <div class="point wide">
+      <h3 data-i18n="tp6h">This is about pay justice.</h3>
+      <ul>
+        <li data-i18n-html="tp6a">Our campaign to Pay Our Providers is about pay justice. Pay justice means thriving wages -- but that's not all.</li>
+        <li data-i18n-html="tp6b">We need the basics of on-time payment and functional payment systems too. The New York City Council must deliver on these promises.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sec display" id="script" data-i18n="scH">Two-minute script</h2>
+  <p class="sec-note" data-i18n="scNote">Fill in the blanks and practice it out loud once with a timer. About 250 words takes two minutes.</p>
+  <div class="switch" role="group" aria-label="Script for">
+    <button type="button" data-who="provider" aria-pressed="true" aria-controls="sc-provider" data-i18n="tgProv">I'm a provider</button>
+    <button type="button" data-who="parent" aria-pressed="false" aria-controls="sc-parent" data-i18n="tgPar">I'm a parent or family member</button>
+  </div>
+  <p class="legend"><span data-i18n-html="lgBlank"><span class="blank">HIGHLIGHTED</span> tap and type your own</span><span data-i18n-html="lgOpt"><span class="optl">[In brackets]</span> use it if it fits you</span></p>
+
+  <section class="script-panel on" id="sc-provider" aria-label="Provider script">
+    <div class="part"><h3 data-i18n="pv1h">Who you are</h3>
+      <p data-i18n-html="pv1">Good afternoon, Chair <span class="blank">CHAIR'S NAME</span> and members of the Council. My name is <span class="blank">YOUR NAME</span>, and I'm a <span class="blank">family child care provider / child care center owner / teacher</span> in <span class="blank">NEIGHBORHOOD</span>, Council District <span class="blank">NUMBER</span>. I've been caring for children for <span class="blank">NUMBER</span> years, and right now I care for <span class="blank">NUMBER</span> children. I'm here with Providers Organized for Power, POP.</p></div>
+    <div class="part"><h3 data-i18n="pv2h">What happened</h3>
+      <p data-i18n-html="pv2">For providers like me, every month is a crisis. In <span class="blank">MONTH</span>, my payment came <span class="blank">NUMBER</span> weeks late. <span class="optl">[Since <span class="blank">DATE</span>, I've been paid late <span class="blank">NUMBER</span> times.]</span> <span class="optl">[In <span class="blank">MONTH</span>, $<span class="blank">AMOUNT</span> was taken back from my payment with no explanation.]</span></p></div>
+    <div class="part"><h3 data-i18n="pv3h">What it did to you</h3>
+      <p data-i18n-html="pv3">When the money doesn't come, I still have to pay <span class="blank">rent / my assistant / food for the children / my own bills</span>. To keep my doors open, I had to <span class="blank">borrow from WHO / put $AMOUNT on a credit card / skip my own pay / WHAT YOU DID</span>. <span class="blank">One sentence on what it meant for you, your family or the families you serve.</span></p></div>
+    <div class="part"><h3 data-i18n="pv4h">Why it keeps happening</h3>
+      <p data-i18n-html="pv4">We're paid only after we submit attendance for the month. Imagine an 8th grade teacher getting docked pay because students were out with the flu. Years ago we were promised the State would pay us in advance and based on enrollment, not attendance. None of this has happened.</p></div>
+    <div class="part"><h3 data-i18n="pv5h">What you want</h3>
+      <p data-i18n-html="pv5">The City needs more child care providers to meet demand for universal child care. Fix these problems first. I'm asking the Council to:</p>
+      <ol><li data-i18n="ask1">Pay providers in advance</li><li data-i18n="ask2">Pay based on enrollment</li><li data-i18n="ask3">Hold agencies and third-party vendors accountable</li></ol>
+      <p data-i18n-html="pv6">Pay justice means thriving wages, but it starts with getting paid on time. Thank you.</p></div>
+  </section>
+
+  <section class="script-panel" id="sc-parent" aria-label="Parent script">
+    <div class="part"><h3 data-i18n="pa1h">Who you are</h3>
+      <p data-i18n-html="pa1">Good afternoon, Chair <span class="blank">CHAIR'S NAME</span> and members of the Council. My name is <span class="blank">YOUR NAME</span>, and I'm a parent in <span class="blank">NEIGHBORHOOD</span>, Council District <span class="blank">NUMBER</span>. My child goes to <span class="blank">PROGRAM OR PROVIDER'S NAME</span>. I'm here with Providers Organized for Power, POP.</p></div>
+    <div class="part"><h3 data-i18n="pa2h">What happened</h3>
+      <p data-i18n-html="pa2">The people who care for my child are paid late, month after month. <span class="optl">[In <span class="blank">MONTH</span>, our provider went <span class="blank">NUMBER</span> weeks without being paid.]</span> <span class="optl">[Payments to our provider have been taken back with no explanation.]</span></p></div>
+    <div class="part"><h3 data-i18n="pa3h">What it did to you</h3>
+      <p data-i18n-html="pa3">When my provider isn't paid on time, <span class="blank">what you've seen: closures, staff leaving, the provider struggling, worrying about losing care</span>. <span class="blank">One sentence on what it meant for you and your family.</span></p></div>
+    <div class="part"><h3 data-i18n="pa4h">Why it keeps happening</h3>
+      <p data-i18n-html="pa4">Providers are paid only after they submit attendance for the month. Imagine an 8th grade teacher getting docked pay because students were out with the flu. Years ago providers were promised the State would pay them in advance and based on enrollment, not attendance. None of this has happened.</p></div>
+    <div class="part"><h3 data-i18n="pa5h">What you want</h3>
+      <p data-i18n-html="pa5">I need my provider to be there, and they can't be there if they aren't paid. The City needs more child care providers to meet demand for universal child care. Fix these problems first. I'm asking the Council to:</p>
+      <ol><li data-i18n="ask1">Pay providers in advance</li><li data-i18n="ask2">Pay based on enrollment</li><li data-i18n="ask3">Hold agencies and third-party vendors accountable</li></ol>
+      <p data-i18n-html="pa6">Pay justice means thriving wages, but it starts with getting paid on time. Thank you.</p></div>
+  </section>
+
+  <div class="send">
+    <h3 data-i18n="sendH">Send it to yourself</h3>
+    <p data-i18n="sendP">Fill in your blanks above, then email or text yourself your testimony so you have it on Oct 29. What you type stays on your phone or computer. Nothing is sent to POP.</p>
+    <div class="copy-row">
+      <button type="button" class="btn primary" id="emailScript" data-i18n="emailMe">Email it to me</button>
+      <button type="button" class="btn" id="textScript" data-i18n="textMe">Text it to me</button>
+      <button type="button" class="btn copybtn" id="copyScript" data-i18n="copyScript">Copy</button>
+      <button type="button" class="btn" id="printScript" data-i18n="print">Print</button>
+    </div>
+    <button type="button" class="linkish" id="clearScript" data-i18n="clearAll">Clear my blanks</button>
+  </div>
+
+  <h2 class="sec display" id="written" data-i18n="wrH">Written testimony and tips</h2>
+  <div class="body"><p data-i18n-html="wr1">Written testimony can be longer than two minutes, so use the same script and add the details: dates, amounts, copies of letters. Put your name, the hearing date and "Oversight - The Business of Child Care" at the top.</p></div>
+  <p class="callout" data-i18n-html="wr2"><b>Where to send it:</b> the Council takes written testimony only through its online form, <a href="https://council.nyc.gov/testify/">council.nyc.gov/testify</a>. Under "How will you be testifying?" choose <b>Submitting written testimony</b>, pick the Oct 29 hearing, and upload your file (Word or PDF, up to 10 MB). The deadline is 72 hours after the hearing ends, so send it by Sunday, November 1 at the latest (earlier is safer, since the end time isn't fixed). Questions about the hearing go to <a href="mailto:hearings@council.nyc.gov">hearings@council.nyc.gov</a>.</p>
+  <ul class="tips">
+    <li data-i18n-html="t1"><b>Speak from your own life.</b> Your story is the evidence. The numbers and dates make it hard to ignore.</li>
+    <li data-i18n-html="t2"><b>Say it plainly.</b> Talk like you're telling a neighbor, not reading a report.</li>
+    <li data-i18n-html="t3"><b>End with the ask.</b> The three demands are what we want Council members to remember.</li>
+  </ul>
+
+  <p class="back"><a class="btn primary" href="../#signup" data-i18n="backSign">Sign up to testify</a></p>
+
+  <footer>
+    <p data-i18n="footer">Providers Organized for Power (POP) is a coalition of child care providers, parents, unions and community organizations across New York State.</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var ES = {
+    navDemands: 'Demandas', navToolkit: 'Materiales', navEndorse: 'Respaldar', navTestify: 'Testificar', navDec2: 'Lanzamiento 2 dic',
+    tagSub: 'Guía para testificar',
+    h1: 'Qué decir el 29 de octubre. <span class="hl">Dos minutos, tu historia.</span>',
+    lede: 'Puntos clave y un guion para llenar para la audiencia del Concejo Municipal sobre <b>el negocio del cuidado infantil</b>. Escoge el guion para proveedoras o para padres, llena tus espacios y practícalo una vez en voz alta.',
+    date: 'Jue, 29 oct', mode: 'En persona o por Zoom',
+    jumpScript: 'Ir al guion', jumpSign: 'Inscríbete para testificar',
+    prepH: 'Antes de testificar',
+    prepP: 'Tienes <b>dos minutos</b>, así que escoge una o dos historias y cuéntalas bien. No necesitas saber los detalles de la política -- tú sabes lo que significa cuando un pago no llega.',
+    p1: '<b>Cuándo:</b> jueves 29 de octubre, 1 PM, Subcomité de Educación de la Primera Infancia del Concejo Municipal junto con el Comité de Pequeñas Empresas, "Oversight - The Business of Child Care"',
+    p2: '<b>Dónde:</b> 250 Broadway, piso 8, Sala de Audiencias 1, Manhattan, o por Zoom',
+    p3: '<b>Regístrate primero:</b> <a href="https://council.nyc.gov/testify/">council.nyc.gov/testify</a>. Por Zoom tienes que registrarte antes. En persona también te puedes inscribir el mismo día con el Sargento de Armas.',
+    p4: '<b>¿Necesitas interpretación?</b> Escribe a <a href="mailto:translationservice@council.nyc.gov">translationservice@council.nyc.gov</a> a más tardar el lunes 26 de octubre.',
+    p5: '<b>¿No puedes hablar?</b> Manda tu <a href="#written">testimonio por escrito</a> hasta 72 horas después de la audiencia.',
+    p6: '<b>Trae tus comprobantes:</b> fechas de pago, cartas, capturas de pantalla, cualquier cosa que muestre qué tan tarde, qué tan seguido y cuánto.',
+    p7: 'Todo lo que digas o mandes se vuelve parte del registro público.',
+    tpH: 'Puntos clave', tpNote: 'Usa los que van con tu historia. No necesitas todos.',
+    tp1h: 'Para muchas proveedoras, cada mes es una crisis.',
+    tp1a: 'Mes tras mes, a las proveedoras les pagan tarde, y a algunas les revierten pagos sin ninguna explicación.',
+    tp1b: 'Los pagos atrasados, los pagos revertidos sin explicación y las fallas del sistema hacen que las proveedoras cubran la nómina, la renta y la comida de su propio bolsillo, pidan prestado o dejen de pagarse a sí mismas para mantener sus puertas abiertas.',
+    tp2h: 'Solo nos pagan después de entregar la asistencia.',
+    tp2a: 'A las proveedoras solo les pagan después de entregar la asistencia del mes.',
+    tp2b: 'Imagínate que a una maestra de 8º grado le descontaran el sueldo porque sus alumnos faltaron con gripe. Eso es lo que nos hace el pago según la asistencia.',
+    tp3h: 'El Estado nos hizo una promesa. Nada de eso ha pasado.',
+    tp3a: 'Hace años, a las proveedoras les prometieron que el Estado empezaría a pagar por adelantado, y por fin según la inscripción, no la asistencia.',
+    tp3b: 'Nada de esto ha pasado.',
+    tp4h: 'La Ciudad necesita más de nosotras -- que arreglen esto primero.',
+    tp4a: 'La Ciudad necesita más proveedoras de cuidado infantil para cubrir la demanda del cuidado infantil universal.',
+    tp4b: 'No las va a conseguir si las proveedoras que ya tiene no pueden contar con que les paguen. Que arreglen estos problemas antes de que afecten a más proveedoras.',
+    tp5h: 'Lo que exigimos:',
+    dem1: '<b>Que les paguen a las proveedoras por adelantado</b>', dem2: '<b>Que paguen según la inscripción</b>',
+    dem3: '<b>Que las agencias y las empresas contratistas rindan cuentas</b> -- ACS es la agencia de la Ciudad que maneja los pagos, junto con las empresas que contrata para procesarlos',
+    tp6h: 'Esto es por la justicia salarial.',
+    tp6a: 'Nuestra campaña Pay Our Providers es por la justicia salarial. La justicia salarial significa salarios dignos -- pero eso no es todo.',
+    tp6b: 'También necesitamos lo básico: pagos a tiempo y sistemas de pago que funcionen. El Concejo Municipal de Nueva York tiene que cumplir estas promesas.',
+    scH: 'Guion de dos minutos', scNote: 'Llena los espacios y practícalo una vez en voz alta con un reloj. Unas 250 palabras toman dos minutos.',
+    tgProv: 'Soy proveedora', tgPar: 'Soy madre, padre o familiar',
+ lgOpt: '<span class="optl">[Entre corchetes]</span> úsalo si va contigo',
+    pv1h: 'Quién eres',
+    pv1: 'Buenas tardes, presidenta o presidente <span class="blank">NOMBRE</span> y miembros del Concejo. Me llamo <span class="blank">TU NOMBRE</span>, y soy <span class="blank">proveedora de cuidado infantil familiar / dueña de un centro de cuidado infantil / maestra</span> en <span class="blank">VECINDARIO</span>, Distrito del Concejo <span class="blank">NÚMERO</span>. Llevo <span class="blank">NÚMERO</span> años cuidando niños, y ahora cuido a <span class="blank">NÚMERO</span> niños. Estoy aquí con Providers Organized for Power, POP.',
+    pv2h: 'Qué pasó',
+    pv2: 'Para proveedoras como yo, cada mes es una crisis. En <span class="blank">MES</span>, mi pago llegó <span class="blank">NÚMERO</span> semanas tarde. <span class="optl">[Desde <span class="blank">FECHA</span>, me han pagado tarde <span class="blank">NÚMERO</span> veces.]</span> <span class="optl">[En <span class="blank">MES</span>, me quitaron $<span class="blank">CANTIDAD</span> de mi pago sin ninguna explicación.]</span>',
+    pv3h: 'Lo que te causó',
+    pv3: 'Cuando el dinero no llega, igual tengo que pagar <span class="blank">la renta / a mi asistente / la comida de los niños / mis propias cuentas</span>. Para mantener mis puertas abiertas, tuve que <span class="blank">pedirle prestado a QUIÉN / poner $CANTIDAD en una tarjeta de crédito / dejar de pagarme / LO QUE HICISTE</span>. <span class="blank">Una oración sobre lo que significó para ti, tu familia o las familias que atiendes.</span>',
+    pv4h: 'Por qué sigue pasando',
+    pv4: 'Solo nos pagan después de entregar la asistencia del mes. Imagínense que a una maestra de 8º grado le descontaran el sueldo porque sus alumnos faltaron con gripe. Hace años nos prometieron que el Estado nos pagaría por adelantado y según la inscripción, no la asistencia. Nada de esto ha pasado.',
+    pv5h: 'Lo que quieres',
+    pv5: 'La Ciudad necesita más proveedoras de cuidado infantil para cubrir la demanda del cuidado infantil universal. Primero arreglen estos problemas. Le pido al Concejo que:',
+    ask1: 'Les paguen a las proveedoras por adelantado', ask2: 'Paguen según la inscripción', ask3: 'Hagan que las agencias y las empresas contratistas rindan cuentas',
+    pv6: 'La justicia salarial significa salarios dignos, pero empieza con que nos paguen a tiempo. Gracias.',
+    pa1h: 'Quién eres',
+    pa1: 'Buenas tardes, presidenta o presidente <span class="blank">NOMBRE</span> y miembros del Concejo. Me llamo <span class="blank">TU NOMBRE</span>, y soy madre o padre en <span class="blank">VECINDARIO</span>, Distrito del Concejo <span class="blank">NÚMERO</span>. Mi hijo o hija va a <span class="blank">PROGRAMA O NOMBRE DE LA PROVEEDORA</span>. Estoy aquí con Providers Organized for Power, POP.',
+    pa2h: 'Qué pasó',
+    pa2: 'A las personas que cuidan a mi hijo les pagan tarde, mes tras mes. <span class="optl">[En <span class="blank">MES</span>, nuestra proveedora pasó <span class="blank">NÚMERO</span> semanas sin que le pagaran.]</span> <span class="optl">[A nuestra proveedora le han quitado pagos sin ninguna explicación.]</span>',
+    pa3h: 'Lo que te causó',
+    pa3: 'Cuando a mi proveedora no le pagan a tiempo, <span class="blank">lo que has visto: cierres, personal que se va, la proveedora con apuros, el miedo de perder el cuidado</span>. <span class="blank">Una oración sobre lo que significó para ti y tu familia.</span>',
+    pa4h: 'Por qué sigue pasando',
+    pa4: 'A las proveedoras solo les pagan después de entregar la asistencia del mes. Imagínense que a una maestra de 8º grado le descontaran el sueldo porque sus alumnos faltaron con gripe. Hace años a las proveedoras les prometieron que el Estado les pagaría por adelantado y según la inscripción, no la asistencia. Nada de esto ha pasado.',
+    pa5h: 'Lo que quieres',
+    pa5: 'Necesito que mi proveedora esté ahí, y no puede estar ahí si no le pagan. La Ciudad necesita más proveedoras de cuidado infantil para cubrir la demanda del cuidado infantil universal. Primero arreglen estos problemas. Le pido al Concejo que:',
+    pa6: 'La justicia salarial significa salarios dignos, pero empieza con que les paguen a tiempo. Gracias.',
+    copyScript: 'Copiar', copied: 'Copiado', print: 'Imprimir',
+    lgBlank: '<span class="blank">RESALTADO</span> tócalo y escribe lo tuyo',
+    sendH: 'Mándatelo', sendP: 'Llena tus espacios arriba y luego mándate tu testimonio por correo o por mensaje de texto, para tenerlo el 29 de octubre. Lo que escribes se queda en tu teléfono o computadora. No se le manda nada a POP.',
+    emailMe: 'Mandármelo por correo', textMe: 'Mandármelo por texto', clearAll: 'Borrar lo que escribí',
+    mailSubj: 'Mi testimonio para el 29 de octubre', clearAsk: '¿Borrar todo lo que escribiste?',
+    wrH: 'Testimonio escrito y consejos',
+    wr1: 'El testimonio escrito puede ser más largo que dos minutos, así que usa el mismo guion y agrega los detalles: fechas, cantidades, copias de cartas. Pon tu nombre, la fecha de la audiencia y "Oversight - The Business of Child Care" arriba.',
+    wr2: '<b>Dónde mandarlo:</b> el Concejo solo recibe testimonio escrito por su formulario en línea, <a href="https://council.nyc.gov/testify/">council.nyc.gov/testify</a> (en inglés). En "How will you be testifying?" escoge <b>Submitting written testimony</b>, elige la audiencia del 29 de octubre y sube tu archivo (Word o PDF, hasta 10 MB). El plazo es 72 horas después de que termine la audiencia, así que mándalo a más tardar el domingo 1 de noviembre (mejor antes, porque la hora en que termina no es fija). Las preguntas sobre la audiencia van a <a href="mailto:hearings@council.nyc.gov">hearings@council.nyc.gov</a>.',
+    t1: '<b>Habla de tu propia vida.</b> Tu historia es la prueba. Los números y las fechas hacen que no la puedan ignorar.',
+    t2: '<b>Dilo claro.</b> Habla como si le contaras a una vecina, no como si leyeras un informe.',
+    t3: '<b>Termina con lo que pides.</b> Las tres demandas son lo que queremos que los miembros del Concejo recuerden.',
+    backSign: 'Inscríbete para testificar',
+    footer: 'Providers Organized for Power (POP) es una coalición de proveedoras de cuidado infantil, padres, sindicatos y organizaciones comunitarias en todo el estado de Nueva York.'
+  };
+  var EN = { copied: 'Copied', mailSubj: 'My testimony for Oct 29', clearAsk: 'Clear everything you typed?' };
+  var EDIT = false; // the editor copy turns this on and leaves the blanks as plain text
+  var lang = 'en';
+
+  document.querySelectorAll('[data-i18n]').forEach(function (el) { EN[el.getAttribute('data-i18n')] = el.textContent; });
+  document.querySelectorAll('[data-i18n-html]').forEach(function (el) { EN[el.getAttribute('data-i18n-html')] = el.innerHTML; });
+  function t(k) { return (lang === 'es' ? ES[k] : EN[k]) || EN[k] || k; }
+  function setLang(l) {
+    lang = l;
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
+    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === l)); });
+    try { localStorage.setItem('popreg-lang', l); } catch (e) {}
+    if (typeof makeFields === 'function') makeFields();
+  }
+  document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
+
+  // Provider / parent switch: only one script shows. #parent in the link opens the parent one.
+  var who = 'provider';
+  function setWho(w) {
+    who = w;
+    document.querySelectorAll('.switch button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.who === w)); });
+    document.querySelectorAll('.script-panel').forEach(function (p) { p.classList.toggle('on', p.id === 'sc-' + w); });
+  }
+  document.querySelectorAll('.switch button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      setWho(b.dataset.who);
+      try { history.replaceState(null, '', b.dataset.who === 'parent' ? '#parent' : '#script'); } catch (e) {}
+    });
+  });
+
+  // Blanks become tap-to-type fields. What people type is kept in this browser only.
+  var STORE = 'pop-testimony-v1', vals = {};
+  try { vals = JSON.parse(localStorage.getItem(STORE) || '{}') || {}; } catch (e) { vals = {}; }
+  function keep() { try { localStorage.setItem(STORE, JSON.stringify(vals)); } catch (e) {} }
+  function makeFields() {
+    if (EDIT) return;
+    document.querySelectorAll('.script-panel').forEach(function (panel) {
+      panel.querySelectorAll('.blank').forEach(function (b, i) {
+        var id = lang + ':' + panel.id + ':' + i;
+        b.className = 'fill';
+        b.setAttribute('data-ph', b.textContent);
+        b.setAttribute('contenteditable', 'true');
+        b.setAttribute('role', 'textbox');
+        b.setAttribute('aria-label', b.textContent);
+        b.setAttribute('spellcheck', 'true');
+        b.dataset.id = id;
+        b.textContent = vals[id] || '';
+        b.classList.toggle('done', !!vals[id]);
+      });
+    });
+  }
+  document.addEventListener('input', function (e) {
+    var f = e.target.closest && e.target.closest('.fill'); if (!f) return;
+    var v = f.textContent.replace(/\s+/g, ' ').trim();
+    if (v) vals[f.dataset.id] = v; else { delete vals[f.dataset.id]; if (f.innerHTML) f.innerHTML = ''; }
+    f.classList.toggle('done', !!v);
+    keep();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.target.closest && e.target.closest('.fill')) { e.preventDefault(); e.target.blur(); }
+  });
+  document.addEventListener('paste', function (e) {
+    var f = e.target.closest && e.target.closest('.fill'); if (!f) return;
+    e.preventDefault();
+    var txt = (e.clipboardData || window.clipboardData).getData('text').replace(/\s+/g, ' ');
+    document.execCommand('insertText', false, txt);
+  });
+
+  // The script as plain text. Unfilled blanks stay in [BRACKETS]; optional sentences
+  // with nothing filled in are left out, filled ones lose their brackets.
+  function scriptText() {
+    var panel = document.getElementById('sc-' + who).cloneNode(true);
+    panel.querySelectorAll('.optl').forEach(function (o) {
+      var bl = o.querySelectorAll('.fill, .blank'), any = Array.prototype.some.call(bl, function (b) { return b.textContent.trim(); });
+      if (bl.length && !any) o.remove();
+    });
+    panel.querySelectorAll('.fill, .blank').forEach(function (b) {
+      var v = b.textContent.trim();
+      b.textContent = v || '[' + (b.getAttribute('data-ph') || '') + ']';
+    });
+    panel.querySelectorAll('.optl').forEach(function (o) { o.textContent = o.textContent.replace(/^\s*\[/, '').replace(/\]\s*$/, ''); });
+    panel.querySelectorAll('h3').forEach(function (h) { h.remove(); });
+    var out = [];
+    panel.querySelectorAll('p, ol').forEach(function (n) {
+      if (n.tagName === 'OL') out.push(Array.prototype.map.call(n.children, function (li, i) { return (i + 1) + '. ' + li.textContent.trim(); }).join('\n'));
+      else out.push(n.textContent.replace(/\s+/g, ' ').replace(/\s+([.,])/g, '$1').trim());
+    });
+    return out.join('\n\n');
+  }
+  function withLink() { return scriptText() + '\n\n' + (lang === 'es' ? 'Guía: ' : 'Guide: ') + 'https://popchildcare.org/campaign/testify/script/'; }
+  document.getElementById('emailScript').addEventListener('click', function () {
+    location.href = 'mailto:?subject=' + encodeURIComponent(t('mailSubj')) + '&body=' + encodeURIComponent(withLink());
+  });
+  document.getElementById('textScript').addEventListener('click', function () {
+    // iPhones read "&body=", Android reads "?body="; "?&body=" works on both.
+    location.href = 'sms:?&body=' + encodeURIComponent(scriptText());
+  });
+  var copyBtn = document.getElementById('copyScript');
+  copyBtn.addEventListener('click', function () {
+    var b = this;
+    function ok() { b.textContent = t('copied'); b.classList.add('ok'); setTimeout(function () { b.textContent = t('copyScript'); b.classList.remove('ok'); }, 1600); }
+    if (navigator.clipboard) navigator.clipboard.writeText(withLink()).then(ok).catch(function () {});
+  });
+  document.getElementById('clearScript').addEventListener('click', function () {
+    if (!confirm(t('clearAsk'))) return;
+    Object.keys(vals).forEach(function (k) { if (k.indexOf(lang + ':sc-' + who + ':') === 0) delete vals[k]; });
+    keep(); makeFields();
+  });
+  document.getElementById('printScript').addEventListener('click', function () { window.print(); });
+
+  var saved; try { saved = localStorage.getItem('popreg-lang'); } catch (e) {}
+  if (!saved && /^es\b/i.test(navigator.language || '')) saved = 'es';
+  if (/[?&]lang=es\b/.test(location.search)) saved = 'es';
+  if (/[?&]lang=en\b/.test(location.search)) saved = 'en';
+  setLang(saved === 'es' ? 'es' : 'en');
+  if (/^#parent\b/.test(location.hash) || /[?&]for=parent\b/.test(location.search)) {
+    setWho('parent');
+    var s = document.getElementById('script'); if (s) s.scrollIntoView();
+  }
+})();
+</script>
+</body>
+</html>
