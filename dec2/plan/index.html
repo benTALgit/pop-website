@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- popny.org is the short address: send visitors to the same page on popchildcare.org, the main site. -->
+<script>if (/(^|\.)popny\.org$/.test(location.hostname)) location.replace('https://popchildcare.org' + location.pathname + location.search + location.hash);</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dec 2 Launch Planning</title>
+<meta name="description" content="Planning tracker for the Dec 2 Pay Our Providers launch in New York City, Buffalo and Albany.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../pay/site-nav.css">
+<link rel="stylesheet" href="../../pay/pay.css">
+<style>
+  :root { --done: #1F7A74; --prog: #B7791F; --stuck: #C0395A; --skip: #8A7F7C; --done-bg: #E3F1EF; --prog-bg: #FBF0DC; --stuck-bg: #FBE4EA; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --done: #5FC2BA; --prog: #E8B460; --stuck: #F07D98; --skip: #A89C99; --done-bg: #1D3533; --prog-bg: #3A2E1A; --stuck-bg: #3C2128; } }
+  :root[data-theme="dark"] { --done: #5FC2BA; --prog: #E8B460; --stuck: #F07D98; --skip: #A89C99; --done-bg: #1D3533; --prog-bg: #3A2E1A; --stuck-bg: #3C2128; }
+
+  .intro { padding-bottom: 0; }
+  .lede { font-size: 17px; }
+  .me { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 18px 0 0; padding: 12px 14px; background: var(--chip); }
+  .me label { font-weight: 800; font-size: 15px; }
+  .me input { flex: 1 1 200px; max-width: 320px; }
+  input[type=text], select, textarea {
+    width: 100%; font: inherit; font-size: 16px; padding: 9px 11px; color: var(--ink);
+    background: var(--card); border: 2px solid var(--line); border-radius: 0;
+  }
+  textarea { min-height: 44px; resize: vertical; line-height: 1.4; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--focus); }
+
+  .tabs { position: sticky; top: 0; z-index: 20; display: flex; gap: 0; margin: 24px 0 0; background: var(--paper); border-bottom: 2px solid var(--ink); overflow-x: auto; }
+  .tabs button { all: unset; cursor: pointer; padding: 12px 16px 10px; font: 800 15px/1.1 'Libre Franklin', sans-serif; letter-spacing: .02em; color: var(--ink-soft); border-bottom: 4px solid transparent; margin-bottom: -2px; white-space: nowrap; }
+  .tabs button[aria-selected="true"] { color: var(--coral-deep); border-bottom-color: var(--coral-deep); }
+  .tabs button:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
+
+  .summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 18px 0 0; }
+  .sitecard { all: unset; cursor: pointer; display: block; padding: 14px; background: var(--card); border-top: 5px solid var(--coral-deep); }
+  .sitecard.on { outline: 2px solid var(--coral-deep); outline-offset: -2px; }
+  .sitecard:focus-visible { outline: 3px solid var(--focus); }
+  .sitecard b { display: block; font: 800 15px/1.2 'Unbounded', sans-serif; }
+  .sitecard .big { display: block; margin-top: 6px; font-size: 14px; color: var(--ink-soft); }
+  .bar { display: flex; height: 10px; margin-top: 10px; background: var(--chip); overflow: hidden; }
+  .bar i { display: block; height: 100%; }
+  .bar .d { background: var(--done); } .bar .p { background: var(--prog); } .bar .s { background: var(--stuck); }
+  .stuckline { display: block; margin-top: 8px; font-size: 13.5px; font-weight: 800; color: var(--stuck); }
+
+  .toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin: 22px 0 0; }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filters button { all: unset; cursor: pointer; padding: 7px 12px; font-size: 14px; font-weight: 600; border: 2px solid var(--line); background: var(--card); }
+  .filters button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+  .filters button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .savestate { font-size: 14px; color: var(--ink-soft); }
+  .savestate.bad { color: var(--stuck); font-weight: 800; }
+
+  .area { margin: 30px 0 0; }
+  .area-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+  .area-head h2 { font-size: clamp(20px, 3.6vw, 26px); color: var(--coral); }
+  .area-head span { font-size: 14px; color: var(--ink-soft); font-weight: 600; }
+
+  .item { padding: 14px 0 16px; border-bottom: 1px solid var(--line); }
+  .item .t { font-weight: 800; font-size: 17px; line-height: 1.3; }
+  .item .new { display: inline-block; margin-left: 6px; padding: 1px 6px; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; background: var(--chip); color: var(--ink-soft); vertical-align: 2px; }
+  .item.s-skip .t { color: var(--ink-soft); text-decoration: line-through; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+  .chips button { all: unset; cursor: pointer; padding: 6px 10px; font-size: 14px; font-weight: 600; border: 2px solid var(--line); background: var(--card); color: var(--ink-soft); }
+  .chips button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .chips button[aria-pressed="true"] { color: #fff; font-weight: 800; }
+  .chips button.c-none[aria-pressed="true"] { background: var(--ink-soft); border-color: var(--ink-soft); }
+  .chips button.c-prog[aria-pressed="true"] { background: var(--prog); border-color: var(--prog); }
+  .chips button.c-done[aria-pressed="true"] { background: var(--done); border-color: var(--done); }
+  .chips button.c-stuck[aria-pressed="true"] { background: var(--stuck); border-color: var(--stuck); }
+  .chips button.c-skip[aria-pressed="true"] { background: var(--skip); border-color: var(--skip); }
+  .fields { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 10px; margin: 10px 0 0; }
+  .fields label { display: block; font-size: 12.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px; }
+  .meta { margin: 6px 0 0; font-size: 13px; color: var(--ink-soft); }
+  .meta.err { color: var(--stuck); font-weight: 600; }
+
+  .add { margin: 34px 0 0; padding: 18px; background: var(--chip); }
+  .add h2 { font-size: 20px; }
+  .add p { margin: 6px 0 12px; font-size: 15px; color: var(--ink-soft); }
+  .add .row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 10px; }
+  .add .row + .row { margin-top: 10px; }
+  .add .btn { margin-top: 12px; }
+  .add .msg { margin: 10px 0 0; font-weight: 600; }
+
+  .grid { width: 100%; margin: 22px 0 0; border-collapse: collapse; font-size: 15px; }
+  .grid th, .grid td { padding: 9px 6px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .grid thead th { position: sticky; top: 44px; background: var(--paper); font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); border-bottom: 2px solid var(--ink); }
+  .grid .ah td { padding-top: 22px; font: 800 16px/1.2 'Unbounded', sans-serif; color: var(--coral); border-bottom: 2px solid var(--ink); }
+  .grid td.st { width: 104px; }
+  .pill { all: unset; cursor: pointer; display: inline-block; white-space: nowrap; padding: 3px 7px; font-size: 12.5px; font-weight: 800; line-height: 1.3; }
+  .pill:focus-visible { outline: 3px solid var(--focus); }
+  .pill.none { color: var(--ink-soft); background: var(--chip); }
+  .pill.prog { color: var(--prog); background: var(--prog-bg); }
+  .pill.done { color: var(--done); background: var(--done-bg); }
+  .pill.stuck { color: var(--stuck); background: var(--stuck-bg); }
+  .pill.skip { color: var(--skip); background: transparent; text-decoration: line-through; }
+  .pill.na { cursor: default; color: var(--line); background: transparent; }
+
+  .gate, .loading, .empty { margin: 26px 0 0; padding: 22px; background: var(--card); border-top: 6px solid var(--coral-deep); }
+  .gate h2 { font-size: 22px; }
+  .gate p { margin: 8px 0 0; }
+  .gate form { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 0; }
+  .gate input { flex: 1 1 200px; max-width: 280px; }
+  .demo { margin: 16px 0 0; padding: 10px 14px; background: var(--prog-bg); color: var(--ink); font-size: 14.5px; font-weight: 600; }
+  .foot { margin: 48px 0 40px; font-size: 14px; color: var(--ink-soft); }
+  .sh { display: none; }
+  [hidden] { display: none !important; }
+
+  @media (max-width: 640px) {
+    .summary { gap: 6px; }
+    .sitecard { padding: 10px 8px; }
+    .sitecard b { font-size: 12.5px; }
+    .sitecard .big { font-size: 12.5px; }
+    .sitecard .long { display: none; }
+    .stuckline { font-size: 12px; }
+    .tabs button { flex: 1 1 auto; padding: 12px 8px 10px; font-size: 14px; text-align: center; }
+    .tabs .long { display: none; }
+    .sh { display: inline; }
+    .fields, .add .row { grid-template-columns: minmax(0, 1fr); }
+    .grid { font-size: 14px; }
+    .grid th, .grid td { padding: 8px 3px; }
+    .pill { font-size: 11.5px; padding: 3px 5px; }
+    .grid td.st { width: auto; }
+    .grid th:first-child { width: 44%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <nav class="sn-in" aria-label="POP">
+    <a class="sn-logo" href="https://popchildcare.org/"><img src="../../pay/assets/pop-logo.svg" alt="Providers Organized for Power home" width="164" height="76"></a>
+    <div class="sn-links"><a href="https://popchildcare.org/campaign/">Campaign</a><a href="https://popchildcare.org/events">Events</a><a href="https://popchildcare.org/press">Press</a><a class="sn-join" href="../../pay/#join">Join</a></div>
+    <details class="sn-menu">
+      <summary aria-label="Menu"><svg class="bars" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="x" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+      <div class="sn-drop"><a href="https://popchildcare.org/campaign/">Campaign</a><a href="https://popchildcare.org/events">Events</a><a href="https://popchildcare.org/press">Press</a><a class="sn-join" href="../../pay/#join">Join the Movement</a></div>
+    </details>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <p class="eyebrow">Dec 2 launch · team page</p>
+    <h1 class="display">Dec 2 planning</h1>
+    <p class="lede">One list for all three launches: New York City, Buffalo and Albany. Pick your site, tap where each item stands, and put who's on it. It saves on its own, and everyone sees the same thing.</p>
+    <div class="me">
+      <label for="me">Your name</label>
+      <input id="me" type="text" autocomplete="name" placeholder="So others know who updated">
+    </div>
+    <p class="demo" id="demo" hidden>This is a preview with made-up statuses. Nothing here saves.</p>
+  </section>
+
+  <section class="gate" id="gate" hidden>
+    <h2>This page is for the planning team</h2>
+    <p>Open it from the link Luis or Ben sent you. Or type the team code here.</p>
+    <form id="gateForm">
+      <input id="gateCode" type="text" autocomplete="off" aria-label="Team code" placeholder="Team code">
+      <button class="btn primary" type="submit">Open the plan</button>
+    </form>
+    <p class="meta err" id="gateErr" hidden>That code didn't work. Check the link and try again.</p>
+  </section>
+
+  <p class="loading" id="loading">Loading the plan…</p>
+
+  <div id="app" hidden>
+    <div class="tabs" role="tablist" aria-label="Site" id="tabs"></div>
+    <div class="summary" id="summary"></div>
+
+    <div class="toolbar" id="toolbar">
+      <div class="filters" id="filters" role="group" aria-label="Show">
+        <button type="button" data-f="all" aria-pressed="true">Everything</button>
+        <button type="button" data-f="todo" aria-pressed="false">Still to do</button>
+        <button type="button" data-f="stuck" aria-pressed="false">Stuck</button>
+      </div>
+      <span class="savestate" id="savestate" aria-live="polite"></span>
+    </div>
+
+    <div id="list"></div>
+
+    <section class="add" id="add">
+      <h2>Add something for <span id="addSite">your site</span></h2>
+      <p>If your site needs something that isn't on the list, add it here. Only your site gets it.</p>
+      <form id="addForm">
+        <div class="row">
+          <div><label class="lbl" for="addArea">Area</label><select id="addArea"></select></div>
+          <div><label class="lbl" for="addItem">What needs to happen</label><input id="addItem" type="text" maxlength="200" required></div>
+        </div>
+        <div class="row">
+          <div><label class="lbl" for="addWho">Who's on it <span class="opt">(optional)</span></label><input id="addWho" type="text" maxlength="100"></div>
+          <div><label class="lbl" for="addNotes">Notes <span class="opt">(optional)</span></label><input id="addNotes" type="text" maxlength="1000"></div>
+        </div>
+        <button class="btn primary" type="submit" id="addBtn">Add it</button>
+        <p class="msg" id="addMsg" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+
+  <p class="foot">Questions about the plan? Email <a href="mailto:luis@actionlabny.org">luis@actionlabny.org</a>. Registration for Dec 2 is at <a href="https://popchildcare.org/dec2">popchildcare.org/dec2</a>.</p>
+</main>
+
+<script>
+(function () {
+  var API = '/api/dec2-plan';
+  var SITES = ['NYC', 'Buffalo', 'Albany'];
+  var SITE_NAMES = { NYC: 'New York City', Buffalo: 'Buffalo', Albany: 'Albany' };
+  // On phones the tabs say NYC; on wider screens New York City.
+  function siteLabel(s) { return s === 'NYC' ? '<span class="sh">NYC</span><span class="long">New York City</span>' : SITE_NAMES[s]; }
+  var AREAS = ['Communications', 'Logistics', 'Press and promo', 'Outreach', 'Day of'];
+  var STATUSES = [
+    { v: 'Not started', c: 'none', short: 'Not started' },
+    { v: 'In progress', c: 'prog', short: 'In progress' },
+    { v: 'Done', c: 'done', short: 'Done' },
+    { v: 'Stuck, need help', c: 'stuck', short: 'Stuck' },
+    { v: 'Not needed here', c: 'skip', short: 'Not needed' }
+  ];
+  var CLS = {}; STATUSES.forEach(function (s) { CLS[s.v] = s; });
+
+  var $ = function (id) { return document.getElementById(id); };
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+  var params = new URLSearchParams(location.search);
+  var DEMO = params.has('demo');
+  var code = params.get('k') || store('dec2plan.k') || '';
+  if (params.get('k')) {
+    store('dec2plan.k', params.get('k'));
+    params.delete('k');
+    var qs = params.toString();
+    history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+  }
+
+  var rows = [];
+  var byId = {};
+  var site = params.get('site') || store('dec2plan.site') || 'NYC';
+  if (SITES.indexOf(site) < 0 && site !== 'All') site = 'NYC';
+  var filter = 'all';
+  var pending = {};   // id -> {fields}
+  var timers = {};
+  var inflight = 0;
+  var failed = false;
+
+  var me = $('me');
+  me.value = store('dec2plan.me') || '';
+  me.addEventListener('input', function () { store('dec2plan.me', me.value.trim()); });
+
+  // ---------- network ----------
+  function api(method, path, body) {
+    if (DEMO) return new Promise(function (res) { setTimeout(function () { res(demoApi(method, path, body)); }, 150); });
+    return fetch(API + path, {
+      method: method,
+      headers: { 'Content-Type': 'application/json', 'X-Plan-Code': code },
+      body: body ? JSON.stringify(body) : undefined
+    }).then(function (r) {
+      if (r.status === 401 || r.status === 403) { var e = new Error('code'); e.code = 401; throw e; }
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) throw new Error(j.error || 'Something went wrong');
+        return j;
+      });
+    });
+  }
+
+  function load(first) {
+    if (!DEMO && !code) { showGate(); return; }
+    api('GET', '').then(function (j) {
+      setRows(j.rows || []);
+      $('gate').hidden = true; $('loading').hidden = true; $('app').hidden = false;
+      render();
+    }).catch(function (e) {
+      if (e.code === 401) { showGate(!first || !!code); return; }
+      if (first) $('loading').textContent = 'The plan didn’t load. Check your connection and refresh the page.';
+    });
+  }
+
+  function setRows(list) {
+    // Keep what someone is typing right now; take everything else from the server.
+    var keep = {};
+    Object.keys(pending).forEach(function (id) { keep[id] = pending[id]; });
+    rows = list.map(function (r) {
+      if (keep[r.id]) Object.keys(keep[r.id]).forEach(function (k) { r[k] = keep[r.id][k]; });
+      return r;
+    });
+    byId = {}; rows.forEach(function (r) { byId[r.id] = r; });
+  }
+
+  function showGate(bad) {
+    $('loading').hidden = true; $('app').hidden = true; $('gate').hidden = false;
+    $('gateErr').hidden = !bad;
+  }
+  $('gateForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    code = $('gateCode').value.trim();
+    if (!code) return;
+    store('dec2plan.k', code);
+    load(false);
+  });
+
+  // ---------- saving ----------
+  function queue(id, field, value, now) {
+    var r = byId[id]; if (!r) return;
+    r[field] = value;
+    pending[id] = pending[id] || {};
+    pending[id][field] = value;
+    clearTimeout(timers[id]);
+    timers[id] = setTimeout(function () { flush(id); }, now ? 0 : 900);
+    setSave();
+  }
+
+  function flush(id) {
+    var fields = pending[id]; if (!fields) return;
+    delete pending[id]; clearTimeout(timers[id]);
+    var body = {}; Object.keys(fields).forEach(function (k) { body[k] = fields[k]; });
+    body.by = me.value.trim();
+    inflight++; setSave();
+    api('PATCH', '/' + encodeURIComponent(id), body).then(function (j) {
+      inflight--; failed = false;
+      var r = byId[id];
+      if (r && j.row) {
+        r.updated = j.row.updated; r.updatedBy = j.row.updatedBy;
+        var stillTyping = pending[id] || {};
+        ['status', 'who', 'notes'].forEach(function (k) { if (!(k in stillTyping)) r[k] = j.row[k]; });
+      }
+      paintMeta(id); setSave();
+    }).catch(function (e) {
+      inflight--; failed = true;
+      // Put it back so the next try sends it again.
+      pending[id] = Object.assign(fields, pending[id] || {});
+      setSave();
+      if (e.code === 401) { showGate(true); return; }
+      timers[id] = setTimeout(function () { flush(id); }, 5000);
+    });
+  }
+
+  function flushAll() { Object.keys(pending).forEach(flush); }
+  function hasPending() { return Object.keys(pending).length > 0 || inflight > 0; }
+
+  function setSave() {
+    var el = $('savestate');
+    if (DEMO) { el.textContent = 'Preview: changes are not saved'; el.className = 'savestate'; return; }
+    if (failed) { el.textContent = 'Couldn’t save. Trying again…'; el.className = 'savestate bad'; return; }
+    el.className = 'savestate';
+    el.textContent = hasPending() ? 'Saving…' : (rows.length ? 'All changes saved' : '');
+  }
+
+  window.addEventListener('beforeunload', function (e) {
+    if (!hasPending()) return;
+    flushAll();
+    e.preventDefault(); e.returnValue = '';
+  });
+  document.addEventListener('visibilitychange', function () { if (document.hidden) flushAll(); });
+
+  // ---------- render ----------
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function fmtTarget(t) {
+    if (!t) return '';
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(t);
+    if (!m) return t;
+    var d = new Date(+m[1], +m[2] - 1, +m[3]);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+  function fmtWhen(iso) {
+    if (!iso) return '';
+    var d = new Date(iso); if (isNaN(d)) return '';
+    return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  }
+  function metaText(r) {
+    if (!r.updated) return '';
+    return 'Updated ' + fmtWhen(r.updated) + (r.updatedBy ? ' by ' + r.updatedBy : '');
+  }
+  function siteRows(s) {
+    return rows.filter(function (r) { return r.site === s; }).sort(function (a, b) {
+      return AREAS.indexOf(a.area) - AREAS.indexOf(b.area) || (a.order || 0) - (b.order || 0);
+    });
+  }
+  function counts(s) {
+    var c = { total: 0, done: 0, prog: 0, stuck: 0 };
+    siteRows(s).forEach(function (r) {
+      if (r.status === 'Not needed here') return;
+      c.total++;
+      if (r.status === 'Done') c.done++;
+      else if (r.status === 'In progress') c.prog++;
+      else if (r.status === 'Stuck, need help') c.stuck++;
+    });
+    return c;
+  }
+  function pct(n, d) { return d ? (100 * n / d).toFixed(1) + '%' : '0'; }
+
+  function renderTabs() {
+    var tabs = SITES.concat(['All']);
+    $('tabs').innerHTML = tabs.map(function (s) {
+      return '<button type="button" role="tab" data-site="' + s + '" aria-selected="' + (s === site) + '">' + (s === 'All' ? 'All<span class="long"> sites</span>' : siteLabel(s)) + '</button>';
+    }).join('');
+  }
+
+  function renderSummary() {
+    $('summary').innerHTML = SITES.map(function (s) {
+      var c = counts(s);
+      return '<button type="button" class="sitecard' + (s === site ? ' on' : '') + '" data-site="' + s + '">' +
+        '<b>' + siteLabel(s) + '</b>' +
+        '<span class="big">' + c.done + ' of ' + c.total + ' done<span class="long"> · ' + c.prog + ' in progress</span></span>' +
+        '<span class="bar" aria-hidden="true"><i class="d" style="width:' + pct(c.done, c.total) + '"></i><i class="p" style="width:' + pct(c.prog, c.total) + '"></i><i class="s" style="width:' + pct(c.stuck, c.total) + '"></i></span>' +
+        (c.stuck ? '<span class="stuckline">' + c.stuck + ' stuck<span class="long">, needs help</span></span>' : '') +
+        '</button>';
+    }).join('');
+  }
+
+  function keep(r) {
+    if (filter === 'todo') return r.status !== 'Done' && r.status !== 'Not needed here';
+    if (filter === 'stuck') return r.status === 'Stuck, need help';
+    return true;
+  }
+
+  function renderSite() {
+    var list = siteRows(site);
+    var html = '';
+    AREAS.forEach(function (a) {
+      var items = list.filter(function (r) { return r.area === a; });
+      var shown = items.filter(keep);
+      if (!shown.length) return;
+      var targets = items.map(function (r) { return r.target; }).filter(Boolean).sort();
+      html += '<section class="area"><div class="area-head"><h2>' + esc(a) + '</h2>' +
+        (targets.length ? '<span>Target: ' + esc(fmtTarget(targets[0])) + '</span>' : '') + '</div>';
+      shown.forEach(function (r) {
+        var st = CLS[r.status] || STATUSES[0];
+        html += '<div class="item s-' + st.c + '" data-id="' + esc(r.id) + '">' +
+          '<div class="t">' + esc(r.item) + (r.added ? '<span class="new">' + esc(SITE_NAMES[r.site]) + ' only</span>' : '') + '</div>' +
+          '<div class="chips" role="group" aria-label="Status">' + STATUSES.map(function (s) {
+            return '<button type="button" class="c-' + s.c + '" data-status="' + esc(s.v) + '" aria-pressed="' + (s.v === (r.status || 'Not started')) + '">' + s.short + '</button>';
+          }).join('') + '</div>' +
+          '<div class="fields">' +
+            '<div><label for="w-' + esc(r.id) + '">Who’s on it</label><input type="text" id="w-' + esc(r.id) + '" data-f="who" maxlength="100" value="' + esc(r.who) + '"></div>' +
+            '<div><label for="n-' + esc(r.id) + '">Notes</label><textarea id="n-' + esc(r.id) + '" data-f="notes" rows="1" maxlength="1000">' + esc(r.notes) + '</textarea></div>' +
+          '</div>' +
+          '<p class="meta">' + esc(metaText(r)) + '</p>' +
+        '</div>';
+      });
+      html += '</section>';
+    });
+    if (!html) html = '<p class="empty">' + (filter === 'stuck' ? 'Nothing is stuck at ' + SITE_NAMES[site] + ' right now.' : 'Everything at ' + SITE_NAMES[site] + ' is done or not needed. Nice.') + '</p>';
+    $('list').innerHTML = html;
+    $('list').querySelectorAll('textarea').forEach(grow);
+  }
+
+  function renderAll() {
+    var html = '<table class="grid"><thead><tr><th>Item</th>' + SITES.map(function (s) { return '<th>' + s + '</th>'; }).join('') + '</tr></thead><tbody>';
+    var any = false;
+    AREAS.forEach(function (a) {
+      // One line per item name; site-only items show a dash for the other sites.
+      var names = [], seen = {};
+      rows.filter(function (r) { return r.area === a; })
+        .sort(function (x, y) { return (x.order || 0) - (y.order || 0); })
+        .forEach(function (r) { if (!seen[r.item]) { seen[r.item] = {}; names.push(r.item); } seen[r.item][r.site] = r; });
+      var lines = names.filter(function (n) { return SITES.some(function (s) { return seen[n][s] && keep(seen[n][s]); }); });
+      if (!lines.length) return;
+      any = true;
+      html += '<tr class="ah"><td colspan="4">' + esc(a) + '</td></tr>';
+      lines.forEach(function (n) {
+        html += '<tr><th scope="row" style="font-weight:600">' + esc(n) + '</th>' + SITES.map(function (s) {
+          var r = seen[n][s];
+          if (!r) return '<td class="st"><span class="pill na">—</span></td>';
+          var st = CLS[r.status] || STATUSES[0];
+          var tip = st.v + (r.who ? ' · ' + r.who : '') + (r.notes ? ' · ' + r.notes : '');
+          return '<td class="st"><button type="button" class="pill ' + st.c + '" data-jump="' + esc(r.id) + '" title="' + esc(tip) + '">' + st.short + '</button></td>';
+        }).join('') + '</tr>';
+      });
+    });
+    html += '</tbody></table>';
+    $('list').innerHTML = any ? html : '<p class="empty">Nothing stuck at any site right now.</p>';
+  }
+
+  function render() {
+    renderTabs(); renderSummary();
+    $('add').hidden = site === 'All';
+    if (site === 'All') renderAll(); else { renderSite(); $('addSite').textContent = SITE_NAMES[site]; }
+    setSave();
+  }
+
+  function paintMeta(id) {
+    var el = document.querySelector('.item[data-id="' + CSS.escape(id) + '"] .meta');
+    if (el) el.textContent = metaText(byId[id]);
+  }
+  function grow(t) { t.style.height = 'auto'; t.style.height = Math.max(44, t.scrollHeight + 4) + 'px'; }
+
+  // ---------- events ----------
+  function pickSite(s) {
+    site = s; store('dec2plan.site', s);
+    render();
+    var t = $('tabs').querySelector('[aria-selected="true"]'); if (t) t.focus({ preventScroll: true });
+  }
+  $('tabs').addEventListener('click', function (e) { var b = e.target.closest('[data-site]'); if (b) pickSite(b.dataset.site); });
+  $('summary').addEventListener('click', function (e) { var b = e.target.closest('[data-site]'); if (b) pickSite(b.dataset.site); });
+  $('filters').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-f]'); if (!b) return;
+    filter = b.dataset.f;
+    $('filters').querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+    render();
+  });
+
+  $('list').addEventListener('click', function (e) {
+    var jump = e.target.closest('[data-jump]');
+    if (jump) {
+      var r = byId[jump.dataset.jump]; if (!r) return;
+      site = r.site; store('dec2plan.site', site); filter = 'all';
+      $('filters').querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x.dataset.f === 'all'); });
+      render();
+      var el = document.querySelector('.item[data-id="' + CSS.escape(r.id) + '"]');
+      if (el) { el.scrollIntoView({ block: 'center' }); el.querySelector('.chips button[aria-pressed="true"]').focus({ preventScroll: true }); }
+      return;
+    }
+    var chip = e.target.closest('[data-status]'); if (!chip) return;
+    var item = chip.closest('.item'); var id = item.dataset.id;
+    var v = chip.dataset.status;
+    item.querySelectorAll('.chips button').forEach(function (x) { x.setAttribute('aria-pressed', x === chip); });
+    item.className = 'item s-' + CLS[v].c;
+    queue(id, 'status', v, true);
+    renderSummary();
+  });
+  $('list').addEventListener('input', function (e) {
+    var f = e.target.dataset && e.target.dataset.f; if (!f) return;
+    if (e.target.tagName === 'TEXTAREA') grow(e.target);
+    queue(e.target.closest('.item').dataset.id, f, e.target.value);
+  });
+  $('list').addEventListener('focusout', function (e) {
+    var f = e.target.dataset && e.target.dataset.f; if (!f) return;
+    var id = e.target.closest('.item').dataset.id;
+    if (pending[id]) flush(id);
+  });
+
+  $('addArea').innerHTML = AREAS.map(function (a) { return '<option>' + esc(a) + '</option>'; }).join('');
+  $('addForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var item = $('addItem').value.trim(); if (!item) return;
+    var btn = $('addBtn'); btn.disabled = true; $('addMsg').textContent = '';
+    api('POST', '', { site: site, area: $('addArea').value, item: item, who: $('addWho').value.trim(), notes: $('addNotes').value.trim(), by: me.value.trim() })
+      .then(function (j) {
+        btn.disabled = false;
+        if (j.row) { rows.push(j.row); byId[j.row.id] = j.row; }
+        $('addItem').value = ''; $('addWho').value = ''; $('addNotes').value = '';
+        $('addMsg').textContent = 'Added to ' + SITE_NAMES[site] + '.';
+        render();
+      }).catch(function (err) {
+        btn.disabled = false;
+        if (err.code === 401) { showGate(true); return; }
+        $('addMsg').textContent = 'That didn’t save. Try again in a minute.';
+      });
+  });
+
+  // Pick up other people's changes every 30 seconds, unless you're mid-edit.
+  setInterval(function () {
+    if (DEMO || document.hidden || hasPending() || $('app').hidden) return;
+    var a = document.activeElement;
+    if (a && (a.tagName === 'INPUT' || a.tagName === 'TEXTAREA') && a.closest('#list')) return;
+    api('GET', '').then(function (j) { setRows(j.rows || []); render(); }).catch(function () {});
+  }, 30000);
+
+  // ---------- preview mode (?demo) ----------
+  var DEMO_ITEMS = [["Communications", "Messaging and design for the launch (flyer, one-pager, graphics)", "10/23"], ["Logistics", "Secure the venue", "10/23"], ["Logistics", "Permits, if needed", "10/23"], ["Logistics", "Transportation for providers and families", "10/23"], ["Logistics", "Food: birthday cake", "10/23"], ["Logistics", "Food: vendors and snacks (check allergies)", "10/23"], ["Logistics", "Music", "10/23"], ["Logistics", "Activity on Shirley Chisholm's work, labor and education justice", "10/23"], ["Logistics", "Kids' activity: decorating folding chairs", "10/23"], ["Logistics", "Live stream setup", "10/23"], ["Logistics", "Swag: t-shirts and stickers", "10/23"], ["Logistics", "Bilingual materials and Spanish interpretation", "10/23"], ["Logistics", "Wheelchair access at the venue", "10/23"], ["Logistics", "Reimbursement process for costs", "10/23"], ["Press and promo", "Secure press, media and social influencers", "10/30"], ["Press and promo", "Plan promo (digital and traditional media)", "10/30"], ["Press and promo", "Launch promo (digital and traditional media)", "10/30"], ["Press and promo", "Talking points", "10/30"], ["Press and promo", "Press release and quotes", "10/30"], ["Outreach", "Invite elected officials and track who confirms", "10/30"], ["Outreach", "Get commitments from organizations (how many people each will bring)", "10/30"], ["Outreach", "Share the registration link (popny.org/dec2)", "10/30"], ["Outreach", "Texting", "10/30"], ["Outreach", "Email list", "10/30"], ["Outreach", "Facebook", "10/30"], ["Outreach", "Instagram", "10/30"], ["Outreach", "WhatsApp", "10/30"], ["Outreach", "TikTok (do we create an account?)", "10/30"], ["Outreach", "Phone banking", "10/30"], ["Outreach", "Announce at other meetings", "10/30"], ["Day of", "Set-up crew", "11/06"], ["Day of", "Run of show filled in (emcee, providers, parent, electeds)", "11/06"], ["Day of", "Show runner / event production", "11/06"], ["Day of", "Video and photo", "11/06"], ["Day of", "Signs and banner", "11/06"], ["Day of", "Bullhorn and sound", "11/06"], ["Day of", "Snacks and water", "11/06"], ["Day of", "Slogan, song and chants", "11/06"], ["Day of", "Safety and first aid", "11/06"], ["Day of", "Marshals (if we march after)", "11/06"], ["Day of", "Police liaison", "11/06"]];
+  var demoRows = null;
+  function demoApi(method, path, body) {
+    if (!demoRows) {
+      var seed = 7; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+      var pick = ['Done', 'Done', 'In progress', 'In progress', 'Not started', 'Not started', 'Not started', 'Stuck, need help', 'Not needed here'];
+      var who = ['Luis', 'Oliver', 'Ana', 'Marisol', ''];
+      demoRows = [];
+      SITES.forEach(function (s, si) {
+        DEMO_ITEMS.forEach(function (it, i) {
+          var st = i < 6 - si * 2 ? pick[Math.floor(rnd() * 4)] : pick[Math.floor(rnd() * pick.length)];
+          if (si > 0 && rnd() < .35) st = 'Not started';
+          var y = it[2].split('/');
+          demoRows.push({ id: 'demo' + s + i, site: s, area: it[0], item: it[1], target: '2026-' + y[0] + '-' + y[1], order: (i + 1) * 10,
+            status: st, who: st === 'Not started' ? '' : who[Math.floor(rnd() * who.length)], notes: st === 'Stuck, need help' ? 'Need a contact for this' : '',
+            updated: st === 'Not started' ? '' : '2026-10-26T15:' + (10 + i) + ':00-04:00', updatedBy: st === 'Not started' ? '' : 'Luis', added: false });
+        });
+      });
+    }
+    if (method === 'GET') return { rows: JSON.parse(JSON.stringify(demoRows)) };
+    if (method === 'POST') { var r = { id: 'demo' + Date.now(), site: body.site, area: body.area, item: body.item, who: body.who, notes: body.notes, status: 'Not started', order: 9999, added: true, updated: new Date().toISOString(), updatedBy: body.by }; demoRows.push(r); return { row: r }; }
+    var id = decodeURIComponent(path.slice(1)); var row = demoRows.find(function (x) { return x.id === id; });
+    ['status', 'who', 'notes'].forEach(function (k) { if (k in body) row[k] = body[k]; });
+    row.updated = new Date().toISOString(); row.updatedBy = body.by;
+    return { row: row };
+  }
+
+  if (DEMO) $('demo').hidden = false;
+  load(true);
+})();
+</script>
+</body>
+</html>
