@@ -484,7 +484,7 @@
   function postsFor(id, kind) {
     return posts.filter(function (p) { return p.kind === kind && (p.items || []).indexOf(id) >= 0; });
   }
-  function byLine(p) { return (p.by || 'Someone') + (p.at ? ' \u00b7 ' + fmtWhen(p.at) : ''); }
+  function byLine(p) { return [p.by, fmtWhen(p.at)].filter(Boolean).join(' \u00b7 '); }
 
   function ideasBox(r) {
     var list = postsFor(r.id, 'Idea').sort(function (a, b) {
@@ -495,7 +495,7 @@
         var mine = !!liked[p.id];
         return '<li class="idea' + (p.picked ? ' picked' : '') + '"><b>' + esc(p.text) + '</b>' +
           (p.details ? '<span class="det">' + esc(p.details) + '</span>' : '') +
-          '<span class="by">' + (/^From /.test(p.by || '') ? '' : 'Added by ') + esc(byLine(p)) + '</span>' +
+          (p.by ? '<span class="by">Added by ' + esc(byLine(p)) + '</span>' : '') +
           '<span class="acts"><button type="button" class="mini" data-like="' + esc(p.id) + '" aria-pressed="' + mine + '" aria-label="I like this option, ' + (p.likes || 0) + ' so far">\ud83d\udc4d ' + (p.likes || 0) + '</button>' +
           '<button type="button" class="mini pick" data-pick="' + esc(p.id) + '" aria-pressed="' + !!p.picked + '">' + (p.picked ? 'Picked' : 'Pick') + '</button></span></li>';
       }).join('') : '<li class="none">No options yet. Add the first one.</li>') +
@@ -702,9 +702,9 @@
     if (!demoPosts) {
       var nyVenue = 'demoNYC1';
       demoPosts = [
-        { id: 'p1', kind: 'Idea', items: [nyVenue], text: 'Hamilton-Madison House', details: '#1 pick in the planning doc. Shirley Chisholm directed its child care center.', by: 'From the planning doc', at: '2026-10-26T15:00:00-04:00', likes: 3, picked: false },
-        { id: 'p2', kind: 'Idea', items: [nyVenue], text: 'UFT office (Manhattan or Bronx)', details: 'Manhattan feels high profile. Bronx is closer to our members.', by: 'From the planning doc', at: '2026-10-26T15:00:00-04:00', likes: 1, picked: false },
-        { id: 'p3', kind: 'Idea', items: [nyVenue], text: 'The Action Lab, 6th St office', details: 'Easiest to manage and coordinate.', by: 'From the planning doc', at: '2026-10-26T15:00:00-04:00', likes: 0, picked: false },
+        { id: 'p1', kind: 'Idea', items: [nyVenue], text: 'Hamilton-Madison House', details: 'Shirley Chisholm directed its child care center.', by: '', at: '2026-10-26T15:00:00-04:00', likes: 3, picked: false },
+        { id: 'p2', kind: 'Idea', items: [nyVenue], text: 'UFT office (Manhattan or Bronx)', details: 'Manhattan feels high profile. Bronx is closer to our members.', by: '', at: '2026-10-26T15:00:00-04:00', likes: 1, picked: false },
+        { id: 'p3', kind: 'Idea', items: [nyVenue], text: 'The Action Lab, 6th St office', details: 'Easiest to manage and coordinate.', by: '', at: '2026-10-26T15:00:00-04:00', likes: 0, picked: false },
         { id: 'p4', kind: 'Note', items: [nyVenue], text: 'Called Hamilton-Madison, waiting to hear back on the room for 60 people.', by: 'Luis', at: '2026-10-26T15:20:00-04:00', likes: 0, picked: false },
         { id: 'p5', kind: 'Note', items: [nyVenue], text: 'If they say no, UFT Bronx is my next pick.', by: 'Oliver', at: '2026-10-26T15:40:00-04:00', likes: 0, picked: false },
         { id: 'p6', kind: 'Note', items: ['demoNYC0'], text: 'Flyer is done. One-pager draft is in Drive.', by: 'Oliver', at: '2026-10-26T14:10:00-04:00', likes: 0, picked: false }
