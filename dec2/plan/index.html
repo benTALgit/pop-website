@@ -72,9 +72,37 @@
   .chips button.c-done[aria-pressed="true"] { background: var(--done); border-color: var(--done); }
   .chips button.c-stuck[aria-pressed="true"] { background: var(--stuck); border-color: var(--stuck); }
   .chips button.c-skip[aria-pressed="true"] { background: var(--skip); border-color: var(--skip); }
-  .fields { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 10px; margin: 10px 0 0; }
-  .fields label { display: block; font-size: 12.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 4px; }
   .meta { margin: 6px 0 0; font-size: 13px; color: var(--ink-soft); }
+  .who { max-width: 340px; margin: 10px 0 0; }
+  .who label, .box h3 { display: block; font-size: 12.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 4px; }
+  .box { margin: 12px 0 0; padding: 12px 12px 10px; background: var(--card); border-left: 4px solid var(--line); }
+  .box.ideas { border-left-color: var(--prog); }
+  .box.notes { border-left-color: var(--teal); }
+  .box h3 span { font-weight: 600; letter-spacing: 0; text-transform: none; }
+  .posts { list-style: none; margin: 0; padding: 0; }
+  .posts li { padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 15.5px; line-height: 1.4; }
+  .posts li:last-child { border-bottom: 0; }
+  .posts .by { display: block; font-size: 12.5px; color: var(--ink-soft); margin-top: 2px; }
+  .posts .none { color: var(--ink-soft); font-size: 14.5px; border: 0; }
+  .note-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .idea { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; align-items: start; }
+  .idea b { overflow-wrap: anywhere; }
+  .idea .det { grid-column: 1; font-size: 14.5px; color: var(--ink-soft); overflow-wrap: anywhere; }
+  .idea .by { grid-column: 1; }
+  .idea .acts { grid-column: 2; grid-row: 1 / span 3; display: flex; gap: 6px; align-items: center; }
+  .idea.picked b::after { content: 'Picked'; display: inline-block; margin-left: 8px; padding: 1px 6px; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: var(--done); vertical-align: 2px; }
+  .mini { all: unset; cursor: pointer; padding: 4px 8px; font-size: 13px; font-weight: 700; border: 2px solid var(--line); background: var(--paper); white-space: nowrap; }
+  .mini:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .mini[aria-pressed="true"] { border-color: var(--prog); background: var(--prog-bg); color: var(--ink); }
+  .mini.pick[aria-pressed="true"] { border-color: var(--done); background: var(--done-bg); }
+  .more { all: unset; cursor: pointer; display: inline-block; margin: 4px 0 2px; font-size: 13.5px; font-weight: 800; color: var(--teal); }
+  .post-form { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; }
+  .post-form input { flex: 1 1 180px; width: auto; padding: 7px 10px; font-size: 15px; }
+  .post-form .det-in { flex-basis: 100%; order: 2; }
+  .post-form .mini { padding: 7px 12px; font-size: 14px; border-color: var(--ink); }
+  .counts { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink-soft); }
+  .check { display: flex; gap: 8px; align-items: flex-start; margin-top: 10px; font-size: 15px; }
+  .check input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--teal); }
   .meta.err { color: var(--stuck); font-weight: 600; }
 
   .add { margin: 34px 0 0; padding: 18px; background: var(--chip); }
@@ -119,7 +147,8 @@
     .tabs button { flex: 1 1 auto; padding: 12px 8px 10px; font-size: 14px; text-align: center; }
     .tabs .long { display: none; }
     .sh { display: inline; }
-    .fields, .add .row { grid-template-columns: minmax(0, 1fr); }
+    .add .row { grid-template-columns: minmax(0, 1fr); }
+    .who { max-width: none; }
     .grid { font-size: 14px; }
     .grid th, .grid td { padding: 8px 3px; }
     .pill { font-size: 11.5px; padding: 3px 5px; }
@@ -145,7 +174,7 @@
   <section class="intro">
     <p class="eyebrow">Dec 2 launch · team page</p>
     <h1 class="display">Dec 2 planning</h1>
-    <p class="lede">One list for all three launches: New York City, Buffalo and Albany. Pick your site, tap where each item stands, and put who's on it. It saves on its own, and everyone sees the same thing.</p>
+    <p class="lede">One list for all three launches: New York City, Buffalo and Albany. Pick your site, tap where each item stands, and put who's on it. Leave notes for the team, and add options where we're still deciding (like the venue). It saves on its own, and everyone sees the same thing.</p>
     <div class="me">
       <label for="me">Your name</label>
       <input id="me" type="text" autocomplete="name" placeholder="So others know who updated">
@@ -190,8 +219,9 @@
         </div>
         <div class="row">
           <div><label class="lbl" for="addWho">Who's on it <span class="opt">(optional)</span></label><input id="addWho" type="text" maxlength="100"></div>
-          <div><label class="lbl" for="addNotes">Notes <span class="opt">(optional)</span></label><input id="addNotes" type="text" maxlength="1000"></div>
+          <div></div>
         </div>
+        <label class="check"><input type="checkbox" id="addIdeas"> <span>We're still deciding on this. Let people suggest options.</span></label>
         <button class="btn primary" type="submit" id="addBtn">Add it</button>
         <p class="msg" id="addMsg" aria-live="polite"></p>
       </form>
@@ -233,6 +263,9 @@
 
   var rows = [];
   var byId = {};
+  var posts = [];
+  var openNotes = {};  // item id -> show all notes
+  var liked = {}; try { liked = JSON.parse(store('dec2plan.liked') || '{}') || {}; } catch (e) {}
   var site = params.get('site') || store('dec2plan.site') || 'NYC';
   if (SITES.indexOf(site) < 0 && site !== 'All') site = 'NYC';
   var filter = 'all';
@@ -264,7 +297,7 @@
   function load(first) {
     if (!DEMO && !code) { showGate(); return; }
     api('GET', '').then(function (j) {
-      setRows(j.rows || []);
+      setRows(j.rows || []); posts = j.posts || [];
       $('gate').hidden = true; $('loading').hidden = true; $('app').hidden = false;
       render();
     }).catch(function (e) {
@@ -412,6 +445,11 @@
   }
 
   function renderSite() {
+    // Keep anything half-typed in the note and option boxes across a redraw.
+    var typed = {};
+    $('list').querySelectorAll('.post-form input').forEach(function (i) {
+      if (i.value) typed[i.form.dataset.kind + i.form.dataset.item + i.name] = i.value;
+    });
     var list = siteRows(site);
     var html = '';
     AREAS.forEach(function (a) {
@@ -428,18 +466,57 @@
           '<div class="chips" role="group" aria-label="Status">' + STATUSES.map(function (s) {
             return '<button type="button" class="c-' + s.c + '" data-status="' + esc(s.v) + '" aria-pressed="' + (s.v === (r.status || 'Not started')) + '">' + s.short + '</button>';
           }).join('') + '</div>' +
-          '<div class="fields">' +
-            '<div><label for="w-' + esc(r.id) + '">Who’s on it</label><input type="text" id="w-' + esc(r.id) + '" data-f="who" maxlength="100" value="' + esc(r.who) + '"></div>' +
-            '<div><label for="n-' + esc(r.id) + '">Notes</label><textarea id="n-' + esc(r.id) + '" data-f="notes" rows="1" maxlength="1000">' + esc(r.notes) + '</textarea></div>' +
-          '</div>' +
+          '<div class="who"><label for="w-' + esc(r.id) + '">Who’s on it</label><input type="text" id="w-' + esc(r.id) + '" data-f="who" maxlength="100" value="' + esc(r.who) + '"></div>' +
           '<p class="meta">' + esc(metaText(r)) + '</p>' +
+          (r.brainstorm ? ideasBox(r) : '') +
+          notesBox(r) +
         '</div>';
       });
       html += '</section>';
     });
     if (!html) html = '<p class="empty">' + (filter === 'stuck' ? 'Nothing is stuck at ' + SITE_NAMES[site] + ' right now.' : 'Everything at ' + SITE_NAMES[site] + ' is done or not needed. Nice.') + '</p>';
     $('list').innerHTML = html;
-    $('list').querySelectorAll('textarea').forEach(grow);
+    $('list').querySelectorAll('.post-form input').forEach(function (i) {
+      var v = typed[i.form.dataset.kind + i.form.dataset.item + i.name]; if (v) i.value = v;
+    });
+  }
+
+  function postsFor(id, kind) {
+    return posts.filter(function (p) { return p.kind === kind && (p.items || []).indexOf(id) >= 0; });
+  }
+  function byLine(p) { return (p.by || 'Someone') + (p.at ? ' \u00b7 ' + fmtWhen(p.at) : ''); }
+
+  function ideasBox(r) {
+    var list = postsFor(r.id, 'Idea').sort(function (a, b) {
+      return (b.picked - a.picked) || (b.likes - a.likes) || String(a.at).localeCompare(String(b.at));
+    });
+    return '<div class="box ideas" data-item="' + esc(r.id) + '"><h3>Options <span>(' + list.length + ')</span></h3><ul class="posts">' +
+      (list.length ? list.map(function (p) {
+        var mine = !!liked[p.id];
+        return '<li class="idea' + (p.picked ? ' picked' : '') + '"><b>' + esc(p.text) + '</b>' +
+          (p.details ? '<span class="det">' + esc(p.details) + '</span>' : '') +
+          '<span class="by">' + (/^From /.test(p.by || '') ? '' : 'Added by ') + esc(byLine(p)) + '</span>' +
+          '<span class="acts"><button type="button" class="mini" data-like="' + esc(p.id) + '" aria-pressed="' + mine + '" aria-label="I like this option, ' + (p.likes || 0) + ' so far">\ud83d\udc4d ' + (p.likes || 0) + '</button>' +
+          '<button type="button" class="mini pick" data-pick="' + esc(p.id) + '" aria-pressed="' + !!p.picked + '">' + (p.picked ? 'Picked' : 'Pick') + '</button></span></li>';
+      }).join('') : '<li class="none">No options yet. Add the first one.</li>') +
+      '</ul><form class="post-form" data-kind="Idea" data-item="' + esc(r.id) + '">' +
+        '<input type="text" name="text" maxlength="200" placeholder="Add an option" aria-label="Add an option for ' + esc(r.item) + '" required>' +
+        '<button type="submit" class="mini">Add option</button>' +
+        '<input type="text" name="details" class="det-in" maxlength="500" placeholder="Details: address, contact, cost (optional)" aria-label="Details"></form></div>';
+  }
+
+  function notesBox(r) {
+    var list = postsFor(r.id, 'Note').sort(function (a, b) { return String(a.at).localeCompare(String(b.at)); });
+    var all = openNotes[r.id] || list.length <= 3;
+    var shown = all ? list : list.slice(-3);
+    return '<div class="box notes" data-item="' + esc(r.id) + '"><h3>Notes <span>(' + list.length + ')</span></h3>' +
+      (!all ? '<button type="button" class="more" data-more="' + esc(r.id) + '">Show all ' + list.length + ' notes</button>' : '') +
+      '<ul class="posts">' + (shown.length ? shown.map(function (p) {
+        return '<li><span class="note-text">' + esc(p.text) + '</span><span class="by">' + esc(byLine(p)) + '</span></li>';
+      }).join('') : '<li class="none">No notes yet.</li>') + '</ul>' +
+      '<form class="post-form" data-kind="Note" data-item="' + esc(r.id) + '">' +
+        '<input type="text" name="text" maxlength="1000" placeholder="Add a note for the team" aria-label="Add a note on ' + esc(r.item) + '" required>' +
+        '<button type="submit" class="mini">Post</button></form></div>';
   }
 
   function renderAll() {
@@ -456,11 +533,15 @@
       any = true;
       html += '<tr class="ah"><td colspan="4">' + esc(a) + '</td></tr>';
       lines.forEach(function (n) {
-        html += '<tr><th scope="row" style="font-weight:600">' + esc(n) + '</th>' + SITES.map(function (s) {
+        var nn = 0, ni = 0;
+        SITES.forEach(function (s) { if (seen[n][s]) { nn += postsFor(seen[n][s].id, 'Note').length; ni += postsFor(seen[n][s].id, 'Idea').length; } });
+        var cnt = [nn ? nn + (nn === 1 ? ' note' : ' notes') : '', ni ? ni + (ni === 1 ? ' option' : ' options') : ''].filter(Boolean).join(' \u00b7 ');
+        html += '<tr><th scope="row" style="font-weight:600">' + esc(n) + (cnt ? '<span class="counts">' + cnt + '</span>' : '') + '</th>' + SITES.map(function (s) {
           var r = seen[n][s];
           if (!r) return '<td class="st"><span class="pill na">—</span></td>';
           var st = CLS[r.status] || STATUSES[0];
-          var tip = st.v + (r.who ? ' · ' + r.who : '') + (r.notes ? ' · ' + r.notes : '');
+          var last = postsFor(r.id, 'Note').slice(-1)[0];
+          var tip = st.v + (r.who ? ' · ' + r.who : '') + (last ? ' · ' + last.text : '');
           return '<td class="st"><button type="button" class="pill ' + st.c + '" data-jump="' + esc(r.id) + '" title="' + esc(tip) + '">' + st.short + '</button></td>';
         }).join('') + '</tr>';
       });
@@ -480,7 +561,6 @@
     var el = document.querySelector('.item[data-id="' + CSS.escape(id) + '"] .meta');
     if (el) el.textContent = metaText(byId[id]);
   }
-  function grow(t) { t.style.height = 'auto'; t.style.height = Math.max(44, t.scrollHeight + 4) + 'px'; }
 
   // ---------- events ----------
   function pickSite(s) {
@@ -508,6 +588,12 @@
       if (el) { el.scrollIntoView({ block: 'center' }); el.querySelector('.chips button[aria-pressed="true"]').focus({ preventScroll: true }); }
       return;
     }
+    var more = e.target.closest('[data-more]');
+    if (more) { openNotes[more.dataset.more] = true; renderSite(); return; }
+    var lk = e.target.closest('[data-like]');
+    if (lk) { like(lk.dataset.like); return; }
+    var pk = e.target.closest('[data-pick]');
+    if (pk) { pick(pk.dataset.pick); return; }
     var chip = e.target.closest('[data-status]'); if (!chip) return;
     var item = chip.closest('.item'); var id = item.dataset.id;
     var v = chip.dataset.status;
@@ -516,9 +602,48 @@
     queue(id, 'status', v, true);
     renderSummary();
   });
+  $('list').addEventListener('submit', function (e) {
+    var form = e.target.closest('.post-form'); if (!form) return;
+    e.preventDefault();
+    var text = form.elements.text.value.trim(); if (!text) return;
+    var details = form.elements.details ? form.elements.details.value.trim() : '';
+    var btn = form.querySelector('button'); btn.disabled = true;
+    inflight++; setSave();
+    api('POST', '/posts', { item: form.dataset.item, kind: form.dataset.kind, text: text, details: details, by: me.value.trim() })
+      .then(function (j) {
+        inflight--; failed = false;
+        if (j.post) posts.push(j.post);
+        form.querySelectorAll('input').forEach(function (i) { i.value = ''; });
+        renderSite(); renderSummary(); setSave();
+        var again = document.querySelector('.post-form[data-kind="' + form.dataset.kind + '"][data-item="' + CSS.escape(form.dataset.item) + '"] input');
+        if (again) again.focus({ preventScroll: true });
+      }).catch(function (err) {
+        inflight--; btn.disabled = false;
+        if (err.code === 401) { showGate(true); return; }
+        failed = true; setSave();
+        alert('That didn\u2019t post. Check your connection and try again.');
+      });
+  });
+
+  function findPost(id) { for (var i = 0; i < posts.length; i++) if (posts[i].id === id) return posts[i]; }
+  function like(id) {
+    var p = findPost(id); if (!p) return;
+    var delta = liked[id] ? -1 : 1;
+    if (delta > 0) liked[id] = 1; else delete liked[id];
+    store('dec2plan.liked', JSON.stringify(liked));
+    p.likes = Math.max(0, (p.likes || 0) + delta); renderSite();
+    api('POST', '/posts/' + encodeURIComponent(id) + '/like', { delta: delta }).then(function (j) {
+      if (j.post) { p.likes = j.post.likes; renderSite(); }
+    }).catch(function () {});
+  }
+  function pick(id) {
+    var p = findPost(id); if (!p) return;
+    p.picked = !p.picked; renderSite();
+    api('POST', '/posts/' + encodeURIComponent(id) + '/pick', { picked: p.picked, by: me.value.trim() }).catch(function () { p.picked = !p.picked; renderSite(); });
+  }
+
   $('list').addEventListener('input', function (e) {
     var f = e.target.dataset && e.target.dataset.f; if (!f) return;
-    if (e.target.tagName === 'TEXTAREA') grow(e.target);
     queue(e.target.closest('.item').dataset.id, f, e.target.value);
   });
   $('list').addEventListener('focusout', function (e) {
@@ -532,11 +657,11 @@
     e.preventDefault();
     var item = $('addItem').value.trim(); if (!item) return;
     var btn = $('addBtn'); btn.disabled = true; $('addMsg').textContent = '';
-    api('POST', '', { site: site, area: $('addArea').value, item: item, who: $('addWho').value.trim(), notes: $('addNotes').value.trim(), by: me.value.trim() })
+    api('POST', '', { site: site, area: $('addArea').value, item: item, who: $('addWho').value.trim(), brainstorm: $('addIdeas').checked, by: me.value.trim() })
       .then(function (j) {
         btn.disabled = false;
         if (j.row) { rows.push(j.row); byId[j.row.id] = j.row; }
-        $('addItem').value = ''; $('addWho').value = ''; $('addNotes').value = '';
+        $('addItem').value = ''; $('addWho').value = ''; $('addIdeas').checked = false;
         $('addMsg').textContent = 'Added to ' + SITE_NAMES[site] + '.';
         render();
       }).catch(function (err) {
@@ -551,12 +676,12 @@
     if (DEMO || document.hidden || hasPending() || $('app').hidden) return;
     var a = document.activeElement;
     if (a && (a.tagName === 'INPUT' || a.tagName === 'TEXTAREA') && a.closest('#list')) return;
-    api('GET', '').then(function (j) { setRows(j.rows || []); render(); }).catch(function () {});
+    api('GET', '').then(function (j) { setRows(j.rows || []); posts = j.posts || []; render(); }).catch(function () {});
   }, 30000);
 
   // ---------- preview mode (?demo) ----------
   var DEMO_ITEMS = [["Communications", "Messaging and design for the launch (flyer, one-pager, graphics)", "10/23"], ["Logistics", "Secure the venue", "10/23"], ["Logistics", "Permits, if needed", "10/23"], ["Logistics", "Transportation for providers and families", "10/23"], ["Logistics", "Food: birthday cake", "10/23"], ["Logistics", "Food: vendors and snacks (check allergies)", "10/23"], ["Logistics", "Music", "10/23"], ["Logistics", "Activity on Shirley Chisholm's work, labor and education justice", "10/23"], ["Logistics", "Kids' activity: decorating folding chairs", "10/23"], ["Logistics", "Live stream setup", "10/23"], ["Logistics", "Swag: t-shirts and stickers", "10/23"], ["Logistics", "Bilingual materials and Spanish interpretation", "10/23"], ["Logistics", "Wheelchair access at the venue", "10/23"], ["Logistics", "Reimbursement process for costs", "10/23"], ["Press and promo", "Secure press, media and social influencers", "10/30"], ["Press and promo", "Plan promo (digital and traditional media)", "10/30"], ["Press and promo", "Launch promo (digital and traditional media)", "10/30"], ["Press and promo", "Talking points", "10/30"], ["Press and promo", "Press release and quotes", "10/30"], ["Outreach", "Invite elected officials and track who confirms", "10/30"], ["Outreach", "Get commitments from organizations (how many people each will bring)", "10/30"], ["Outreach", "Share the registration link (popny.org/dec2)", "10/30"], ["Outreach", "Texting", "10/30"], ["Outreach", "Email list", "10/30"], ["Outreach", "Facebook", "10/30"], ["Outreach", "Instagram", "10/30"], ["Outreach", "WhatsApp", "10/30"], ["Outreach", "TikTok (do we create an account?)", "10/30"], ["Outreach", "Phone banking", "10/30"], ["Outreach", "Announce at other meetings", "10/30"], ["Day of", "Set-up crew", "11/06"], ["Day of", "Run of show filled in (emcee, providers, parent, electeds)", "11/06"], ["Day of", "Show runner / event production", "11/06"], ["Day of", "Video and photo", "11/06"], ["Day of", "Signs and banner", "11/06"], ["Day of", "Bullhorn and sound", "11/06"], ["Day of", "Snacks and water", "11/06"], ["Day of", "Slogan, song and chants", "11/06"], ["Day of", "Safety and first aid", "11/06"], ["Day of", "Marshals (if we march after)", "11/06"], ["Day of", "Police liaison", "11/06"]];
-  var demoRows = null;
+  var demoRows = null, demoPosts = null;
   function demoApi(method, path, body) {
     if (!demoRows) {
       var seed = 7; function rnd() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
@@ -569,13 +694,27 @@
           if (si > 0 && rnd() < .35) st = 'Not started';
           var y = it[2].split('/');
           demoRows.push({ id: 'demo' + s + i, site: s, area: it[0], item: it[1], target: '2026-' + y[0] + '-' + y[1], order: (i + 1) * 10,
-            status: st, who: st === 'Not started' ? '' : who[Math.floor(rnd() * who.length)], notes: st === 'Stuck, need help' ? 'Need a contact for this' : '',
+            status: st, who: st === 'Not started' ? '' : who[Math.floor(rnd() * who.length)], notes: '', brainstorm: /venue|Transportation|Food|Music|activity|Activity|Swag|influencers|chants/.test(it[1]) && !/Wheelchair/.test(it[1]),
             updated: st === 'Not started' ? '' : '2026-10-26T15:' + (10 + i) + ':00-04:00', updatedBy: st === 'Not started' ? '' : 'Luis', added: false });
         });
       });
     }
-    if (method === 'GET') return { rows: JSON.parse(JSON.stringify(demoRows)) };
-    if (method === 'POST') { var r = { id: 'demo' + Date.now(), site: body.site, area: body.area, item: body.item, who: body.who, notes: body.notes, status: 'Not started', order: 9999, added: true, updated: new Date().toISOString(), updatedBy: body.by }; demoRows.push(r); return { row: r }; }
+    if (!demoPosts) {
+      var nyVenue = 'demoNYC1';
+      demoPosts = [
+        { id: 'p1', kind: 'Idea', items: [nyVenue], text: 'Hamilton-Madison House', details: '#1 pick in the planning doc. Shirley Chisholm directed its child care center.', by: 'From the planning doc', at: '2026-10-26T15:00:00-04:00', likes: 3, picked: false },
+        { id: 'p2', kind: 'Idea', items: [nyVenue], text: 'UFT office (Manhattan or Bronx)', details: 'Manhattan feels high profile. Bronx is closer to our members.', by: 'From the planning doc', at: '2026-10-26T15:00:00-04:00', likes: 1, picked: false },
+        { id: 'p3', kind: 'Idea', items: [nyVenue], text: 'The Action Lab, 6th St office', details: 'Easiest to manage and coordinate.', by: 'From the planning doc', at: '2026-10-26T15:00:00-04:00', likes: 0, picked: false },
+        { id: 'p4', kind: 'Note', items: [nyVenue], text: 'Called Hamilton-Madison, waiting to hear back on the room for 60 people.', by: 'Luis', at: '2026-10-26T15:20:00-04:00', likes: 0, picked: false },
+        { id: 'p5', kind: 'Note', items: [nyVenue], text: 'If they say no, UFT Bronx is my next pick.', by: 'Oliver', at: '2026-10-26T15:40:00-04:00', likes: 0, picked: false },
+        { id: 'p6', kind: 'Note', items: ['demoNYC0'], text: 'Flyer is done. One-pager draft is in Drive.', by: 'Oliver', at: '2026-10-26T14:10:00-04:00', likes: 0, picked: false }
+      ];
+    }
+    if (method === 'GET') return { rows: JSON.parse(JSON.stringify(demoRows)), posts: JSON.parse(JSON.stringify(demoPosts)) };
+    if (path === '/posts') { var np = { id: 'p' + Date.now(), kind: body.kind, items: [body.item], text: body.text, details: body.details, by: body.by, at: new Date().toISOString(), likes: 0, picked: false }; demoPosts.push(np); return { post: np }; }
+    var m = /^\/posts\/([^/]+)\/(like|pick)$/.exec(path);
+    if (m) { var dp = demoPosts.find(function (x) { return x.id === decodeURIComponent(m[1]); }); if (m[2] === 'like') dp.likes = Math.max(0, dp.likes + body.delta); else dp.picked = body.picked; return { post: dp }; }
+    if (method === 'POST') { var r = { id: 'demo' + Date.now(), site: body.site, area: body.area, item: body.item, who: body.who, notes: '', brainstorm: !!body.brainstorm, status: 'Not started', order: 9999, added: true, updated: new Date().toISOString(), updatedBy: body.by }; demoRows.push(r); return { row: r }; }
     var id = decodeURIComponent(path.slice(1)); var row = demoRows.find(function (x) { return x.id === id; });
     ['status', 'who', 'notes'].forEach(function (k) { if (k in body) row[k] = body[k]; });
     row.updated = new Date().toISOString(); row.updatedBy = body.by;
