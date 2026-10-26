@@ -349,7 +349,7 @@
     api('PATCH', '/' + encodeURIComponent(id), body).then(function (j) {
       inflight--; failed = false;
       var r = byId[id];
-      if (r && j.row) {
+      if (r && j.row && j.row.item) {
         r.updated = j.row.updated; r.updatedBy = j.row.updatedBy;
         var stillTyping = pending[id] || {};
         ['status', 'who', 'notes'].forEach(function (k) { if (!(k in stillTyping)) r[k] = j.row[k]; });
@@ -612,7 +612,7 @@
     api('POST', '/posts', { item: form.dataset.item, kind: form.dataset.kind, text: text, details: details, by: me.value.trim() })
       .then(function (j) {
         inflight--; failed = false;
-        if (j.post) posts.push(j.post);
+        if (j.post && j.post.text) posts.push(j.post); else load(false);
         form.querySelectorAll('input').forEach(function (i) { i.value = ''; });
         renderSite(); renderSummary(); setSave();
         var again = document.querySelector('.post-form[data-kind="' + form.dataset.kind + '"][data-item="' + CSS.escape(form.dataset.item) + '"] input');
@@ -633,7 +633,7 @@
     store('dec2plan.liked', JSON.stringify(liked));
     p.likes = Math.max(0, (p.likes || 0) + delta); renderSite();
     api('POST', '/posts/' + encodeURIComponent(id) + '/like', { delta: delta }).then(function (j) {
-      if (j.post) { p.likes = j.post.likes; renderSite(); }
+      if (j.post && j.post.text) { p.likes = j.post.likes; renderSite(); }
     }).catch(function () {});
   }
   function pick(id) {
@@ -660,7 +660,7 @@
     api('POST', '', { site: site, area: $('addArea').value, item: item, who: $('addWho').value.trim(), brainstorm: $('addIdeas').checked, by: me.value.trim() })
       .then(function (j) {
         btn.disabled = false;
-        if (j.row) { rows.push(j.row); byId[j.row.id] = j.row; }
+        if (j.row && j.row.item) { rows.push(j.row); byId[j.row.id] = j.row; } else load(false);
         $('addItem').value = ''; $('addWho').value = ''; $('addIdeas').checked = false;
         $('addMsg').textContent = 'Added to ' + SITE_NAMES[site] + '.';
         render();
