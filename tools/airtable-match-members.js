@@ -4,8 +4,9 @@
 async function main() {
   const cfg = input.config();
   const isReg = cfg.kind === 'registration';
-  const src = base.getTable(isReg ? 'Registrations' : 'POP Pledge');
-  const people = base.getTable('Members');
+  // Table IDs, not names, so renaming a table in Airtable doesn't break matching.
+  const src = base.getTable(isReg ? 'tblzO2wUvQuBPgjgO' : 'tblxmECshBmEhRZku'); // Registrations : POP Pledge
+  const people = base.getTable('tbl92K4LZ2JIKlF3b'); // Members
   const F = isReg
     ? { first: 'First name', last: 'Last name', email: 'Email', phone: 'Phone', zip: 'Zip code', link: 'Person' }
     : { first: 'Name', last: 'Last Name', email: 'Email', phone: 'Phone', zip: 'Zip Code', link: 'Members' };
