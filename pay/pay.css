@@ -326,3 +326,20 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 .join-native input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--coral-deep); }
 .jf-trap { position: absolute; left: -9999px; }
 .join-native .join-err { margin: 0 0 12px !important; }
+
+/* Legislative goal banner, estimate labels, and the ask for elected officials */
+.leg-banner { padding: 24px 22px 22px; background: var(--ink); color: var(--paper); border-left: 8px solid var(--coral-deep); }
+.leg-banner .eyebrow { color: color-mix(in srgb, var(--paper) 75%, transparent); }
+.leg-banner h2 { color: var(--paper); }
+.leg-banner p:not(.eyebrow) { margin: 12px 0 0; max-width: 44em; font-size: 17px; }
+.demand .est { margin: 0 0 4px; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.principles .eyebrow { margin-top: 4px; }
+.ask-box { margin: 20px 0 0; padding: 18px 20px 20px; background: var(--card); border: 2px solid var(--ink); }
+.ask-box h4 { margin: 0; font: 800 18px/1.2 'Libre Franklin', sans-serif; }
+.ask-box ol { margin: 10px 0 0; padding-left: 22px; }
+.ask-box li + li { margin-top: 4px; }
+.ask-box .cta-row { margin-top: 16px; }
+.people li.ph .ph-link { grid-column: 2; margin-top: 6px; font-size: 14px; }
+/* Champion cards: which of the three asks each elected has committed to */
+.people .asks-done { grid-column: 2; display: flex !important; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.people .asks-done em { margin: 0; padding: 3px 7px; background: var(--chip); font-size: 11px; }
