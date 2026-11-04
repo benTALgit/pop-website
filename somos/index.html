@@ -105,7 +105,6 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
 .imgview{max-width:100%;display:block}
 .toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 14px;border-radius:8px;font:600 14px Inter,sans-serif;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20}
 .toast.on{opacity:1}
-footer{color:var(--muted);font-size:12.5px;margin-top:30px}
 @media (max-width:480px){h1{font-size:22px}.btn{padding:6px 8px}}
 </style>
 </head>
@@ -138,10 +137,6 @@ footer{color:var(--muted);font-size:12.5px;margin-top:30px}
 
   <main id="list"></main>
 
-  <footer>
-    Panels come from the SOMOS workshop schedule. Receptions come from a shared receptions list, partner emails, flyers and posts. Things change a lot at SOMOS, so check the link or flyer before you go.
-    <br><br><button class="btn" id="exportBtn" type="button">Copy the events I added</button>
-  </footer>
 </div>
 
 <button class="fab" id="addBtn" type="button">+ Add event</button>
@@ -184,7 +179,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:30px}
     <label for="a-flyer">Flyer photo (optional)</label>
     <input id="a-flyer" name="flyer" type="file" accept="image/*">
     <label><input type="checkbox" name="partner" id="a-partner" style="width:auto"> Partner / ally is hosting</label>
-    <p class="hint">Saves on this phone or computer right away. To put it on the shared page for everyone, tap "Copy the events I added" at the bottom and send it to Claude in the SOMOS thread.</p>
+    <p class="hint">Saves on this phone only. Other people won't see it.</p>
     <div class="actions">
       <button class="btn" value="cancel" type="button" id="addCancel">Cancel</button>
       <button class="btn" type="button" id="addDelete" hidden>Delete</button>
@@ -360,11 +355,6 @@ footer{color:var(--muted);font-size:12.5px;margin-top:30px}
     function done(){if(!editing)added.push(e);save(LS_ADD,added);dlg.close();state.day=e.date;renderDays();render();
       setTimeout(function(){var n=document.getElementById(e.id);if(n){n.scrollIntoView({block:'center'});n.classList.add('flash')}},50);toast('Saved')}
     if(file)shrink(file,function(d){e.flyer=d;done()});else done();
-  });
-  document.getElementById('exportBtn').addEventListener('click',function(){
-    if(!added.length){toast("You haven't added any yet");return}
-    var lines=added.map(function(e){return['• '+e.title,dayLabel(e.date)+', '+timeRange(e)+' PR time',[e.where,e.room].filter(Boolean).join(', '),e.hosts?'Hosts: '+e.hosts:'',(e.links[0]||{}).url||'',e.notes].filter(Boolean).join('\n')});
-    copy('Add these to the SOMOS page:\n\n'+lines.join('\n\n'));
   });
 
   // start on today's date during SOMOS, or the saved day, or the deep-linked event's day
