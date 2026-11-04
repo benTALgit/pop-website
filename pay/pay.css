@@ -349,3 +349,28 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 /* Champion cards: which of the three asks each elected has committed to */
 .people .asks-done { grid-column: 2; display: flex !important; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
 .people .asks-done em { margin: 0; padding: 3px 7px; background: var(--chip); font-size: 11px; }
+/* Champions by chamber: a district map beside each chamber's cards, champions' districts lit */
+.chamber { margin: 30px 0 0; padding-top: 18px; border-top: 2px solid var(--line); }
+.chamber h3 { margin: 0 0 12px; }
+.chamber:has(.chmap) { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 22px; }
+.chamber:has(.chmap) h3 { grid-column: 1 / -1; }
+.chamber .chmap { margin: 0; }
+.chamber:has(.chmap) .people { margin: 0; grid-template-columns: minmax(0, 1fr); align-content: start; }
+.dmap { display: block; width: 100%; height: auto; }
+.dmap .ds { fill: var(--card); stroke: var(--ink-soft); stroke-opacity: .5; stroke-width: .5; stroke-linejoin: round; }
+.dmap .ds.on { fill: var(--teal); stroke: var(--paper); stroke-opacity: 1; stroke-width: .7; }
+.dmap .ds:hover { fill-opacity: .8; }
+.dmap .inset rect { fill: var(--paper); stroke: var(--ink-soft); stroke-width: 1; }
+.dmap .lbl { font: 800 12px 'Libre Franklin', sans-serif; fill: var(--ink); }
+.dmap .lead { fill: none; stroke: var(--ink-soft); stroke-width: 1; stroke-dasharray: 3 3; }
+@media (max-width: 760px) {
+  .chamber:has(.chmap) { display: block; }
+  .chamber .chmap { margin-bottom: 12px; }
+}
+/* Champion sign-on dialog (shares the Join dialog's look) */
+.champ-asks { margin: -6px 0 16px; padding-left: 20px; font-size: 15px; }
+.champ-sub { margin: 4px 0 10px; font: 800 13px/1.2 'Libre Franklin', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--coral-deep); }
+.champ-other[hidden] { display: none !important; }
+.champ-auth { display: grid !important; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; margin: 0 0 14px; padding: 12px; background: var(--chip); font-weight: 600 !important; font-size: 15px !important; }
+.champ-auth input { margin: 2px 0 0; }
+.champ-done p { margin: 0 0 12px; }
