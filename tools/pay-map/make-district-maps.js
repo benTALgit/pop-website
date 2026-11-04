@@ -2,8 +2,8 @@
 // and writes them into pay/index.html between <!-- map:NAME --> ... <!-- /map:NAME --> markers.
 // Districts with a champion are lit; edit CHAMPS below when someone signs on, then re-run:
 //   node tools/pay-map/make-district-maps.js <geo dir>
-// <geo dir> holds sldu.json and sldl.json (Census cartographic boundary GeoJSON for NY, STATEFP 36)
-// and cc/d1.json ... cc/d51.json (one GeoJSON feature per City Council district, CounDist property).
+// <geo dir> holds sldu.json and sldl.json (Census 2024 cartographic boundaries for NY, converted from cb_2024_36_sldu/sldl_500k)
+// and cc/d1.json ... cc/d51.json (NYC Planning NYC_City_Council_Districts, one feature per district, CounDist property).
 const fs = require('fs');
 const path = require('path');
 

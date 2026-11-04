@@ -354,7 +354,7 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 .chamber h3 { margin: 0 0 12px; }
 .chamber:has(.chmap) { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 22px; }
 .chamber:has(.chmap) h3 { grid-column: 1 / -1; }
-.chamber .chmap { margin: 0; }
+.chamber .chmap { margin: 0; align-self: start; }
 .chamber:has(.chmap) .people { margin: 0; grid-template-columns: minmax(0, 1fr); align-content: start; }
 .dmap { display: block; width: 100%; height: auto; }
 .dmap .ds { fill: var(--card); stroke: var(--ink-soft); stroke-opacity: .5; stroke-width: .5; stroke-linejoin: round; }
@@ -374,3 +374,4 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 .champ-auth { display: grid !important; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; margin: 0 0 14px; padding: 12px; background: var(--chip); font-weight: 600 !important; font-size: 15px !important; }
 .champ-auth input { margin: 2px 0 0; }
 .champ-done p { margin: 0 0 12px; }
+.credits { margin: 14px 0 0; font-size: 12px; color: var(--ink-soft); } .credits a { color: inherit; }
