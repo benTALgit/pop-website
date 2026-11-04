@@ -374,3 +374,4 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 .champ-auth { display: grid !important; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; margin: 0 0 14px; padding: 12px; background: var(--chip); font-weight: 600 !important; font-size: 15px !important; }
 .champ-auth input { margin: 2px 0 0; }
 .champ-done p { margin: 0 0 12px; }
+.pick-opts { display: flex; flex-direction: column; gap: 10px; } .pick-opts .btn { justify-content: center; text-align: center; }

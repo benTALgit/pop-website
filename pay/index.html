@@ -51,6 +51,7 @@
     <p class="lede" data-e="3">New York is building universal child care. But the providers who make it possible earn less than 96% of the state's workers, and New York City family child care providers take home a median of <b>$6.01 an hour</b>. Universal child care can't be built on poverty wages. It's time to <b>Pay Our Providers</b>.</p>
     <div class="cta-row">
       <a class="btn primary" href="../dec2/" data-e="4">Join the launch on Dec 2</a>
+      <a class="btn" href="#endorse-pick" data-pick data-e="278">Endorse the campaign</a>
       <a class="btn" href="toolkit/" data-e="5">Get the toolkit</a>
     </div>
   </section>
@@ -670,6 +671,35 @@
     dlg.querySelector('.join-x').addEventListener('click', function () { dlg.close(); });
     dlg.querySelector('.champ-close').addEventListener('click', function () { dlg.close(); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  })();
+</script>
+
+<dialog id="endorse-pick" class="join pick" aria-labelledby="pickH">
+  <div class="join-head">
+    <h2 id="pickH">Endorse the campaign</h2>
+    <button type="button" class="join-x" aria-label="Close">&times;</button>
+  </div>
+  <div class="join-native">
+    <p class="join-pledge">Are you endorsing on behalf of an organization or an elected official?</p>
+    <div class="pick-opts">
+      <a class="btn primary" href="endorse/">An organization</a>
+      <a class="btn primary signon" href="#sign-on">An elected official</a>
+      <a class="btn" href="#join" data-join>I'm an individual</a>
+    </div>
+  </div>
+</dialog>
+<script>
+  // Endorse chooser: organizations go to the endorse form, elected officials to the champion sign-on,
+  // individuals to the Join pledge. The other two dialogs open themselves from their own click handlers.
+  (function () {
+    var dlg = document.getElementById('endorse-pick');
+    if (!dlg || !dlg.showModal) return;
+    function open(e) { if (e) e.preventDefault(); if (!dlg.open) dlg.showModal(); }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-pick]'), function (b) { b.addEventListener('click', open); });
+    Array.prototype.forEach.call(dlg.querySelectorAll('.pick-opts a'), function (a) { a.addEventListener('click', function () { dlg.close(); }); });
+    dlg.querySelector('.join-x').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    if (location.hash === '#endorse-pick') open();
   })();
 </script>
 </body>
