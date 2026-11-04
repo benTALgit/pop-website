@@ -326,3 +326,52 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 .join-native input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--coral-deep); }
 .jf-trap { position: absolute; left: -9999px; }
 .join-native .join-err { margin: 0 0 12px !important; }
+
+/* Legislative goal banner, estimate labels, and the ask for elected officials */
+.leg-banner { padding: 24px 22px 22px; background: var(--ink); color: var(--paper); border-left: 8px solid var(--coral-deep); }
+.leg-banner .eyebrow { color: color-mix(in srgb, var(--paper) 75%, transparent); }
+.leg-banner h2 { color: var(--paper); }
+.leg-banner h2 .hl { color: var(--coral); }
+.leg-banner p:not(.eyebrow) { margin: 12px 0 0; max-width: 44em; font-size: 17px; }
+/* One-pager wording (Nov 2026): the ask leads, the estimate sits under it */
+.demand h3.ask { margin: 0 0 10px; font-size: 21px; }
+.demand h3.ask span, .principles h3 .hl { color: var(--coral); }
+.demand .amount { font-size: clamp(34px, 5.6vw, 46px); margin: 0 0 10px; }
+.demand .amount small { font-size: .38em; font-weight: 700; letter-spacing: 0; margin-left: 2px; }
+.demand .est { margin: 0 0 4px; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.principles .eyebrow { margin-top: 4px; }
+.ask-box { margin: 20px 0 0; padding: 18px 20px 20px; background: var(--card); border: 2px solid var(--ink); }
+.ask-box h4 { margin: 0; font: 800 18px/1.2 'Libre Franklin', sans-serif; }
+.ask-box ol { margin: 10px 0 0; padding-left: 22px; }
+.ask-box li + li { margin-top: 4px; }
+.ask-box .cta-row { margin-top: 16px; }
+.people li.ph .ph-link { grid-column: 2; margin-top: 6px; font-size: 14px; }
+/* Champion cards: which of the three asks each elected has committed to */
+.people .asks-done { grid-column: 2; display: flex !important; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.people .asks-done em { margin: 0; padding: 3px 7px; background: var(--chip); font-size: 11px; }
+/* Champions by chamber: a district map beside each chamber's cards, champions' districts lit */
+.chamber { margin: 30px 0 0; padding-top: 18px; border-top: 2px solid var(--line); }
+.chamber h3 { margin: 0 0 12px; }
+.chamber:has(.chmap) { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 22px; }
+.chamber:has(.chmap) h3 { grid-column: 1 / -1; }
+.chamber .chmap { margin: 0; align-self: start; }
+.chamber:has(.chmap) .people { margin: 0; grid-template-columns: minmax(0, 1fr); align-content: start; }
+.dmap { display: block; width: 100%; height: auto; }
+.dmap .ds { fill: var(--card); stroke: var(--ink-soft); stroke-opacity: .5; stroke-width: .5; stroke-linejoin: round; }
+.dmap .ds.on { fill: var(--teal); stroke: var(--paper); stroke-opacity: 1; stroke-width: .7; }
+.dmap .ds:hover { fill-opacity: .8; }
+.dmap .inset rect { fill: var(--paper); stroke: var(--ink-soft); stroke-width: 1; }
+.dmap .lbl { font: 800 12px 'Libre Franklin', sans-serif; fill: var(--ink); }
+.dmap .lead { fill: none; stroke: var(--ink-soft); stroke-width: 1; stroke-dasharray: 3 3; }
+@media (max-width: 760px) {
+  .chamber:has(.chmap) { display: block; }
+  .chamber .chmap { margin-bottom: 12px; }
+}
+/* Champion sign-on dialog (shares the Join dialog's look) */
+.champ-asks { margin: -6px 0 16px; padding-left: 20px; font-size: 15px; }
+.champ-sub { margin: 4px 0 10px; font: 800 13px/1.2 'Libre Franklin', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--coral-deep); }
+.champ-other[hidden] { display: none !important; }
+.champ-auth { display: grid !important; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; margin: 0 0 14px; padding: 12px; background: var(--chip); font-weight: 600 !important; font-size: 15px !important; }
+.champ-auth input { margin: 2px 0 0; }
+.champ-done p { margin: 0 0 12px; }
+.pick-opts { display: flex; flex-direction: column; gap: 10px; } .pick-opts .btn { justify-content: center; text-align: center; }
