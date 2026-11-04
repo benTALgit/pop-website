@@ -331,6 +331,7 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 .leg-banner { padding: 24px 22px 22px; background: var(--ink); color: var(--paper); border-left: 8px solid var(--coral-deep); }
 .leg-banner .eyebrow { color: color-mix(in srgb, var(--paper) 75%, transparent); }
 .leg-banner h2 { color: var(--paper); }
+.leg-banner h2 .hl { color: var(--coral); }
 .leg-banner p:not(.eyebrow) { margin: 12px 0 0; max-width: 44em; font-size: 17px; }
 /* One-pager wording (Nov 2026): the ask leads, the estimate sits under it */
 .demand h3.ask { margin: 0 0 10px; font-size: 21px; }
