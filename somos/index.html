@@ -144,16 +144,15 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
 <dialog id="addDlg">
   <form class="dlg" method="dialog" id="addForm">
     <h2 id="addTitle">Add an event</h2>
-    <label for="a-title">What is it?</label>
+    <label for="a-title">Event name *</label>
     <input id="a-title" name="title" required placeholder="e.g. DC37 reception">
     <div class="row">
-      <div><label for="a-date">Day</label>
-        <select id="a-date" name="date">
+      <div><label for="a-date">Day *</label>
+        <select id="a-date" name="date" required>
           <option value="2026-11-04">Wed Nov 4</option>
           <option value="2026-11-05">Thu Nov 5</option>
           <option value="2026-11-06">Fri Nov 6</option>
           <option value="2026-11-07">Sat Nov 7</option>
-          <option value="">Not sure</option>
         </select></div>
       <div><label for="a-type">Kind</label>
         <select id="a-type" name="type">
@@ -163,7 +162,7 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
         </select></div>
     </div>
     <div class="row">
-      <div><label for="a-start">Starts (PR time)</label><input id="a-start" name="start" type="time"></div>
+      <div><label for="a-start">Starts, PR time *</label><input id="a-start" name="start" type="time" required></div>
       <div><label for="a-end">Ends</label><input id="a-end" name="end" type="time"></div>
     </div>
     <label for="a-hosts">Hosts</label>
@@ -179,11 +178,14 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
     <label for="a-flyer">Flyer photo (optional)</label>
     <input id="a-flyer" name="flyer" type="file" accept="image/*">
     <label><input type="checkbox" name="partner" id="a-partner" style="width:auto"> Partner / ally is hosting</label>
-    <p class="hint">Saves on this phone only. Other people won't see it.</p>
+    <label for="a-by">Added by</label>
+    <input id="a-by" name="addedBy" placeholder="Your name" autocomplete="name">
+    <input name="website" id="a-website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+    <p class="hint">Everyone with the link will see it. * = required</p>
+    <p class="hint" id="addErr" role="alert" hidden style="color:var(--coral-dk);font-weight:600"></p>
     <div class="actions">
       <button class="btn" value="cancel" type="button" id="addCancel">Cancel</button>
-      <button class="btn" type="button" id="addDelete" hidden>Delete</button>
-      <button class="btn primary" value="ok" type="submit">Save</button>
+      <button class="btn primary" value="ok" type="submit" id="addSave">Add for everyone</button>
     </div>
   </form>
 </dialog>
@@ -195,13 +197,23 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
 <script>
 (function(){
   var DAYS=[['2026-11-04','Wed','Nov 4'],['2026-11-05','Thu','Nov 5'],['2026-11-06','Fri','Nov 6'],['2026-11-07','Sat','Nov 7'],['','Day TBD','']];
-  var LS_ADD='somos26-added', LS_STAR='somos26-stars', LS_DAY='somos26-day';
+  var API='https://popchildcare.org/api/somos-events';
+  var LS_SHARED='somos26-shared', LS_STAR='somos26-stars', LS_DAY='somos26-day', LS_BY='somos26-by';
   function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
   function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){toast('Could not save on this device');return false}}
-  var added=load(LS_ADD,[]), stars=load(LS_STAR,{});
+  var shared=load(LS_SHARED,[]), stars=load(LS_STAR,{});
+  try{localStorage.removeItem('somos26-added')}catch(e){}
   var state={day:null,f:'all',q:''};
   var base=(window.SOMOS_EVENTS||[]);
-  function all(){return base.concat(added.map(function(e){e.mine=true;return e}))}
+  function fromApi(r){return{id:'a-'+r.id,type:r.type||'event',date:r.date||'',start:r.start||'',end:r.end||'',title:r.title||'',hosts:r.hosts||'',where:r.where||'',room:r.room||'',
+    notes:r.notes||'',links:r.link?[{label:'Link',url:r.link}]:[],flyer:r.flyer||'',tags:r.partner?['partner']:[],addedBy:r.addedBy||'',added:true}}
+  function all(){return base.concat(shared)}
+  function refresh(cb){
+    fetch(API,{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){
+      if(!d||!d.ok||!Array.isArray(d.events))throw 0;
+      shared=d.events.map(fromApi);save(LS_SHARED,shared);renderDays();render();cb&&cb(true);
+    }).catch(function(){cb&&cb(false)});
+  }
 
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
   function fmt(t){if(!t)return'';var p=t.split(':'),h=+p[0],m=p[1];if(h===24||h===0)return'12:'+m+' am';var ap=h>=12?'pm':'am';h=h%12||12;return h+(m==='00'?'':':'+m)+' '+ap}
@@ -218,7 +230,7 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
   function calTimes(e){var s=utc(e.date,e.start),en;
     if(e.end&&e.end>e.start)en=utc(e.date,e.end);else if(e.end&&e.end<e.start)en=utc(e.date,e.end,1440);else en=utc(e.date,e.start,60);
     return[s,en]}
-  function calDetails(e){return[e.hosts?'Hosts: '+e.hosts:'',e.orgs?'Orgs: '+e.orgs:'',e.notes,e.rsvp?'RSVP: '+e.rsvp:'',((e.links||[])[0]||{}).url||'',e.mine?'':pageUrl(e)].filter(Boolean).join('\n')}
+  function calDetails(e){return[e.hosts?'Hosts: '+e.hosts:'',e.orgs?'Orgs: '+e.orgs:'',e.notes,e.rsvp?'RSVP: '+e.rsvp:'',((e.links||[])[0]||{}).url||'',pageUrl(e)].filter(Boolean).join('\n')}
   function calWhere(e){return[e.room,e.where,'San Juan, Puerto Rico'].filter(Boolean).join(', ')}
   function gcalUrl(e){var t=calTimes(e);return'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(e.title)+'&dates='+t[0]+'/'+t[1]+'&details='+encodeURIComponent(calDetails(e))+'&location='+encodeURIComponent(calWhere(e))}
   function icsEsc(v){return String(v).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n')}
@@ -234,7 +246,7 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
     if(e.hosts)lines.push('Hosts: '+e.hosts);
     if(e.rsvp)lines.push('RSVP: '+e.rsvp);
     var l=(e.links||[])[0];if(l)lines.push(l.url);
-    if(!e.mine)lines.push('More SOMOS events: '+pageUrl(e));
+    lines.push('More SOMOS events: '+pageUrl(e));
     return lines.join('\n');
   }
 
@@ -264,7 +276,7 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
     if(tags.indexOf('childcare')>-1)h+='<span class="tag childcare">Child care</span>';
     if(tags.indexOf('labor')>-1)h+='<span class="tag">Labor</span>';
     if(tags.indexOf('funder')>-1)h+='<span class="tag">Funder</span>';
-    if(e.mine)h+='<span class="tag mine">Added by you</span>';
+    if(e.added)h+='<span class="tag mine">Added'+(e.addedBy?' by '+esc(e.addedBy):'')+'</span>';
     h+='</div><h3>'+esc(e.title)+'</h3>';
     if(e.hosts)h+='<div class="hosts">'+(e.type==='panel'?'Electeds: ':'')+esc(e.hosts)+'</div>';
     if(e.orgs)h+='<div class="orgs"><b>Orgs:</b> '+esc(e.orgs)+'</div>';
@@ -284,7 +296,6 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
     h+='<button class="btn" data-act="copy">Copy</button>';
     if(e.date&&e.start){h+='<a class="btn" href="'+esc(gcalUrl(e))+'" target="_blank" rel="noopener">+ Google Cal</a>';
       h+='<button class="btn" data-act="ics">+ iPhone / Outlook</button>'}
-    if(e.mine)h+='<button class="btn" data-act="edit">Edit</button>';
     h+='</div></article>';
     return h;
   }
@@ -326,35 +337,40 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
     if(act==='share'){navigator.share({title:e.title,text:txt}).catch(function(){});return}
     if(act==='copy'){copy(txt);return}
     if(act==='ics'){downloadIcs(e);return}
-    if(act==='edit'){openAdd(e);return}
   });
   document.getElementById('imgDlg').addEventListener('click',function(){this.close()});
 
-  // add / edit
-  var dlg=document.getElementById('addDlg'),form=document.getElementById('addForm'),editing=null;
-  function openAdd(e){
-    editing=e||null;form.reset();
-    document.getElementById('addTitle').textContent=e?'Edit your event':'Add an event';
-    document.getElementById('addDelete').hidden=!e;
-    if(e){['title','date','type','start','end','hosts','where','room','notes'].forEach(function(k){if(form.elements[k])form.elements[k].value=e[k]||''});
-      form.elements.link.value=(e.links&&e.links[0]&&e.links[0].url)||'';form.elements.partner.checked=(e.tags||[]).indexOf('partner')>-1}
-    else if(state.day!==null)form.elements.date.value=state.day;
+  // add (shared with everyone)
+  var dlg=document.getElementById('addDlg'),form=document.getElementById('addForm'),errEl=document.getElementById('addErr'),saveBtn=document.getElementById('addSave');
+  function openAdd(){
+    form.reset();errEl.hidden=true;
+    if(state.day)form.elements.date.value=state.day;
+    form.elements.addedBy.value=load(LS_BY,'');
     dlg.showModal();
   }
-  document.getElementById('addBtn').addEventListener('click',function(){openAdd(null)});
+  document.getElementById('addBtn').addEventListener('click',openAdd);
   document.getElementById('addCancel').addEventListener('click',function(){dlg.close()});
-  document.getElementById('addDelete').addEventListener('click',function(){if(!editing)return;added=added.filter(function(x){return x.id!==editing.id});save(LS_ADD,added);dlg.close();renderDays();render()});
-  function shrink(file,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,900/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.75))};im.onerror=function(){cb('')};im.src=r.result};r.readAsDataURL(file)}
+  function shrink(file,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,1400/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.8))};im.onerror=function(){cb('')};im.src=r.result};r.onerror=function(){cb('')};r.readAsDataURL(file)}
   form.addEventListener('submit',function(ev){
-    ev.preventDefault();var F=form.elements;
-    var e=editing||{id:'mine-'+Date.now().toString(36)};
-    ['title','date','type','start','end','hosts','where','room','notes'].forEach(function(k){e[k]=F[k].value.trim()});
-    e.links=F.link.value.trim()?[{label:'Link',url:F.link.value.trim()}]:[];
-    e.tags=F.partner.checked?['partner']:[];
+    ev.preventDefault();var F=form.elements;errEl.hidden=true;
+    var body={title:F.title.value.trim(),date:F.date.value,start:F.start.value,end:F.end.value,type:F.type.value,hosts:F.hosts.value.trim(),
+      where:F.where.value.trim(),room:F.room.value.trim(),link:F.link.value.trim(),notes:F.notes.value.trim(),partner:F.partner.checked,
+      addedBy:F.addedBy.value.trim(),website:F.website.value};
+    if(!body.title||!body.date||!body.start){errEl.textContent='Add the event name, day and start time.';errEl.hidden=false;return}
+    save(LS_BY,body.addedBy);
+    saveBtn.disabled=true;saveBtn.textContent='Adding…';
     var file=F.flyer.files&&F.flyer.files[0];
-    function done(){if(!editing)added.push(e);save(LS_ADD,added);dlg.close();state.day=e.date;renderDays();render();
-      setTimeout(function(){var n=document.getElementById(e.id);if(n){n.scrollIntoView({block:'center'});n.classList.add('flash')}},50);toast('Saved')}
-    if(file)shrink(file,function(d){e.flyer=d;done()});else done();
+    function send(){
+      fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(d){if(!r.ok||!d.ok)throw 0;return d})})
+      .then(function(d){
+        saveBtn.disabled=false;saveBtn.textContent='Add for everyone';dlg.close();toast('Added for everyone');
+        state.day=body.date;refresh(function(){var n=document.getElementById('a-'+d.id);if(n){n.scrollIntoView({block:'center'});n.classList.add('flash')}});
+      })
+      .catch(function(){saveBtn.disabled=false;saveBtn.textContent='Add for everyone';
+        errEl.textContent="Couldn't save it. Check your connection and tap the button again.";errEl.hidden=false});
+    }
+    if(file)shrink(file,function(d){if(d)body.flyer={name:(file.name||'flyer').replace(/\.[^.]+$/,'')+'.jpg',type:'image/jpeg',data:d.split(',')[1]};send()});else send();
   });
 
   // start on today's date during SOMOS, or the saved day, or the deep-linked event's day
@@ -366,6 +382,8 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
   if(hash){var he=byId(hash);if(he)state.day=he.date||''}
   renderDays();render();
   if(hash){var n=document.getElementById(hash);if(n){n.scrollIntoView({block:'center'});n.classList.add('flash')}}
+  refresh(function(){if(hash&&hash.indexOf('a-')===0){var he2=byId(hash);if(he2){state.day=he2.date;renderDays();render();var n2=document.getElementById(hash);if(n2){n2.scrollIntoView({block:'center'});n2.classList.add('flash')}}}});
+  setInterval(function(){if(!document.hidden&&!dlg.open)refresh()},60000);
 })();
 </script>
 </body>
