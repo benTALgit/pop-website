@@ -266,7 +266,11 @@ footer{color:var(--muted);font-size:12.5px;margin-top:30px}
     h+='<div class="actions">';
     h+='<button class="btn star" data-act="star" aria-pressed="'+(stars[e.id]?'true':'false')+'">'+(stars[e.id]?'★ Going':'☆ Pick')+'</button>';
     if(navigator.share)h+='<button class="btn" data-act="share">Share</button>';
-    h+='<button class="btn" data-act="wa">WhatsApp</button><button class="btn" data-act="sms">Text</button><button class="btn" data-act="email">Email</button><button class="btn" data-act="copy">Copy</button>';
+    var txt=shareText(e);
+    h+='<a class="btn" href="https://wa.me/?text='+encodeURIComponent(txt)+'" target="_blank" rel="noopener">WhatsApp</a>';
+    h+='<a class="btn" href="sms:?&amp;body='+encodeURIComponent(txt)+'">Text</a>';
+    h+='<a class="btn" href="mailto:?subject='+encodeURIComponent('SOMOS: '+e.title)+'&amp;body='+encodeURIComponent(txt)+'">Email</a>';
+    h+='<button class="btn" data-act="copy">Copy</button>';
     if(e.mine)h+='<button class="btn" data-act="edit">Edit</button>';
     h+='</div></article>';
     return h;
@@ -307,9 +311,6 @@ footer{color:var(--muted);font-size:12.5px;margin-top:30px}
     var e=byId(b.closest('.card').id);if(!e)return;var txt=shareText(e),act=b.dataset.act;
     if(act==='star'){if(stars[e.id])delete stars[e.id];else stars[e.id]=1;save(LS_STAR,stars);render();return}
     if(act==='share'){navigator.share({title:e.title,text:txt}).catch(function(){});return}
-    if(act==='wa'){window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');return}
-    if(act==='sms'){location.href='sms:?&body='+encodeURIComponent(txt);return}
-    if(act==='email'){location.href='mailto:?subject='+encodeURIComponent('SOMOS: '+e.title)+'&body='+encodeURIComponent(txt);return}
     if(act==='copy'){copy(txt);return}
     if(act==='edit'){openAdd(e);return}
   });
@@ -328,7 +329,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:30px}
   }
   document.getElementById('addBtn').addEventListener('click',function(){openAdd(null)});
   document.getElementById('addCancel').addEventListener('click',function(){dlg.close()});
-  document.getElementById('addDelete').addEventListener('click',function(){if(!editing)return;if(!confirm('Delete this event from your list?'))return;added=added.filter(function(x){return x.id!==editing.id});save(LS_ADD,added);dlg.close();renderDays();render()});
+  document.getElementById('addDelete').addEventListener('click',function(){if(!editing)return;added=added.filter(function(x){return x.id!==editing.id});save(LS_ADD,added);dlg.close();renderDays();render()});
   function shrink(file,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,900/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.75))};im.onerror=function(){cb('')};im.src=r.result};r.readAsDataURL(file)}
   form.addEventListener('submit',function(ev){
     ev.preventDefault();var F=form.elements;
