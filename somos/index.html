@@ -217,6 +217,22 @@ footer{color:var(--muted);font-size:12.5px;margin-top:30px}
   function pageUrl(e){return location.origin+location.pathname+(e?'#'+e.id:'')}
   function typeName(t){return t==='panel'?'Official panel':t==='program'?'SOMOS program':'Event'}
 
+  // calendar: PR time is UTC-4 all year
+  function utc(date,t,addMin){var d=new Date(date+'T00:00:00Z');var p=(t||'00:00').split(':');d.setUTCMinutes(+p[0]*60+(+p[1])+240+(addMin||0));
+    return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'')}
+  function calTimes(e){var s=utc(e.date,e.start),en;
+    if(e.end&&e.end>e.start)en=utc(e.date,e.end);else if(e.end&&e.end<e.start)en=utc(e.date,e.end,1440);else en=utc(e.date,e.start,60);
+    return[s,en]}
+  function calDetails(e){return[e.hosts?'Hosts: '+e.hosts:'',e.orgs?'Orgs: '+e.orgs:'',e.notes,e.rsvp?'RSVP: '+e.rsvp:'',((e.links||[])[0]||{}).url||'',e.mine?'':pageUrl(e)].filter(Boolean).join('\n')}
+  function calWhere(e){return[e.room,e.where,'San Juan, Puerto Rico'].filter(Boolean).join(', ')}
+  function gcalUrl(e){var t=calTimes(e);return'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(e.title)+'&dates='+t[0]+'/'+t[1]+'&details='+encodeURIComponent(calDetails(e))+'&location='+encodeURIComponent(calWhere(e))}
+  function icsEsc(v){return String(v).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n')}
+  function downloadIcs(e){var t=calTimes(e);
+    var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//POP//SOMOS 2026//EN','BEGIN:VEVENT','UID:'+e.id+'@popny.org','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''),
+      'DTSTART:'+t[0],'DTEND:'+t[1],'SUMMARY:'+icsEsc(e.title),'LOCATION:'+icsEsc(calWhere(e)),'DESCRIPTION:'+icsEsc(calDetails(e)),'END:VEVENT','END:VCALENDAR'].join('\r\n');
+    try{var b=new Blob([ics],{type:'text/calendar'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=(e.id||'event')+'.ics';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000)}
+    catch(err){toast('Could not make the calendar file here')}}
+
   function shareText(e){
     var lines=[e.title,dayLabel(e.date)+', '+timeRange(e)+' (PR time)'];
     var w=[e.where,e.room].filter(Boolean).join(', ');if(w)lines.push(w);
@@ -271,6 +287,8 @@ footer{color:var(--muted);font-size:12.5px;margin-top:30px}
     h+='<a class="btn" href="sms:?&amp;body='+encodeURIComponent(txt)+'">Text</a>';
     h+='<a class="btn" href="mailto:?subject='+encodeURIComponent('SOMOS: '+e.title)+'&amp;body='+encodeURIComponent(txt)+'">Email</a>';
     h+='<button class="btn" data-act="copy">Copy</button>';
+    if(e.date&&e.start){h+='<a class="btn" href="'+esc(gcalUrl(e))+'" target="_blank" rel="noopener">+ Google Cal</a>';
+      h+='<button class="btn" data-act="ics">+ iPhone / Outlook</button>'}
     if(e.mine)h+='<button class="btn" data-act="edit">Edit</button>';
     h+='</div></article>';
     return h;
@@ -312,6 +330,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:30px}
     if(act==='star'){if(stars[e.id])delete stars[e.id];else stars[e.id]=1;save(LS_STAR,stars);render();return}
     if(act==='share'){navigator.share({title:e.title,text:txt}).catch(function(){});return}
     if(act==='copy'){copy(txt);return}
+    if(act==='ics'){downloadIcs(e);return}
     if(act==='edit'){openAdd(e);return}
   });
   document.getElementById('imgDlg').addEventListener('click',function(){this.close()});
