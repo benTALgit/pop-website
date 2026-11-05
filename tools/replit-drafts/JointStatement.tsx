@@ -131,7 +131,7 @@ export default function JointStatement() {
           </div>
           <div className="border border-border bg-card p-6">
             <h2 className="font-display text-sm text-primary tracking-wide uppercase mb-3">
-              Providers Organized for Power Participants
+              Providers Organized for Power Members
             </h2>
             <ul className="text-foreground leading-relaxed">
               {popMembers.map((name) => (
