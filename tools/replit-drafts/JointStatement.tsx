@@ -37,7 +37,7 @@ export default function JointStatement() {
         </Link>
 
         <p className="font-display text-xs text-primary tracking-wide uppercase mb-4">
-          Joint statement · November 4, 2026
+          Joint statement · November 5, 2026
         </p>
         <h1
           className="font-display text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-3 text-balance"
