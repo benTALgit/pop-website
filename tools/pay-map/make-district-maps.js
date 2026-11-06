@@ -8,8 +8,8 @@ const fs = require('fs');
 const path = require('path');
 
 const CHAMPS = {
-  senate: { 25: 'Sen. Jabari Brisport' },
-  assembly: { 28: 'Asm. Andrew Hevesi', 36: 'Asm. Diana Moreno', 39: 'Asm. Catalina Cruz', 125: 'Asm. Anna Kelles', 136: 'Asm. Sarah Clark' },
+  senate: { 25: 'Sen. Jabari Brisport', 31: 'Sen. Robert Jackson' },
+  assembly: { 28: 'Asm. Andrew Hevesi', 36: 'Asm. Diana Moreno', 39: 'Asm. Catalina Cruz', 125: 'Asm. Anna Kelles', 57: 'Asm. Phara Souffrant Forrest', 136: 'Asm. Sarah Clark' },
   council: { 21: 'CM Shanel Thomas-Henry', 33: 'CM Lincoln Restler', 34: 'CM Jennifer Gutiérrez', 37: 'CM Sandy Nurse', 38: 'CM Alexa Avilés', 39: 'CM Shahana Hanif' },
 };
 
