@@ -304,7 +304,7 @@
     h += '<label class="rs-msg"><span>' + esc(t('msg')) + '</span><textarea name="body" rows="12">' + esc(txt.b) + '</textarea></label>';
     h += '<p class="join-err" role="alert" hidden></p><div class="rs-actions">';
     if (hasEmail) h += '<a class="btn primary" data-go="mail" href="#">' + esc(t('openEmail')) + '</a><a class="btn" data-go="gmail" href="#" target="_blank" rel="noopener">' + esc(t('gmail')) + '</a>';
-    if (o.form) h += '<a class="btn' + (hasEmail ? '' : ' primary') + '" data-go="form" href="' + esc(o.form) + '" target="_blank" rel="noopener">' + esc(t('copyForm')) + '</a>';
+    if (o.form && !hasEmail) h += '<a class="btn primary" data-go="form" href="' + esc(o.form) + '" target="_blank" rel="noopener">' + esc(t('copyForm')) + '</a>';
     h += '<button type="button" class="btn" data-go="copy">' + esc(t('copy')) + '</button></div>';
     if (o.phones.length) {
       h += '<p class="rs-call"><b>' + esc(t('callIt')) + ':</b> ' + o.phones.map(function (ph) { return '<a data-go="tel" href="tel:' + ph.n.replace(/\D/g, '') + '">' + esc(ph.n) + '</a> <small>' + esc(t('ph')[ph.w] || '') + '</small>'; }).join(' · ') +
