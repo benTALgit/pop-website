@@ -69,3 +69,11 @@
 #rep-send .rs-call span { display: block; margin-top: 6px; font-size: 14px; color: var(--ink-soft); }
 #rep-send .rs-done { margin: 14px 0 0; padding: 10px 12px; background: var(--card); border-left: 4px solid var(--teal); font-weight: 700; }
 #rep-send .rs-done[hidden] { display: none; }
+/* Address suggestions (reps/addr-suggest.js) */
+.addr-list { position: absolute; z-index: 20; top: 100%; left: 0; right: 0; margin: -2px 0 0; padding: 0; list-style: none; background: var(--paper); border: 2px solid var(--ink); box-shadow: 0 8px 18px rgba(0,0,0,.12); font-weight: 400; }
+.addr-list[hidden] { display: none; }
+.addr-list li { padding: 10px 12px; cursor: pointer; display: flex; flex-direction: column; gap: 2px; border-top: 1px solid var(--line); }
+.addr-list li:first-child { border-top: 0; }
+.addr-list li b { font-weight: 700; font-size: 16px; }
+.addr-list li span { font-size: 14px; color: var(--ink-soft); }
+.addr-list li[aria-selected=true], .addr-list li:hover { background: rgba(0,0,0,.06); }
