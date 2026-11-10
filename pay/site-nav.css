@@ -66,3 +66,10 @@
   .camp-nav .cn-links a { flex: none; padding: 8px 9px; font-size: 11px; }
   .camp-nav .cn-links a:first-child { margin-left: -9px; }
 }
+
+/* The campaign sub-nav stays on screen while you scroll. On pages that have it, the site header scrolls
+   away and the sub-nav sticks to the top instead, so the two bars never stack up and eat the screen. */
+body:has(.camp-nav) .site-nav { position: relative; }
+.camp-nav { position: sticky; top: 0; z-index: 40; }
+:target, [id] { scroll-margin-top: 72px; }
+@media (max-width: 639px) { :target, [id] { scroll-margin-top: 96px; } }

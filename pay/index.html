@@ -17,6 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site-nav.css">
 <link rel="stylesheet" href="pay.css">
+<link rel="stylesheet" href="reps/reps.css">
 </head>
 <body>
 
@@ -33,7 +34,7 @@
 <nav class="camp-nav" aria-label="Pay Our Providers">
   <div class="cn-in">
     <a class="cn-name" href="./">Pay Our Providers</a>
-    <div class="cn-links"><a href="#demands">Demands</a><a href="toolkit/">Toolkit</a><a href="endorse/">Endorse</a><a href="../dec2/" class="go">Dec 2 launch</a></div>
+    <div class="cn-links"><a href="#demands">Demands</a><a href="toolkit/">Toolkit</a><a href="endorse/">Endorse</a><a href="#champions">Champions</a><a href="../dec2/" class="go">Dec 2 launch</a></div>
   </div>
 </nav>
 
@@ -311,6 +312,22 @@
     <details class="sec" id="champions">
       <summary><span class="num">03</span><span class="t display" data-e="84">Our Champions</span><span class="sub" data-e="85">Elected officials across the State of New York who stand with providers</span></summary>
       <div class="body">
+        <div class="reps" id="your-reps">
+          <div class="reps-top">
+            <div>
+              <p class="eyebrow" data-r="eyebrow">Look up your elected officials</p>
+              <h3 data-r="title">Are your reps supporting POP?</h3>
+            </div>
+            <div class="reps-lang" role="group" aria-label="Language / Idioma"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" aria-pressed="false">Español</button></div>
+          </div>
+          <p class="reps-intro" data-r="intro">Enter your home address to see who represents you, and whether they've signed on as a Pay Our Providers champion. Then thank them, or ask them to sign on.</p>
+          <form class="reps-form" novalidate>
+            <label><span data-r="addrLabel">Your home address</span><input name="address" autocomplete="street-address" placeholder="Street address, city, zip" required></label>
+            <button type="submit" class="btn primary" data-r="find">Find my reps</button>
+          </form>
+          <p class="reps-status" role="status" aria-live="polite"></p>
+          <div class="reps-results" hidden></div>
+        </div>
         <figure class="photo"><img src="assets/nycat-electeds.jpg" alt="Elected officials standing at the head table during the NYCAT lightning round" loading="lazy" style="object-position:center 30%"><figcaption data-e="86">Elected officials stand for pay justice at the New York State Child Care Alignment Table, September 28, 2026.</figcaption></figure>
         <h3 data-e="255">Signed on for the 2027 session</h3>
         <p data-e="256">These elected officials have signed on as Pay Our Providers champions for the 2027 legislative session.</p>
@@ -442,6 +459,7 @@
     <button type="submit" class="btn primary" data-es="Me uno">Sign on</button>
   </form>
 </dialog>
+<dialog id="rep-send" class="join" aria-labelledby="repSendH"></dialog>
 <dialog id="sign-on" class="join champ" aria-labelledby="champH">
   <div class="join-head">
     <h2 id="champH">Sign on as a POP Champion</h2>
@@ -623,6 +641,7 @@
     secs.forEach(function (d) { d.addEventListener('toggle', sync); });
     function openHash() {
       var el = location.hash && document.getElementById(location.hash.slice(1));
+      if (el && el.tagName !== 'DETAILS' && el.closest) { var sec = el.closest('details.sec'); if (sec) { sec.open = true; el.scrollIntoView(); return; } }
       if (el && el.tagName === 'DETAILS') { el.open = true; el.scrollIntoView(); }
     }
     window.addEventListener('hashchange', openHash);
@@ -715,5 +734,7 @@
     if (location.hash === '#endorse-pick') open();
   })();
 </script>
+<script src="reps/officials.js"></script>
+<script src="reps/reps.js"></script>
 </body>
 </html>

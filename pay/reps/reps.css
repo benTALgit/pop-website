@@ -1,0 +1,71 @@
+/* "Are your reps supporting POP?" lookup (#your-reps on /campaign/) and its message dialog (#rep-send). */
+.reps { margin: 4px 0 30px; padding: 20px 20px 22px; background: var(--card); border-top: 6px solid var(--coral-deep); }
+.reps-top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px 16px; }
+.reps h3 { margin: 0; color: var(--coral); font-weight: 800; font-size: clamp(24px, 4.4vw, 34px); line-height: 1.08; letter-spacing: -.01em; }
+.reps .eyebrow { margin-bottom: 6px; }
+.reps-intro { margin: 10px 0 16px; max-width: 62ch; }
+.reps-lang { display: inline-flex; border: 1.5px solid var(--ink); flex: none; }
+.reps-lang button, .rs-ll button { border: 0; padding: 7px 11px; background: none; color: var(--ink); font: 700 13px 'Libre Franklin', sans-serif; cursor: pointer; }
+.reps-lang button[aria-pressed=true], .rs-ll button[aria-pressed=true] { background: var(--ink); color: var(--paper); }
+.reps-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.reps-form label { flex: 1 1 320px; display: flex; flex-direction: column; gap: 5px; font-weight: 700; font-size: 14px; }
+.reps-form input { min-height: 50px; padding: 0 12px; font: 500 17px 'Libre Franklin', sans-serif; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); width: 100%; box-sizing: border-box; }
+.reps-form .btn { flex: none; }
+.reps-form .btn[disabled] { opacity: .6; cursor: wait; }
+.reps-status { margin: 10px 0 0; font-weight: 700; min-height: 1em; }
+.reps-status:empty { display: none; }
+.reps-status.bad { color: var(--coral); }
+.reps-results { margin-top: 18px; }
+.reps-results[hidden] { display: none; }
+.reps-matched { margin: 0; color: var(--ink-soft); outline: none; }
+.reps-score { margin: 6px 0 4px; font-size: 18px; }
+.reps-score b { color: var(--coral); font-size: 22px; }
+.reps-note { margin: 4px 0 0; font-size: 14px; color: var(--ink-soft); }
+.reps-group { margin: 22px 0 8px; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.rep-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.rep { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 4px 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.rep .mark { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font: 800 22px/1 'Libre Franklin', sans-serif; color: #fff; }
+.rep.yes .mark { background: var(--teal); }
+.rep.no .mark { background: var(--coral-deep); }
+.rep.vacant .mark, .rep.unknown .mark { background: var(--line); color: var(--ink); }
+.rep .who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rep .who b { font-size: 18px; line-height: 1.2; }
+.rep .who > span { font-size: 14px; color: var(--ink-soft); }
+.rep .who .state { font-weight: 800; color: var(--ink); font-size: 13px; letter-spacing: .04em; text-transform: uppercase; margin-top: 2px; }
+.rep.yes .who .state { color: var(--teal); }
+.rep.no .who .state { color: var(--coral-deep); }
+.rep .btn { min-height: 44px; font-size: 14px; padding: 0 14px; align-self: center; }
+.rep .contacts { margin-top: 6px; font-size: 14px; }
+.rep .contacts summary { cursor: pointer; font-weight: 700; color: var(--coral-deep); }
+.rep .contacts ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; }
+.rep .contacts li { overflow-wrap: anywhere; }
+.rep .contacts li > span { display: inline-block; min-width: 92px; font-weight: 700; color: var(--ink-soft); }
+.rep .contacts small { color: var(--ink-soft); }
+@media (max-width: 639px) {
+  .reps { padding: 16px 14px 18px; margin-left: -4px; margin-right: -4px; }
+  .rep { grid-template-columns: 36px minmax(0, 1fr); }
+  .rep .mark { width: 32px; height: 32px; font-size: 18px; }
+  .rep .btn { grid-column: 2; justify-self: start; }
+  .rep .contacts li > span { min-width: 0; margin-right: 6px; }
+}
+:root[data-theme="dark"] .rep.yes .mark, :root[data-theme="dark"] .rep.no .mark { color: #1B1616; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .rep.yes .mark { color: #1B1616; } }
+
+/* message dialog */
+#rep-send .rs-body { display: block; }
+#rep-send .rs-to { margin: 0 0 12px; }
+#rep-send .rs-to span { font-size: 14px; color: var(--ink-soft); overflow-wrap: anywhere; }
+#rep-send .rs-note { margin: 0 0 12px; padding: 10px 12px; background: var(--card); border-left: 4px solid var(--coral); font-size: 14px; }
+#rep-send .rs-keep { display: flex; gap: 8px; align-items: center; font-weight: 500; margin-bottom: 12px; }
+#rep-send .rs-ll { display: flex; align-items: center; gap: 0; margin-bottom: 12px; font-size: 14px; font-weight: 700; }
+#rep-send .rs-ll span { margin-right: 8px; }
+#rep-send .rs-ll button { border: 1.5px solid var(--ink); }
+#rep-send .rs-ll button + button { border-left: 0; }
+#rep-send .rs-subj, #rep-send .rs-msg { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+#rep-send textarea { width: 100%; box-sizing: border-box; padding: 10px; font: 400 15px/1.45 'Libre Franklin', sans-serif; border: 2px solid var(--ink); background: var(--card); color: var(--ink); resize: vertical; }
+#rep-send .rs-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+#rep-send .rs-actions .btn { min-height: 46px; font-size: 14px; }
+#rep-send .rs-call { margin: 16px 0 0; font-size: 15px; }
+#rep-send .rs-call span { display: block; margin-top: 6px; font-size: 14px; color: var(--ink-soft); }
+#rep-send .rs-done { margin: 14px 0 0; padding: 10px 12px; background: var(--card); border-left: 4px solid var(--teal); font-weight: 700; }
+#rep-send .rs-done[hidden] { display: none; }
