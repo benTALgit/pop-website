@@ -226,7 +226,7 @@
 
   <div class="when display">
     <span data-i18n="date">Wed, Dec 2</span>
-    <span>10 AM</span>
+    <span>11 AM–1 PM</span>
     <span>Albany · Buffalo · NYC</span>
   </div>
   <p class="loc-note" data-i18n="locNote">Register to receive location details.</p>
@@ -383,7 +383,7 @@
   // popchildcare.org server. Leave empty ('') to preview without sending.
   var SUBMIT_URL = '/api/dec2-register';
 
-  var EVENT = { title: 'Happy Birthday, Shirley! Pay Our Providers campaign launch', start: '20261202T100000', end: '20261202T120000', tz: 'America/New_York' };
+  var EVENT = { title: 'Happy Birthday, Shirley! Pay Our Providers campaign launch', start: '20261202T110000', end: '20261202T130000', tz: 'America/New_York' };
 
   var ES = {
     navDemands: 'Demandas', navToolkit: 'Materiales', navEndorse: 'Respaldar', navTestify: 'Testificar', navDec2: 'Lanzamiento 2 dic',
@@ -543,14 +543,14 @@
     + '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
   document.getElementById('calOutlook').href = 'https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent'
     + '&subject=' + encodeURIComponent(EVENT.title)
-    + '&startdt=' + encodeURIComponent('2026-12-02T10:00:00-05:00') + '&enddt=' + encodeURIComponent('2026-12-02T12:00:00-05:00')
+    + '&startdt=' + encodeURIComponent('2026-12-02T11:00:00-05:00') + '&enddt=' + encodeURIComponent('2026-12-02T13:00:00-05:00')
     + '&body=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
   var olQuery = '&subject=' + encodeURIComponent(EVENT.title)
-    + '&startdt=' + encodeURIComponent('2026-12-02T10:00:00-05:00') + '&enddt=' + encodeURIComponent('2026-12-02T12:00:00-05:00')
+    + '&startdt=' + encodeURIComponent('2026-12-02T11:00:00-05:00') + '&enddt=' + encodeURIComponent('2026-12-02T13:00:00-05:00')
     + '&body=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
   document.getElementById('calO365').href = 'https://outlook.office.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent' + olQuery;
   document.getElementById('calYahoo').href = 'https://calendar.yahoo.com/?v=60'
-    + '&title=' + encodeURIComponent(EVENT.title) + '&st=20261202T150000Z&et=20261202T170000Z'
+    + '&title=' + encodeURIComponent(EVENT.title) + '&st=20261202T160000Z&et=20261202T180000Z'
     + '&desc=' + encodeURIComponent(details) + '&in_loc=' + encodeURIComponent(where);
   var calBtn = document.getElementById('calBtn'), calMenu = document.getElementById('calMenu');
   function closeCal() { calMenu.hidden = true; calBtn.setAttribute('aria-expanded', 'false'); }
