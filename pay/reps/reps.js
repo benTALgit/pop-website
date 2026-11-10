@@ -15,6 +15,8 @@
   var COUNCIL_URL = 'https://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/NYC_City_Council_Districts/FeatureServer/0/query';
   var NYC = { '005': 'Bronx', '047': 'Brooklyn', '061': 'Manhattan', '081': 'Queens', '085': 'Staten Island' };
   var SIGN_ON = 'https://popchildcare.org/campaign/#sign-on';
+  // Every email letter BCCs this POP inbox, so we have a copy of each one that actually goes out (and from whom).
+  var BCC = 'info@popchildcare.org';
   var DEC2_OVER = new Date('2026-12-03T05:00:00Z'); // after Dec 2 (ET) the letters stop mentioning the launch
 
   var T = {
@@ -38,10 +40,11 @@
       councilMiss: 'We couldn’t find your Council district from this address.', councilFind: 'Find your Council Member',
       nycOnly: 'City Council and citywide offices are shown for New York City addresses.',
       // composer
-      to: 'To', yourName: 'Your name', yourEmail: 'Your email (optional)', keep: 'Keep me posted about Pay Our Providers',
+      to: 'To', yourName: 'Your name', yourEmail: 'Your email', keep: 'Keep me posted about Pay Our Providers',
       letterLang: 'Letter in', msg: 'Your message (you can edit it)', subject: 'Subject',
       openEmail: 'Open in my email', gmail: 'Use Gmail instead', copyForm: 'Copy message & open their contact form',
-      copy: 'Copy message', copied: 'Copied!', callIt: 'Call their office', close: 'Close', needName: 'Please add your name so they know who it’s from.',
+      copy: 'Copy message', copied: 'Copied!', callIt: 'Call their office', close: 'Close', needName: 'Please add your name so they know who it’s from.', needEmail: 'Please add your email so their office can write back to you.',
+      bccNote: 'A blind copy goes to POP so we can count your message.',
       noEmail: 'This office doesn’t list a public email, so send your message through their contact form, or call.',
       senNote: 'The State Senate form asks you to make a free nysenate.gov account first.',
       script: 'On the phone: “Hi, I’m a constituent. I’m calling to ask {who} to sign on as a champion of Pay Our Providers, the child care providers’ campaign for fair pay.”',
@@ -68,10 +71,11 @@
       district: 'Distrito', groups: { mine: 'Sus representantes de distrito', also: 'Tambi\u00e9n le representan' },
       councilMiss: 'No encontramos su distrito del Concejo con esta dirección.', councilFind: 'Busque a su concejal',
       nycOnly: 'El Concejo Municipal y los cargos de la ciudad aparecen para direcciones en la Ciudad de Nueva York.',
-      to: 'Para', yourName: 'Su nombre', yourEmail: 'Su correo (opcional)', keep: 'Quiero recibir noticias de Pay Our Providers',
+      to: 'Para', yourName: 'Su nombre', yourEmail: 'Su correo', keep: 'Quiero recibir noticias de Pay Our Providers',
       letterLang: 'Carta en', msg: 'Su mensaje (puede editarlo)', subject: 'Asunto',
       openEmail: 'Abrir en mi correo', gmail: 'Usar Gmail', copyForm: 'Copiar el mensaje y abrir su formulario',
-      copy: 'Copiar el mensaje', copied: '¡Copiado!', callIt: 'Llamar a su oficina', close: 'Cerrar', needName: 'Escriba su nombre para que sepan quién escribe.',
+      copy: 'Copiar el mensaje', copied: '¡Copiado!', callIt: 'Llamar a su oficina', close: 'Cerrar', needName: 'Escriba su nombre para que sepan quién escribe.', needEmail: 'Escriba su correo para que su oficina le pueda responder.',
+      bccNote: 'Se envía una copia oculta a POP para contar su mensaje.',
       noEmail: 'Esta oficina no publica un correo, así que envíe su mensaje por su formulario de contacto, o llame.',
       senNote: 'El formulario del Senado Estatal pide crear primero una cuenta gratis en nysenate.gov.',
       script: 'Por teléfono: “Hola, vivo en su distrito. Llamo para pedirle a {who} que se sume como campeón de Pay Our Providers, la campaña de las proveedoras de cuidado infantil por un pago justo.”',
@@ -290,9 +294,10 @@
     var h = '<div class="join-head"><h2 id="repSendH">' + esc(r.yes ? t('thank') : t('ask')) + ': ' + esc(o.name) + '</h2>' +
       '<button type="button" class="join-x" aria-label="' + esc(t('close')) + '">&times;</button></div><div class="rs-body join-native">';
     h += '<p class="rs-to"><b>' + esc(t('to')) + ':</b> ' + esc(o.name) + ', ' + esc(officeLine(r)) + (hasEmail ? '<br><span>' + esc(o.emails.join(', ')) + '</span>' : '') + '</p>';
+    if (hasEmail && BCC) h += '<p class="rs-note rs-bcc">' + esc(t('bccNote')) + '</p>';
     if (!hasEmail) h += '<p class="rs-note">' + esc(t('noEmail')) + (o.formNote === 'nysenate' ? ' ' + esc(t('senNote')) : '') + '</p>';
     h += '<div class="jf-grid"><label><span>' + esc(t('yourName')) + '</span><input name="me" autocomplete="name" required value="' + esc(who.name) + '"></label>' +
-      '<label><span>' + esc(t('yourEmail')) + '</span><input name="mail" type="email" autocomplete="email" value="' + esc(who.email) + '"></label></div>' +
+      '<label><span>' + esc(t('yourEmail')) + '</span><input name="mail" type="email" autocomplete="email" required value="' + esc(who.email) + '"></label></div>' +
       '<label class="rs-keep"><input type="checkbox" name="keep"' + (who.keep ? ' checked' : '') + '> <span>' + esc(t('keep')) + '</span></label>';
     h += '<div class="rs-ll" role="group" aria-label="' + esc(t('letterLang')) + '"><span>' + esc(t('letterLang')) + ':</span> <button type="button" data-l="en" aria-pressed="' + (L === 'en') + '">English</button><button type="button" data-l="es" aria-pressed="' + (L === 'es') + '">Español</button></div>';
     h += '<label class="rs-subj"><span>' + esc(t('subject')) + '</span><input name="subj" value="' + esc(txt.s) + '"></label>';
@@ -325,6 +330,7 @@
     function ready() {
       refresh();
       if (!who.name) { err.textContent = t('needName'); err.hidden = false; f('me').focus(); return false; }
+      if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(who.email || '')) { err.textContent = t('needEmail'); err.hidden = false; f('mail').focus(); return false; }
       err.hidden = true; return true;
     }
     function copy() {
@@ -336,15 +342,15 @@
     Array.prototype.forEach.call(dlg.querySelectorAll('[data-go]'), function (a) {
       a.addEventListener('click', function (e) {
         var go = a.getAttribute('data-go');
-        if (go === 'tel') { if (who.name) log(r, 'Phone', ''); return; }
+        if (go === 'tel') { refresh(); if (who.name && who.email) log(r, 'Phone', ''); return; }
         if (!ready()) { e.preventDefault(); return; }
         var s = f('subj').value, b = f('body').value;
         if (go === 'mail') {
           e.preventDefault();
-          location.href = 'mailto:' + o.emails.map(encodeURIComponent).join(',') + '?subject=' + encodeURIComponent(s) + '&body=' + encodeURIComponent(b);
+          location.href = 'mailto:' + o.emails.map(encodeURIComponent).join(',') + '?subject=' + encodeURIComponent(s) + (BCC ? '&bcc=' + encodeURIComponent(BCC) : '') + '&body=' + encodeURIComponent(b);
           log(r, 'Email', b); done.textContent = t('done'); done.hidden = false;
         } else if (go === 'gmail') {
-          a.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(o.emails.join(',')) + '&su=' + encodeURIComponent(s) + '&body=' + encodeURIComponent(b);
+          a.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(o.emails.join(',')) + (BCC ? '&bcc=' + encodeURIComponent(BCC) : '') + '&su=' + encodeURIComponent(s) + '&body=' + encodeURIComponent(b);
           log(r, 'Email', b); done.textContent = t('done'); done.hidden = false;
         } else if (go === 'form') {
           copy(); log(r, 'Contact form', b); done.textContent = t('doneForm'); done.hidden = false;

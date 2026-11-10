@@ -193,7 +193,7 @@ let officialsCache: { at: number; data: unknown } | null = null;
     const schema = z.object({
       form: z.literal("rep-message"),
       name: z.string().trim().min(1).max(200),
-      email: z.union([z.string().trim().email(), z.literal("")]).optional().default(""),
+      email: z.string().trim().email(),
       address: z.string().max(300).optional().default(""),
       zip: z.string().max(20).optional().default(""),
       official: z.string().trim().min(1).max(200),
@@ -222,6 +222,7 @@ let officialsCache: { at: number; data: unknown } | null = null;
     const F = REP_MESSAGE_FIELDS;
     const fields: Record<string, unknown> = {
       [F.name]: d.name,
+      [F.email]: d.email,
       [F.address]: d.address,
       [F.zip]: d.zip,
       [F.official]: d.official,
@@ -236,7 +237,6 @@ let officialsCache: { at: number; data: unknown } | null = null;
       [F.page]: d.page,
       [F.sentAt]: new Date().toISOString(),
     };
-    if (d.email) fields[F.email] = d.email;
     try {
       const r = await popPledgeAirtableRequest(REP_MESSAGES_AIRTABLE_PATH, {
         method: "POST",
