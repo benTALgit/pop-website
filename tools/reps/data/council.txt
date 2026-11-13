@@ -1,0 +1,51 @@
+1|Christopher Marte|District1@council.nyc.gov
+2|Harvey Epstein|Harvey@council.nyc.gov
+3|Carl Wilson|District3@council.nyc.gov
+4|Virginia Maloney|District4@council.nyc.gov
+5|Julie Menin|SpeakerMenin@council.nyc.gov
+6|Gale A. Brewer|District6@council.nyc.gov
+7|Shaun Abreu|District7@council.nyc.gov
+8|Elsie Encarnacion|District8@council.nyc.gov
+9|Yusef Salaam|district9@council.nyc.gov
+10|Carmen De La Rosa|District10@council.nyc.gov
+11|Eric Dinowitz|dinowitz@council.nyc.gov
+12|Kevin C. Riley|District12@council.nyc.gov
+13|Shirley Aldebol|District13@council.nyc.gov
+14|Pierina Ana Sanchez|District14@council.nyc.gov
+15|Oswald Feliz|District15@council.nyc.gov
+16|Althea Stevens|District16@council.nyc.gov
+17|Justin Sanchez|District17@council.nyc.gov
+18|Amanda Farías|District18@council.nyc.gov
+19|Vickie Paladino|District19@council.nyc.gov
+20|Sandra Ung|district20@council.nyc.gov
+21|Shanel Thomas-Henry|District21@council.nyc.gov
+22|Tiffany Cabán|District22@council.nyc.gov
+23|Linda Lee|District23@council.nyc.gov
+24|James F. Gennaro|District24@council.nyc.gov
+25|Shekar Krishnan|District25@council.nyc.gov
+26|Julie Won|district26@council.nyc.gov
+27|Nantasha Williams|District27@council.nyc.gov
+28|Ty Hankerson|District28@council.nyc.gov
+29|Lynn Schulman|District29@council.nyc.gov
+30|Phil Wong|District30@council.nyc.gov
+31|Selvena N. Brooks-Powers|District31@council.nyc.gov
+32|Joann Ariola|District32@council.nyc.gov
+33|Lincoln Restler|District33@council.nyc.gov
+34|Jennifer Gutiérrez|District34@council.nyc.gov
+35|Crystal Hudson|District35@council.nyc.gov
+36|Chi Ossé|District36@council.nyc.gov
+37|Sandy Nurse|District37@council.nyc.gov
+38|Alexa Avilés|District38@council.nyc.gov
+39|Shahana Hanif|District39@council.nyc.gov
+40|Rita C. Joseph|District40@council.nyc.gov
+41|Darlene Mealy|District41@council.nyc.gov
+42|Chris Banks|District42@council.nyc.gov
+43|Susan Zhuang|District43@council.nyc.gov
+44|Simcha Felder|AskSimcha@council.nyc.gov
+45|Farah N. Louis|District45@council.nyc.gov
+46|Mercedes Narcisse|District46@council.nyc.gov
+47|Kayla Santosuosso|heykayla@council.nyc.gov
+48|Inna Vernikov|District48@council.nyc.gov
+49|Kamillah M. Hanks|District49@council.nyc.gov
+50|David Carr|DCarr@council.nyc.gov
+51|Frank Morano|Morano@council.nyc.gov
