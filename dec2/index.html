@@ -373,6 +373,7 @@
       <li><img src="assets/logos/las-donas.png" alt="Las Doñas" loading="lazy"></li>
       <li><img src="assets/logos/ilr.png" alt="ILR Worker Institute" loading="lazy"></li>
       <li><img src="assets/logos/momsrising.png" alt="MomsRising" loading="lazy"></li>
+      <li><img src="assets/logos/unh.png" alt="United Neighborhood Houses" loading="lazy"></li>
     </ul>
   </section>
 </main>
@@ -528,14 +529,14 @@
     'UID:pop-dec2-2026@popchildcare.org', 'DTSTAMP:20261017T000000Z',
     'DTSTART;TZID=' + EVENT.tz + ':' + EVENT.start, 'DTEND;TZID=' + EVENT.tz + ':' + EVENT.end,
     'SUMMARY:' + EVENT.title, 'LOCATION:Albany\\, Buffalo or New York City (address to come)',
-    'DESCRIPTION:Shirley Chisholm\'s 102nd birthday party and the launch of the Pay Our Providers campaign. Cake\\, games & music. Address to come. Questions? Contact Luis at luis@actionlabny.org.',
-    'CONTACT:Luis\\, luis@actionlabny.org',
+    'DESCRIPTION:Shirley Chisholm\'s 102nd birthday party and the launch of the Pay Our Providers campaign. Cake\\, games & music. Address to come. Questions? Email info@popchildcare.org.',
+    'CONTACT:info@popchildcare.org',
     'END:VEVENT', 'END:VCALENDAR'
   ].join('\r\n');
   var icsHref = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
   document.getElementById('calIcs').href = icsHref;
   document.getElementById('calApple').href = icsHref;
-  var details = "Shirley Chisholm's 102nd birthday party and the launch of the Pay Our Providers campaign. Cake, games & music. Celebrations in Albany, Buffalo and New York City; watch your email for the location. Questions? Contact Luis at luis@actionlabny.org.";
+  var details = "Shirley Chisholm's 102nd birthday party and the launch of the Pay Our Providers campaign. Cake, games & music. Celebrations in Albany, Buffalo and New York City; watch your email for the location. Questions? Email info@popchildcare.org.";
   var where = 'Albany, Buffalo or New York City (address to come)';
   document.getElementById('calGoogle').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
     + '&text=' + encodeURIComponent(EVENT.title)
