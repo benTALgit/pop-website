@@ -36,12 +36,13 @@ def office_label(phone):
 
 out = {'updated': UPDATED}
 
-# Staff emails from TAL's own NYCAT outreach (Whitney's Sept-Oct 2026 invitations and endorsement asks), keyed "chamber|district".
+# Whitney's cleaned NYCAT email lists (TAL's own Sept-Oct 2026 invitations and endorsement asks, cleaned Nov 10, 2026),
+# keyed "chamber|district". Where an office is listed, that list is used exactly as written (order and spelling kept);
+# offices not listed use the official emails from the source files above. To change someone's emails, edit them in
+# Airtable (Elected Officials) and mirror the change here, so the backup bundle never drifts from what the site shows.
 STAFF = json.load(open(os.path.join(HERE, 'data', 'staff-emails.json')))
 def with_staff(chamber, district, emails):
-    seen = [e.lower() for e in emails]
-    extra = [e for e in STAFF.get(f'{chamber}|{district}', []) if e.lower() not in seen and not seen.append(e.lower())]
-    return emails + extra
+    return STAFF.get(f'{chamber}|{district}', emails)
 
 # State Senate
 sen = {}
