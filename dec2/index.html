@@ -201,7 +201,7 @@
 <nav class="camp-nav" aria-label="Pay Our Providers">
   <div class="cn-in">
     <a class="cn-name" href="../pay/">Pay Our Providers</a>
-    <div class="cn-links"><a href="../pay/#demands" data-i18n="navDemands">Demands</a><a href="../pay/toolkit/" data-i18n="navToolkit">Toolkit</a><a href="../pay/endorse/" data-i18n="navEndorse">Endorse</a><a href="../pay/../dec2/" class="go" aria-current="page" data-i18n="navDec2">Dec 2 launch</a></div>
+    <div class="cn-links"><a href="../pay/#demands" data-i18n="navDemands">Demands</a><a href="../pay/toolkit/" data-i18n="navToolkit">Toolkit</a><a href="../pay/endorse/" data-i18n="navEndorse">Endorse</a><a href="../pay/#champions" data-i18n="navChampions">Champions</a><a href="../pay/../dec2/" class="go" aria-current="page" data-i18n="navDec2">Dec 2 launch</a></div>
     <div class="lang" role="group" aria-label="Language / Idioma">
       <button type="button" data-lang="en" aria-pressed="true">English</button>
       <button type="button" data-lang="es" aria-pressed="false">Español</button>
@@ -400,7 +400,7 @@
   };
 
   var ES = {
-    navDemands: 'Demandas', navToolkit: 'Materiales', navEndorse: 'Respaldar', navDec2: 'Lanzamiento 2 dic',
+    navDemands: 'Demandas', navToolkit: 'Materiales', navEndorse: 'Respaldar', navChampions: 'Campeones', navDec2: 'Lanzamiento 2 dic',
     launch: 'Lanzamiento de campaña', h1: '¡Feliz cumpleaños, Shirley Chisholm!', tagline: 'Terminamos lo que Shirley empezó.',
     date: 'Miér., 2 de dic.', siteAlbany: 'Capitolio del Estado de Nueva York',
     hosted: 'Organizan',
@@ -543,7 +543,7 @@
   // Calendar links. Before someone registers they list all three sites; once they register they use
   // the site they picked (setCal is called from finish()).
   var details = "Shirley Chisholm's 102nd birthday party and the launch of the Pay Our Providers campaign. Cake, games & music. Questions? Email info@popchildcare.org.";
-  function icsText(v) { return v.replace(/\\/g, '\\\\').replace(/,/g, '\\,').replace(/;/g, '\;'); }
+  function icsText(v) { return v.replace(/\\/g, '\\\\').replace(/,/g, '\\,').replace(/;/g, '\\;'); }
   function setCal(where) {
     var ics = [
       'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//POP//Dec 2 Launch//EN', 'BEGIN:VEVENT',
