@@ -63,7 +63,9 @@
   .tagline { margin: 10px 0 0; font-weight: 600; font-size: clamp(16px, 3vw, 20px); line-height: 1.25; }
 
   .when { margin: 22px 0 0; background: var(--coral-deep); color: #fff; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding: 14px 18px; font-weight: 800; font-size: clamp(16px, 3.4vw, 22px); }
-  .loc-note { margin: 0; padding: 8px 18px; background: #1F1A1A; color: #FFFFFF; font-weight: 800; font-size: 15px; letter-spacing: .02em; }
+  .sites { list-style: none; margin: 0; padding: 10px 18px 12px; background: #1F1A1A; color: #FFFFFF; display: grid; gap: 8px; font-size: 15px; line-height: 1.35; }
+  .sites b { display: inline-block; min-width: 72px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+  .done .where { font-weight: 800; }
   .party { margin: 12px 0 0; color: var(--ink-soft); font-size: 16px; }
   .party b { color: var(--ink); }
   .logos { margin: 18px 0 0; padding: 14px 0 0; border-top: 1px solid var(--line); }
@@ -171,7 +173,8 @@
     .hero { display: none; }
     .intro { margin-top: 16px; align-items: center; }
     .when { margin-top: 16px; padding: 10px 14px; gap: 2px 12px; justify-content: flex-start; font-size: 17px; }
-    .loc-note { padding: 6px 14px; font-size: 14px; }
+    .sites { padding: 8px 14px 10px; font-size: 14px; gap: 6px; }
+    .sites b { display: block; min-width: 0; }
     .party { font-size: 15px; line-height: 1.45; }
     form { margin-top: 6px; }
     h2.sec { margin-top: 18px; padding-top: 14px; }
@@ -179,7 +182,6 @@
   @media (min-width: 561px) {
     .hero img.rally { height: clamp(110px, 11vw, 140px); }
     .when { margin-top: 16px; }
-    .loc-note { padding: 6px 18px; }
     .intro img.portrait { margin-top: -48px; }
   }
 </style>
@@ -199,7 +201,7 @@
 <nav class="camp-nav" aria-label="Pay Our Providers">
   <div class="cn-in">
     <a class="cn-name" href="../pay/">Pay Our Providers</a>
-    <div class="cn-links"><a href="../pay/#demands" data-i18n="navDemands">Demands</a><a href="../pay/toolkit/" data-i18n="navToolkit">Toolkit</a><a href="../pay/endorse/" data-i18n="navEndorse">Endorse</a><a href="../pay/../dec2/" class="go" aria-current="page" data-i18n="navDec2">Dec 2 launch</a></div>
+    <div class="cn-links"><a href="../pay/#demands" data-i18n="navDemands">Demands</a><a href="../pay/toolkit/" data-i18n="navToolkit">Toolkit</a><a href="../pay/endorse/" data-i18n="navEndorse">Endorse</a><a href="../pay/#champions" data-i18n="navChampions">Champions</a><a href="../pay/../dec2/" class="go" aria-current="page" data-i18n="navDec2">Dec 2 launch</a></div>
     <div class="lang" role="group" aria-label="Language / Idioma">
       <button type="button" data-lang="en" aria-pressed="true">English</button>
       <button type="button" data-lang="es" aria-pressed="false">Español</button>
@@ -229,14 +231,18 @@
     <span>11 AM–1 PM</span>
     <span>Albany · Buffalo · NYC</span>
   </div>
-  <p class="loc-note" data-i18n="locNote">Register to receive location details.</p>
+  <ul class="sites" aria-label="Locations">
+    <li><b>Albany</b> <span data-i18n="siteAlbany">New York State Capitol</span></li>
+    <li><b>Buffalo</b> <span>Delavan Grider Community Center, 877 E Delavan Ave</span></li>
+    <li><b>NYC</b> <span>Hamilton-Madison House, 50 Madison St, Manhattan</span></li>
+  </ul>
   <p class="party" data-i18n-html="party"><b>Before Congress, Shirley Chisholm was a child care teacher and director.</b> She later championed a universal child care bill through Congress, only to have it vetoed by Nixon. For her 102nd birthday we're throwing her a party, with cake, games and music for the kids, and launching our campaign to Pay Our Providers.</p>
 
   <form id="reg" novalidate>
     <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
     <h2 class="sec display" data-i18n="title">Register</h2>
-    <p class="step-note" data-i18n="note">Celebrate in Albany, Buffalo or New York City. We'll send you the exact address as soon as it's set.</p>
+    <p class="step-note" data-i18n="note">Celebrate in Albany, Buffalo or New York City.</p>
 
     <div class="field" data-req-site>
       <span class="lbl" id="siteLbl" data-i18n="site">Where will you be celebrating?</span>
@@ -341,7 +347,8 @@
 
   <section class="done" id="done" aria-live="polite" tabindex="-1">
     <h2 class="display" data-i18n="doneH">You're in. See you December 2!</h2>
-    <p data-i18n="doneP">Look out in your email for the location and other details. Bring the kids, and bring a friend.</p>
+    <p class="where" id="doneWhere"></p>
+    <p data-i18n="doneP">Look out in your email for reminders and other details. Bring the kids, and bring a friend.</p>
     <div class="actions">
       <div class="cal">
         <button type="button" class="btn primary" id="calBtn" aria-expanded="false" aria-controls="calMenu"><span data-i18n="cal">Add to my calendar</span> <span aria-hidden="true">▾</span></button>
@@ -373,6 +380,7 @@
       <li><img src="assets/logos/las-donas.png" alt="Las Doñas" loading="lazy"></li>
       <li><img src="assets/logos/ilr.png" alt="ILR Worker Institute" loading="lazy"></li>
       <li><img src="assets/logos/momsrising.png" alt="MomsRising" loading="lazy"></li>
+      <li><img src="assets/logos/unh.png" alt="United Neighborhood Houses" loading="lazy"></li>
     </ul>
   </section>
 </main>
@@ -384,14 +392,20 @@
   var SUBMIT_URL = '/api/dec2-register';
 
   var EVENT = { title: 'Happy Birthday, Shirley! Pay Our Providers campaign launch', start: '20261202T110000', end: '20261202T130000', tz: 'America/New_York' };
+  // Dec 2 sites, keyed by the value of the city radio buttons.
+  var SITES = {
+    'Albany': { place: 'New York State Capitol', es: 'Capitolio del Estado de Nueva York', addr: 'Albany, NY' },
+    'Buffalo': { place: 'Delavan Grider Community Center', addr: '877 E Delavan Ave, Buffalo, NY' },
+    'New York City': { place: 'Hamilton-Madison House', addr: '50 Madison St, New York, NY' }
+  };
 
   var ES = {
-    navDemands: 'Demandas', navToolkit: 'Materiales', navEndorse: 'Respaldar', navDec2: 'Lanzamiento 2 dic',
+    navDemands: 'Demandas', navToolkit: 'Materiales', navEndorse: 'Respaldar', navChampions: 'Campeones', navDec2: 'Lanzamiento 2 dic',
     launch: 'Lanzamiento de campaña', h1: '¡Feliz cumpleaños, Shirley Chisholm!', tagline: 'Terminamos lo que Shirley empezó.',
-    date: 'Miér., 2 de dic.', locNote: 'Regístrate para recibir los detalles del lugar.',
+    date: 'Miér., 2 de dic.', siteAlbany: 'Capitolio del Estado de Nueva York',
     hosted: 'Organizan',
     party: '<b>Antes de llegar al Congreso, Shirley Chisholm fue maestra y directora de cuidado infantil.</b> Luego impulsó en el Congreso un proyecto de ley de cuidado infantil universal, pero Nixon lo vetó. Para su cumpleaños 102 le hacemos una fiesta, con pastel, juegos y música para los niños, y lanzamos nuestra campaña Pay Our Providers.',
-    title: 'Regístrate', note: 'Celebra en Albany, Buffalo o la Ciudad de Nueva York. Te enviaremos la dirección exacta en cuanto esté lista.',
+    title: 'Regístrate', note: 'Celebra en Albany, Buffalo o la Ciudad de Nueva York.',
     site: '¿Dónde vas a celebrar?', errSite: 'Por favor elige una ciudad.',
     first: 'Nombre', last: 'Apellido', optional: '(opcional)', phone: 'Teléfono celular', email: 'Correo electrónico',
     errName: 'Por favor escribe tu nombre.', errLast: 'Por favor escribe tu apellido.', errContact: 'Por favor agrega un teléfono o un correo para comunicarnos contigo.',
@@ -404,7 +418,7 @@
     notes: '¿Algo más que debamos saber?', notesPh: 'Alergias, otros idiomas, necesidades de acceso…',
     errSubmit: 'Hubo un problema al enviar tu registro. Por favor intenta de nuevo.',
     submit: 'Registrarme', sending: 'Enviando…',
-    doneH: '¡Listo! Nos vemos el 2 de diciembre.', doneP: 'Revisa tu correo electrónico para el lugar y otros detalles. Trae a los niños y trae a un amigo.', locNoteDone: 'Revisa tu correo electrónico para el lugar y otros detalles.', calOther: 'Otro calendario (archivo .ics)',
+    doneH: '¡Listo! Nos vemos el 2 de diciembre.', doneP: 'Revisa tu correo electrónico para recordatorios y otros detalles. Trae a los niños y trae a un amigo.', seeYou: 'Nos vemos en', calOther: 'Otro calendario (archivo .ics)',
     cal: 'Agregar a mi calendario', share: 'Compartir esta página', copied: 'Enlace copiado',
     footer: 'Providers Organized for Power (POP) y la Mesa de Alineación de Cuidado Infantil del Estado de Nueva York.'
   };
@@ -419,7 +433,7 @@
   document.querySelectorAll('[data-i18n]').forEach(function (el) { EN[el.getAttribute('data-i18n')] = el.textContent; });
   document.querySelectorAll('[data-i18n-html]').forEach(function (el) { EN[el.getAttribute('data-i18n-html')] = el.innerHTML; });
   document.querySelectorAll('[data-i18n-ph]').forEach(function (el) { EN[el.getAttribute('data-i18n-ph')] = el.getAttribute('placeholder'); });
-  EN.copied = 'Link copied'; EN.locNoteDone = 'Look out in your email for the location and other details.'; EN.sending = 'Sending…';
+  EN.copied = 'Link copied'; EN.seeYou = 'See you at'; EN.sending = 'Sending…';
   function t(k) { return (lang === 'es' ? ES[k] : EN[k]) || EN[k] || k; }
 
   function setLang(l) {
@@ -512,8 +526,12 @@
   });
 
   function finish() {
-    var ln = document.querySelector('.loc-note');
-    if (ln) { ln.setAttribute('data-i18n', 'locNoteDone'); ln.textContent = t('locNoteDone'); }
+    var picked = form.querySelector('input[name="site"]:checked');
+    var venue = picked && SITES[picked.value];
+    if (venue) {
+      document.getElementById('doneWhere').textContent = t('seeYou') + ' ' + (lang === 'es' && venue.es ? venue.es : venue.place) + ', ' + venue.addr + '.';
+      setCal(venue.place + ', ' + venue.addr);
+    }
     try { localStorage.removeItem('popreg-draft'); } catch (e) {}
     form.hidden = true;
     var done = document.getElementById('done');
@@ -522,36 +540,37 @@
     done.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  // Calendar file
-  var ics = [
-    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//POP//Dec 2 Launch//EN', 'BEGIN:VEVENT',
-    'UID:pop-dec2-2026@popchildcare.org', 'DTSTAMP:20261017T000000Z',
-    'DTSTART;TZID=' + EVENT.tz + ':' + EVENT.start, 'DTEND;TZID=' + EVENT.tz + ':' + EVENT.end,
-    'SUMMARY:' + EVENT.title, 'LOCATION:Albany\\, Buffalo or New York City (address to come)',
-    'DESCRIPTION:Shirley Chisholm\'s 102nd birthday party and the launch of the Pay Our Providers campaign. Cake\\, games & music. Address to come. Questions? Contact Luis at luis@actionlabny.org.',
-    'CONTACT:Luis\\, luis@actionlabny.org',
-    'END:VEVENT', 'END:VCALENDAR'
-  ].join('\r\n');
-  var icsHref = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
-  document.getElementById('calIcs').href = icsHref;
-  document.getElementById('calApple').href = icsHref;
-  var details = "Shirley Chisholm's 102nd birthday party and the launch of the Pay Our Providers campaign. Cake, games & music. Celebrations in Albany, Buffalo and New York City; watch your email for the location. Questions? Contact Luis at luis@actionlabny.org.";
-  var where = 'Albany, Buffalo or New York City (address to come)';
-  document.getElementById('calGoogle').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
-    + '&text=' + encodeURIComponent(EVENT.title)
-    + '&dates=' + EVENT.start + '/' + EVENT.end + '&ctz=' + encodeURIComponent(EVENT.tz)
-    + '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
-  document.getElementById('calOutlook').href = 'https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent'
-    + '&subject=' + encodeURIComponent(EVENT.title)
-    + '&startdt=' + encodeURIComponent('2026-12-02T11:00:00-05:00') + '&enddt=' + encodeURIComponent('2026-12-02T13:00:00-05:00')
-    + '&body=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
-  var olQuery = '&subject=' + encodeURIComponent(EVENT.title)
-    + '&startdt=' + encodeURIComponent('2026-12-02T11:00:00-05:00') + '&enddt=' + encodeURIComponent('2026-12-02T13:00:00-05:00')
-    + '&body=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
-  document.getElementById('calO365').href = 'https://outlook.office.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent' + olQuery;
-  document.getElementById('calYahoo').href = 'https://calendar.yahoo.com/?v=60'
-    + '&title=' + encodeURIComponent(EVENT.title) + '&st=20261202T160000Z&et=20261202T180000Z'
-    + '&desc=' + encodeURIComponent(details) + '&in_loc=' + encodeURIComponent(where);
+  // Calendar links. Before someone registers they list all three sites; once they register they use
+  // the site they picked (setCal is called from finish()).
+  var details = "Shirley Chisholm's 102nd birthday party and the launch of the Pay Our Providers campaign. Cake, games & music. Questions? Email info@popchildcare.org.";
+  function icsText(v) { return v.replace(/\\/g, '\\\\').replace(/,/g, '\\,').replace(/;/g, '\\;'); }
+  function setCal(where) {
+    var ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//POP//Dec 2 Launch//EN', 'BEGIN:VEVENT',
+      'UID:pop-dec2-2026@popchildcare.org', 'DTSTAMP:20261017T000000Z',
+      'DTSTART;TZID=' + EVENT.tz + ':' + EVENT.start, 'DTEND;TZID=' + EVENT.tz + ':' + EVENT.end,
+      'SUMMARY:' + EVENT.title, 'LOCATION:' + icsText(where),
+      'DESCRIPTION:' + icsText(details),
+      'CONTACT:info@popchildcare.org',
+      'END:VEVENT', 'END:VCALENDAR'
+    ].join('\r\n');
+    var icsHref = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+    document.getElementById('calIcs').href = icsHref;
+    document.getElementById('calApple').href = icsHref;
+    document.getElementById('calGoogle').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+      + '&text=' + encodeURIComponent(EVENT.title)
+      + '&dates=' + EVENT.start + '/' + EVENT.end + '&ctz=' + encodeURIComponent(EVENT.tz)
+      + '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
+    var olQuery = '&subject=' + encodeURIComponent(EVENT.title)
+      + '&startdt=' + encodeURIComponent('2026-12-02T11:00:00-05:00') + '&enddt=' + encodeURIComponent('2026-12-02T13:00:00-05:00')
+      + '&body=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
+    document.getElementById('calOutlook').href = 'https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent' + olQuery;
+    document.getElementById('calO365').href = 'https://outlook.office.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent' + olQuery;
+    document.getElementById('calYahoo').href = 'https://calendar.yahoo.com/?v=60'
+      + '&title=' + encodeURIComponent(EVENT.title) + '&st=20261202T160000Z&et=20261202T180000Z'
+      + '&desc=' + encodeURIComponent(details) + '&in_loc=' + encodeURIComponent(where);
+  }
+  setCal('Albany: New York State Capitol; Buffalo: Delavan Grider Community Center, 877 E Delavan Ave; NYC: Hamilton-Madison House, 50 Madison St');
   var calBtn = document.getElementById('calBtn'), calMenu = document.getElementById('calMenu');
   function closeCal() { calMenu.hidden = true; calBtn.setAttribute('aria-expanded', 'false'); }
   calBtn.addEventListener('click', function (e) {
