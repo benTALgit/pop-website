@@ -360,6 +360,15 @@ dialog.join::backdrop { background: rgba(31,26,26,.5); }
 .dmap { display: block; width: 100%; height: auto; }
 .dmap .ds { fill: var(--card); stroke: var(--ink-soft); stroke-opacity: .5; stroke-width: .5; stroke-linejoin: round; }
 .dmap .ds.on { fill: var(--teal); stroke: var(--paper); stroke-opacity: 1; stroke-width: .7; }
+.dmap .ds.elect { fill: var(--teal); fill-opacity: .4; stroke: var(--paper); stroke-opacity: 1; stroke-width: .7; }
+/* Members-elect: lighter shade on the map, own group in the list */
+.mapkey { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; font-size: 13px; color: var(--ink-soft); }
+.mapkey span { display: inline-flex; align-items: center; gap: 6px; }
+.mapkey .k { display: inline-block; width: 14px; height: 14px; background: var(--teal); }
+.mapkey .k.elect { opacity: .4; }
+.people li.people-sub { display: block; background: none; border: 0; padding: 10px 0 0; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); }
+.people li.elect { border-left-style: dashed; }
+.people li.elect .badge { background: var(--teal); color: var(--paper) !important; }
 .dmap .ds:hover { fill-opacity: .8; }
 .dmap .inset rect { fill: var(--paper); stroke: var(--ink-soft); stroke-width: 1; }
 .dmap .lbl { font: 800 12px 'Libre Franklin', sans-serif; fill: var(--ink); }
