@@ -19,6 +19,7 @@ h2 { margin: 10pt 0 4pt; font-size: 12pt; line-height: 1.2; }
 .asks { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; margin: 9pt 0 0; }
 .ask { background: #fff; border-top: 4pt solid #B8361C; padding: 8pt 10pt 9pt; }
 .ask .amt { color: #D9472B; font-size: 24pt; line-height: 1; }
+.ask .amt small { font-size: 10.5pt; font-weight: 600; letter-spacing: 0; }
 .ask b.h { display: block; font-size: 11pt; margin: 4pt 0 2pt; }
 .ask p { margin: 0; font-size: 9.2pt; }
 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16pt; }
