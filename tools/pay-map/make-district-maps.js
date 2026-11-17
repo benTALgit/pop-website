@@ -7,11 +7,20 @@
 const fs = require('fs');
 const path = require('path');
 
+// ELECT: champions who won their seat but haven't taken office yet. Their districts get a lighter shade
+// (class "ds elect") and they're listed under "Members-elect" on the page. Move them into CHAMPS when sworn in.
 const CHAMPS = {
   senate: { 25: 'Sen. Jabari Brisport', 31: 'Sen. Robert Jackson' },
-  assembly: { 28: 'Asm. Andrew Hevesi', 36: 'Asm. Diana Moreno', 39: 'Asm. Catalina Cruz', 125: 'Asm. Anna Kelles', 57: 'Asm. Phara Souffrant Forrest', 67: 'Asm. Linda B. Rosenthal', 87: 'Asm. Karines Reyes, R.N.', 106: 'Asm. Didi Barrett', 136: 'Asm. Sarah Clark' },
+  assembly: { 28: 'Asm. Andrew Hevesi', 36: 'Asm. Diana Moreno', 39: 'Asm. Catalina Cruz', 125: 'Asm. Anna Kelles', 57: 'Asm. Phara Souffrant Forrest', 67: 'Asm. Linda B. Rosenthal', 87: 'Asm. Karines Reyes, R.N.', 106: 'Asm. Didi Barrett', 135: 'Asm. Jen Lunsford', 136: 'Asm. Sarah Clark' },
   council: { 21: 'CM Shanel Thomas-Henry', 33: 'CM Lincoln Restler', 34: 'CM Jennifer Gutiérrez', 37: 'CM Sandy Nurse', 38: 'CM Alexa Avilés', 39: 'CM Shahana Hanif' },
 };
+const ELECT = {
+  senate: {},
+  assembly: { 149: 'Adam Bojak (Assembly Member-elect)' },
+  council: {},
+};
+const electNote = el => Object.keys(el).length ? `; members-elect, shaded lighter: ${Object.values(el).join(', ')}` : '';
+const cls = (on, el) => on ? ' on' : el ? ' elect' : '';
 
 const dir = process.argv[2];
 if (!dir) { console.error('usage: node make-district-maps.js <geo dir>'); process.exit(1); }
@@ -42,56 +51,56 @@ function inBox(geom, [lo0, lo1, la0, la1]) {
 }
 
 // Statewide map with a New York City inset (most districts there are too small to see at state scale).
-function stateMap(file, prop, lit, id, label) {
+function stateMap(file, prop, lit, elect, id, label) {
   const fc = JSON.parse(fs.readFileSync(path.join(dir, file)));
   const W = 640, P = mkproj(-79.8, -71.85, 40.5, 45.02, 6, 6, W - 12);
   const H = Math.ceil(P([-79.8, 40.5])[1]) + 6;
   const names = Object.values(lit);
-  let s = `<svg viewBox="0 0 ${W} ${H}" class="dmap" role="img" aria-labelledby="${id}T"><title id="${id}T">Map of New York ${label} districts, with our champions' districts lit: ${names.join(', ')}</title>\n`;
-  let litS = '';
+  let s = `<svg viewBox="0 0 ${W} ${H}" class="dmap" role="img" aria-labelledby="${id}T"><title id="${id}T">Map of New York ${label} districts, with our champions' districts lit: ${names.join(', ')}${electNote(elect)}</title>\n`;
+  let litS = '', elS = '';
   for (const f of fc.features) {
-    const n = +f.properties[prop]; const on = lit[n];
-    const p = `<path class="ds${on ? ' on' : ''}" d="${d(f.geometry, P, .35, .4)}"><title>${label} District ${n}${on ? ': ' + on : ''}</title></path>`;
-    if (on) litS += p; else s += p;
+    const n = +f.properties[prop]; const on = lit[n], el = elect[n], who = on || el;
+    const p = `<path class="ds${cls(on, el)}" d="${d(f.geometry, P, .35, .4)}"><title>${label} District ${n}${who ? ': ' + who : ''}</title></path>`;
+    if (on) litS += p; else if (el) elS += p; else s += p;
   }
-  s += litS;
+  s += litS + elS;
   // Inset sits top-left, over Lake Ontario, where the state map is empty.
   const ix = 4, iw = 196, ih = 176, iy = 4;
   const box = [-74.27, -73.69, 40.49, 40.92];
   const Q = mkproj(box[0], box[1], box[2], box[3], ix + 10, iy + 26, iw - 20);
   s += `<defs><clipPath id="${id}clip"><rect x="${ix}" y="${iy}" width="${iw}" height="${ih}"/></clipPath></defs><g class="inset"><rect x="${ix}" y="${iy}" width="${iw}" height="${ih}"/><g clip-path="url(#${id}clip)">`;
-  litS = '';
+  litS = ''; elS = '';
   for (const f of fc.features) {
     if (!inBox(f.geometry, [-74.4, -73.6, 40.45, 41.0])) continue;
-    const n = +f.properties[prop]; const on = lit[n];
-    const p = `<path class="ds${on ? ' on' : ''}" d="${d(f.geometry, Q, .3, .3)}"><title>${label} District ${n}${on ? ': ' + on : ''}</title></path>`;
-    if (on) litS += p; else s += p;
+    const n = +f.properties[prop]; const on = lit[n], el = elect[n], who = on || el;
+    const p = `<path class="ds${cls(on, el)}" d="${d(f.geometry, Q, .3, .3)}"><title>${label} District ${n}${who ? ': ' + who : ''}</title></path>`;
+    if (on) litS += p; else if (el) elS += p; else s += p;
   }
-  s += litS + `</g><text x="${ix + 10}" y="${iy + 18}" class="lbl">New York City</text></g>`;
+  s += litS + elS + `</g><text x="${ix + 10}" y="${iy + 18}" class="lbl">New York City</text></g>`;
   const [nx, ny] = P([-73.95, 40.72]);
   s += `<path class="lead" d="M${nx.toFixed(1)},${ny.toFixed(1)}L${ix + iw},${iy + ih}"/></svg>`;
   return s;
 }
 
-function councilMap(lit, id) {
+function councilMap(lit, elect, id) {
   const fs_ = [];
   for (let i = 1; i <= 51; i++) fs_.push(JSON.parse(fs.readFileSync(path.join(dir, 'cc', `d${i}.json`))));
   const W = 420, P = mkproj(-74.26, -73.695, 40.495, 40.918, 6, 6, W - 12);
   const H = Math.ceil(P([-74.26, 40.495])[1]) + 6;
-  let s = `<svg viewBox="0 0 ${W} ${H}" class="dmap" role="img" aria-labelledby="${id}T"><title id="${id}T">Map of New York City Council districts, with our champions' districts lit: ${Object.values(lit).join(', ')}</title>\n`;
-  let litS = '';
+  let s = `<svg viewBox="0 0 ${W} ${H}" class="dmap" role="img" aria-labelledby="${id}T"><title id="${id}T">Map of New York City Council districts, with our champions' districts lit: ${Object.values(lit).join(', ')}${electNote(elect)}</title>\n`;
+  let litS = '', elS = '';
   for (const f of fs_) {
-    const n = +f.properties.CounDist; const on = lit[n];
-    const p = `<path class="ds${on ? ' on' : ''}" d="${d(f.geometry, P, .3, .3)}"><title>Council District ${n}${on ? ': ' + on : ''}</title></path>`;
-    if (on) litS += p; else s += p;
+    const n = +f.properties.CounDist; const on = lit[n], el = elect[n], who = on || el;
+    const p = `<path class="ds${cls(on, el)}" d="${d(f.geometry, P, .3, .3)}"><title>Council District ${n}${who ? ': ' + who : ''}</title></path>`;
+    if (on) litS += p; else if (el) elS += p; else s += p;
   }
-  return s + litS + '</svg>';
+  return s + litS + elS + '</svg>';
 }
 
 const maps = {
-  senate: stateMap('sldu.json', 'NAME', CHAMPS.senate, 'mapSen', 'State Senate'),
-  assembly: stateMap('sldl.json', 'NAME', CHAMPS.assembly, 'mapAsm', 'Assembly'),
-  council: councilMap(CHAMPS.council, 'mapCC'),
+  senate: stateMap('sldu.json', 'NAME', CHAMPS.senate, ELECT.senate, 'mapSen', 'State Senate'),
+  assembly: stateMap('sldl.json', 'NAME', CHAMPS.assembly, ELECT.assembly, 'mapAsm', 'Assembly'),
+  council: councilMap(CHAMPS.council, ELECT.council, 'mapCC'),
 };
 let html = fs.readFileSync(page, 'utf8');
 for (const [name, svg] of Object.entries(maps)) {
