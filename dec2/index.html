@@ -6,7 +6,7 @@
 <script>if (/(^|\.)popny\.org$/.test(location.hostname)) location.replace('https://popchildcare.org' + location.pathname + location.search + location.hash);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Register: Happy Birthday, Shirley</title>
-<meta name="description" content="Register for the Pay Our Providers campaign launch and Shirley Chisholm's 102nd birthday party, Wednesday, December 2.">
+<meta name="description" content="Register for the Pay Our Providers campaign launch and Shirley Chisholm's 102nd birthday party: Albany and NYC on Wednesday, December 2, and Buffalo on Monday evening, November 30.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -64,7 +64,9 @@
 
   .when { margin: 22px 0 0; background: var(--coral-deep); color: #fff; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 18px; padding: 14px 18px; font-weight: 800; font-size: clamp(16px, 3.4vw, 22px); }
   .sites { list-style: none; margin: 0; padding: 10px 18px 12px; background: #1F1A1A; color: #FFFFFF; display: grid; gap: 8px; font-size: 15px; line-height: 1.35; }
-  .sites b { display: inline-block; min-width: 72px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+  .sites b { display: inline-block; min-width: 92px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+  .sites .site-when { font-weight: 800; }
+  .when-buf { flex-basis: 100%; font-size: .82em; }
   .done .where { font-weight: 800; }
   .party { margin: 12px 0 0; color: var(--ink-soft); font-size: 16px; }
   .party b { color: var(--ink); }
@@ -229,11 +231,12 @@
   <div class="when display">
     <span data-i18n="date">Wed, Dec 2</span>
     <span>11 AM–1 PM</span>
-    <span>Albany · Buffalo · NYC</span>
+    <span>Albany · NYC</span>
+    <span class="when-buf" data-i18n="whenBuf">Buffalo: Mon, Nov 30, 5:30 PM</span>
   </div>
   <ul class="sites" aria-label="Locations">
     <li><b>Albany</b> <span data-i18n="siteAlbany">New York State Capitol</span></li>
-    <li><b>Buffalo</b> <span>Delavan Grider Community Center, 877 E Delavan Ave</span></li>
+    <li><b>Buffalo</b> <span><strong class="site-when" data-i18n="bufWhen">Mon, Nov 30, 5:30–8 PM.</strong> <span data-i18n="bufWhere">Northland Workforce Training Center, 683 Northland Ave. A free birthday dinner with the Western New York Child Care Action Team.</span></span></li>
     <li><b>NYC</b> <span>Hamilton-Madison House, 50 Madison St, Manhattan</span></li>
   </ul>
   <p class="party" data-i18n-html="party"><b>Before Congress, Shirley Chisholm was a child care teacher and director.</b> She later championed a universal child care bill through Congress, only to have it vetoed by Nixon. For her 102nd birthday we're throwing her a party, with cake, games and music for the kids, and launching our campaign to Pay Our Providers.</p>
@@ -395,7 +398,10 @@
   // Dec 2 sites, keyed by the value of the city radio buttons.
   var SITES = {
     'Albany': { place: 'New York State Capitol', es: 'Capitolio del Estado de Nueva York', addr: 'Albany, NY' },
-    'Buffalo': { place: 'Delavan Grider Community Center', addr: '877 E Delavan Ave, Buffalo, NY' },
+    // Buffalo's celebration is Monday evening, Nov 30, with the Western New York Child Care Action Team.
+    'Buffalo': { place: 'Northland Workforce Training Center', addr: '683 Northland Ave, Buffalo, NY 14211',
+      start: '20261130T173000', end: '20261130T200000', iso: ['2026-11-30T17:30:00-05:00', '2026-11-30T20:00:00-05:00'],
+      utc: ['20261130T223000Z', '20261201T010000Z'], doneH: 'doneHBuf' },
     'New York City': { place: 'Hamilton-Madison House', addr: '50 Madison St, New York, NY' }
   };
 
@@ -403,6 +409,9 @@
     navDemands: 'Demandas', navToolkit: 'Materiales', navEndorse: 'Respaldar', navChampions: 'Campeones', navDec2: 'Lanzamiento 2 dic',
     launch: 'Lanzamiento de campaña', h1: '¡Feliz cumpleaños, Shirley Chisholm!', tagline: 'Terminamos lo que Shirley empezó.',
     date: 'Miér., 2 de dic.', siteAlbany: 'Capitolio del Estado de Nueva York',
+    whenBuf: 'Buffalo: lun., 30 de nov., 5:30 PM', bufWhen: 'Lun., 30 de nov., 5:30–8 PM.',
+    bufWhere: 'Northland Workforce Training Center, 683 Northland Ave. Una cena de cumpleaños gratis con el Western New York Child Care Action Team.',
+    doneHBuf: '¡Listo! Nos vemos el 30 de noviembre.',
     hosted: 'Organizan',
     party: '<b>Antes de llegar al Congreso, Shirley Chisholm fue maestra y directora de cuidado infantil.</b> Luego impulsó en el Congreso un proyecto de ley de cuidado infantil universal, pero Nixon lo vetó. Para su cumpleaños 102 le hacemos una fiesta, con pastel, juegos y música para los niños, y lanzamos nuestra campaña Pay Our Providers.',
     title: 'Regístrate', note: 'Celebra en Albany, Buffalo o la Ciudad de Nueva York.',
@@ -433,7 +442,7 @@
   document.querySelectorAll('[data-i18n]').forEach(function (el) { EN[el.getAttribute('data-i18n')] = el.textContent; });
   document.querySelectorAll('[data-i18n-html]').forEach(function (el) { EN[el.getAttribute('data-i18n-html')] = el.innerHTML; });
   document.querySelectorAll('[data-i18n-ph]').forEach(function (el) { EN[el.getAttribute('data-i18n-ph')] = el.getAttribute('placeholder'); });
-  EN.copied = 'Link copied'; EN.seeYou = 'See you at'; EN.sending = 'Sending…';
+  EN.copied = 'Link copied'; EN.seeYou = 'See you at'; EN.sending = 'Sending…'; EN.doneHBuf = "You're in. See you November 30!";
   function t(k) { return (lang === 'es' ? ES[k] : EN[k]) || EN[k] || k; }
 
   function setLang(l) {
@@ -530,7 +539,9 @@
     var venue = picked && SITES[picked.value];
     if (venue) {
       document.getElementById('doneWhere').textContent = t('seeYou') + ' ' + (lang === 'es' && venue.es ? venue.es : venue.place) + ', ' + venue.addr + '.';
-      setCal(venue.place + ', ' + venue.addr);
+      var doneH = document.querySelector('#done h2');
+      doneH.setAttribute('data-i18n', venue.doneH || 'doneH'); doneH.textContent = t(venue.doneH || 'doneH');
+      setCal(venue.place + ', ' + venue.addr, venue);
     }
     try { localStorage.removeItem('popreg-draft'); } catch (e) {}
     form.hidden = true;
@@ -544,11 +555,15 @@
   // the site they picked (setCal is called from finish()).
   var details = "Shirley Chisholm's 102nd birthday party and the launch of the Pay Our Providers campaign. Cake, games & music. Questions? Email info@popchildcare.org.";
   function icsText(v) { return v.replace(/\\/g, '\\\\').replace(/,/g, '\\,').replace(/;/g, '\\;'); }
-  function setCal(where) {
+  function setCal(where, v) {
+    // Albany and NYC use the Dec 2 times in EVENT; a site with its own times (Buffalo) overrides them.
+    var start = (v && v.start) || EVENT.start, end = (v && v.end) || EVENT.end;
+    var iso = (v && v.iso) || ['2026-12-02T11:00:00-05:00', '2026-12-02T13:00:00-05:00'];
+    var utc = (v && v.utc) || ['20261202T160000Z', '20261202T180000Z'];
     var ics = [
       'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//POP//Dec 2 Launch//EN', 'BEGIN:VEVENT',
       'UID:pop-dec2-2026@popchildcare.org', 'DTSTAMP:20261017T000000Z',
-      'DTSTART;TZID=' + EVENT.tz + ':' + EVENT.start, 'DTEND;TZID=' + EVENT.tz + ':' + EVENT.end,
+      'DTSTART;TZID=' + EVENT.tz + ':' + start, 'DTEND;TZID=' + EVENT.tz + ':' + end,
       'SUMMARY:' + EVENT.title, 'LOCATION:' + icsText(where),
       'DESCRIPTION:' + icsText(details),
       'CONTACT:info@popchildcare.org',
@@ -559,18 +574,18 @@
     document.getElementById('calApple').href = icsHref;
     document.getElementById('calGoogle').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
       + '&text=' + encodeURIComponent(EVENT.title)
-      + '&dates=' + EVENT.start + '/' + EVENT.end + '&ctz=' + encodeURIComponent(EVENT.tz)
+      + '&dates=' + start + '/' + end + '&ctz=' + encodeURIComponent(EVENT.tz)
       + '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
     var olQuery = '&subject=' + encodeURIComponent(EVENT.title)
-      + '&startdt=' + encodeURIComponent('2026-12-02T11:00:00-05:00') + '&enddt=' + encodeURIComponent('2026-12-02T13:00:00-05:00')
+      + '&startdt=' + encodeURIComponent(iso[0]) + '&enddt=' + encodeURIComponent(iso[1])
       + '&body=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where);
     document.getElementById('calOutlook').href = 'https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent' + olQuery;
     document.getElementById('calO365').href = 'https://outlook.office.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent' + olQuery;
     document.getElementById('calYahoo').href = 'https://calendar.yahoo.com/?v=60'
-      + '&title=' + encodeURIComponent(EVENT.title) + '&st=20261202T160000Z&et=20261202T180000Z'
+      + '&title=' + encodeURIComponent(EVENT.title) + '&st=' + utc[0] + '&et=' + utc[1]
       + '&desc=' + encodeURIComponent(details) + '&in_loc=' + encodeURIComponent(where);
   }
-  setCal('Albany: New York State Capitol; Buffalo: Delavan Grider Community Center, 877 E Delavan Ave; NYC: Hamilton-Madison House, 50 Madison St');
+  setCal('Albany: New York State Capitol; NYC: Hamilton-Madison House, 50 Madison St (Buffalo: Mon, Nov 30, 5:30-8 PM, Northland Workforce Training Center, 683 Northland Ave)');
   var calBtn = document.getElementById('calBtn'), calMenu = document.getElementById('calMenu');
   function closeCal() { calMenu.hidden = true; calBtn.setAttribute('aria-expanded', 'false'); }
   calBtn.addEventListener('click', function (e) {
