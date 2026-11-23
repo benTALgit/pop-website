@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dec 2 flyer: date band patch</title>
+<!--
+  The Dec 2 flyer (pay/toolkit/flyer/) has no HTML source in this repo, only finished PDFs and JPGs.
+  This page draws a replacement for the flyer's orange date band, at the exact spot it sits on the
+  letter-size page, on an otherwise transparent page. tools/pay-toolkit/patch-flyer-band.py lays it over
+  the original flyer PDFs and JPGs. Use ?lang=es for the Spanish side.
+  Nov 22, 2026: Buffalo moved to Mon, Nov 30, 5:30-8 PM (Western New York Child Care Action Team dinner).
+-->
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: 8.5in 11in; margin: 0; }
+  html, body { margin: 0; padding: 0; background: transparent; }
+  body { width: 816px; height: 1056px; position: relative; overflow: hidden; }
+  /* Original band: 794-886 px at 150 dpi (508-567 CSS px). The new one is a little taller, 502-573 CSS px
+     (784-895 px at 150 dpi), to fit two lines; it stays clear of the text above (ends 774 EN / 754 ES)
+     and below (starts 921 EN / 912 ES). The old "Register to receive location details" line is dropped. */
+  .band { position: absolute; left: 0; right: 0; top: 502px; height: 71px; background: #D9472B; color: #fff;
+          box-sizing: border-box; padding: 10.5px 50px 0; }
+  /* Date and time columns start where they did on the original band (x = 78 and 403 px at 150 dpi). */
+  .row { display: grid; grid-template-columns: 208px 1fr auto; align-items: baseline; white-space: nowrap;
+         font-family: 'Unbounded', sans-serif; font-weight: 800; letter-spacing: -.02em; font-size: 20.5px; line-height: 25px; }
+  .row .t { display: inline-block; }
+  .row .t b { font-weight: 800; margin-left: 22px; }
+</style>
+</head>
+<body>
+<div class="band">
+  <div class="row"><span class="t" data-en="Wed, Dec 2" data-es="Miér., 2 de dic."></span><span class="t">11 AM–1 PM</span><span class="where">Albany · NYC</span></div>
+  <div class="row"><span class="t" data-en="Mon, Nov 30" data-es="Lun., 30 de nov."></span><span class="t">5:30–8 PM</span><span class="where">Buffalo</span></div>
+</div>
+<script>
+  var es = /[?&]lang=es\b/.test(location.search);
+  document.documentElement.lang = es ? 'es' : 'en';
+  document.querySelectorAll('[data-en]').forEach(function (el) { el.textContent = el.getAttribute(es ? 'data-es' : 'data-en'); });
+</script>
+</body>
+</html>
