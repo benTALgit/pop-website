@@ -15,23 +15,22 @@
   @page { size: 8.5in 11in; margin: 0; }
   html, body { margin: 0; padding: 0; background: transparent; }
   body { width: 816px; height: 1056px; position: relative; overflow: hidden; }
-  /* Original band: 794-886 px at 150 dpi (508-567 CSS px). The new one is a little taller, 782-905 px,
-     which stays clear of the text above (ends 774 EN / 754 ES) and below (starts 921 EN / 912 ES). */
-  .band { position: absolute; left: 0; right: 0; top: 500.5px; height: 78.6px; background: #D9472B; color: #fff;
-          box-sizing: border-box; padding: 7px 50px 0; }
+  /* Original band: 794-886 px at 150 dpi (508-567 CSS px). The new one is a little taller, 502-573 CSS px
+     (784-895 px at 150 dpi), to fit two lines; it stays clear of the text above (ends 774 EN / 754 ES)
+     and below (starts 921 EN / 912 ES). The old "Register to receive location details" line is dropped. */
+  .band { position: absolute; left: 0; right: 0; top: 502px; height: 71px; background: #D9472B; color: #fff;
+          box-sizing: border-box; padding: 10.5px 50px 0; }
   /* Date and time columns start where they did on the original band (x = 78 and 403 px at 150 dpi). */
   .row { display: grid; grid-template-columns: 208px 1fr auto; align-items: baseline; white-space: nowrap;
          font-family: 'Unbounded', sans-serif; font-weight: 800; letter-spacing: -.02em; font-size: 20.5px; line-height: 25px; }
   .row .t { display: inline-block; }
   .row .t b { font-weight: 800; margin-left: 22px; }
-  .sub { font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 11.5px; line-height: 14px; text-align: right; margin-top: 2px; }
 </style>
 </head>
 <body>
 <div class="band">
   <div class="row"><span class="t" data-en="Wed, Dec 2" data-es="Miér., 2 de dic."></span><span class="t">11 AM–1 PM</span><span class="where">Albany · NYC</span></div>
   <div class="row"><span class="t" data-en="Mon, Nov 30" data-es="Lun., 30 de nov."></span><span class="t">5:30–8 PM</span><span class="where">Buffalo</span></div>
-  <div class="sub" data-en="Register to receive location details" data-es="Regístrate para recibir los detalles del lugar"></div>
 </div>
 <script>
   var es = /[?&]lang=es\b/.test(location.search);

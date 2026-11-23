@@ -65,7 +65,7 @@ def patch_pdf(name, langs):
     writer.append(reader)
     for page, lang in zip(writer.pages, langs):
         removed = strip_old_band_text(writer, page)
-        assert removed == 4, (name, removed)  # date, time, cities, "register" line
+        assert removed == 4, (name, removed)  # old date, time, cities, "register" line
         band = PdfReader(BAND_DIR / f'band-{lang}.pdf').pages[0]
         assert [round(float(x)) for x in band.mediabox] == [round(float(x)) for x in page.mediabox]
         page.merge_page(band)
