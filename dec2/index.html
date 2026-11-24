@@ -66,6 +66,7 @@
   .sites { list-style: none; margin: 0; padding: 10px 18px 12px; background: #1F1A1A; color: #FFFFFF; display: grid; gap: 8px; font-size: 15px; line-height: 1.35; }
   .sites b { display: inline-block; min-width: 92px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
   .sites .site-when { font-weight: 800; }
+  .capacity-notice { color: #ffb6b6; font-weight: 800; }
   .when-buf { flex-basis: 100%; font-size: .82em; }
   .done .where { font-weight: 800; }
   .party { margin: 12px 0 0; color: var(--ink-soft); font-size: 16px; }
@@ -123,6 +124,9 @@
   .choice input:checked + span { border-color: var(--coral); background: var(--chip); }
   .choice input:checked + span::before { border-color: var(--coral); background: var(--coral); box-shadow: inset 0 0 0 3px var(--field); }
   .choice input:focus-visible + span { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .choice input:disabled { cursor: not-allowed; }
+  .choice input:disabled + span { color: var(--ink-soft); background: var(--line); border-color: var(--line); cursor: not-allowed; }
+  .choice input:disabled + span::before { border-color: var(--ink-soft); background: var(--line); }
   .choices.three-up { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .choices.one { grid-template-columns: minmax(0, 1fr); }
 
@@ -237,6 +241,7 @@
   <ul class="sites" aria-label="Locations">
     <li><b>Albany</b> <span data-i18n="siteAlbany">New York State Capitol</span></li>
     <li><b>Buffalo</b> <span><strong class="site-when" data-i18n="bufWhen">Mon, Nov 30, 5:30–8 PM.</strong> <span data-i18n="bufWhere">Northland Workforce Training Center, 683 Northland Ave. A free birthday dinner with the Western New York Child Care Action Team.</span></span></li>
+    <li class="capacity-notice" data-i18n="buffaloCapacity">Buffalo is at capacity. Registration is closed.</li>
     <li><b>NYC</b> <span>Hamilton-Madison House, 50 Madison St, Manhattan</span></li>
   </ul>
   <p class="party" data-i18n-html="party"><b>Before Congress, Shirley Chisholm was a child care teacher and director.</b> She later championed a universal child care bill through Congress, only to have it vetoed by Nixon. For her 102nd birthday we're throwing her a party, with cake, games and music for the kids, and launching our campaign to Pay Our Providers.</p>
@@ -245,13 +250,13 @@
     <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
     <h2 class="sec display" data-i18n="title">Register</h2>
-    <p class="step-note" data-i18n="note">Celebrate in Albany, Buffalo or New York City.</p>
+    <p class="step-note" data-i18n="noteClosed">Celebrate in Albany or New York City. Buffalo is at capacity.</p>
 
     <div class="field" data-req-site>
       <span class="lbl" id="siteLbl" data-i18n="site">Where will you be celebrating?</span>
       <div class="choices three-up" role="radiogroup" aria-labelledby="siteLbl">
         <label class="choice"><input type="radio" name="site" value="Albany"><span>Albany</span></label>
-        <label class="choice"><input type="radio" name="site" value="Buffalo"><span>Buffalo</span></label>
+        <label class="choice"><input type="radio" name="site" value="Buffalo"><span data-i18n="siteBuffaloClosed">Buffalo — at capacity</span></label>
         <label class="choice"><input type="radio" name="site" value="New York City"><span>NYC</span></label>
       </div>
       <div class="err" data-i18n="errSite">Please choose a city.</div>
@@ -390,6 +395,7 @@
 
 <script>
 (function () {
+  var BUFFALO_REGISTRATION_OPEN = false;
   // Where registrations are sent: Airtable (Registrations, linked to the city's Dec 2 Event) through the
   // popchildcare.org server. Leave empty ('') to preview without sending.
   var SUBMIT_URL = '/api/dec2-register';
@@ -414,7 +420,12 @@
     doneHBuf: '¡Listo! Nos vemos el 30 de noviembre.',
     hosted: 'Organizan',
     party: '<b>Antes de llegar al Congreso, Shirley Chisholm fue maestra y directora de cuidado infantil.</b> Luego impulsó en el Congreso un proyecto de ley de cuidado infantil universal, pero Nixon lo vetó. Para su cumpleaños 102 le hacemos una fiesta, con pastel, juegos y música para los niños, y lanzamos nuestra campaña Pay Our Providers.',
-    title: 'Regístrate', note: 'Celebra en Albany, Buffalo o la Ciudad de Nueva York.',
+    title: 'Regístrate',
+    noteClosed: 'Celebra en Albany o la Ciudad de Nueva York. Buffalo está lleno.',
+    noteOpen: 'Celebra en Albany, Buffalo o la Ciudad de Nueva York.',
+    siteBuffaloClosed: 'Buffalo — lleno', siteBuffaloOpen: 'Buffalo',
+    buffaloCapacity: 'Buffalo está lleno. El registro está cerrado.',
+    errBuffaloClosed: 'Buffalo está lleno. Por favor elige Albany o NYC.',
     site: '¿Dónde vas a celebrar?', errSite: 'Por favor elige una ciudad.',
     first: 'Nombre', last: 'Apellido', optional: '(opcional)', phone: 'Teléfono celular', email: 'Correo electrónico',
     errName: 'Por favor escribe tu nombre.', errLast: 'Por favor escribe tu apellido.', errContact: 'Por favor agrega un teléfono o un correo para comunicarnos contigo.',
@@ -437,12 +448,25 @@
   var form = document.getElementById('reg');
   var submitBtn = document.getElementById('submit');
   var errBox = document.getElementById('formError');
+  var buffaloInput = form.querySelector('input[name="site"][value="Buffalo"]');
+  var buffaloCapacityNotice = document.querySelector('.capacity-notice');
+  if (BUFFALO_REGISTRATION_OPEN) {
+    buffaloInput.disabled = false;
+    buffaloCapacityNotice.hidden = true;
+    buffaloInput.nextElementSibling.setAttribute('data-i18n', 'siteBuffaloOpen');
+    document.querySelector('.step-note').setAttribute('data-i18n', 'noteOpen');
+  } else {
+    buffaloInput.disabled = true;
+    buffaloCapacityNotice.hidden = false;
+  }
 
   // Remember English strings so the toggle can switch back.
   document.querySelectorAll('[data-i18n]').forEach(function (el) { EN[el.getAttribute('data-i18n')] = el.textContent; });
   document.querySelectorAll('[data-i18n-html]').forEach(function (el) { EN[el.getAttribute('data-i18n-html')] = el.innerHTML; });
   document.querySelectorAll('[data-i18n-ph]').forEach(function (el) { EN[el.getAttribute('data-i18n-ph')] = el.getAttribute('placeholder'); });
   EN.copied = 'Link copied'; EN.seeYou = 'See you at'; EN.sending = 'Sending…'; EN.doneHBuf = "You're in. See you November 30!";
+  EN.noteOpen = 'Celebrate in Albany, Buffalo or New York City.';
+  EN.siteBuffaloOpen = 'Buffalo';
   function t(k) { return (lang === 'es' ? ES[k] : EN[k]) || EN[k] || k; }
 
   function setLang(l) {
@@ -505,7 +529,7 @@
     Object.keys(d).forEach(function (k) {
       form.querySelectorAll('[name="' + k + '"]').forEach(function (el) {
         if (el.type === 'checkbox') el.checked = [].concat(d[k]).indexOf(el.value) > -1;
-        else if (el.type === 'radio') el.checked = el.value === d[k];
+        else if (el.type === 'radio') el.checked = el.value === d[k] && (BUFFALO_REGISTRATION_OPEN || !(k === 'site' && d[k] === 'Buffalo'));
         else if (el.type !== 'hidden' && k !== 'website') el.value = d[k];
       });
     });
@@ -523,12 +547,26 @@
     payload.submitted_at = new Date().toISOString();
     submitBtn.disabled = true; submitBtn.textContent = t('sending');
     errBox.classList.remove('show');
+    errBox.setAttribute('data-i18n', 'errSubmit');
+    errBox.textContent = t('errSubmit');
     var send = SUBMIT_URL
       ? fetch(SUBMIT_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-          .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+          .then(function (r) {
+            return r.json().catch(function () { return {}; }).then(function (j) {
+              if (!r.ok) {
+                var error = new Error('HTTP ' + r.status);
+                if (j && j.error === 'buffalo_at_capacity') error.code = 'buffalo_at_capacity';
+                throw error;
+              }
+              return j;
+            });
+          })
           .then(function (j) { if (!j || j.ok !== true) throw new Error('Not saved'); })
       : new Promise(function (res) { setTimeout(res, 400); });
-    send.then(finish).catch(function () {
+    send.then(finish).catch(function (error) {
+      var messageKey = error && error.code === 'buffalo_at_capacity' ? 'errBuffaloClosed' : 'errSubmit';
+      errBox.setAttribute('data-i18n', messageKey);
+      errBox.textContent = t(messageKey);
       errBox.classList.add('show');
       submitBtn.disabled = false; submitBtn.textContent = t('submit');
     });
