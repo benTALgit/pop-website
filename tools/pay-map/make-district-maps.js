@@ -10,7 +10,7 @@ const path = require('path');
 // ELECT: champions who won their seat but haven't taken office yet. Their districts get a lighter shade
 // (class "ds elect") and they're listed under "Members-elect" on the page. Move them into CHAMPS when sworn in.
 const CHAMPS = {
-  senate: { 18: 'Sen. Julia Salazar', 25: 'Sen. Jabari Brisport', 31: 'Sen. Robert Jackson', 47: 'Sen. Erik Bottcher', 63: 'Sen. April N.M. Baskin' },
+  senate: { 18: 'Sen. Julia Salazar', 25: 'Sen. Jabari Brisport', 31: 'Sen. Robert Jackson', 33: 'Sen. Gustavo Rivera', 47: 'Sen. Erik Bottcher', 63: 'Sen. April N.M. Baskin' },
   assembly: { 28: 'Asm. Andrew Hevesi', 34: 'Asm. Jessica González-Rojas', 36: 'Asm. Diana Moreno', 39: 'Asm. Catalina Cruz', 125: 'Asm. Anna Kelles', 57: 'Asm. Phara Souffrant Forrest', 67: 'Asm. Linda B. Rosenthal', 87: 'Asm. Karines Reyes, R.N.', 103: 'Asm. Sarahana Shrestha', 106: 'Asm. Didi Barrett', 135: 'Asm. Jen Lunsford', 136: 'Asm. Sarah Clark' },
   council: { 21: 'CM Shanel Thomas-Henry', 33: 'CM Lincoln Restler', 34: 'CM Jennifer Gutiérrez', 37: 'CM Sandy Nurse', 38: 'CM Alexa Avilés', 39: 'CM Shahana Hanif' },
 };
