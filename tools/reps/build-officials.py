@@ -18,7 +18,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '../..'))
 UPDATED = '2026-11-10'
 
 CHAMPIONS = {
-    'senate': [25, 31, 63],
+    'senate': [25, 31, 47, 63],
     'assembly': [28, 36, 39, 57, 67, 87, 103, 106, 125, 135, 136],  # AD 149 (Adam Bojak, member-elect) goes in when he takes office in Jan 2027; until then the seat is Jon Rivera's
     'council': [21, 33, 34, 37, 38, 39],
     'house': [], 'ussenate': [], 'city': [], 'bp': [],
