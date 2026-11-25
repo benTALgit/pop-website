@@ -50,13 +50,17 @@
   .ps { margin-top:26px; padding-top:18px; border-top:1px solid var(--line); }
   .logos { margin-top:34px; padding-top:20px; border-top:3px solid var(--ink); }
   .logos h2 { margin:0 0 14px; color:var(--teal); font-size:13px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; text-align:center; }
-  .logos ul { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:16px 12px; align-items:center; justify-items:center; }
+  .logos ul { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(14, minmax(0,1fr)); gap:16px 10px; align-items:center; justify-items:center; }
   .logos img { display:block; max-width:100%; max-height:42px; }
+  .logos li { grid-column:span 2; }
+  .logos li:nth-child(8), .logos li:nth-child(21) { grid-column:2 / span 2; } /* 26 logos = rows of 7, 6, 7, 6 */
   @media (max-width:560px) {
     .hero { display:none; }
     .top { margin-top:18px; align-items:center; }
     .top img.portrait { width:84px; height:106px; border:0; }
-    .logos ul { grid-template-columns:repeat(3, minmax(0,1fr)); }
+    .logos ul { grid-template-columns:repeat(6, minmax(0,1fr)); }
+    .logos li:nth-child(8), .logos li:nth-child(21) { grid-column:span 2; }
+    .logos li:nth-child(25) { grid-column:2 / span 2; } /* 3 per row, last 2 centered */
     .sites b { display:block; min-width:0; }
   }
   [hidden] { display:none !important; }
