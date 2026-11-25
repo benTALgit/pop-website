@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- popny.org is the short address: send visitors to the same page on popchildcare.org, the main site. -->
+<script>if (/(^|\.)popny\.org$/.test(location.hostname)) location.replace('https://popchildcare.org' + location.pathname + location.search + location.hash);</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thanks (+HBD) to Shirley! · POP</title>
+<meta name="description" content="Our Thanksgiving letter: why we're grateful for Shirley Chisholm, and how we'll celebrate her 102nd birthday by launching Pay Our Providers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pay/site-nav.css">
+<style>
+  :root { --paper:#FDF8F7; --ink:#1F1A1A; --ink-soft:#4A4040; --line:#D9CCC8; --coral:#D9472B; --coral-deep:#B8361C; --teal:#1F7A74; --chip:#F6ECE9; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --paper:#1B1616; --ink:#F6EEEC; --ink-soft:#CDBFBB; --line:#4A3F3D; --coral:#F0694D; --coral-deep:#C9452A; --teal:#5FC2BA; --chip:#2E2625; }
+    :root:not([data-theme="light"]) .logos img { filter: invert(1); }
+  }
+  :root[data-theme="dark"] { --paper:#1B1616; --ink:#F6EEEC; --ink-soft:#CDBFBB; --line:#4A3F3D; --coral:#F0694D; --coral-deep:#C9452A; --teal:#5FC2BA; --chip:#2E2625; }
+  :root[data-theme="dark"] .logos img { filter: invert(1); }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:'Libre Franklin', system-ui, sans-serif; font-size:17px; line-height:1.55; }
+  .display { font-family:'Unbounded', system-ui, sans-serif; }
+  a { color:var(--coral); font-weight:700; }
+  .hero { position:relative; }
+  .hero img.rally { display:block; width:100%; height:clamp(110px, 14vw, 170px); object-fit:cover; }
+  .tags { position:absolute; right:16px; bottom:16px; display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
+  .tag-main { background:var(--coral-deep); color:#fff; padding:7px 12px; font-weight:800; font-size:clamp(13px, 2.2vw, 18px); }
+  .tag-sub { background:#1F1A1A; color:#fff; padding:5px 10px; font-size:11px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+  .wrap { max-width:680px; margin:0 auto; padding:0 18px 56px; }
+  .top { display:flex; gap:18px; align-items:flex-end; margin-top:-48px; position:relative; }
+  .top img.portrait { width:112px; height:142px; object-fit:cover; border:5px solid var(--paper); flex:none; filter:grayscale(1); }
+  .kicker { margin:0 0 4px; color:var(--teal); font-weight:800; font-size:13px; letter-spacing:.14em; text-transform:uppercase; }
+  h1 { margin:0; color:var(--coral); font-weight:800; font-size:clamp(26px, 5.4vw, 40px); line-height:1.05; letter-spacing:-.02em; }
+  .meta { margin:6px 0 0; color:var(--ink-soft); font-size:15px; }
+  .lang { display:flex; gap:6px; margin:22px 0 4px; }
+  .lang button { font:600 15px 'Libre Franklin', system-ui, sans-serif; min-height:40px; padding:0 14px; border:1px solid var(--line); background:transparent; color:var(--ink); border-radius:999px; cursor:pointer; }
+  .lang button[aria-pressed="true"] { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .lang button:focus-visible { outline:3px solid var(--teal); outline-offset:2px; }
+  article { margin-top:18px; }
+  article p { margin:0 0 16px; }
+  .when { margin:26px 0 0; background:var(--coral-deep); color:#fff; display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px 16px; padding:14px 18px; font-weight:800; font-size:clamp(16px, 3.4vw, 21px); }
+  .sites { margin:0; padding:12px 18px 14px; background:#1F1A1A; color:#fff; list-style:none; display:grid; gap:8px; font-size:15px; line-height:1.4; }
+  .sites b { display:inline-block; min-width:88px; letter-spacing:.04em; text-transform:uppercase; }
+  .sites .buf { color:#E9D9D5; font-size:14px; border-top:1px solid #4A3F3D; padding-top:8px; }
+  .cta { display:inline-block; margin:22px 0 8px; background:var(--coral-deep); color:#fff; text-decoration:none; padding:14px 26px; border-radius:4px; font-size:19px; }
+  .cta:focus-visible { outline:3px solid var(--teal); outline-offset:3px; }
+  .ps { margin-top:26px; padding-top:18px; border-top:1px solid var(--line); }
+  .logos { margin-top:34px; padding-top:20px; border-top:3px solid var(--ink); }
+  .logos h2 { margin:0 0 14px; color:var(--teal); font-size:13px; font-weight:800; letter-spacing:.2em; text-transform:uppercase; text-align:center; }
+  .logos ul { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:16px 12px; align-items:center; justify-items:center; }
+  .logos img { display:block; max-width:100%; max-height:42px; }
+  @media (max-width:560px) {
+    .hero { display:none; }
+    .top { margin-top:18px; align-items:center; }
+    .top img.portrait { width:84px; height:106px; border:0; }
+    .logos ul { grid-template-columns:repeat(3, minmax(0,1fr)); }
+    .sites b { display:block; min-width:0; }
+  }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <nav class="sn-in" aria-label="POP">
+    <a class="sn-logo" href="https://popchildcare.org/"><img src="../pay/assets/pop-logo.svg" alt="Providers Organized for Power home" width="164" height="76"></a>
+    <div class="sn-links"><a href="https://popchildcare.org/campaign/">Campaign</a><a href="https://popchildcare.org/events">Events</a><a href="https://popchildcare.org/press">Press</a><a class="sn-join" href="../pay/#join">Join</a></div>
+  </nav>
+</header>
+
+<div class="hero">
+  <img class="rally" src="../dec2/assets/rally.jpg" alt="">
+  <div class="tags"><div class="tag-main display">PAY OUR PROVIDERS</div><div class="tag-sub" data-i="launch">Campaign launch</div></div>
+</div>
+
+<main class="wrap">
+  <div class="top">
+    <img class="portrait" src="../dec2/assets/shirley.jpg" alt="Portrait of Shirley Chisholm, 1972">
+    <div>
+      <p class="kicker" data-i="kicker">Letter from POP</p>
+      <h1 class="display" data-i="h1">Thanks (+HBD) to Shirley!</h1>
+      <p class="meta" data-i="date">November 25, 2026</p>
+    </div>
+  </div>
+
+  <div class="lang" role="group" aria-label="Language / Idioma">
+    <button type="button" data-lang="en" aria-pressed="true">English</button>
+    <button type="button" data-lang="es" aria-pressed="false">Español</button>
+  </div>
+
+  <!-- ENGLISH: final email text, Nov 25 -->
+  <article lang="en" data-lang-block="en">
+    <p>As we sign off later today to celebrate the gratitude we have for our families, friends, and communities, let&rsquo;s also remember how grateful we are as child care advocates for the trailblazing worker champion Shirley Chisholm. <strong>Our celebration of Shirley will continue into next week, when we will host <a href="https://popchildcare.org/dec2/">102nd birthday parties for her across New York State -- join us!</a></strong></p>
+    <p>Chisholm was not only the first Black woman in the US House of Representatives and the first Black candidate to seek a major party&rsquo;s nomination for president. She was also a relentless fighter for workers in her home of Brooklyn, which she became the first Black woman to represent in the NY State Assembly in 1965. While in Albany she championed successful legislation to extend unemployment insurance to domestic workers and to guarantee teachers the right to return to their jobs after maternity leave.</p>
+    <p>Before all of that, <strong>Shirley Chisholm was an early childhood educator</strong> and the child care center director at Hamilton-Madison House in the 1950s. Her experience in this field no doubt left a lasting impact on her, as she became the champion of a milestone universal child care bill during her years in US Congress. It may be hard to believe today, but the bill she championed passed both houses! That&rsquo;s right &ndash; not only New York City or State, but the <strong>entire country won a huge investment in universal child care, in 1971, thanks to Shirley Chisholm.</strong></p>
+    <p>Well &ndash; almost. Just one week after the US Senate passed the bill Shirley Chisholm had championed, it was vetoed by President Nixon.</p>
+    <p>So, this December 2, exactly 55 years after that Senate vote, we will <strong>launch the Pay Our Providers campaign</strong> in the very child care center she ran by celebrating Shirley&rsquo;s birthday and her pioneering work for universal child care and provider pay justice. And, we'll be celebrating in Albany, too, right in the Capitol building itself!</p>
+    <p>This will be a real birthday party. Food, drinks &ndash; cake! &ndash; music, games, and festivities. We welcome you to join, to bring your kids, and to tell your friends. Together with our allies, <strong>we&rsquo;ll call on our elected officials in Albany to be like Shirley by <a href="https://popchildcare.org/campaign/">passing a bill</a> to guarantee dignified salaries</strong> for all child care providers, in all settings, all across the state.</p>
+    <p><a href="https://popchildcare.org/dec2">Register here</a>, and have a great holiday!</p>
+  </article>
+
+  <!-- ESPAÑOL: traducción del texto final (borrador, falta revisión) -->
+  <article lang="es" data-lang-block="es" hidden>
+    <p>Hoy, antes de despedirnos para celebrar la gratitud que sentimos por nuestras familias, amistades y comunidades, recordemos también lo agradecidos que estamos, como defensores del cuidado infantil, con Shirley Chisholm, pionera y gran defensora de las y los trabajadores. <strong>La celebración de Shirley seguirá la próxima semana, cuando haremos <a href="https://popchildcare.org/dec2/?lang=es">fiestas por su cumpleaños número 102 en todo el estado de Nueva York -- ¡acompáñanos!</a></strong></p>
+    <p>Chisholm no solo fue la primera mujer negra en la Cámara de Representantes de EE. UU. y la primera persona negra en buscar la candidatura presidencial de uno de los grandes partidos. También fue una luchadora incansable por las y los trabajadores de Brooklyn, su hogar, que en 1965 la convirtió en la primera mujer negra en representarlo en la Asamblea del Estado de Nueva York. En Albany impulsó leyes, que se aprobaron, para extender el seguro de desempleo a las trabajadoras y los trabajadores del hogar y para garantizar que las maestras pudieran volver a su trabajo después de la licencia por maternidad.</p>
+    <p>Antes de todo eso, <strong>Shirley Chisholm fue educadora de la primera infancia</strong> y directora del centro de cuidado infantil de Hamilton-Madison House en la década de 1950. Sin duda esa experiencia la marcó, porque durante sus años en el Congreso se convirtió en la gran defensora de un proyecto de ley histórico de cuidado infantil universal. Hoy cuesta creerlo, pero ¡el proyecto que ella defendió fue aprobado por ambas cámaras! Así es &ndash; no solo la ciudad o el estado de Nueva York, sino que <strong>todo el país logró una enorme inversión en cuidado infantil universal, en 1971, gracias a Shirley Chisholm.</strong></p>
+    <p>Bueno &ndash; casi. Apenas una semana después de que el Senado de EE. UU. aprobara el proyecto que Shirley Chisholm había defendido, el presidente Nixon lo vetó.</p>
+    <p>Por eso, este 2 de diciembre, exactamente 55 años después de aquella votación en el Senado, <strong>lanzaremos la campaña Pay Our Providers</strong> en el mismo centro de cuidado infantil que ella dirigió, celebrando el cumpleaños de Shirley y su trabajo pionero por el cuidado infantil universal y la justicia salarial para las y los proveedores. ¡Y también celebraremos en Albany, en el mismísimo Capitolio del Estado!</p>
+    <p>Será una verdadera fiesta de cumpleaños: comida, bebidas &ndash; ¡pastel! &ndash; música, juegos y mucha alegría. Te invitamos a venir, a traer a tus hijos y a correr la voz. Junto con nuestros aliados, <strong>les pediremos a nuestros funcionarios electos en Albany que sean como Shirley y <a href="https://popchildcare.org/campaign/">aprueben una ley</a> que garantice salarios dignos</strong> para todas y todos los proveedores de cuidado infantil, en todos los entornos y en todo el estado.</p>
+    <p><a href="https://popchildcare.org/dec2?lang=es">Regístrate aquí</a>, ¡y felices fiestas!</p>
+  </article>
+
+  <div class="when display"><span data-i="whenDate">Wed, Dec 2</span><span>11 AM–1 PM</span><span>Albany · NYC</span></div>
+  <ul class="sites">
+    <li><b>Albany</b> <span data-i="albany">New York State Capitol</span></li>
+    <li><b>NYC</b> <span data-i="nyc">Hamilton-Madison House, 50 Madison St, Manhattan -- where Shirley ran the child care center</span></li>
+    <li class="buf"><b>Buffalo</b> <span data-i="buffalo">Mon, Nov 30, 5:30–8 PM, birthday dinner with the Western New York Child Care Action Team. At capacity, registration closed.</span></li>
+  </ul>
+  <a class="cta display" id="cta" href="https://popchildcare.org/dec2" data-i="cta">Register to join us</a>
+
+  <p class="ps" lang="en" data-lang-block="en"><strong>P.S.</strong> &ndash; 25 elected officials have already signed on as Pay Our Providers champions, from the State Senate and Assembly to the City Council. Are yours on the list? <a href="https://popchildcare.org/campaign/#your-reps">Look up your elected officials</a> &ndash; if they've signed on, thank them, and if they haven't yet, ask them to be like Shirley and sign on!</p>
+  <p class="ps" lang="es" data-lang-block="es" hidden><b>P.D.</b> – 25 funcionarios electos ya se sumaron como campeones de Pay Our Providers, desde el Senado y la Asamblea del Estado hasta el Concejo Municipal. ¿Están los tuyos en la lista? <a href="https://popchildcare.org/campaign/#your-reps">Busca a tus funcionarios electos</a> – si ya se sumaron, dales las gracias, y si todavía no, ¡pídeles que sean como Shirley y se sumen!</p>
+
+  <section class="logos" aria-labelledby="logosH">
+    <h2 id="logosH" data-i="together">Celebrating together</h2>
+    <ul>
+      <li><img src="assets/hmh.png" alt="Hamilton-Madison House" loading="lazy"></li>
+      <li><img src="../dec2/assets/logos/tal.png" alt="The Action Lab" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/empire.png" alt="Empire State Campaign for Child Care" loading="lazy"></li>
+      <li><img src="../dec2/assets/logos/uft.png" alt="UFT" loading="lazy"></li>
+      <li><img src="../dec2/assets/logos/csea-voice.png" alt="CSEA / VOICE" loading="lazy"></li>
+      <li><img src="../dec2/assets/logos/citizen-action.png" alt="Citizen Action of New York" loading="lazy"></li>
+      <li><img src="../dec2/assets/logos/nycc.png" alt="New York Communities for Change" loading="lazy"></li>
+      <li><img src="../dec2/assets/logos/aqe.png" alt="Alliance for Quality Education" loading="lazy"></li>
+      <li><img src="../dec2/assets/logos/ece-otm.png" alt="ECE On The Move" loading="lazy"></li>
+      <li><img src="../dec2/assets/logos/las-donas.png" alt="Las Doñas" loading="lazy"></li>
+      <li><img src="../dec2/assets/logos/ilr.png" alt="ILR Worker Institute" loading="lazy"></li>
+      <li><img src="../dec2/assets/logos/momsrising.png" alt="MomsRising" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/dc37.png" alt="DC 37, AFSCME" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/dcc.png" alt="Day Care Council of New York" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/nyuccc.png" alt="New York Union Child Care Coalition" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/mtr.png" alt="Make the Road New York" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/cwe.png" alt="Consortium for Worker Education" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/opeiu-153.png" alt="OPEIU Local 153" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/chcf.png" alt="Committee for Hispanic Children and Families" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/jfrej.png" alt="Jews For Racial &amp; Economic Justice" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/dads-for-all.png" alt="Dads for All" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/afrikana.png" alt="Afrikana" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/unh.png" alt="United Neighborhood Houses" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/met-council.svg" alt="Met Council on Housing" loading="lazy" style="width:100%;height:36px;object-fit:contain"></li>
+      <li><img src="assets/wnyccat.png" alt="Western New York Child Care Action Team" loading="lazy"></li>
+    </ul>
+  </section>
+</main>
+
+<script>
+{
+  var ES = {
+    launch: 'Lanzamiento de campaña', kicker: 'Carta de POP', h1: '¡Gracias (y feliz cumpleaños) a Shirley!', date: '25 de noviembre de 2026',
+    whenDate: 'Miér., 2 de dic.', albany: 'Capitolio del Estado de Nueva York',
+    nyc: 'Hamilton-Madison House, 50 Madison St, Manhattan -- donde Shirley dirigió el centro de cuidado infantil',
+    buffalo: 'Lun., 30 de nov., 5:30–8 PM, cena de cumpleaños con el Western New York Child Care Action Team. Está lleno; el registro está cerrado.',
+    cta: 'Regístrate', together: 'Celebramos juntos'
+  };
+  var EN = {};
+  var nodes = document.querySelectorAll('[data-i]');
+  nodes.forEach(function (n) { EN[n.getAttribute('data-i')] = n.textContent; });
+  var titles = { en: document.title, es: '¡Gracias (y feliz cumpleaños) a Shirley! · POP' };
+  function setLang(l) {
+    document.documentElement.lang = l;
+    nodes.forEach(function (n) { var k = n.getAttribute('data-i'); n.textContent = (l === 'es' ? ES[k] : EN[k]) || EN[k]; });
+    document.querySelectorAll('[data-lang-block]').forEach(function (b) { b.hidden = b.getAttribute('data-lang-block') !== l; });
+    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    document.getElementById('cta').href = 'https://popchildcare.org/dec2' + (l === 'es' ? '?lang=es' : '');
+    document.title = titles[l];
+    try { localStorage.setItem('popLang', l); } catch (e) {}
+  }
+  document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); }); });
+  var saved = null;
+  try { saved = localStorage.getItem('popLang'); } catch (e) {}
+  if (/[?&]lang=es\b/.test(location.search)) saved = 'es';
+  if (/[?&]lang=en\b/.test(location.search)) saved = 'en';
+  setLang(saved === 'es' ? 'es' : 'en');
+}
+</script>
+</body>
+</html>
