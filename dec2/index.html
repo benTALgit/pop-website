@@ -75,6 +75,8 @@
   .logos h2 { margin: 0 0 10px; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
   .logos ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
   .logos img { display: block; height: 26px; width: auto; max-width: 100px; object-fit: contain; }
+  @media (min-width: 600px) { .logos ul { display: grid; grid-template-columns: repeat(16, minmax(0, 1fr)); gap: 14px 10px; } .logos li { grid-column: span 2; display: flex; justify-content: center; } .logos li:nth-child(9), .logos li:nth-child(16) { grid-column: 2 / span 2; } .logos img { max-width: 100%; } } /* 22 logos = rows of 8, 7, 7 */
+  @media (max-width: 599px) { .logos ul { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px 10px; } .logos li { grid-column: span 2; display: flex; justify-content: center; } .logos li:nth-child(21) { grid-column: 3 / span 2; } .logos img { max-width: 100%; } } /* phones: 4 across, last 2 centered */
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logos img { filter: invert(1); } }
   :root[data-theme="dark"] .logos img { filter: invert(1); }
 
@@ -397,6 +399,7 @@
       <li><img src="../pay/assets/logos/hmh.png" alt="Hamilton-Madison House" loading="lazy"></li>
       <li><img src="../pay/assets/logos/wnyccat.png" alt="Western New York Child Care Action Team" loading="lazy"></li>
       <li><img src="assets/logos/cwa-d1.png" alt="CWA District 1" loading="lazy"></li>
+      <li><img src="../pay/assets/logos/aok.png" alt="All Our Kin" loading="lazy"></li>
     </ul>
   </section>
 </main>
