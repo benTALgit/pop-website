@@ -5,6 +5,7 @@ import jointStatementThumb from "@assets/mayor-fcc-roundtable-2026-06-24.jpg";
 import gothamistThumb from "@assets/Screenshot_2026-08-07_at_4.15.16_PM_1786133722344.png";
 import statementThumb from "@assets/Screenshot_2026-08-14_at_9.24.29_AM_1786713887675.png";
 import gothamistFreeThumb from "@assets/gothamist_free_childcare_2026-08-13.webp";
+import shirleyLetterThumb from "@assets/shirley-letter-2026-11-25.jpg";
 
 const featuredLinks = [
   {
@@ -16,6 +17,7 @@ const featuredLinks = [
     title: "Thanks (+HBD) to Shirley! · ¡Gracias (y feliz cumpleaños) a Shirley!",
     url: "/shirley/",
     buttonText: "Read the letter · Leer en español",
+    thumbnail: shirleyLetterThumb,
   },
   {
     id: "amny-oped-seat-at-table",
