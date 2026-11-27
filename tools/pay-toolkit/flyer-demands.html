@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dec 2 flyer: demands patch</title>
+<!--
+  The Dec 2 flyer (pay/toolkit/flyer/) has no HTML source in this repo, only finished PDFs and JPGs.
+  This page redraws the two demand columns under "Pass pay justice legislation this session", at the
+  exact spot they sit on the letter-size page, on an otherwise transparent page.
+  tools/pay-toolkit/patch-flyer-demands.py lays it over the flyer PDFs and JPGs. Use ?lang=es for the
+  Spanish side.
+  Nov 27, 2026: CCAP estimate is now $2B (was $1.2B). Each dollar figure moves below its description,
+  smaller than before but still red and a little larger than the body text, with "est." kept.
+  Positions are text baselines in CSS px, taken from the original PDFs.
+-->
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Libre+Franklin:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: 8.5in 11in; margin: 0; }
+  html, body { margin: 0; padding: 0; background: transparent; }
+  body { width: 816px; height: 1056px; position: relative; overflow: hidden; }
+  /* Covers the old columns: from below the section heading to just above the black rule (806 px). */
+  .cover { position: absolute; left: 36px; right: 36px; top: 612px; height: 191px; background: #FDF7F7; }
+  .ln { position: absolute; white-space: nowrap; font-family: 'Libre Franklin', sans-serif; color: #1F1919; }
+  .h { font-weight: 800; }
+  .b { font-weight: 400; }
+  .b b { font-weight: 800; }
+  .red { color: #D9472B; }
+  .amt { font-family: 'Unbounded', sans-serif; font-weight: 800; color: #D9472B; letter-spacing: -.01em; }
+  .amt small { font-weight: 600; font-size: .6em; margin-left: .35em; }
+</style>
+</head>
+<body>
+<div class="cover"></div>
+<div id="cols"></div>
+<script>
+  var es = /[?&]lang=es\b/.test(location.search);
+  document.documentElement.lang = es ? 'es' : 'en';
+  // [x, baseline, class, font-size, html]
+  var EN = { head: 16, body: 14, amt: 20, lines: [
+    [50, 631, 'h', '<span class="red">Pay Justice:</span> Make thriving wages the law and'],
+    [50, 651, 'h', 'recognize child care work as a profession'],
+    [50, 677, 'b', 'Guarantee <b>thriving wages</b> for child care providers'],
+    [50, 696.5, 'b', 'throughout New York State with a new salary scale'],
+    [50, 716, 'b', 'that recognizes experience and credentials. All'],
+    [50, 735.5, 'b', 'providers are included, in centers or residential'],
+    [50, 755, 'b', 'settings, <b>without changing what families pay.</b>'],
+    [50, 785, 'amt', '$2B<small>est.</small>'],
+    [418, 631, 'h', '<span class="red">Universal Child Care:</span> End the waitlists by fully'],
+    [418, 651, 'h', 'funding programs families need.'],
+    [418, 677, 'b', 'The State must also <b>fully fund</b> the programs that are'],
+    [418, 696.5, 'b', 'already critical to hundreds of thousands of New'],
+    [418, 716, 'b', 'Yorkers, including the Child Care Assistance Program'],
+    [418, 735.5, 'b', '(CCAP). Full funding means that <b>no eligible family is</b>'],
+    [418, 755, 'b', '<b>waitlisted.</b>'],
+    [418, 785, 'amt', '$2B<small>est.</small>'],
+  ]};
+  var ES = { head: 15, body: 13, amt: 18, lines: [
+    [50, 624, 'h', '<span class="red">Justicia salarial:</span> Que los salarios dignos sean ley'],
+    [50, 642, 'h', 'y que el cuidado infantil se reconozca como'],
+    [50, 661, 'h', 'profesión'],
+    [50, 684, 'b', 'Garantizar <b>salarios dignos</b> para las proveedoras de'],
+    [50, 701, 'b', 'cuidado infantil en todo el Estado de Nueva York con una'],
+    [50, 718, 'b', 'nueva escala salarial que reconozca la experiencia y las'],
+    [50, 735, 'b', 'credenciales. Se incluye a todas las proveedoras, en'],
+    [50, 752, 'b', 'centros o en entornos residenciales, <b>sin cambiar lo que</b>'],
+    [50, 769, 'b', '<b>pagan las familias.</b>'],
+    [50, 793, 'amt', '$2,000 millones<small>est.</small>'],
+    [418, 624, 'h', '<span class="red">Cuidado infantil universal:</span> Acabar con las listas'],
+    [418, 642, 'h', 'de espera financiando por completo los'],
+    [418, 661, 'h', 'programas que las familias necesitan.'],
+    [418, 684, 'b', 'El Estado también debe <b>financiar por completo</b> los'],
+    [418, 701, 'b', 'programas que ya son fundamentales para cientos de'],
+    [418, 718, 'b', 'miles de neoyorquinos, incluido el Programa de Asistencia'],
+    [418, 735, 'b', 'para el Cuidado Infantil (CCAP). Financiarlos por completo'],
+    [418, 752, 'b', 'significa que <b>ninguna familia elegible se queda en lista</b>'],
+    [418, 769, 'b', '<b>de espera.</b>'],
+    [418, 793, 'amt', '$2,000 millones<small>est.</small>'],
+  ]};
+  var L = es ? ES : EN, box = document.getElementById('cols');
+  L.lines.forEach(function (l) {
+    var d = document.createElement('div');
+    d.className = 'ln ' + (l[2] === 'amt' ? 'amt' : l[2]);
+    d.style.fontSize = (l[2] === 'h' ? L.head : l[2] === 'b' ? L.body : L.amt) + 'px';
+    d.style.left = l[0] + 'px';
+    d.style.lineHeight = '1';
+    d.innerHTML = '<span class="t">' + l[3] + '</span>';
+    d.dataset.baseline = l[1];
+    box.appendChild(d);
+  });
+  // Put each line's baseline exactly on its y, whatever the font metrics.
+  document.fonts.ready.then(function () {
+    box.querySelectorAll('.ln').forEach(function (d) {
+      d.style.top = '0px';
+      var probe = document.createElement('span');
+      probe.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline';
+      d.appendChild(probe);
+      var base = probe.getBoundingClientRect().top - d.getBoundingClientRect().top;
+      d.style.top = (parseFloat(d.dataset.baseline) - base) + 'px';
+      probe.remove();
+    });
+    document.body.dataset.ready = '1';
+  });
+</script>
+</body>
+</html>
