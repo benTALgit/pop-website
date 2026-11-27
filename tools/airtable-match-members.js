@@ -4,8 +4,9 @@
 async function main() {
   const cfg = input.config();
   const isReg = cfg.kind === 'registration';
-  const src = base.getTable(isReg ? 'Registrations' : 'POP Pledge');
-  const people = base.getTable('Members');
+  // Tables by ID so renaming them (e.g. Registrations -> Dec 2 Registrations) doesn't break this.
+  const src = base.getTable(isReg ? 'tblzO2wUvQuBPgjgO' : 'tblxmECshBmEhRZku');
+  const people = base.getTable('tbl92K4LZ2JIKlF3b'); // Members
   const F = isReg
     ? { first: 'First name', last: 'Last name', email: 'Email', phone: 'Phone', zip: 'Zip code', link: 'Person' }
     : { first: 'Name', last: 'Last Name', email: 'Email', phone: 'Phone', zip: 'Zip Code', link: 'Members' };
