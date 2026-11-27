@@ -4,7 +4,7 @@
 // popPledgeAirtableRequest, which already exist there.
 //
 //   GET  /api/reps/lookup?address=...   address -> districts, via the US Census geocoder (no key needed)
-//   GET  /api/reps/officials            every Active row of Airtable "Elected Officials" (emails, phones, champion box),
+//   GET  /api/reps/officials            every Active row of Airtable "Elected Officials" (emails, phones; champion = the officeholder's tick in People),
 //                                       cached 10 minutes, so staff edit emails/champions in Airtable, not in code
 //   POST /api/rep-message               logs a thank-you / ask-to-endorse to Airtable "Rep Messages"
 //
@@ -37,7 +37,9 @@ const OFFICIAL_FIELDS = {
   office: "fldL4OXSh3fSNpkvB",
   district: "fldppi0l6EsrY6EoX",
   borough: "fldlwGDCCT3m1MBTP",
-  champion: "fld1hqGmTOxXV5Muz",
+  // "Champion (from People)": a lookup of the officeholder's Champion tick in the People table.
+  // (The old Champion checkbox on this table, fld1hqGmTOxXV5Muz, is no longer read.)
+  champion: "fldJ3MQGzKwGUf93A",
   emails: "fld5EVcE5NPC0RK6W",
   phones: "fldpLXYNh2yA0jXie",
   form: "fldfVfRcVHQllvbbs",
@@ -92,7 +94,7 @@ let officialsCache: { at: number; data: unknown } | null = null;
             return { n, w: phoneKind(label) };
           }).filter((p) => /\d{3}.*\d{4}/.test(p.n)),
           url: f[F.website] || "",
-          champ: !!f[F.champion],
+          champ: Array.isArray(f[F.champion]) ? f[F.champion].some(Boolean) : !!f[F.champion],
         };
         if (f[F.form]) o.form = f[F.form];
         const chamber = office === "NYC Council" ? "council" : office === "State Assembly" ? "assembly"
