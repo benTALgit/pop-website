@@ -33,7 +33,9 @@ const REP_MESSAGE_FIELDS = {
 
 const ELECTED_OFFICIALS_AIRTABLE_PATH = `/v0/${POP_PLEDGE_AIRTABLE_BASE_ID}/tblxm4XvlcVQVDkna`;
 const OFFICIAL_FIELDS = {
-  name: "fldbbm0p2S8W5rJ49",
+  // "Officeholder name": a lookup of the officeholder's Full Name in People.
+  // (The old Name field, fldbbm0p2S8W5rJ49, was deleted from Airtable on Nov 26, 2026.)
+  name: "fldoKnbLlvndP7lMl",
   office: "fldL4OXSh3fSNpkvB",
   district: "fldppi0l6EsrY6EoX",
   borough: "fldlwGDCCT3m1MBTP",
@@ -83,11 +85,12 @@ let officialsCache: { at: number; data: unknown } | null = null;
       };
       for (const rec of rows) {
         const f = rec.fields || {};
-        if (!f[F.active] || !f[F.name]) continue;
+        const nm = Array.isArray(f[F.name]) ? f[F.name][0] : f[F.name];
+        if (!f[F.active] || !nm) continue;
         const office = typeof f[F.office] === "string" ? f[F.office] : f[F.office]?.name;
         const d = Number(f[F.district]) || 0;
         const o: any = {
-          name: String(f[F.name]).trim(),
+          name: String(nm).trim(),
           emails: lines(f[F.emails]).filter((e) => /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(e)),
           phones: String(f[F.phones] || "").split("\n").map((l) => l.trim()).filter(Boolean).map((l) => {
             const [n, label = ""] = l.split("|").map((x) => x.trim());
